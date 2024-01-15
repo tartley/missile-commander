@@ -1,5 +1,5 @@
 extends Node2D
-
+    
 func _draw():
     var random = RandomNumberGenerator.new()
     var verts: Array[Vector2] = []
@@ -7,10 +7,10 @@ func _draw():
     var y: int
     var size:float
     var bright: float
-    for i in range(1000):
-        x = random.randi_range(-4700, 4700)
+    for i in range(100):
+        x = random.randi_range(-5400, 5400)
         y = random.randi_range(22500, 27500)
-        size = random.randf_range(4, 12.0)
+        size = random.randf_range(2, 8.0)
         bright = random.randf_range(0.5, 1.0)
         verts.append(Vector2(x, y))
         verts.append(Vector2(x + size, y))

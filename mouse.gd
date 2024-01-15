@@ -19,7 +19,7 @@ func constrain(initial: Polar, extent: Rect2) -> void:
     initial.radius = min(initial.radius, extent.end.y)
 
 func _ready():
-    extent_polar = Rect2(-%Ground.PLANET_ANGLE, %Ground.RADIUS * 10/10, %Ground.PLANET_ANGLE * 2.0, get_viewport_rect().size.y * 18/10)
+    extent_polar = Rect2(-%Ground.PLANET_ANGLE, %Ground.RADIUS + get_viewport_rect().size.y * 0.11, %Ground.PLANET_ANGLE * 2.0, get_viewport_rect().size.y * 18/10)
     
 func _notification(what):
     match what:

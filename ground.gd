@@ -26,8 +26,10 @@ func _ready():
     # Approximate the curved surface with straight segments.
     const seg_ang := PLANET_ANGLE / 36
     var annotated_polars : Array = [
-        Polar.new(-36 * seg_ang, 0),
-        Polar.new(-36 * seg_ang, RADIUS, "edge"),
+        Polar.new(-44 * seg_ang, 0),
+        Polar.new(-44 * seg_ang, RADIUS),                
+        Polar.new(-40 * seg_ang, RADIUS),        
+        Polar.new(-36 * seg_ang, RADIUS),
         Polar.new(-32 * seg_ang, RADIUS),
         Polar.new(-28 * seg_ang, RADIUS),
         Polar.new(-26 * seg_ang, RADIUS + HILL_HEIGHT),
@@ -51,8 +53,10 @@ func _ready():
         Polar.new(26 * seg_ang, RADIUS + HILL_HEIGHT),
         Polar.new(28 * seg_ang, RADIUS),
         Polar.new(32 * seg_ang, RADIUS),
-        Polar.new(36 * seg_ang, RADIUS, "edge"),
-        Polar.new(36 * seg_ang, 0),
+        Polar.new(36 * seg_ang, RADIUS),
+        Polar.new(40 * seg_ang, RADIUS),
+        Polar.new(44 * seg_ang, RADIUS),
+        Polar.new(44 * seg_ang, 0),
     ]
     
     var xys_annotated: Array = []
