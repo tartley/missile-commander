@@ -1,13 +1,17 @@
 class_name Polar extends Node
 
-static func cartesian_from_polar(polar) -> Vector2:
-    return Vector2(
-        polar[1] * cos(polar[0]),
-        polar[1] * sin(polar[0]),
-    )
+# Polar co-ordinates
+var angle: float # Relative to straight up, in radians, increasing clockwise.
+var radius: float
+var annotation: String
 
-static func cartesian_from_polars(polars:Array) -> Array:
-    var xys := []
-    for p:Array in polars:
-        xys.append([cartesian_from_polar([p[0][0], p[0][1]]), p[1]])
-    return xys
+func _init(_angle: float, _radius: float, _annotation: String = ""):
+    angle=_angle
+    radius=_radius
+    annotation=_annotation
+
+func cartesian() -> Vector2:
+    return Vector2(
+        radius * sin(angle),
+        radius * cos(angle),
+    )

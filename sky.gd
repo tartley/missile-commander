@@ -6,10 +6,12 @@ func _draw():
     var x: int
     var y: int
     var size:float
-    for i in range(100):
-        x = random.randi_range(-1000, 1000)
-        y = random.randi_range(0, 1000)
-        size = random.randf_range(0.2, 3.0)
+    var bright: float
+    for i in range(1000):
+        x = random.randi_range(-4700, 4700)
+        y = random.randi_range(22500, 27500)
+        size = random.randf_range(4, 12.0)
+        bright = random.randf_range(0.5, 1.0)
         verts.append(Vector2(x, y))
         verts.append(Vector2(x + size, y))
-    draw_multiline(verts, Color(1, 1, 1), 8.0)
+    draw_multiline(verts, Color(bright, bright, bright), size)
