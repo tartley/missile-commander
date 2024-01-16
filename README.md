@@ -15,16 +15,17 @@ using [Godot](https://godotengine.org/).
 
 * Re-org co-ordinates
   - One camera
-  * set it to show a large area so we can see everything
+  x set it to show a large area so we can see everything
     (or should this be in the editor?)
-  * ground renders with (0, 0) at planet center
-  * mouse moves in a polar segment
-  * camera pan left right, in a polar manner so with tilt
+  - ground renders with (0, 0) at planet center
+  - mouse moves in a polar segment
+  - camera pan left right, in a polar manner so with tilt
     such that ground rotates beneath us properly
     (Should work even with high rotation values)
-  * camera also pans up down slightly (polar though)
+  - camera also pans up down slightly (polar though)
   * Stars on a parallax background
     https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
+    or
 
 * How to raise an error from ground? (see TODO there)
 
