@@ -16,9 +16,6 @@ position = Vector2(0, 12000)
 ignore_rotation = false
 script = ExtResource("1_2ff6t")
 
-[node name="Polar" type="Node" parent="."]
-script = ExtResource("5_6n56b")
-
 [node name="World" type="Node2D" parent="."]
 
 [node name="Ground" type="Node2D" parent="World"]
@@ -31,5 +28,7 @@ script = ExtResource("3_xy2w8")
 
 [node name="Sky" type="Node2D" parent="World"]
 unique_name_in_owner = true
-scale = Vector2(1, 1)
 script = ExtResource("4_neypf")
+
+[node name="Polar" type="Node" parent="."]
+script = ExtResource("5_6n56b")

@@ -6,7 +6,7 @@ which will ask us where they should be located.
 class_name Ground extends Node2D
 
 # The ground is a pizza-slice shaped segment of a circular planet, centered at (0, 0), with:
-const RADIUS := 23000.0
+const RADIUS := 12000.0
 # extending for PLANET_ANGLE radians on either side of 'straight up':
 const PLANET_ANGLE := PI / 16.0
 const HILL_HEIGHT := RADIUS / 100.0
