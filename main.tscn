@@ -1,22 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvl60w5q1oghk"]
+[gd_scene load_steps=8 format=3 uid="uid://dvl60w5q1oghk"]
 
 [ext_resource type="Script" path="res://camera.gd" id="1_2ff6t"]
 [ext_resource type="Script" path="res://main.gd" id="1_htis4"]
 [ext_resource type="Script" path="res://ground.gd" id="2_j6ko4"]
 [ext_resource type="Script" path="res://mouse.gd" id="3_xy2w8"]
+[ext_resource type="Script" path="res://world.gd" id="3_ygiri"]
 [ext_resource type="Script" path="res://sky.gd" id="4_neypf"]
 [ext_resource type="Script" path="res://polar.gd" id="5_6n56b"]
 
-[node name="Main" type="Node2D"]
-scale = Vector2(1, -1)
+[node name="Main" type="Node"]
 script = ExtResource("1_htis4")
 
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2(0, 12000)
+[node name="World" type="Node2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(1, -1)
+script = ExtResource("3_ygiri")
+
+[node name="Camera" type="Camera2D" parent="World"]
+position = Vector2(0, -12000)
+scale = Vector2(1, -1)
 ignore_rotation = false
 script = ExtResource("1_2ff6t")
-
-[node name="World" type="Node2D" parent="."]
 
 [node name="Sky" type="Node2D" parent="World"]
 unique_name_in_owner = true

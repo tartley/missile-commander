@@ -13,9 +13,9 @@ const HILL_HEIGHT := RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
 
 var verts : Array[Vector2]
-var edges : Array[Vector2] = []
 var cities : Array[Vector2] = []
 var bases : Array[Vector2] = []
+var empties : Array[Vector2] = []
 
 func _ready():
     # Shape of ground in annotated polar co-ordinates, (angle, radius, feature). Where:
@@ -27,60 +27,58 @@ func _ready():
     const seg_ang := PLANET_ANGLE / 36
     var annotated_polars : Array = [
         Polar.new(-44 * seg_ang, 0),
-        Polar.new(-44 * seg_ang, RADIUS),                
-        Polar.new(-40 * seg_ang, RADIUS),        
+        Polar.new(-44 * seg_ang, RADIUS),
+        Polar.new(-40 * seg_ang, RADIUS),
         Polar.new(-36 * seg_ang, RADIUS),
         Polar.new(-32 * seg_ang, RADIUS),
-        Polar.new(-28 * seg_ang, RADIUS),
-        Polar.new(-26 * seg_ang, RADIUS + HILL_HEIGHT),
+        Polar.new(-28 * seg_ang, RADIUS, "empty"),
+        Polar.new(-26 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
         Polar.new(-24 * seg_ang, RADIUS + HILL_HEIGHT, "base"),
-        Polar.new(-22 * seg_ang, RADIUS + HILL_HEIGHT),
-        Polar.new(-20 * seg_ang, RADIUS),
+        Polar.new(-22 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
+        Polar.new(-20 * seg_ang, RADIUS, "empty"),
         Polar.new(-16 * seg_ang, RADIUS, "city"),
         Polar.new(-12 * seg_ang, RADIUS, "city"),
         Polar.new(-8 * seg_ang, RADIUS, "city"),
-        Polar.new(-4 * seg_ang, RADIUS),
-        Polar.new(-2 * seg_ang, RADIUS + HILL_HEIGHT),
+        Polar.new(-4 * seg_ang, RADIUS, "empty"),
+        Polar.new(-2 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
         Polar.new(0 * seg_ang, RADIUS + HILL_HEIGHT, "base"),
-        Polar.new(2 * seg_ang, RADIUS + HILL_HEIGHT),
-        Polar.new(4 * seg_ang, RADIUS),
+        Polar.new(2 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
+        Polar.new(4 * seg_ang, RADIUS, "empty"),
         Polar.new(8 * seg_ang, RADIUS, "city"),
         Polar.new(12 * seg_ang, RADIUS, "city"),
         Polar.new(16 * seg_ang, RADIUS, "city"),
-        Polar.new(20 * seg_ang, RADIUS),
-        Polar.new(22 * seg_ang, RADIUS + HILL_HEIGHT),
+        Polar.new(20 * seg_ang, RADIUS, "empty"),
+        Polar.new(22 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
         Polar.new(24 * seg_ang, RADIUS + HILL_HEIGHT, "base"),
-        Polar.new(26 * seg_ang, RADIUS + HILL_HEIGHT),
-        Polar.new(28 * seg_ang, RADIUS),
+        Polar.new(26 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
+        Polar.new(28 * seg_ang, RADIUS, "empty"),
         Polar.new(32 * seg_ang, RADIUS),
         Polar.new(36 * seg_ang, RADIUS),
         Polar.new(40 * seg_ang, RADIUS),
         Polar.new(44 * seg_ang, RADIUS),
         Polar.new(44 * seg_ang, 0),
     ]
-    
     var xys_annotated: Array = []
     for polar:Polar in annotated_polars:
         xys_annotated.append([polar.cartesian(), polar.annotation])
-    
+
     # Extract from the annotated verts array an array of regular vector2
     # and the locations of the named features.
     for va in xys_annotated:
         verts.append(va[0])
         var collection:Array
-        if va[1] == "edge":
-            collection = edges
-        elif va[1] == "city":
+        if va[1] == "city":
             collection = cities
         elif va[1] == "base":
             collection = bases
+        elif va[1] == "empty":
+            collection = empties
         elif va[1]:
             assert(false, "Unrecognized vertex annotation '%s'" % va[1])
         collection.append(va[0])
 
-    print(edges)
     return xys_annotated
-    
-            
+
+
 func _draw():
     draw_colored_polygon(verts, Color(.7, 1, .6))

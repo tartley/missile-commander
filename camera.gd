@@ -11,10 +11,10 @@ func get_camera_position(input:Vector2) -> Vector2:
         )
     return pos
 
-func get_camera_rotation(input:Vector2) -> float:
-    return input.x / -7
-
 func _process(_delta):
-    position = get_camera_position(%Mouse.normalized)
-    rotation = get_camera_rotation(%Mouse.normalized)
-
+    var radius:float = %Ground.RADIUS + get_viewport_rect().size.y * 0.4
+    rotation = - %Ground.PLANET_ANGLE * 0.64 * %Mouse.normalized.x
+    position = Vector2(
+        -radius * sin(rotation),
+         radius * cos(rotation) + get_viewport_rect().size.y * %Mouse.normalized.y * 0.1
+    )

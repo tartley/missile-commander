@@ -8,13 +8,23 @@ var extent_polar: Rect2
 var normalized: Vector2
 
 # Mouse position, as (angle from up in radians, height above planet surface)
-var world_polar: Polar:
+var world_polar:= Polar.new(0, 0):
     get:
         return world_polar
     set(value):
         world_polar = constrain(value, extent_polar)
         position = world_polar.cartesian()
         normalized = normalize(world_polar, extent_polar)
+
+func _ready():
+    extent_polar = Rect2(
+        -%Ground.PLANET_ANGLE * 0.99,
+        %Ground.RADIUS + get_viewport_rect().size.y * 0.11,
+        %Ground.PLANET_ANGLE * 1.98,
+        get_viewport_rect().size.y * .89
+    )
+    # Dupes behavior of "focus in" event, since we don't get that event on MacOS
+    capture_mouse()
 
 func constrain(initial: Polar, extent: Rect2) -> Polar:
     "Return 'initial', modified to lie within 'extent'"
@@ -30,17 +40,17 @@ func normalize(point:Polar, extent:Rect2) -> Vector2:
         (point.radius - extent.position.y) / (extent.end.y - extent.position.y),
     )
 
-func _ready():
-    extent_polar = Rect2(-%Ground.PLANET_ANGLE, %Ground.RADIUS + get_viewport_rect().size.y * 0.11, %Ground.PLANET_ANGLE * 2.0, get_viewport_rect().size.y * 9/10)
-    
+func capture_mouse():
+    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+    world_polar = Polar.new(0, 0)
+
 func _notification(what):
     match what:
         MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
-            Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-            world_polar = Polar.new(0, %Ground.RADIUS + get_viewport_rect().size.y * 0.5)
+            capture_mouse()
         MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT:
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-   
+
 func _input(event: InputEvent):
     if event is InputEventMouseMotion:
         world_polar = Polar.new(

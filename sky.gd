@@ -17,6 +17,6 @@ func _draw():
         size = _random.randf_range(5.0, 8.0)
         bright = _random.randf_range(0.5, 1.0)
         verts.append(Vector2(x, y))
-        verts.append(Vector2(x + 3, y))
+        verts.append(Vector2(x + 4, y))
         colors.append(Color(bright, bright, bright))
-    draw_multiline_colors(verts, colors, -1)
+    draw_multiline_colors(verts, colors, 4)
