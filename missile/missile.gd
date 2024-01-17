@@ -10,14 +10,6 @@ const verts: Array[Vector2] = [
 
 var velocity: Vector2
 
-func _init() -> void:
-    var rng = RandomNumberGenerator.new()
-    position = Vector2(1960, 2160 - SIZE/2)
-    var destination := Vector2(rng.randf_range(0, 2*1960), 0)
-    var time = 10 # seconds
-    velocity = (destination - position) / time
-    rotation = tanh(velocity.x / -velocity.y)
-
 func _ready() -> void:
     $Appearance.verts = verts
     $Exhaust.direction = Vector2(velocity.x, -velocity.y)

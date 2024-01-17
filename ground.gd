@@ -15,7 +15,7 @@ const COLOR := Color(0.1, 0.5, 0.2)
 var verts : Array[Vector2]
 var cities : Array[Vector2] = []
 var bases : Array[Vector2] = []
-var empties : Array[Vector2] = []
+var gaps : Array[Vector2] = []
 
 func _ready():
     # Shape of ground in annotated polar co-ordinates, (angle, radius, feature). Where:
@@ -31,27 +31,27 @@ func _ready():
         Polar.new(-40 * seg_ang, RADIUS),
         Polar.new(-36 * seg_ang, RADIUS),
         Polar.new(-32 * seg_ang, RADIUS),
-        Polar.new(-28 * seg_ang, RADIUS, "empty"),
-        Polar.new(-26 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
+        Polar.new(-28 * seg_ang, RADIUS, "gap"),
+        Polar.new(-26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
         Polar.new(-24 * seg_ang, RADIUS + HILL_HEIGHT, "base"),
-        Polar.new(-22 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
-        Polar.new(-20 * seg_ang, RADIUS, "empty"),
+        Polar.new(-22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
+        Polar.new(-20 * seg_ang, RADIUS, "gap"),
         Polar.new(-16 * seg_ang, RADIUS, "city"),
         Polar.new(-12 * seg_ang, RADIUS, "city"),
         Polar.new(-8 * seg_ang, RADIUS, "city"),
-        Polar.new(-4 * seg_ang, RADIUS, "empty"),
-        Polar.new(-2 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
+        Polar.new(-4 * seg_ang, RADIUS, "gap"),
+        Polar.new(-2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
         Polar.new(0 * seg_ang, RADIUS + HILL_HEIGHT, "base"),
-        Polar.new(2 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
-        Polar.new(4 * seg_ang, RADIUS, "empty"),
+        Polar.new(2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
+        Polar.new(4 * seg_ang, RADIUS, "gap"),
         Polar.new(8 * seg_ang, RADIUS, "city"),
         Polar.new(12 * seg_ang, RADIUS, "city"),
         Polar.new(16 * seg_ang, RADIUS, "city"),
-        Polar.new(20 * seg_ang, RADIUS, "empty"),
-        Polar.new(22 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
+        Polar.new(20 * seg_ang, RADIUS, "gap"),
+        Polar.new(22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
         Polar.new(24 * seg_ang, RADIUS + HILL_HEIGHT, "base"),
-        Polar.new(26 * seg_ang, RADIUS + HILL_HEIGHT, "empty"),
-        Polar.new(28 * seg_ang, RADIUS, "empty"),
+        Polar.new(26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
+        Polar.new(28 * seg_ang, RADIUS, "gap"),
         Polar.new(32 * seg_ang, RADIUS),
         Polar.new(36 * seg_ang, RADIUS),
         Polar.new(40 * seg_ang, RADIUS),
@@ -71,8 +71,8 @@ func _ready():
             collection = cities
         elif va[1] == "base":
             collection = bases
-        elif va[1] == "empty":
-            collection = empties
+        elif va[1] == "gap":
+            collection = gaps
         elif va[1]:
             assert(false, "Unrecognized vertex annotation '%s'" % va[1])
         collection.append(va[0])
