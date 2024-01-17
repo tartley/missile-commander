@@ -6,10 +6,12 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
-* missiles should also aim for the gaps between cities
-
 * 3 bases exist.
   * Ask the ground where they are placed
+
+* consistent angle representation,
+  maybe deleting Polar, since things like Vector2.angle() exist.
+  which should remove all the "+ PI/2" offsets.
 
 * Main has script 'main.gd', which contains startup orchestration,
   including DI required so one child node knows about others it needs.
@@ -77,4 +79,6 @@ using [Godot](https://godotengine.org/).
 * bombs rain down
   * I don't think they need to be polar.
   * Consider drawing creation area for editor?
+
+* missiles should also aim for the gaps between cities
 
