@@ -6,6 +6,11 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
+* missiles should also aim for the gaps between cities
+
+* 3 bases exist.
+  * Ask the ground where they are placed
+
 * Main has script 'main.gd', which contains startup orchestration,
   including DI required so one child node knows about others it needs.
   Child nodes which require such setup should @tool run
@@ -13,37 +18,18 @@ using [Godot](https://godotengine.org/).
   to generate warnings if they are not configured.
 * Can we have a linear chain of dependencies, not a tangled web?
 
-* Re-org co-ordinates
-  - One camera
-  x set it to show a large area so we can see everything
-    (or should this be in the editor?)
-  - ground renders with (0, 0) at planet center
-  - mouse moves in a polar segment
-  - camera pan left right, in a polar manner so with tilt
-    such that ground rotates beneath us properly
-    (Should work even with high rotation values)
-  - camera also pans up down slightly (polar though)
-  * Stars on a parallax background
-    https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
-    or
-
-* How to raise an error from ground? (see TODO there)
-
 * Add previews in the editor?
   https://docs.godotengine.org/en/stable/tutorials/plugins/running_code_in_the_editor.html#doc-running-code-in-the-editor
   * Ground?
   * Camera and mouse max extents?
   * Star max extents?
 
-* bombs rain down
-  * I don't think they need to be polar.
-  * Consider drawing creation area for editor?
+* extract an "annotatedArray" class?
 
-* 3 bases exist.
-  * Ask the ground where they are placed
-  * extract an "annotatedArray" class?
-  * Read about structs?
-* 6 cities exist. Likewise.
+* Stars on a parallax background
+  https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
+  or
+  that github issue I commented on
 
 ## Done
 
@@ -72,4 +58,23 @@ using [Godot](https://godotengine.org/).
     methods can be reliably overriden. Methods include `_init` and
     `_static_init`.
   * All in one: `class_name Character extends Entity`
+
+* Re-org co-ordinates
+  - One camera
+  - set it to show a large area so we can see everything
+    (or should this be in the editor?)
+  - ground renders with (0, 0) at planet center
+  - mouse moves in a polar segment
+  - camera pan left right, in a polar manner so with tilt
+    such that ground rotates beneath us properly
+    (Should work even with high rotation values)
+  - camera also pans up down slightly (polar though)
+
+* 6 cities exist.
+
+* How to raise an error from ground? (see TODO there)
+
+* bombs rain down
+  * I don't think they need to be polar.
+  * Consider drawing creation area for editor?
 

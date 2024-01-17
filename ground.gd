@@ -81,4 +81,5 @@ func _ready():
 
 
 func _draw():
-    draw_colored_polygon(verts, Color(.7, 1, .6))
+    draw_polygon(verts, [Color(0, 0, 0)])
+    draw_polyline(verts, Color(.7, 1, .6), 2.0, true)

@@ -55,7 +55,7 @@ func _input(event: InputEvent):
     if event is InputEventMouseMotion:
         world_polar = Polar.new(
             world_polar.angle + event.relative.x * 0.00012,
-            world_polar.radius - event.relative.y * 4,
+            world_polar.radius - event.relative.y * 2,
         )
 
 func _draw():

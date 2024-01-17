@@ -6,12 +6,12 @@ const verts: Array[Vector2] = [
     Vector2(-30, 20),
     Vector2(-30, 30),
     Vector2(-10, 30),
-    Vector2(-10, 60),
-    Vector2(10, 60),
-    Vector2(10, 30),
+    Vector2(-10, 50),
+    Vector2(10, 50),
+    Vector2(10, 20),
+    Vector2(30, 20),
     Vector2(30, 30),
-    Vector2(30, 10),
-    Vector2(50, 10),
+    Vector2(50, 30),
     Vector2(50, 0),
 ]
 
