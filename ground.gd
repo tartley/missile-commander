@@ -83,22 +83,11 @@ func get_annotation(annotated_verts:Array, annotation:String) -> Array[Vector2]:
             retval.append(av[0])
     return retval
 
-func set_up_collision_shape():
-    var collision_shape = CollisionShape2D.new()
-    collision_shape.shape = ConvexPolygonShape2D.new()
-    collision_shape.shape.points = verts
-    add_child(collision_shape)
-
-    #var platform = StaticBody2D.new()
-    #var plat_collision_shape = CollisionShape2D.new()
-    #var plat_shape = RectangleShape2D.new()
-    #plat_shape.extents = Vector2(100, 5)  // Width and height of the platform
-    #plat_collision_shape.shape = plat_shape
-    #platform.add_child(plat_collision_shape)
-    #// Assigning the environment objects to layer 2
-    #platform.collision_layer = 2
-
-
+#func set_up_collision_shape():
+    #var collision_shape = CollisionShape2D.new()
+    #collision_shape.shape = Shape.new()
+    #collision_shape.shape = verts
+    #add_child(collision_shape)
 
 func _ready() -> void:
     var annotated_verts := get_annotated_verts()
@@ -106,8 +95,8 @@ func _ready() -> void:
     cities = get_annotation(annotated_verts, "city")
     bases = get_annotation(annotated_verts, "base")
     gaps = get_annotation(annotated_verts, "gap")
-    # set_up_collision_shape()
+    #set_up_collision_shape()
 
 func _draw():
-    draw_polygon(verts, [Color(0, 0, 0)])
+    draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.7, 1, .6), 2.0, true)

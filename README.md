@@ -6,15 +6,6 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
-* Main has script 'main.gd', which contains startup orchestration,
-  including DI required so one child node knows about others it needs.
-  Child nodes which require such setup should @tool run
-  `_get_configuration_warnings()`, which returns a non-empty PackedStringArray
-  to generate warnings if they are not configured.
-* Can we have a linear chain of dependencies, not a tangled web?
-
-* Add a text node so I can figure out if scale.y=-1 is a disaster
-
 * consistent angle representation, remove all the +/-PI/2 offsets.
 * Consider using TAU
 
@@ -103,4 +94,7 @@ using [Godot](https://godotengine.org/).
 
 * See the tutorial way of adding new nodes to the tree programatically.
   https://docs.godotengine.org/en/4.2/getting_started/first_2d_game/05.the_main_game_scene.html
+
+* Add a text node so I can figure out if scale.y=-1 is a disaster
+  No: I can also set same on the Label to fix the upsid3-down text.
 
