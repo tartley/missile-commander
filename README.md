@@ -6,6 +6,21 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
+* Detect missiles colliding with the ground
+  * Make the Ground an Area2D, with a CollisionShape2D child, populated with a ConcavePolygon2d
+    or something
+  * Add some collision boundary to missils.
+  * on collision, kill the missile
+
+* See the tutorial way of adding new nodes to the tree programatically.
+  https://docs.godotengine.org/en/4.2/getting_started/first_2d_game/05.the_main_game_scene.html
+
+* missiles die when hitting the ground
+  * do we use collision shapes for missile and ground?
+  * or just for ground?
+
+* small explosion when missiles die
+
 * 3 bases exist.
   * Ask the ground where they are placed
 

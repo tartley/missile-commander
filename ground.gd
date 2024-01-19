@@ -12,73 +12,101 @@ const PLANET_ANGLE := PI / 16.0
 const HILL_HEIGHT := RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
 
-var verts : Array[Vector2]
+var verts : PackedVector2Array
 var cities : Array[Vector2] = []
 var bases : Array[Vector2] = []
 var gaps : Array[Vector2] = []
 
-func _ready():
-    # Shape of ground in annotated polar co-ordinates, (angle, radius, feature). Where:
+func get_annotated_verts() -> Array:
+    '''Return an array of annotated Vector2, ie. [ [ vector2, string ], ... ]'''
+    var retval := []
+    # Define the shape of ground in annotated polar co-ordinates, [angle, radius, feature]. Where:
     # * angle=0 is straight up,
     # * radius is relative to planet center at origin,
-    # * feature is a string indicating the point is the location of an in-game feature.
-
+    # * feature is a string indicating the in-game feature located at that point.
     # Approximate the curved surface with straight segments.
     const seg_ang := PLANET_ANGLE / 36
-    var annotated_polars : Array = [
-        Polar.new(-44 * seg_ang, 0),
-        Polar.new(-44 * seg_ang, RADIUS),
-        Polar.new(-36 * seg_ang, RADIUS),
-        Polar.new(-28 * seg_ang, RADIUS),
-        Polar.new(-26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
-        Polar.new(-24 * seg_ang, RADIUS + HILL_HEIGHT, "base"),
-        Polar.new(-22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
-        Polar.new(-20 * seg_ang, RADIUS, "gap"),
-        Polar.new(-16 * seg_ang, RADIUS, "city"),
-        Polar.new(-14 * seg_ang, RADIUS, "gap"),
-        Polar.new(-12 * seg_ang, RADIUS, "city"),
-        Polar.new(-10 * seg_ang, RADIUS, "gap"),
-        Polar.new(-8 * seg_ang, RADIUS, "city"),
-        Polar.new(-4 * seg_ang, RADIUS, "gap"),
-        Polar.new(-2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
-        Polar.new(0 * seg_ang, RADIUS + HILL_HEIGHT, "base"),
-        Polar.new(2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
-        Polar.new(4 * seg_ang, RADIUS, "gap"),
-        Polar.new(8 * seg_ang, RADIUS, "city"),
-        Polar.new(10 * seg_ang, RADIUS, "gap"),
-        Polar.new(12 * seg_ang, RADIUS, "city"),
-        Polar.new(14 * seg_ang, RADIUS, "gap"),
-        Polar.new(16 * seg_ang, RADIUS, "city"),
-        Polar.new(20 * seg_ang, RADIUS, "gap"),
-        Polar.new(22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
-        Polar.new(24 * seg_ang, RADIUS + HILL_HEIGHT, "base"),
-        Polar.new(26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"),
-        Polar.new(28 * seg_ang, RADIUS),
-        Polar.new(36 * seg_ang, RADIUS),
-        Polar.new(44 * seg_ang, RADIUS),
-        Polar.new(44 * seg_ang, 0),
+    var annotated_polars := [
+        [PI / 2 - 44 * seg_ang, 0],
+        [PI / 2 - 44 * seg_ang, RADIUS],
+        [PI / 2 - 36 * seg_ang, RADIUS],
+        [PI / 2 - 28 * seg_ang, RADIUS],
+        [PI / 2 - 26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+        [PI / 2 - 24 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
+        [PI / 2 - 22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+        [PI / 2 - 20 * seg_ang, RADIUS, "gap"],
+        [PI / 2 - 16 * seg_ang, RADIUS, "city"],
+        [PI / 2 - 14 * seg_ang, RADIUS, "gap"],
+        [PI / 2 - 12 * seg_ang, RADIUS, "city"],
+        [PI / 2 - 10 * seg_ang, RADIUS, "gap"],
+        [PI / 2 -  8 * seg_ang, RADIUS, "city"],
+        [PI / 2 -  4 * seg_ang, RADIUS, "gap"],
+        [PI / 2 -  2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+        [PI / 2 +  0 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
+        [PI / 2 +  2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+        [PI / 2 +  4 * seg_ang, RADIUS, "gap"],
+        [PI / 2 +  8 * seg_ang, RADIUS, "city"],
+        [PI / 2 + 10 * seg_ang, RADIUS, "gap"],
+        [PI / 2 + 12 * seg_ang, RADIUS, "city"],
+        [PI / 2 + 14 * seg_ang, RADIUS, "gap"],
+        [PI / 2 + 16 * seg_ang, RADIUS, "city"],
+        [PI / 2 + 20 * seg_ang, RADIUS, "gap"],
+        [PI / 2 + 22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+        [PI / 2 + 24 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
+        [PI / 2 + 26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+        [PI / 2 + 28 * seg_ang, RADIUS],
+        [PI / 2 + 36 * seg_ang, RADIUS],
+        [PI / 2 + 44 * seg_ang, RADIUS],
+        [PI / 2 + 44 * seg_ang, 0],
     ]
-    var xys_annotated: Array = []
-    for polar:Polar in annotated_polars:
-        xys_annotated.append([polar.cartesian(), polar.annotation])
+    var polar:Polar
+    var annotation:String
+    var vert:Vector2
+    for ap:Array in annotated_polars:
+        vert = Vector2.from_angle(ap[0]) * ap[1]
+        annotation = ""
+        if len(ap) == 3:
+            annotation = ap[2]
+        retval.append([vert, annotation])
+    return retval
 
-    # Extract from the annotated verts array an array of regular vector2
-    # and the locations of the named features.
-    for va in xys_annotated:
-        verts.append(va[0])
-        var collection:Array
-        if va[1] == "city":
-            collection = cities
-        elif va[1] == "base":
-            collection = bases
-        elif va[1] == "gap":
-            collection = gaps
-        elif va[1]:
-            assert(false, "Unrecognized vertex annotation '%s'" % va[1])
-        collection.append(va[0])
+func get_verts(annotated_verts:Array) -> Array[Vector2]:
+    var retval:Array[Vector2] = []
+    for av in annotated_verts:
+        retval.append(av[0])
+    return retval
 
-    return xys_annotated
+func get_annotation(annotated_verts:Array, annotation:String) -> Array[Vector2]:
+    var retval:Array[Vector2] = []
+    for av in annotated_verts:
+        if av[1] == annotation:
+            retval.append(av[0])
+    return retval
 
+func set_up_collision_shape():
+    var collision_shape = CollisionShape2D.new()
+    collision_shape.shape = ConvexPolygonShape2D.new()
+    collision_shape.shape.points = verts
+    add_child(collision_shape)
+
+    #var platform = StaticBody2D.new()
+    #var plat_collision_shape = CollisionShape2D.new()
+    #var plat_shape = RectangleShape2D.new()
+    #plat_shape.extents = Vector2(100, 5)  // Width and height of the platform
+    #plat_collision_shape.shape = plat_shape
+    #platform.add_child(plat_collision_shape)
+    #// Assigning the environment objects to layer 2
+    #platform.collision_layer = 2
+
+
+
+func _ready() -> void:
+    var annotated_verts := get_annotated_verts()
+    verts = get_verts(annotated_verts)
+    cities = get_annotation(annotated_verts, "city")
+    bases = get_annotation(annotated_verts, "base")
+    gaps = get_annotation(annotated_verts, "gap")
+    # set_up_collision_shape()
 
 func _draw():
     draw_polygon(verts, [Color(0, 0, 0)])

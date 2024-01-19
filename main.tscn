@@ -26,7 +26,7 @@ script = ExtResource("1_2ff6t")
 unique_name_in_owner = true
 script = ExtResource("4_neypf")
 
-[node name="Ground" type="Node2D" parent="World"]
+[node name="Ground" type="Area2D" parent="World"]
 unique_name_in_owner = true
 script = ExtResource("2_j6ko4")
 

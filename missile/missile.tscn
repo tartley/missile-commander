@@ -11,6 +11,7 @@ metadata/_edit_group_ = true
 script = ExtResource("2_uund3")
 
 [node name="Exhaust" type="CPUParticles2D" parent="."]
+show_behind_parent = true
 amount = 80
 lifetime = 10.0
 speed_scale = 0.75
@@ -18,8 +19,6 @@ fract_delta = false
 direction = Vector2(2.08165e-12, 1)
 spread = 0.0
 gravity = Vector2(2.08165e-12, 2.08165e-12)
-damping_min = 1000.0
-damping_max = 1000.0
 scale_amount_min = 4.0
 scale_amount_max = 4.0
 color = Color(0.458824, 0.576471, 1, 1)

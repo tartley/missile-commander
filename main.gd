@@ -18,10 +18,10 @@ func create_cities():
         city.position = city_pos
         %World.add_child(city)
 
-func begin_level(level:int):
+func begin_level():
     for _i in range(20):
         launch_missile()
 
 func _ready() -> void:
     create_cities()
-    begin_level(1)
+    begin_level()
