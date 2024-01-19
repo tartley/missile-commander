@@ -83,11 +83,13 @@ func get_annotation(annotated_verts:Array, annotation:String) -> Array[Vector2]:
             retval.append(av[0])
     return retval
 
-#func set_up_collision_shape():
-    #var collision_shape = CollisionShape2D.new()
-    #collision_shape.shape = Shape.new()
-    #collision_shape.shape = verts
-    #add_child(collision_shape)
+func set_up_collision_shape():
+    # TODO: Needs equivalent setting up in Missile,
+    # and then handlers for signals when they intersect.
+    var collision = CollisionShape2D.new()
+    collision.shape = CircleShape2D.new()
+    collision.shape.radius = RADIUS
+    add_child(collision)
 
 func _ready() -> void:
     var annotated_verts := get_annotated_verts()
@@ -95,7 +97,7 @@ func _ready() -> void:
     cities = get_annotation(annotated_verts, "city")
     bases = get_annotation(annotated_verts, "base")
     gaps = get_annotation(annotated_verts, "gap")
-    #set_up_collision_shape()
+    set_up_collision_shape()
 
 func _draw():
     draw_polygon(verts, [Color.BLACK])
