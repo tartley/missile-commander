@@ -12,6 +12,46 @@ const PLANET_ANGLE := PI / 16.0
 const HILL_HEIGHT := RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
 
+# Define the shape of ground in annotated polar co-ordinates, [angle, radius, feature]. Where:
+# * angle=0 is straight up,
+# * radius is relative to planet center at origin,
+# * feature is a string indicating the in-game feature located at that point.
+# Approximate the curved surface with straight segments.
+const seg_ang := PLANET_ANGLE / 36
+const annotated_polars := [
+    [PI / 2 - 44 * seg_ang, 0],
+    [PI / 2 - 44 * seg_ang, RADIUS],
+    [PI / 2 - 36 * seg_ang, RADIUS],
+    [PI / 2 - 28 * seg_ang, RADIUS],
+    [PI / 2 - 26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+    [PI / 2 - 24 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
+    [PI / 2 - 22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+    [PI / 2 - 20 * seg_ang, RADIUS, "gap"],
+    [PI / 2 - 16 * seg_ang, RADIUS, "city"],
+    [PI / 2 - 14 * seg_ang, RADIUS, "gap"],
+    [PI / 2 - 12 * seg_ang, RADIUS, "city"],
+    [PI / 2 - 10 * seg_ang, RADIUS, "gap"],
+    [PI / 2 -  8 * seg_ang, RADIUS, "city"],
+    [PI / 2 -  4 * seg_ang, RADIUS, "gap"],
+    [PI / 2 -  2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+    [PI / 2 +  0 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
+    [PI / 2 +  2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+    [PI / 2 +  4 * seg_ang, RADIUS, "gap"],
+    [PI / 2 +  8 * seg_ang, RADIUS, "city"],
+    [PI / 2 + 10 * seg_ang, RADIUS, "gap"],
+    [PI / 2 + 12 * seg_ang, RADIUS, "city"],
+    [PI / 2 + 14 * seg_ang, RADIUS, "gap"],
+    [PI / 2 + 16 * seg_ang, RADIUS, "city"],
+    [PI / 2 + 20 * seg_ang, RADIUS, "gap"],
+    [PI / 2 + 22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+    [PI / 2 + 24 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
+    [PI / 2 + 26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+    [PI / 2 + 28 * seg_ang, RADIUS],
+    [PI / 2 + 36 * seg_ang, RADIUS],
+    [PI / 2 + 44 * seg_ang, RADIUS],
+    [PI / 2 + 44 * seg_ang, 0],
+]
+
 var verts : PackedVector2Array
 var cities : Array[Vector2] = []
 var bases : Array[Vector2] = []
@@ -20,48 +60,8 @@ var gaps : Array[Vector2] = []
 func get_annotated_verts() -> Array:
     '''Return an array of annotated Vector2, ie. [ [ vector2, string ], ... ]'''
     var retval := []
-    # Define the shape of ground in annotated polar co-ordinates, [angle, radius, feature]. Where:
-    # * angle=0 is straight up,
-    # * radius is relative to planet center at origin,
-    # * feature is a string indicating the in-game feature located at that point.
-    # Approximate the curved surface with straight segments.
-    const seg_ang := PLANET_ANGLE / 36
-    var annotated_polars := [
-        [PI / 2 - 44 * seg_ang, 0],
-        [PI / 2 - 44 * seg_ang, RADIUS],
-        [PI / 2 - 36 * seg_ang, RADIUS],
-        [PI / 2 - 28 * seg_ang, RADIUS],
-        [PI / 2 - 26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
-        [PI / 2 - 24 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
-        [PI / 2 - 22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
-        [PI / 2 - 20 * seg_ang, RADIUS, "gap"],
-        [PI / 2 - 16 * seg_ang, RADIUS, "city"],
-        [PI / 2 - 14 * seg_ang, RADIUS, "gap"],
-        [PI / 2 - 12 * seg_ang, RADIUS, "city"],
-        [PI / 2 - 10 * seg_ang, RADIUS, "gap"],
-        [PI / 2 -  8 * seg_ang, RADIUS, "city"],
-        [PI / 2 -  4 * seg_ang, RADIUS, "gap"],
-        [PI / 2 -  2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
-        [PI / 2 +  0 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
-        [PI / 2 +  2 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
-        [PI / 2 +  4 * seg_ang, RADIUS, "gap"],
-        [PI / 2 +  8 * seg_ang, RADIUS, "city"],
-        [PI / 2 + 10 * seg_ang, RADIUS, "gap"],
-        [PI / 2 + 12 * seg_ang, RADIUS, "city"],
-        [PI / 2 + 14 * seg_ang, RADIUS, "gap"],
-        [PI / 2 + 16 * seg_ang, RADIUS, "city"],
-        [PI / 2 + 20 * seg_ang, RADIUS, "gap"],
-        [PI / 2 + 22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
-        [PI / 2 + 24 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
-        [PI / 2 + 26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
-        [PI / 2 + 28 * seg_ang, RADIUS],
-        [PI / 2 + 36 * seg_ang, RADIUS],
-        [PI / 2 + 44 * seg_ang, RADIUS],
-        [PI / 2 + 44 * seg_ang, 0],
-    ]
-    var polar:Polar
-    var annotation:String
     var vert:Vector2
+    var annotation:String
     for ap:Array in annotated_polars:
         vert = Vector2.from_angle(ap[0]) * ap[1]
         annotation = ""
