@@ -1,24 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://beborlibqojkp"]
+[gd_scene load_steps=4 format=3 uid="uid://beborlibqojkp"]
 
 [ext_resource type="Script" path="res://missile/missile.gd" id="1_ag1ef"]
-[ext_resource type="Script" path="res://missile/appearance.gd" id="2_uund3"]
+
+[sub_resource type="Curve" id="Curve_jjgk3"]
+_data = [Vector2(0.0827068, 0.24535), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_wnkbf"]
+offsets = PackedFloat32Array(0.0102041, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.635294, 0.635294, 0.631373, 0)
 
 [node name="Missile" type="Node2D"]
 script = ExtResource("1_ag1ef")
 metadata/_edit_group_ = true
 
-[node name="Appearance" type="Node2D" parent="."]
-script = ExtResource("2_uund3")
-
 [node name="Exhaust" type="CPUParticles2D" parent="."]
 show_behind_parent = true
 amount = 80
-lifetime = 10.0
+lifetime = 5.0
 speed_scale = 0.75
 fract_delta = false
+particle_flag_align_y = true
 direction = Vector2(2.08165e-12, 1)
 spread = 0.0
 gravity = Vector2(2.08165e-12, 2.08165e-12)
-scale_amount_min = 4.0
-scale_amount_max = 4.0
-color = Color(0.458824, 0.576471, 1, 1)
+scale_amount_min = 16.0
+scale_amount_max = 16.0
+scale_amount_curve = SubResource("Curve_jjgk3")
+color = Color(0.309804, 0.419608, 1, 1)
+color_ramp = SubResource("Gradient_wnkbf")
