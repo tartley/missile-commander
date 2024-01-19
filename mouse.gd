@@ -7,9 +7,7 @@ var extent_polar:Geometry.PolarExtent
 var polar:Geometry.Polar:
     set(value):
         # constrain new mouse position to lie within maximum extent
-        # TODO move this to Geometry.PolarExtent.constrain
-        value.angle = min(extent_polar.end.angle, max(extent_polar.start.angle, value.angle))
-        value.radius = min(extent_polar.end.radius, max(extent_polar.start.radius, value.radius))
+        value.constrain(extent_polar)
         polar = value
         position = polar.radius * Vector2.from_angle(PI/2 - polar.angle)
         normalized = extent_polar.normalize(polar)
