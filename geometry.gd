@@ -13,7 +13,6 @@ class Polar:
         angle = min(extent.end.angle, max(extent.start.angle, angle))
         radius = min(extent.end.radius, max(extent.start.radius, radius))
 
-
 # A section of an Annulus defined by two polar co-ordinates
 class PolarExtent:
     var start:Polar

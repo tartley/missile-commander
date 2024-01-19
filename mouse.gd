@@ -1,5 +1,16 @@
 extends Node2D
 
+const verts: Array[Vector2] = [
+    Vector2(-60, 0),
+    Vector2(-20, 0),
+    Vector2(20, 0),
+    Vector2(60, 0),
+    Vector2(0, -44),
+    Vector2(0, -20),
+    Vector2(0, 20),
+    Vector2(0, 44),
+]
+
 # mouse can move around in these world co-ordinates
 var extent_polar:Geometry.PolarExtent
 
@@ -45,14 +56,4 @@ func _input(event: InputEvent):
         )
 
 func _draw():
-    var verts: Array[Vector2] = [
-        Vector2(-60, 0),
-        Vector2(-20, 0),
-        Vector2(20, 0),
-        Vector2(60, 0),
-        Vector2(0, -44),
-        Vector2(0, -20),
-        Vector2(0, 20),
-        Vector2(0, 44),
-    ]
     draw_multiline(verts, Color(.5, .6, .7), 4.0)
