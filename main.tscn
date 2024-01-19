@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://mouse.gd" id="3_xy2w8"]
 [ext_resource type="Script" path="res://world.gd" id="3_ygiri"]
 [ext_resource type="Script" path="res://sky.gd" id="4_neypf"]
-[ext_resource type="Script" path="res://polar.gd" id="5_6n56b"]
+[ext_resource type="Script" path="res://geometry.gd" id="5_6n56b"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_htis4")
@@ -34,5 +34,5 @@ script = ExtResource("2_j6ko4")
 unique_name_in_owner = true
 script = ExtResource("3_xy2w8")
 
-[node name="Polar" type="Node" parent="."]
+[node name="Geometry" type="Node" parent="."]
 script = ExtResource("5_6n56b")
