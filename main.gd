@@ -1,7 +1,7 @@
 class_name Main extends Node
 
-var Missile = preload("res://missile/missile.tscn")
-var City = preload("res://city/city.tscn")
+@export var Missile:PackedScene
+@export var City:PackedScene
 
 func launch_missile():
     var missile = Missile.instantiate()

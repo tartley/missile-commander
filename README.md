@@ -6,20 +6,15 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
-* consistent angle representation, remove all the +/-PI/2 offsets.
-* Consider using TAU
-
-* Replace mouse 'extent_polar:Rect2' with a pair of Polar.
-  (or remove the TODO there if I decide not to)
-
-* See the tutorial way of adding new nodes to the tree programatically.
-  https://docs.godotengine.org/en/4.2/getting_started/first_2d_game/05.the_main_game_scene.html
 * Main has script 'main.gd', which contains startup orchestration,
   including DI required so one child node knows about others it needs.
   Child nodes which require such setup should @tool run
   `_get_configuration_warnings()`, which returns a non-empty PackedStringArray
   to generate warnings if they are not configured.
 * Can we have a linear chain of dependencies, not a tangled web?
+
+* consistent angle representation, remove all the +/-PI/2 offsets.
+* Consider using TAU
 
 * Consider AnnotatedVector2 class, extends Vector2
 * Consider AnnotatedVector2Array class, which provides access to co-ords of named features
@@ -100,4 +95,10 @@ using [Godot](https://godotengine.org/).
   * Consider drawing creation area for editor?
 
 * missiles should also aim for the gaps between cities
+
+* Replace mouse 'extent_polar:Rect2' with a pair of Polar.
+  (or remove the TODO there if I decide not to)
+
+* See the tutorial way of adding new nodes to the tree programatically.
+  https://docs.godotengine.org/en/4.2/getting_started/first_2d_game/05.the_main_game_scene.html
 
