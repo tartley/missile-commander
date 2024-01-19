@@ -9,8 +9,6 @@ var normalized: Vector2
 
 # Mouse position, as (angle from up in radians, height above planet surface)
 var world_polar:= Polar.new(0, 0):
-    get:
-        return world_polar
     set(value):
         world_polar = constrain(value, extent_polar)
         position = world_polar.cartesian()

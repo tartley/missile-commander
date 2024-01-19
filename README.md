@@ -6,14 +6,19 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
+* Remove references to Polar
+* Remove Polar
+* consistent angle representation, remove all the +/-PI/2 offsets.
+* Consider using TAU
+
+* See the tutorial way of adding new nodes to the tree programatically.
+  https://docs.godotengine.org/en/4.2/getting_started/first_2d_game/05.the_main_game_scene.html
+
 * Detect missiles colliding with the ground
   * Make the Ground an Area2D, with a CollisionShape2D child, populated with a ConcavePolygon2d
     or something
   * Add some collision boundary to missils.
   * on collision, kill the missile
-
-* See the tutorial way of adding new nodes to the tree programatically.
-  https://docs.godotengine.org/en/4.2/getting_started/first_2d_game/05.the_main_game_scene.html
 
 * missiles die when hitting the ground
   * do we use collision shapes for missile and ground?
@@ -23,10 +28,6 @@ using [Godot](https://godotengine.org/).
 
 * 3 bases exist.
   * Ask the ground where they are placed
-
-* consistent angle representation,
-  maybe deleting Polar, since things like Vector2.angle() exist.
-  which should remove all the "+ PI/2" offsets.
 
 * Main has script 'main.gd', which contains startup orchestration,
   including DI required so one child node knows about others it needs.
