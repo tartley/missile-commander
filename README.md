@@ -6,13 +6,23 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
-* Remove references to Polar
-* Remove Polar
 * consistent angle representation, remove all the +/-PI/2 offsets.
 * Consider using TAU
 
+* Replace mouse 'extent_polar:Rect2' with a pair of Polar.
+  (or remove the TODO there if I decide not to)
+
 * See the tutorial way of adding new nodes to the tree programatically.
   https://docs.godotengine.org/en/4.2/getting_started/first_2d_game/05.the_main_game_scene.html
+* Main has script 'main.gd', which contains startup orchestration,
+  including DI required so one child node knows about others it needs.
+  Child nodes which require such setup should @tool run
+  `_get_configuration_warnings()`, which returns a non-empty PackedStringArray
+  to generate warnings if they are not configured.
+* Can we have a linear chain of dependencies, not a tangled web?
+
+* Consider AnnotatedVector2 class, extends Vector2
+* Consider AnnotatedVector2Array class, which provides access to co-ords of named features
 
 * Detect missiles colliding with the ground
   * Make the Ground an Area2D, with a CollisionShape2D child, populated with a ConcavePolygon2d
@@ -29,20 +39,13 @@ using [Godot](https://godotengine.org/).
 * 3 bases exist.
   * Ask the ground where they are placed
 
-* Main has script 'main.gd', which contains startup orchestration,
-  including DI required so one child node knows about others it needs.
-  Child nodes which require such setup should @tool run
-  `_get_configuration_warnings()`, which returns a non-empty PackedStringArray
-  to generate warnings if they are not configured.
-* Can we have a linear chain of dependencies, not a tangled web?
+* Should we try to use GPUParticles on non-MacOS?
 
 * Add previews in the editor?
   https://docs.godotengine.org/en/stable/tutorials/plugins/running_code_in_the_editor.html#doc-running-code-in-the-editor
   * Ground?
   * Camera and mouse max extents?
   * Star max extents?
-
-* extract an "annotatedArray" class?
 
 * Stars on a parallax background
   https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
