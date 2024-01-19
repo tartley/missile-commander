@@ -13,6 +13,8 @@ using [Godot](https://godotengine.org/).
   to generate warnings if they are not configured.
 * Can we have a linear chain of dependencies, not a tangled web?
 
+* Add a text node so I can figure out if scale.y=-1 is a disaster
+
 * consistent angle representation, remove all the +/-PI/2 offsets.
 * Consider using TAU
 
