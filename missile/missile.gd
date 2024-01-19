@@ -11,9 +11,9 @@ const verts: Array[Vector2] = [
 var velocity: Vector2
 
 func _ready() -> void:
-    $Exhaust.direction = Vector2(0, 1)
-    $Exhaust.initial_velocity_max = velocity.length()
-    $Exhaust.initial_velocity_min = velocity.length()
+    $Trail.direction = Vector2(0, 1)
+    $Trail.initial_velocity_max = velocity.length()
+    $Trail.initial_velocity_min = velocity.length()
 
 func launch(pos:Vector2, destination:Vector2, speed:float):
     position = pos

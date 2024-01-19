@@ -14,7 +14,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.635294, 0.635294, 0.631373, 0)
 script = ExtResource("1_ag1ef")
 metadata/_edit_group_ = true
 
-[node name="Exhaust" type="CPUParticles2D" parent="."]
+[node name="Trail" type="CPUParticles2D" parent="."]
 show_behind_parent = true
 amount = 80
 lifetime = 5.0
