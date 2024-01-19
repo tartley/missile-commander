@@ -17,3 +17,10 @@ class PolarExtent:
     func _init(start:Polar, end:Polar):
         self.start = start
         self.end = end
+
+    func normalize(coord:Geometry.Polar) -> Vector2:
+        '''Convert polar co-ord's position within polar extent to range x:(-1 to +1), y:(0 to 1)'''
+        return Vector2(
+            coord.angle / (end.angle - start.angle),
+            (coord.radius - start.radius) / (end.radius - start.radius),
+        )

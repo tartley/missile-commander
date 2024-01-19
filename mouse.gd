@@ -12,18 +12,10 @@ var polar:Geometry.Polar:
         value.radius = min(extent_polar.end.radius, max(extent_polar.start.radius, value.radius))
         polar = value
         position = polar.radius * Vector2.from_angle(PI/2 - polar.angle)
-        normalized = normalize(polar, extent_polar)
+        normalized = extent_polar.normalize(polar)
 
 # normalized mouse position to lie within (-1 to 1, 0 to 1)
 var normalized:Vector2
-
-# TODO move this to geometry
-func normalize(coord:Geometry.Polar, extent:Geometry.PolarExtent) -> Vector2:
-    '''Convert polar co-ord's position within polar extent to range x:(-1 to +1), y:(0 to 1)'''
-    return Vector2(
-        coord.angle / (extent.end.angle - extent.start.angle),
-        (coord.radius - extent.start.radius) / (extent.end.radius - extent.start.radius),
-    )
 
 func _ready():
     extent_polar = Geometry.PolarExtent.new(
