@@ -1,35 +1,40 @@
 extends Node2D
 
 # mouse can move around in these world co-ordinates
-# TODO would be nice if this used a Polar extent instead of cartesian Rect2
-var extent_polar:Rect2
+var extent_polar:Geometry.PolarExtent
 
 # Mouse current position in polar world co-ordinates
 var polar:Geometry.Polar:
     set(value):
         # constrain new mouse position to lie within maximum extent
-        value.angle = min(extent_polar.end.x, max(extent_polar.position.x, value.angle))
-        value.radius = min(extent_polar.end.y, max(extent_polar.position.y, value.radius))
+        # TODO move this to Geometry.PolarExtent.constrain
+        value.angle = min(extent_polar.end.angle, max(extent_polar.start.angle, value.angle))
+        value.radius = min(extent_polar.end.radius, max(extent_polar.start.radius, value.radius))
         polar = value
         position = polar.radius * Vector2.from_angle(PI/2 - polar.angle)
-        normalized = normalize(polar.angle, polar.radius, extent_polar)
+        normalized = normalize(polar, extent_polar)
 
 # normalized mouse position to lie within (-1 to 1, 0 to 1)
 var normalized:Vector2
 
-func normalize(angle:float, radius:float, extent:Rect2) -> Vector2:
+# TODO move this to geometry
+func normalize(coord:Geometry.Polar, extent:Geometry.PolarExtent) -> Vector2:
     '''Convert polar co-ord's position within polar extent to range x:(-1 to +1), y:(0 to 1)'''
     return Vector2(
-        angle / (extent.end.x - extent.position.x),
-        (radius - extent.position.y) / (extent.end.y - extent.position.y),
+        coord.angle / (extent.end.angle - extent.start.angle),
+        (coord.radius - extent.start.radius) / (extent.end.radius - extent.start.radius),
     )
 
 func _ready():
-    extent_polar = Rect2(
-        -%Ground.PLANET_ANGLE * 0.99,
-        %Ground.RADIUS + get_viewport_rect().size.y * 0.11,
-        %Ground.PLANET_ANGLE * 1.98,
-        get_viewport_rect().size.y * .89
+    extent_polar = Geometry.PolarExtent.new(
+        Geometry.Polar.new(
+            %Ground.PLANET_ANGLE * -0.99,
+            %Ground.RADIUS + get_viewport_rect().size.y * 0.11,
+        ),
+        Geometry.Polar.new(
+            %Ground.PLANET_ANGLE * +0.99,
+            %Ground.RADIUS + get_viewport_rect().size.y * 1.0,
+        ),
     )
     # Dupes behavior of "focus in" event, since we don't get that event on startup on MacOS
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

@@ -9,3 +9,11 @@ class Polar:
         self.angle=angle
         self.radius=radius
 
+# A section of an Annulus defined by two polar co-ordinates
+class PolarExtent:
+    var start:Polar
+    var end:Polar
+
+    func _init(start:Polar, end:Polar):
+        self.start = start
+        self.end = end
