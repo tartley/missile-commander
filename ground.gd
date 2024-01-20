@@ -18,7 +18,7 @@ const COLOR := Color(0.1, 0.5, 0.2)
 # * feature is a string indicating the in-game feature located at that point.
 # Approximate the curved surface with straight segments.
 const seg_ang := PLANET_ANGLE / 36
-const annotated_polars := [
+const annotated_polar_array := [
     [PI / 2 - 44 * seg_ang, 0],
     [PI / 2 - 44 * seg_ang, RADIUS],
     [PI / 2 - 36 * seg_ang, RADIUS],
@@ -56,40 +56,17 @@ var verts : PackedVector2Array
 var cities : Array[Vector2] = []
 var bases : Array[Vector2] = []
 var gaps : Array[Vector2] = []
-var hill1 : Array[Vector2] = []
 
-func get_annotated_verts() -> Array:
-    '''Return an array of annotated Vector2, ie. [ [ vector2, string ], ... ]'''
+func get_annotated_vert_array(annotated_polars:Array) -> Array:
+    '''Convert array of annotated polar co-ords to an array of annotated cartesian co-ords'''
     var retval := []
     var vert:Vector2
     for ap:Array in annotated_polars:
-        vert = Vector2.from_angle(ap[0]) * ap[1]
-        var annotations:Array[String] = []
-        for i in range(2, len(ap)):
-            annotations.append(ap[i])
-        retval.append([vert, annotations])
-    for item:Array in retval:
-        print(item)
+        vert = ap[1] * Vector2.from_angle(ap[0])
+        retval.append([vert.x, vert.y, ap.slice(2)])
     return retval
 
-func get_verts(annotated_verts:Array) -> Array[Vector2]:
-    var retval:Array[Vector2] = []
-    for av in annotated_verts:
-        retval.append(av[0])
-    return retval
-
-func get_annotation(annotated_verts:Array, annotation:String) -> Array[Vector2]:
-    var retval:Array[Vector2] = []
-    var vector:Vector2
-    var annotations:Array[String]
-    for av in annotated_verts:
-        vector = av[0]
-        annotations = av[1]
-        if annotation in annotations:
-            retval.append(vector)
-    return retval
-
-func set_up_collisions():
+func set_up_collisions(av:Geometry.AnnotatedVerts):
     # circle
     var c1 = CollisionShape2D.new()
     c1.shape = CircleShape2D.new()
@@ -98,17 +75,17 @@ func set_up_collisions():
     # hill 1
     var c2 = CollisionShape2D.new()
     c2.shape = ConvexPolygonShape2D.new()
-    c2.shape.points = hill1
+    c2.shape.points = av.get_vertices("hill1")
     add_child(c2)
 
 func _ready() -> void:
-    var annotated_verts := get_annotated_verts()
-    verts = get_verts(annotated_verts)
-    cities = get_annotation(annotated_verts, "city")
-    bases = get_annotation(annotated_verts, "base")
-    gaps = get_annotation(annotated_verts, "gap")
-    hill1 = get_annotation(annotated_verts, "hill1")
-    set_up_collisions()
+    var annotated_vert_array := get_annotated_vert_array(annotated_polar_array)
+    var annotated_verts := Geometry.AnnotatedVerts.new(annotated_vert_array)
+    verts = annotated_verts.verts
+    cities = annotated_verts.get_vertices("city")
+    bases = annotated_verts.get_vertices("base")
+    gaps = annotated_verts.get_vertices("gap")
+    set_up_collisions(annotated_verts)
 
 func _draw():
     draw_polygon(verts, [Color.BLACK])

@@ -33,6 +33,5 @@ func _process(delta: float) -> void:
 func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
-func on_area_entered(area):
-    print(area)
+func on_area_entered(_area):
     queue_free()
