@@ -33,5 +33,11 @@ func _process(delta: float) -> void:
 func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
-func on_area_entered(_area):
+func on_area_entered(area:Area2D):
+    # The missile has collided with the ground.
+    # Reparent our trail onto the ground
+    var trail = $Trail
+    self.remove_child(trail)
+    area.add_child(trail)
+    # Destroy ourselves.
     queue_free()

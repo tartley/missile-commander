@@ -75,9 +75,9 @@ func set_up_collisions(av:Geometry.AnnotatedVerts):
     shapes.append(circle)
 
     # Next shapes are the three hills
-    for name in ["hill1", "hill2", "hill3"]:
+    for hill_name in ["hill1", "hill2", "hill3"]:
         var polygon = ConvexPolygonShape2D.new()
-        polygon.points = av.get_vertices(name)
+        polygon.points = av.get_vertices(hill_name)
         shapes.append(polygon)
 
     # Add all shapes to the ground's collision area

@@ -16,7 +16,7 @@ using [Godot](https://godotengine.org/).
   - on collision, kill the missile
   - Detect collisions with the hills
   - Missiles shouldn't collide with each other
-  * Retain the trail, presumably reparenting it to the World?
+  - Retain the trail, reparenting it to the Ground
   * A little explosion?
 
 * consistent angle representation, remove all the +/-PI/2 offsets.
