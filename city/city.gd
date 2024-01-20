@@ -17,4 +17,6 @@ const verts: Array[Vector2] = [
 
 func _ready() -> void:
     rotation = position.angle() - PI / 2
-    $Appearance.verts = verts
+
+func _draw():
+    draw_polyline(verts, Color(1, .3, .3), 4.0, true)
