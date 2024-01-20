@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://beborlibqojkp"]
+[gd_scene load_steps=5 format=3 uid="uid://beborlibqojkp"]
 
 [ext_resource type="Script" path="res://missile/missile.gd" id="1_ag1ef"]
+[ext_resource type="Script" path="res://missile/trail.gd" id="2_gfwhq"]
 
 [sub_resource type="Curve" id="Curve_jjgk3"]
 _data = [Vector2(0.0827068, 0.24535), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -30,5 +31,7 @@ scale_amount_max = 16.0
 scale_amount_curve = SubResource("Curve_jjgk3")
 color = Color(0.309804, 0.419608, 1, 1)
 color_ramp = SubResource("Gradient_wnkbf")
+script = ExtResource("2_gfwhq")
 
 [connection signal="area_entered" from="." to="." method="on_area_entered"]
+[connection signal="finished" from="Trail" to="Trail" method="on_finished"]

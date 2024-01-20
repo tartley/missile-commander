@@ -95,6 +95,6 @@ func _ready() -> void:
     gaps = annotated_verts.get_vertices("gap")
     set_up_collisions(annotated_verts)
 
-func _draw():
+func _draw() -> void:
     draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.7, 1, .6), 2.0, true)
