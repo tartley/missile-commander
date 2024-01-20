@@ -6,21 +6,23 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
+* Detect missiles colliding with the ground
+  - Make the Ground an Area2D, with a CollisionShape2D child, populated with a
+    ConvexPolygon2d (Although ground is a concave shape, a ConcavePolygon2D is
+    not great for collision detection, it is only sensitive at the edges, not
+    throughout the interior. So, we'll have to somehow compose our 'Ground'
+    Area2D out of multiple Shape2Ds.
+  - Add some collision boundary to missils.
+  - on collision, kill the missile
+  * Detect collisions with the hills
+  * Retain the trail, presumably reparenting it to the World?
+  * A little explosion?
+
 * consistent angle representation, remove all the +/-PI/2 offsets.
 * Consider using TAU
 
 * Consider AnnotatedVector2 class, extends Vector2
 * Consider AnnotatedVector2Array class, which provides access to co-ords of named features
-
-* Detect missiles colliding with the ground
-  * Make the Ground an Area2D, with a CollisionShape2D child, populated with a ConcavePolygon2d
-    or something
-  * Add some collision boundary to missils.
-  * on collision, kill the missile
-
-* missiles die when hitting the ground
-  * do we use collision shapes for missile and ground?
-  * or just for ground?
 
 * small explosion when missiles die
 

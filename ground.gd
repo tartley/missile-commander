@@ -22,11 +22,11 @@ const annotated_polars := [
     [PI / 2 - 44 * seg_ang, 0],
     [PI / 2 - 44 * seg_ang, RADIUS],
     [PI / 2 - 36 * seg_ang, RADIUS],
-    [PI / 2 - 28 * seg_ang, RADIUS],
-    [PI / 2 - 26 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
+    [PI / 2 - 28 * seg_ang, RADIUS, "gap", "hill1"],
+    [PI / 2 - 26 * seg_ang, RADIUS + HILL_HEIGHT, "gap", "hill1"],
     [PI / 2 - 24 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
-    [PI / 2 - 22 * seg_ang, RADIUS + HILL_HEIGHT, "gap"],
-    [PI / 2 - 20 * seg_ang, RADIUS, "gap"],
+    [PI / 2 - 22 * seg_ang, RADIUS + HILL_HEIGHT, "gap", "hill1"],
+    [PI / 2 - 20 * seg_ang, RADIUS, "gap", "hill1"],
     [PI / 2 - 16 * seg_ang, RADIUS, "city"],
     [PI / 2 - 14 * seg_ang, RADIUS, "gap"],
     [PI / 2 - 12 * seg_ang, RADIUS, "city"],
@@ -56,18 +56,20 @@ var verts : PackedVector2Array
 var cities : Array[Vector2] = []
 var bases : Array[Vector2] = []
 var gaps : Array[Vector2] = []
+var hill1 : Array[Vector2] = []
 
 func get_annotated_verts() -> Array:
     '''Return an array of annotated Vector2, ie. [ [ vector2, string ], ... ]'''
     var retval := []
     var vert:Vector2
-    var annotation:String
     for ap:Array in annotated_polars:
         vert = Vector2.from_angle(ap[0]) * ap[1]
-        annotation = ""
-        if len(ap) == 3:
-            annotation = ap[2]
-        retval.append([vert, annotation])
+        var annotations:Array[String] = []
+        for i in range(2, len(ap)):
+            annotations.append(ap[i])
+        retval.append([vert, annotations])
+    for item:Array in retval:
+        print(item)
     return retval
 
 func get_verts(annotated_verts:Array) -> Array[Vector2]:
@@ -78,18 +80,26 @@ func get_verts(annotated_verts:Array) -> Array[Vector2]:
 
 func get_annotation(annotated_verts:Array, annotation:String) -> Array[Vector2]:
     var retval:Array[Vector2] = []
+    var vector:Vector2
+    var annotations:Array[String]
     for av in annotated_verts:
-        if av[1] == annotation:
-            retval.append(av[0])
+        vector = av[0]
+        annotations = av[1]
+        if annotation in annotations:
+            retval.append(vector)
     return retval
 
 func set_up_collisions():
-    # TODO: Needs equivalent setting up in Missile,
-    # and then handlers for signals when they intersect.
-    var collision = CollisionShape2D.new()
-    collision.shape = CircleShape2D.new()
-    collision.shape.radius = RADIUS
-    add_child(collision)
+    # circle
+    var c1 = CollisionShape2D.new()
+    c1.shape = CircleShape2D.new()
+    c1.shape.radius = RADIUS
+    add_child(c1)
+    # hill 1
+    var c2 = CollisionShape2D.new()
+    c2.shape = ConvexPolygonShape2D.new()
+    c2.shape.points = hill1
+    add_child(c2)
 
 func _ready() -> void:
     var annotated_verts := get_annotated_verts()
@@ -97,6 +107,7 @@ func _ready() -> void:
     cities = get_annotation(annotated_verts, "city")
     bases = get_annotation(annotated_verts, "base")
     gaps = get_annotation(annotated_verts, "gap")
+    hill1 = get_annotation(annotated_verts, "hill1")
     set_up_collisions()
 
 func _draw():
