@@ -14,9 +14,9 @@ func _draw():
     for i in range(100):
         x = _random.randf_range(-2800.0, 2800.0)
         y = _random.randf_range(%Ground.RADIUS - get_viewport_rect().size.y * 0.14, %Ground.RADIUS + get_viewport_rect().size.y * 1.04)
-        size = _random.randf_range(5.0, 8.0)
+        size = _random.randf_range(4.0, 8.0)
         bright = _random.randf_range(0.5, 1.0)
         verts.append(Vector2(x, y))
-        verts.append(Vector2(x + 6, y))
+        verts.append(Vector2(x + size, y))
         colors.append(Color(bright, bright, bright))
-    draw_multiline_colors(verts, colors, 6.0)
+    draw_multiline_colors(verts, colors, size)
