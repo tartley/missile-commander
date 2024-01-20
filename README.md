@@ -14,7 +14,8 @@ using [Godot](https://godotengine.org/).
     Area2D out of multiple Shape2Ds.
   - Add some collision boundary to missils.
   - on collision, kill the missile
-  * Detect collisions with the hills
+  - Detect collisions with the hills
+  * Missiles shouldn't collide with each other
   * Retain the trail, presumably reparenting it to the World?
   * A little explosion?
 

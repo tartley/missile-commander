@@ -19,7 +19,7 @@ func create_cities():
         %World.add_child(city)
 
 func begin_level():
-    for _i in range(20):
+    for _i in range(1000):
         launch_missile()
 
 func _ready() -> void:
