@@ -37,7 +37,7 @@ func on_area_entered(area:Area2D):
     # The missile has collided with the ground.
     # Reparent our trail onto the ground
     var trail = $Trail
-    self.remove_child(trail)
-    area.add_child(trail)
+    trail.reparent(area)
+    trail.emitting = false
     # Destroy ourselves.
     queue_free()

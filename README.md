@@ -17,31 +17,28 @@ using [Godot](https://godotengine.org/).
   - Detect collisions with the hills
   - Missiles shouldn't collide with each other
   - Retain the trail, reparenting it to the Ground
+  * delete each trail when all its particles end
   * A little explosion?
-
-* consistent angle representation, remove all the +/-PI/2 offsets.
-* Consider using TAU
-
-* Consider AnnotatedVector2 class, extends Vector2
-* Consider AnnotatedVector2Array class, which provides access to co-ords of named features
-
-* small explosion when missiles die
 
 * 3 bases exist.
   * Ask the ground where they are placed
 
-* Should we try to use GPUParticles on non-MacOS?
+* consistent angle representation, remove all the +/-PI/2 offsets.
+* Consider using TAU
 
+# Optional
+
+* stars in the sky as a particle system?
+* Stars on a parallax background
+  https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
+  or
+  that github issue I commented on
+* Should we try to use GPUParticles on non-MacOS?
 * Add previews in the editor?
   https://docs.godotengine.org/en/stable/tutorials/plugins/running_code_in_the_editor.html#doc-running-code-in-the-editor
   * Ground?
   * Camera and mouse max extents?
   * Star max extents?
-
-* Stars on a parallax background
-  https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
-  or
-  that github issue I commented on
 
 ## Done
 
