@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://camera.gd" id="1_2ff6t"]
 [ext_resource type="Script" path="res://main.gd" id="1_htis4"]
-[ext_resource type="PackedScene" uid="uid://beborlibqojkp" path="res://missile/missile.tscn" id="2_61udo"]
+[ext_resource type="PackedScene" uid="uid://beborlibqojkp" path="res://missile.tscn" id="2_61udo"]
 [ext_resource type="Script" path="res://ground.gd" id="2_j6ko4"]
-[ext_resource type="PackedScene" uid="uid://dk83v0qqd5oxt" path="res://city/city.tscn" id="3_kbfpb"]
+[ext_resource type="PackedScene" uid="uid://dk83v0qqd5oxt" path="res://city.tscn" id="3_kbfpb"]
 [ext_resource type="Script" path="res://mouse.gd" id="3_xy2w8"]
 [ext_resource type="Script" path="res://world.gd" id="3_ygiri"]
 [ext_resource type="Script" path="res://sky.gd" id="4_neypf"]
