@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var Pop:PackedScene
+
 const SIZE := 20.0
 const verts: Array[Vector2] = [
     Vector2(0.0, -SIZE/2.0),
@@ -34,10 +36,17 @@ func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
 func on_area_entered(area:Area2D):
-    # The missile has collided with the ground.
+    # A Missile has collided with the Ground.
     # Reparent our trail onto the ground
     var trail = $Trail
     trail.reparent(area)
     trail.emitting = false
+    # Add a Pop, parented to the World.
+    # TODO: Hmmm maybe the trail should be parented to the World too?
+    # TODO: is it useful to put them in groups, to control what draws in front?
+    var world := get_parent()
+    var pop = Pop.instantiate()
+    pop.position = self.position
+    world.add_child(pop)
     # Destroy ourselves.
     queue_free()

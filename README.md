@@ -6,19 +6,7 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
-* Detect missiles colliding with the ground
-  - Make the Ground an Area2D, with a CollisionShape2D child, populated with a
-    ConvexPolygon2d (Although ground is a concave shape, a ConcavePolygon2D is
-    not great for collision detection, it is only sensitive at the edges, not
-    throughout the interior. So, we'll have to somehow compose our 'Ground'
-    Area2D out of multiple Shape2Ds.
-  - Add some collision boundary to missils.
-  - on collision, kill the missile
-  - Detect collisions with the hills
-  - Missiles shouldn't collide with each other
-  - Retain the trail, reparenting it to the Ground
-  * delete each trail when all its particles end
-  * A little explosion?
+* cities can get destroyed
 
 * 3 bases exist.
   * Ask the ground where they are placed
@@ -28,7 +16,10 @@ using [Godot](https://godotengine.org/).
 
 # Optional
 
-* stars in the sky as a particle system?
+* GPUParticles:
+  * Use GPU Particle systems / Compatibility renderer for web exports
+  * Use GPU Particle systems / Forward+ renderer for desktop (incl. MacOS) exports
+* stars in the sky as a particle system
 * Stars on a parallax background
   https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
   or
@@ -97,4 +88,21 @@ using [Godot](https://godotengine.org/).
 
 * Add a text node so I can figure out if scale.y=-1 is a disaster
   No: I can also set same on the Label to fix the upsid3-down text.
+
+* Detect missiles colliding with the ground
+  - Make the Ground an Area2D, with a CollisionShape2D child, populated with a
+    ConvexPolygon2d (Although ground is a concave shape, a ConcavePolygon2D is
+    not great for collision detection, it is only sensitive at the edges, not
+    throughout the interior. So, we'll have to somehow compose our 'Ground'
+    Area2D out of multiple Shape2Ds.
+  - Add some collision boundary to missils.
+  - on collision, kill the missile
+  - Detect collisions with the hills
+  - Missiles shouldn't collide with each other
+  - Retain the trail, reparenting it to the Ground
+  - delete each trail when all its particles end
+  - A little explosion?
+    - explosion grows over time
+    - explosion fades over time
+    ? explosion is a ring?
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://beborlibqojkp"]
+[gd_scene load_steps=6 format=3 uid="uid://beborlibqojkp"]
 
 [ext_resource type="Script" path="res://missile/missile.gd" id="1_ag1ef"]
 [ext_resource type="Script" path="res://missile/trail.gd" id="2_gfwhq"]
+[ext_resource type="PackedScene" uid="uid://bkqmkdfhp44om" path="res://pop.tscn" id="2_lv8kg"]
 
 [sub_resource type="Curve" id="Curve_jjgk3"]
 _data = [Vector2(0.0827068, 0.24535), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -14,6 +15,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.635294, 0.635294, 0.631373, 0)
 [node name="Missile" type="Area2D"]
 collision_layer = 0
 script = ExtResource("1_ag1ef")
+Pop = ExtResource("2_lv8kg")
 metadata/_edit_group_ = true
 
 [node name="Trail" type="CPUParticles2D" parent="."]
