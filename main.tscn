@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvl60w5q1oghk"]
+[gd_scene load_steps=9 format=3 uid="uid://dvl60w5q1oghk"]
 
 [ext_resource type="Script" path="res://camera.gd" id="1_2ff6t"]
 [ext_resource type="Script" path="res://main.gd" id="1_htis4"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://ground.gd" id="2_j6ko4"]
 [ext_resource type="PackedScene" uid="uid://dk83v0qqd5oxt" path="res://city.tscn" id="3_kbfpb"]
 [ext_resource type="Script" path="res://mouse.gd" id="3_xy2w8"]
-[ext_resource type="Script" path="res://world.gd" id="3_ygiri"]
 [ext_resource type="Script" path="res://sky.gd" id="4_neypf"]
 [ext_resource type="Script" path="res://geometry.gd" id="5_6n56b"]
 
@@ -16,9 +15,7 @@ Missile = ExtResource("2_61udo")
 City = ExtResource("3_kbfpb")
 
 [node name="World" type="Node2D" parent="."]
-unique_name_in_owner = true
 scale = Vector2(1, -1)
-script = ExtResource("3_ygiri")
 
 [node name="Camera" type="Camera2D" parent="World"]
 position = Vector2(0, -12000)
@@ -27,7 +24,6 @@ ignore_rotation = false
 script = ExtResource("1_2ff6t")
 
 [node name="Sky" type="Node2D" parent="World"]
-unique_name_in_owner = true
 script = ExtResource("4_neypf")
 
 [node name="Ground" type="Area2D" parent="World"]

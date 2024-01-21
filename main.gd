@@ -6,17 +6,17 @@ class_name Main extends Node
 func launch_missile():
     var missile = Missile.instantiate()
     var start := Vector2(randf_range(-2000, +2000), randf_range(14500, 15000))
-    var targets:Array[Vector2] = %Ground.gaps + %Ground.cities
+    var targets:Array[Vector2] = $World/Ground.gaps + $World/Ground.cities
     var destination:Vector2 = targets.pick_random()
     var speed := randf_range(100, 600)
     missile.launch(start, destination, speed)
-    %World.add_child(missile)
+    $World.add_child(missile)
 
 func create_cities():
-    for city_pos in %Ground.cities:
+    for city_pos in $World/Ground.cities:
         var city = City.instantiate()
         city.position = city_pos
-        %World.add_child(city)
+        $World.add_child(city)
 
 func begin_level():
     for _i in range(20):
