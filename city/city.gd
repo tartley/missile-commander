@@ -1,22 +1,24 @@
 extends Node2D
 
-const verts: Array[Vector2] = [
-    Vector2(-50, 0),
-    Vector2(-50, 20),
-    Vector2(-30, 20),
-    Vector2(-30, 30),
-    Vector2(-10, 30),
-    Vector2(-10, 50),
-    Vector2(10, 50),
-    Vector2(10, 20),
-    Vector2(30, 20),
-    Vector2(30, 30),
-    Vector2(50, 30),
-    Vector2(50, 0),
-]
+const COLUMNS = 7
+const SIZE = 100
+
+var verts: Array[Vector2]
+
+func get_verts() -> Array[Vector2]:
+    var retval: Array[Vector2] = []
+    var heights:Array[int] = [20, 30, 40, 40, 50, 50, 60]
+    heights.shuffle()
+    retval.append(Vector2(-SIZE/2, 0))
+    for column in range(COLUMNS):
+        retval.append(Vector2(-SIZE/2 + column * SIZE/COLUMNS, heights[column]))
+        retval.append(Vector2(-SIZE/2 + (column + 1) * SIZE/COLUMNS, heights[column]))
+    retval.append(Vector2(+SIZE/2, 0))
+    return retval
 
 func _ready() -> void:
-    rotation = position.angle() - PI / 2
+    self.rotation = position.angle() - PI / 2
+    self.verts = get_verts()
 
 func _draw():
     draw_polyline(verts, Color(1, .3, .3), 4.0, true)

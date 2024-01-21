@@ -6,9 +6,9 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
-* Mouse cursor can go lower
-
 * cities can get destroyed
+* All cities destroyed is game over
+* Each city has a name label?
 
 * 3 bases exist.
   * Ask the ground where they are placed
@@ -110,4 +110,7 @@ using [Godot](https://godotengine.org/).
 
 * Pops render behind the ground
 * Cities and Missiles too, now I come to think of it
+
+* Mouse cursor can go lower
+* Each city looks different?
 
