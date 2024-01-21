@@ -20,8 +20,8 @@ func set_up_collisions():
 
 func _ready() -> void:
     $Trail.direction = Vector2(0, 1)
-    $Trail.initial_velocity_max = velocity.length() / 10
-    $Trail.initial_velocity_min = velocity.length() / 10
+    $Trail.initial_velocity_max = velocity.length() / 5
+    $Trail.initial_velocity_min = velocity.length() / 5
     set_up_collisions()
 
 func launch(pos:Vector2, destination:Vector2, speed:float):
