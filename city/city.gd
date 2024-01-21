@@ -16,9 +16,11 @@ func get_verts() -> Array[Vector2]:
     retval.append(Vector2(+SIZE/2, 0))
     return retval
 
+func _init():
+    self.verts = get_verts()
+
 func _ready() -> void:
     self.rotation = position.angle() - PI / 2
-    self.verts = get_verts()
 
 func _draw():
     draw_polyline(verts, Color(1, .3, .3), 4.0, true)
