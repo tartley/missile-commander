@@ -23,5 +23,6 @@ func begin_level():
         launch_missile()
 
 func _ready() -> void:
+    $World/Camera.mouse = $World/Mouse
     create_cities()
     begin_level()
