@@ -24,5 +24,6 @@ func begin_level():
 
 func _ready() -> void:
     $World/Camera.mouse = $World/Mouse
+    $World/Camera.ground = $World/Ground
     create_cities()
     begin_level()
