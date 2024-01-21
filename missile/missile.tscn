@@ -13,6 +13,7 @@ offsets = PackedFloat32Array(0.0102041, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.635294, 0.635294, 0.631373, 0)
 
 [node name="Missile" type="Area2D"]
+z_index = 1
 collision_layer = 0
 script = ExtResource("1_ag1ef")
 Pop = ExtResource("2_lv8kg")
@@ -20,6 +21,8 @@ metadata/_edit_group_ = true
 
 [node name="Trail" type="CPUParticles2D" parent="."]
 show_behind_parent = true
+z_index = 1
+z_as_relative = false
 amount = 80
 lifetime = 5.0
 speed_scale = 0.75

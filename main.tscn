@@ -32,6 +32,7 @@ script = ExtResource("4_neypf")
 
 [node name="Ground" type="Area2D" parent="World"]
 unique_name_in_owner = true
+z_index = 2
 collision_mask = 0
 script = ExtResource("2_j6ko4")
 

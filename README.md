@@ -6,6 +6,8 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
+* Mouse cursor can go lower
+
 * cities can get destroyed
 
 * 3 bases exist.
@@ -105,4 +107,7 @@ using [Godot](https://godotengine.org/).
     - explosion grows over time
     - explosion fades over time
     ? explosion is a ring?
+
+* Pops render behind the ground
+* Cities and Missiles too, now I come to think of it
 

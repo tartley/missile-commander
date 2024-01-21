@@ -3,5 +3,6 @@
 [ext_resource type="Script" path="res://city/city.gd" id="1_0fe6i"]
 
 [node name="City" type="Node2D"]
+z_index = 1
 script = ExtResource("1_0fe6i")
 metadata/_edit_group_ = true
