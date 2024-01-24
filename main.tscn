@@ -1,18 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvl60w5q1oghk"]
+[gd_scene load_steps=7 format=3 uid="uid://dvl60w5q1oghk"]
 
 [ext_resource type="Script" path="res://camera.gd" id="1_2ff6t"]
 [ext_resource type="Script" path="res://main.gd" id="1_htis4"]
-[ext_resource type="PackedScene" uid="uid://beborlibqojkp" path="res://missile.tscn" id="2_61udo"]
 [ext_resource type="Script" path="res://ground.gd" id="2_j6ko4"]
-[ext_resource type="PackedScene" uid="uid://dk83v0qqd5oxt" path="res://city.tscn" id="3_kbfpb"]
 [ext_resource type="Script" path="res://mouse.gd" id="3_xy2w8"]
 [ext_resource type="Script" path="res://sky.gd" id="4_neypf"]
 [ext_resource type="Script" path="res://geometry.gd" id="5_6n56b"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_htis4")
-Missile = ExtResource("2_61udo")
-City = ExtResource("3_kbfpb")
 
 [node name="World" type="Node2D" parent="."]
 scale = Vector2(1, -1)

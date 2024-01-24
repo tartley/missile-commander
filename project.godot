@@ -26,6 +26,10 @@ window/size/initial_screen=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

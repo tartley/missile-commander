@@ -42,8 +42,6 @@ func on_area_entered(area:Area2D):
     trail.reparent(area)
     trail.emitting = false
     # Add a Pop, parented to the World.
-    # TODO: Hmmm maybe the trail should be parented to the World too?
-    # TODO: is it useful to put them in groups, to control what draws in front?
     var world := get_parent()
     var pop = Pop.instantiate()
     pop.position = self.position
