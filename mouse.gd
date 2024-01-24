@@ -21,6 +21,7 @@ var polar:Geometry.Polar:
         value.constrain(extent_polar)
         polar = value
         position = polar.radius * Vector2.from_angle(PI/2 - polar.angle)
+        rotation = -polar.angle
         normalized = extent_polar.normalize(polar)
 
 # normalized mouse position to lie within (-1 to 1, 0 to 1)
