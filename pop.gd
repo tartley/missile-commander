@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 
 const SIZE := 100.0 # world co-ords
