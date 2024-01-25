@@ -12,6 +12,7 @@ func _ready() -> void:
 func _process(delta:float) -> void:
     self.age += delta
     self.progress = self.age / DURATION
+    self.position += Vector2(0, 10 * delta)
     if progress < 1.0:
         queue_redraw()
     else:
