@@ -69,19 +69,17 @@ func get_annotated_vert_array(annotated_polars:Array) -> Array:
     return retval
 
 func set_up_collisions(av:Geometry.AnnotatedVerts):
+    # Set up collision shapes that define the ground
     var shapes:Array[Shape2D] = []
-
-    # First shape is the circular planet
+    # 1. the circular planet
     var circle = CircleShape2D.new()
     circle.radius = RADIUS
     shapes.append(circle)
-
-    # Next shapes are the three hills
+    # 2. the three hills
     for hill_name in ["hill1", "hill2", "hill3"]:
         var polygon = ConvexPolygonShape2D.new()
         polygon.points = av.get_vertices(hill_name)
         shapes.append(polygon)
-
     # Add all shapes to the ground's collision area
     for shape in shapes:
         var collision = CollisionShape2D.new()
@@ -100,12 +98,11 @@ func create_cities(positions:Array[Vector2]) -> Array[Node2D]:
     return retval
     
 func _ready() -> void:
-    # Define our geometry
     var annotated_verts := Geometry.AnnotatedVerts.new(get_annotated_vert_array(annotated_polar_array))
-    verts = annotated_verts.verts
+    self.verts = annotated_verts.verts
     self.cities = create_cities(annotated_verts.get_vertices("city"))
-    bases = annotated_verts.get_vertices("base")
-    gaps = annotated_verts.get_vertices("gap")
+    self.bases = annotated_verts.get_vertices("base")
+    self.gaps = annotated_verts.get_vertices("gap")
     set_up_collisions(annotated_verts)
 
 func _draw() -> void:
