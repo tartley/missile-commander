@@ -26,9 +26,6 @@ func get_destroyed_verts():
     retval.append(Vector2(+SIZE/2.0, 0))
     return retval
 
-func _ready() -> void:
-    self.rotation = position.angle() - PI / 2
-
 func _draw():
     var verts:Array[Vector2]
     var color:Color

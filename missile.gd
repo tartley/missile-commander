@@ -12,6 +12,8 @@ const verts: Array[Vector2] = [
 
 var velocity: Vector2
 
+signal missile_strike(position:Vector2)
+
 func set_up_collisions():
     var collision = CollisionShape2D.new()
     collision.shape = ConvexPolygonShape2D.new()
@@ -35,16 +37,18 @@ func _process(delta: float) -> void:
 func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
-func on_area_entered(area:Area2D):
+func on_area_entered(ground:Area2D):
     # A Missile has collided with the Ground.
     # Reparent our trail onto the ground
     var trail = $Trail
-    trail.reparent(area)
+    trail.reparent(ground)
     trail.emitting = false
     # Add a Pop, parented to the World.
     var world := get_parent()
     var pop = Pop.instantiate()
     pop.position = self.position
     world.add_child(pop)
-    # Destroy ourselves.
+    # Let Ground destroy any Cities that are too close
+    missile_strike.emit(self.position)
+    # And this missile is done
     queue_free()

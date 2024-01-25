@@ -52,10 +52,12 @@ const annotated_polar_array := [
     [PI / 2 + 88 * seg_ang, 0],
 ]
 
-var verts : PackedVector2Array
-var cities : Array[Vector2] = []
-var bases : Array[Vector2] = []
-var gaps : Array[Vector2] = []
+const City:PackedScene = preload("res://city.tscn")
+
+var verts:PackedVector2Array
+var cities:Array[Node2D] = []
+var bases:Array[Vector2] = []
+var gaps:Array[Vector2] = []
 
 func get_annotated_vert_array(annotated_polars:Array) -> Array:
     '''Convert array of annotated polar co-ords to an array of annotated cartesian co-ords'''
@@ -86,11 +88,22 @@ func set_up_collisions(av:Geometry.AnnotatedVerts):
         collision.shape = shape
         add_child(collision)
 
+func create_cities(positions:Array[Vector2]) -> Array[Node2D]:
+    var retval:Array[Node2D] = []
+    var city:Node2D
+    for city_pos in positions:
+        city = City.instantiate()
+        city.position = city_pos
+        city.rotation = city_pos.angle() - PI / 2
+        add_child(city)
+        retval.append(city)
+    return retval
+    
 func _ready() -> void:
-    var annotated_vert_array := get_annotated_vert_array(annotated_polar_array)
-    var annotated_verts := Geometry.AnnotatedVerts.new(annotated_vert_array)
+    # Define our geometry
+    var annotated_verts := Geometry.AnnotatedVerts.new(get_annotated_vert_array(annotated_polar_array))
     verts = annotated_verts.verts
-    cities = annotated_verts.get_vertices("city")
+    self.cities = create_cities(annotated_verts.get_vertices("city"))
     bases = annotated_verts.get_vertices("base")
     gaps = annotated_verts.get_vertices("gap")
     set_up_collisions(annotated_verts)
@@ -98,3 +111,9 @@ func _ready() -> void:
 func _draw() -> void:
     draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.7, 1, .6), 2.0, true)
+
+func on_missile_strike(strike_position:Vector2):
+    for city in cities:
+        if strike_position.distance_squared_to(city.position) < 1000:
+            city.destroyed = true
+            city.queue_redraw()
