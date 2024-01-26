@@ -10,16 +10,16 @@ func positions(nodes:Array) -> Array[Vector2]:
             
 func launch_missile():
     var missile = Missile.instantiate()
-    var start := Vector2(randf_range(-2000, +2000), randf_range(14500, 30000))
+    var start := Vector2(randf_range(-2000, +2000), randf_range(14100, 20000))
     var targets:Array[Vector2] = positions($World/Ground.cities) + $World/Ground.gaps
     var destination:Vector2 = targets.pick_random()
-    var speed := randf_range(50, 300)
+    var speed := randf_range(50, 100)
     missile.launch(start, destination, speed)
     $World.add_child(missile)
     missile.missile_strike.connect($World/Ground.on_missile_strike)
     
 func begin_level():
-    for _i in range(50):
+    for _i in range(200):
         launch_missile()
 
 func _ready() -> void:

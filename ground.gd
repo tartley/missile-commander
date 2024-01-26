@@ -113,4 +113,3 @@ func on_missile_strike(strike_position:Vector2):
     for city in cities:
         if strike_position.distance_squared_to(city.position) < 1000:
             city.destroyed = true
-            city.queue_redraw()

@@ -6,7 +6,11 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
-* cities can get destroyed
+- cities can get destroyed
+* Destroyed city gains smoke
+* Undestroyed city loses smoke
+  (and for this one, possibly we can just free the
+   emitter and instantly lose the in-flight particles)
 * All cities destroyed is game over
 * Each city has a name label?
 

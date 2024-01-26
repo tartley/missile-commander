@@ -3,7 +3,18 @@ extends Node2D
 const COLUMNS := 7
 const SIZE := 100.0
 
-var destroyed: bool = false
+var verts:Array[Vector2]
+var color:Color
+var destroyed: bool:
+    set(value):
+        if value:
+            self.verts = get_destroyed_verts()
+            self.color = Color(.4, .4, .4)
+        else:
+            self.verts = get_regular_verts()
+            self.color = Color.RED
+        destroyed = value
+        self.queue_redraw()
 
 func get_regular_verts():
     var retval: Array[Vector2] = []
@@ -26,13 +37,8 @@ func get_destroyed_verts():
     retval.append(Vector2(+SIZE/2.0, 0))
     return retval
 
+func _init():
+    self.destroyed = false
+    
 func _draw():
-    var verts:Array[Vector2]
-    var color:Color
-    if self.destroyed:
-        verts = get_destroyed_verts()
-        color = Color(.4, .4, .4)
-    else:
-        verts = get_regular_verts()
-        color = Color.RED
-    draw_polyline(verts, color, 4.0, true)
+    draw_polyline(self.verts, self.color, 4.0, true)
