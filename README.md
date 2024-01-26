@@ -6,36 +6,90 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
-- cities can get destroyed
-* Destroyed city gains smoke
-* Undestroyed city loses smoke
-  (and for this one, possibly we can just free the
-   emitter and instantly lose the in-flight particles)
-* All cities destroyed is game over
-* Each city has a name label?
+* Press Escape to exit
 
 * 3 bases exist.
+  * modify their storage on Ground to match Cities: An array of Node2Ds
   * Ask the ground where they are placed
 
-* consistent angle representation, remove all the +/-PI/2 offsets.
+* Sound effects
+  * Missile strike
+  * City destroyed
+
+* Bases can fire Shots
+* shot sound effect
+* Shots explode at destination
+* explosion sound effect
+* Explosion destroys missiles
+* Display ammo under each base
+* Firing a shot reduces ammo from that base
+
+* Intro screen before game starts, with:
+  * game title
+  * Keys: A | W or S | D to launch from each defence center
+  * 'press fire to start'
+  * Pressing fire starts game
+  * Display keys here? Yeah, I guess.
+
+* All cities destroyed is game over
+  * A game over screen
+  * After a second or two, pressing fire returns to intro screen
+
+* Display a score
+
+* Incoming missiles come in waves
+  * introduced by text on screen
+  * Director (find a better name) fires missiles throughout the
+    wave
+  * When a wave ends, give bonus points
+
+* Pressing escape at any time goes to pause screen, which displays:
+  * 'Paused'
+  * 'Esc to resume'
+  * 'I to start over' (if a game is in progress)
+  * 'Y to quit'
+* Pressing Esc resumes
+* Pressing I returns to Intro
+* Pressing Y quits the program
+* losing focus during game also goes to this pause screen
+
+* High score
+
+* Rename to 'Missile Commander' for findability?
+
+* Include credits to original game designers
+* Suggest a mastodon hashtag
+
+# Refactors
+
 * Consider using TAU
+* Abandon the -y transform
+* Delete the useless World node
+  * depends on abandoning the -y transform, because trying it without that
+    was a mess: missiles visible but flying upwards, ground nowhere to be
+    seen. (or, probably an equivalent amount of work: Tidying up the above
+    after removing the World while retaining the -y transform in a Node2D
+    root node)
+* consistent angle representation, remove all the +/-PI/2 offsets.
 
-# Optional
+# Low priority Features
 
+* Attract mode animations on Intro screen?
+* Animation on launch, to progress to Intro screen?
 * GPUParticles:
   * Use GPU Particle systems / Compatibility renderer for web exports
   * Use GPU Particle systems / Forward+ renderer for desktop (incl. MacOS) exports
+* prettier explosions.
 * stars in the sky as a particle system
+* Destroyed city gains smoke
+* Undestroyed city loses smoke
+* Each city has a name
 * Stars on a parallax background
   https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
   or
   that github issue I commented on
-* Should we try to use GPUParticles on non-MacOS?
-* Add previews in the editor?
-  https://docs.godotengine.org/en/stable/tutorials/plugins/running_code_in_the_editor.html#doc-running-code-in-the-editor
-  * Ground?
-  * Camera and mouse max extents?
-  * Star max extents?
+  or
+  that links to a newer PR against Godot to add a replacement for ParalaxBackground
 
 ## Done
 
@@ -117,4 +171,5 @@ using [Godot](https://godotengine.org/).
 
 * Mouse cursor can go lower
 * Each city looks different?
+- cities can get destroyed
 
