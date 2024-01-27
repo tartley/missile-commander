@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://base.gd" id="1_ef88x"]
 
 [node name="Base" type="Node2D"]
+z_index = 1
 script = ExtResource("1_ef88x")

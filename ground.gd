@@ -93,6 +93,7 @@ func create_features(annotated_verts, feature_name:String, type:PackedScene) -> 
     var feature:Node2D
     for pos in positions:
         feature = type.instantiate()
+        feature.mouse = %Mouse
         feature.position = pos
         feature.rotation = pos.angle() - PI / 2
         add_child(feature)

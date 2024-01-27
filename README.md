@@ -8,9 +8,17 @@ A work in progress.
 
 ## TODO
 
-* Sound effects
-  * Missile strike
-  * City destroyed
+* Bases have tiny turrets on
+  * Are they quite right? Should I use this mess calculating the angle
+    as incentive to get rid of the -y thing now?
+  * find a better shape for them. Just a rectangle, perhaps.
+
+* City destruction needs special effects:
+  * explosion
+  * sound effect
+  * screen shake / zoom?
+
+* base destruction also needs special effects
 
 * Bases can fire Shots
 * shot sound effect
@@ -32,6 +40,7 @@ A work in progress.
   * After a second or two, pressing fire returns to intro screen
 
 * Display a score
+  See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text
 
 * Incoming missiles come in waves
   * introduced by text on screen
@@ -175,4 +184,6 @@ A work in progress.
   * modify their storage on Ground to match Cities: An array of Node2Ds
   * Ask the ground where they are placed
   * bases are destroyed by missiles
+
+* Sound effects for missile strike
 
