@@ -12,7 +12,7 @@ offsets = PackedFloat32Array(0.0102041, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.635294, 0.635294, 0.631373, 0)
 
 [node name="Missile" type="Area2D"]
-z_index = 1
+z_index = 2
 collision_layer = 0
 script = ExtResource("1_ag1ef")
 metadata/_edit_group_ = true
