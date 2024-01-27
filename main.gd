@@ -22,6 +22,11 @@ func begin_level():
     for _i in range(200):
         launch_missile()
 
+func _unhandled_input(event):
+    if event is InputEventKey:
+        if event.pressed and event.keycode == KEY_ESCAPE:
+            get_tree().quit()
+
 func _ready() -> void:
     $World/Camera.mouse = $World/Mouse
     $World/Camera.ground = $World/Ground

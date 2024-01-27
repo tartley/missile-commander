@@ -6,8 +6,6 @@ using [Godot](https://godotengine.org/).
 
 ## TODO
 
-* Press Escape to exit
-
 * 3 bases exist.
   * modify their storage on Ground to match Cities: An array of Node2Ds
   * Ask the ground where they are placed
@@ -172,4 +170,6 @@ using [Godot](https://godotengine.org/).
 * Mouse cursor can go lower
 * Each city looks different?
 - cities can get destroyed
+
+* Press Escape to exit
 
