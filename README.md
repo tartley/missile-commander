@@ -8,18 +8,6 @@ A work in progress.
 
 ## TODO
 
-* Bases have tiny turrets on
-  * Are they quite right? Should I use this mess calculating the angle
-    as incentive to get rid of the -y thing now?
-  * find a better shape for them. Just a rectangle, perhaps.
-
-* City destruction needs special effects:
-  * explosion
-  * sound effect
-  * screen shake / zoom?
-
-* base destruction also needs special effects
-
 * Bases can fire Shots
 * shot sound effect
 * Shots explode at destination
@@ -58,6 +46,12 @@ A work in progress.
 * Pressing Y quits the program
 * losing focus during game also goes to this pause screen
 
+* City destruction needs special effects:
+  * explosion
+  * sound effect
+  * screen shake / zoom?
+* base destruction also needs special effects
+
 * High score
 
 * Rename to 'Missile Commander' for findability?
@@ -67,7 +61,8 @@ A work in progress.
 
 # Refactors
 
-* Consider using TAU
+* Put all scenes into top level 'src' folder?
+* Put each scene into a folder
 * Abandon the -y transform
 * Delete the useless World node
   * depends on abandoning the -y transform, because trying it without that
@@ -79,6 +74,7 @@ A work in progress.
 
 # Low priority Features
 
+* Try FSAA instead of drawing with AA=true
 * Attract mode animations on Intro screen?
 * Animation on launch, to progress to Intro screen?
 * GPUParticles:
@@ -186,4 +182,8 @@ A work in progress.
   * bases are destroyed by missiles
 
 * Sound effects for missile strike
+
+- Bases have tiny turrets on
+  - That point at the mouse
+  - find a better shape for them. Just a rectangle, perhaps.
 

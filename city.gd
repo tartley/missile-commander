@@ -1,7 +1,7 @@
 extends Node2D
 
 const COLUMNS := 7
-const SIZE := 100.0
+const SIZE := 100
 
 var verts:Array[Vector2]
 var color:Color
@@ -24,8 +24,8 @@ func get_regular_verts():
     heights.shuffle()
     retval.append(Vector2(-SIZE/2.0, 0))
     for column in range(COLUMNS):
-        retval.append(Vector2(-SIZE/2.0 + column * SIZE/COLUMNS, heights[column]))
-        retval.append(Vector2(-SIZE/2.0 + (column + 1) * SIZE/COLUMNS, heights[column]))
+        retval.append(Vector2(-SIZE/2.0 + column * SIZE/COLUMNS, heights[column] * SIZE/100))
+        retval.append(Vector2(-SIZE/2.0 + (column + 1) * SIZE/COLUMNS, heights[column] * SIZE/100))
     retval.append(Vector2(+SIZE/2.0, 0))
     return retval
 
@@ -43,4 +43,5 @@ func _init():
     self.destroyed = false
     
 func _draw():
-    draw_polyline(self.verts, self.color, 4.0, true)
+    draw_polygon(self.verts, [Color.BLACK])
+    draw_polyline(self.verts, self.color, 2.0, true)

@@ -7,7 +7,7 @@ func _draw():
     var y: float
     var size:float
     var bright: float
-    for i in range(100):
+    for i in range(1000):
         x = randf_range(-2800.0, 2800.0)
         y = randf_range(
             %Ground.RADIUS - get_viewport_rect().size.y * 0.14,

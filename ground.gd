@@ -110,7 +110,7 @@ func _ready() -> void:
 
 func _draw() -> void:
     draw_polygon(verts, [Color.BLACK])
-    draw_polyline(verts, Color(.7, 1, .6), 2.0, true)
+    draw_polyline(verts, Color(.7, 1, .6), 3.0, true)
 
 func on_missile_strike(strike_position:Vector2):
     for feature in self.cities + self.bases:
