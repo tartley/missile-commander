@@ -24,8 +24,8 @@ func get_regular_verts():
     heights.shuffle()
     retval.append(Vector2(-SIZE/2.0, 0))
     for column in range(COLUMNS):
-        retval.append(Vector2(-SIZE/2.0 + column * SIZE/COLUMNS, heights[column] * SIZE/100))
-        retval.append(Vector2(-SIZE/2.0 + (column + 1) * SIZE/COLUMNS, heights[column] * SIZE/100))
+        retval.append(Vector2(-SIZE/2.0 + column * SIZE/COLUMNS, heights[column] * SIZE/100.0))
+        retval.append(Vector2(-SIZE/2.0 + (column + 1) * SIZE/COLUMNS, heights[column] * SIZE/100.0))
     retval.append(Vector2(+SIZE/2.0, 0))
     return retval
 
