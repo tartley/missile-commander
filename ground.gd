@@ -87,8 +87,8 @@ func set_up_collisions(av:Geometry.AnnotatedVerts):
         collision.shape = shape
         add_child(collision)
 
-func create_features(annotated_verts, name:String, type:PackedScene) -> Array[Node2D]:
-    var positions = annotated_verts.get_vertices(name)
+func create_features(annotated_verts, feature_name:String, type:PackedScene) -> Array[Node2D]:
+    var positions = annotated_verts.get_vertices(feature_name)
     var retval:Array[Node2D] = []
     var feature:Node2D
     for pos in positions:
@@ -98,7 +98,7 @@ func create_features(annotated_verts, name:String, type:PackedScene) -> Array[No
         add_child(feature)
         retval.append(feature)
     return retval
-    
+
 func _ready() -> void:
     var annotated_verts := Geometry.AnnotatedVerts.new(get_annotated_vert_array(annotated_polar_array))
     self.verts = annotated_verts.verts
