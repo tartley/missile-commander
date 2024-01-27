@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvl60w5q1oghk"]
+
+[ext_resource type="Script" path="res://src/main/main.gd" id="1_3ne2t"]
+[ext_resource type="Script" path="res://src/main/camera.gd" id="2_jm13r"]
+[ext_resource type="Script" path="res://src/main/sky.gd" id="3_nw6n4"]
+[ext_resource type="Script" path="res://src/main/ground.gd" id="4_fvoxd"]
+[ext_resource type="Script" path="res://src/main/mouse.gd" id="5_i0hgq"]
+[ext_resource type="Script" path="res://src/main/geometry.gd" id="6_hh5ig"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_3ne2t")
+
+[node name="World" type="Node2D" parent="."]
+scale = Vector2(1, -1)
+
+[node name="Camera" type="Camera2D" parent="World"]
+position = Vector2(0, -12000)
+scale = Vector2(1, -1)
+ignore_rotation = false
+script = ExtResource("2_jm13r")
+
+[node name="Sky" type="Node2D" parent="World"]
+script = ExtResource("3_nw6n4")
+
+[node name="Ground" type="Area2D" parent="World"]
+unique_name_in_owner = true
+z_index = 2
+collision_mask = 0
+script = ExtResource("4_fvoxd")
+
+[node name="Mouse" type="Node2D" parent="World"]
+unique_name_in_owner = true
+script = ExtResource("5_i0hgq")
+
+[node name="Geometry" type="Node" parent="."]
+script = ExtResource("6_hh5ig")

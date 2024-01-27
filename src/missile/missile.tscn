@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://beborlibqojkp"]
 
-[ext_resource type="Script" path="res://src/missile.gd" id="1_dnsy8"]
-[ext_resource type="Script" path="res://src/trail.gd" id="2_1acby"]
+[ext_resource type="Script" path="res://src/missile/missile.gd" id="1_dnsy8"]
+[ext_resource type="Script" path="res://src/missile/trail.gd" id="2_1acby"]
 
 [sub_resource type="Curve" id="Curve_jjgk3"]
 _data = [Vector2(0.0827068, 0.24535), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

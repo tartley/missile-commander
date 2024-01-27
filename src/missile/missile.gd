@@ -1,6 +1,6 @@
 extends Node2D
 
-var Pop:PackedScene = preload("res://src/pop.tscn")
+var Pop:PackedScene = preload("res://src/pop/pop.tscn")
 
 const SIZE := 40.0
 const verts: Array[Vector2] = [

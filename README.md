@@ -54,7 +54,10 @@ A work in progress.
 
 * High score
 
-* Rename to 'Missile Commander' for findability?
+* Rename for findability?
+  * Missile Commander
+  * Mslcmd
+  * Missile.cmd
 
 * Include credits to original game designers
 * Suggest a mastodon hashtag
