@@ -4,11 +4,9 @@ With vector graphics,
 by [Jonathan Hartley](https://mastodon.social/@tartley),
 using [Godot](https://godotengine.org/).
 
-## TODO
+A work in progress.
 
-* 3 bases exist.
-  * modify their storage on Ground to match Cities: An array of Node2Ds
-  * Ask the ground where they are placed
+## TODO
 
 * Sound effects
   * Missile strike
@@ -172,4 +170,9 @@ using [Godot](https://godotengine.org/).
 - cities can get destroyed
 
 * Press Escape to exit
+
+* 3 bases exist.
+  * modify their storage on Ground to match Cities: An array of Node2Ds
+  * Ask the ground where they are placed
+  * bases are destroyed by missiles
 

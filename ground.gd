@@ -53,10 +53,11 @@ const annotated_polar_array := [
 ]
 
 const City:PackedScene = preload("res://city.tscn")
+const Base:PackedScene = preload("res://base.tscn")
 
 var verts:PackedVector2Array
 var cities:Array[Node2D] = []
-var bases:Array[Vector2] = []
+var bases:Array[Node2D] = []
 var gaps:Array[Vector2] = []
 
 func get_annotated_vert_array(annotated_polars:Array) -> Array:
@@ -86,22 +87,23 @@ func set_up_collisions(av:Geometry.AnnotatedVerts):
         collision.shape = shape
         add_child(collision)
 
-func create_cities(positions:Array[Vector2]) -> Array[Node2D]:
+func create_features(annotated_verts, name:String, type:PackedScene) -> Array[Node2D]:
+    var positions = annotated_verts.get_vertices(name)
     var retval:Array[Node2D] = []
-    var city:Node2D
-    for city_pos in positions:
-        city = City.instantiate()
-        city.position = city_pos
-        city.rotation = city_pos.angle() - PI / 2
-        add_child(city)
-        retval.append(city)
+    var feature:Node2D
+    for pos in positions:
+        feature = type.instantiate()
+        feature.position = pos
+        feature.rotation = pos.angle() - PI / 2
+        add_child(feature)
+        retval.append(feature)
     return retval
     
 func _ready() -> void:
     var annotated_verts := Geometry.AnnotatedVerts.new(get_annotated_vert_array(annotated_polar_array))
     self.verts = annotated_verts.verts
-    self.cities = create_cities(annotated_verts.get_vertices("city"))
-    self.bases = annotated_verts.get_vertices("base")
+    self.cities = create_features(annotated_verts, "city", City)
+    self.bases = create_features(annotated_verts, "base", Base)
     self.gaps = annotated_verts.get_vertices("gap")
     set_up_collisions(annotated_verts)
 
@@ -110,6 +112,6 @@ func _draw() -> void:
     draw_polyline(verts, Color(.7, 1, .6), 2.0, true)
 
 func on_missile_strike(strike_position:Vector2):
-    for city in cities:
-        if strike_position.distance_squared_to(city.position) < 1000:
-            city.destroyed = true
+    for feature in self.cities + self.bases:
+        if strike_position.distance_squared_to(feature.position) < 1000:
+            feature.destroyed = true

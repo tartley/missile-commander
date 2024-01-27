@@ -9,7 +9,7 @@ var destroyed: bool:
     set(value):
         if value:
             self.verts = get_destroyed_verts()
-            self.color = Color(.4, .4, .4)
+            self.color = Color(.3, .3, .3)
         else:
             self.verts = get_regular_verts()
             self.color = Color.RED
