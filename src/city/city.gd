@@ -1,7 +1,7 @@
 extends Node2D
 
 const COLUMNS := 7
-const SIZE := 100
+const SIZE := 100.0
 
 var verts:Array[Vector2]
 var color:Color
