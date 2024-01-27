@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://dk83v0qqd5oxt"]
 
-[ext_resource type="Script" path="res://city.gd" id="1_0fe6i"]
+[ext_resource type="Script" path="res://src/city.gd" id="1_r17s1"]
 
 [node name="City" type="Node2D"]
 z_index = 1
-script = ExtResource("1_0fe6i")
+script = ExtResource("1_r17s1")
 metadata/_edit_group_ = true

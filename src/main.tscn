@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://dvl60w5q1oghk"]
 
-[ext_resource type="Script" path="res://camera.gd" id="1_2ff6t"]
-[ext_resource type="Script" path="res://main.gd" id="1_htis4"]
-[ext_resource type="Script" path="res://ground.gd" id="2_j6ko4"]
-[ext_resource type="Script" path="res://mouse.gd" id="3_xy2w8"]
-[ext_resource type="Script" path="res://sky.gd" id="4_neypf"]
-[ext_resource type="Script" path="res://geometry.gd" id="5_6n56b"]
+[ext_resource type="Script" path="res://src/camera.gd" id="1_2ff6t"]
+[ext_resource type="Script" path="res://src/main.gd" id="1_htis4"]
+[ext_resource type="Script" path="res://src/ground.gd" id="2_j6ko4"]
+[ext_resource type="Script" path="res://src/mouse.gd" id="3_xy2w8"]
+[ext_resource type="Script" path="res://src/sky.gd" id="4_neypf"]
+[ext_resource type="Script" path="res://src/geometry.gd" id="5_6n56b"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_htis4")

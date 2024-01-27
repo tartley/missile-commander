@@ -1,6 +1,6 @@
 class_name Main extends Node
 
-var Missile:PackedScene = preload("res://missile.tscn")
+var Missile:PackedScene = preload("res://src/missile.tscn")
 
 func positions(nodes:Array) -> Array[Vector2]:
     var retval:Array[Vector2] = []

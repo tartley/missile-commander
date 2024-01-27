@@ -52,8 +52,8 @@ const annotated_polar_array := [
     [PI / 2 + 88 * seg_ang, 0],
 ]
 
-const City:PackedScene = preload("res://city.tscn")
-const Base:PackedScene = preload("res://base.tscn")
+const City:PackedScene = preload("res://src/city.tscn")
+const Base:PackedScene = preload("res://src/base.tscn")
 
 var verts:PackedVector2Array
 var cities:Array[Node2D] = []

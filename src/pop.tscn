@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkqmkdfhp44om"]
+
+[ext_resource type="Script" path="res://src/pop.gd" id="1_b573p"]
+[ext_resource type="AudioStream" uid="uid://d1mb1u2k5d83b" path="res://audio/explo1.wav" id="2_jfll0"]
+
+[node name="Pop" type="Node2D"]
+z_index = 1
+script = ExtResource("1_b573p")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_jfll0")
+pitch_scale = 0.5
+autoplay = true

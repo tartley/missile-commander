@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://beborlibqojkp"]
 
-[ext_resource type="Script" path="res://missile.gd" id="1_ag1ef"]
-[ext_resource type="Script" path="res://trail.gd" id="3_10owv"]
+[ext_resource type="Script" path="res://src/missile.gd" id="1_dnsy8"]
+[ext_resource type="Script" path="res://src/trail.gd" id="2_1acby"]
 
 [sub_resource type="Curve" id="Curve_jjgk3"]
 _data = [Vector2(0.0827068, 0.24535), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -14,7 +14,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.635294, 0.635294, 0.631373, 0)
 [node name="Missile" type="Area2D"]
 z_index = 2
 collision_layer = 0
-script = ExtResource("1_ag1ef")
+script = ExtResource("1_dnsy8")
 metadata/_edit_group_ = true
 
 [node name="Trail" type="CPUParticles2D" parent="."]
@@ -34,7 +34,7 @@ scale_amount_max = 16.0
 scale_amount_curve = SubResource("Curve_jjgk3")
 color = Color(0.309804, 0.419608, 1, 1)
 color_ramp = SubResource("Gradient_wnkbf")
-script = ExtResource("3_10owv")
+script = ExtResource("2_1acby")
 
 [connection signal="area_entered" from="." to="." method="on_area_entered"]
 [connection signal="finished" from="Trail" to="Trail" method="on_finished"]

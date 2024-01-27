@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dh411srqe5v"]
+
+[ext_resource type="Script" path="res://src/base.gd" id="1_ekid4"]
+[ext_resource type="Script" path="res://src/turret.gd" id="2_e228c"]
+[ext_resource type="Script" path="res://src/foundation.gd" id="3_umx6s"]
+
+[node name="Base" type="Node2D"]
+script = ExtResource("1_ekid4")
+
+[node name="Turret" type="Node2D" parent="."]
+script = ExtResource("2_e228c")
+
+[node name="Foundation" type="Node2D" parent="."]
+script = ExtResource("3_umx6s")
