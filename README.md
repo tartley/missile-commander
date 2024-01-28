@@ -47,10 +47,12 @@ A work in progress.
 * losing focus during game also goes to this pause screen
 
 * City destruction needs special effects:
-  * explosion
-  * sound effect
+  * explosion: Maybe regular explosion is small, thin expanding ring,
+    city explosion is larger, longer lived, thicker ring, starting as a white
+    hot circle.
+  * sound effect. Mix a subtle wail in with the effect
   * screen shake / zoom?
-* base destruction also needs special effects
+* base destruction also needs special effects. Mix an alert in?
 
 * High score
 
@@ -77,23 +79,25 @@ A work in progress.
 
 # Low priority Features
 
+* Take a look at WorldEnvironment, gamedevacademy says it is crucual for
+  atmosphere in Godot games:
+  https://gamedevacademy.org/worldenvironment-in-godot-complete-guide/
 * Try FSAA instead of drawing with AA=true
 * Attract mode animations on Intro screen?
 * Animation on launch, to progress to Intro screen?
 * GPUParticles:
   * Use GPU Particle systems / Compatibility renderer for web exports
-  * Use GPU Particle systems / Forward+ renderer for desktop (incl. MacOS) exports
+  * Use GPU Particle systems / Forward+ renderer for desktop (incl. MacOS)
+    exports
+  * Use for stars in the sky? Can we make them twinkle or delete/add over time?
 * prettier explosions.
-* stars in the sky as a particle system
 * Destroyed city gains smoke
 * Undestroyed city loses smoke
 * Each city has a name
 * Stars on a parallax background
   https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
-  or
-  that github issue I commented on
-  or
-  that links to a newer PR against Godot to add a replacement for ParalaxBackground
+  or that github issue I commented on or that links to a newer PR against Godot
+  to add a replacement for ParalaxBackground
 
 ## Done
 
