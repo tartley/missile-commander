@@ -23,9 +23,11 @@ func begin_level():
         launch_missile()
 
 func _unhandled_input(event):
-    if event is InputEventKey:
-        if event.pressed and event.keycode == KEY_ESCAPE:
-            get_tree().quit()
+    if event is InputEventKey and event.pressed:
+        match event.keycode:
+            KEY_ESCAPE:
+                get_tree().quit()
+            # ignore others
 
 func _ready() -> void:
     $World/Camera.mouse = $World/Mouse
