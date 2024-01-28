@@ -8,10 +8,11 @@ A work in progress.
 
 ## TODO
 
-* Bases can fire Shots
+- Bases can fire Shots
+  * Shots are too big
+  * Shots are too fast
+  * Some shots miss their destination
 * shot sound effect
-* Shots explode at destination
-* explosion sound effect
 * Explosion destroys missiles
 * Display ammo under each base
 * Firing a shot reduces ammo from that base
@@ -59,6 +60,7 @@ A work in progress.
 * Rename for findability?
   * Missile Commander
   * Mslcmd
+  * msl.cmd (in use by some '100 plays' musician)
   * Missile.cmd
 
 * Include credits to original game designers
@@ -68,18 +70,40 @@ A work in progress.
 
 * Dependency injection in World can be done in Main, then it's all together.
 * World mentioned some dependency that isn't injected. Do that in World, too.
-* Dependencies. Speculative: World should have (or be) a separate node for
-  defining all the values (const and var) that are currently interdependencies,
-  like those between $Mouse and $Ground (in both directions). Deps go strictly
-  from: World -> (Playfield, Mouse, Ground, Sky, etc) and World can then
-  facilitate interactions betweeen Platfield and all the others.
 * Abandon the -y transform
-* Delete the useless World node
+* Delete the useless World node?
   * depends on abandoning the -y transform, because trying it without that was
     a mess: missiles visible but flying upwards, ground nowhere to be seen.
     (or, probably an equivalent amount of work: Tidying up the above after
     removing the World while retaining the -y transform in a Node2D root node)
 * consistent angle representation, remove all the +/-PI/2 offsets.
+  * get clear in my head how Vector2.angle, etc, work.
+* I reparent some things to Ground, but I should probably reparent them
+  to World.
+* Fix draw order (back to front):
+  * Sky
+  * <new parent for missile>
+    * Trail (both initially and after missile is gone)
+    * Warhead
+  * <new parent for shot>
+    * Trail
+    * Warhead
+  * City
+  * Pop
+  * Explosion
+  * Mouse
+  * Ground
+  * Base
+    * Turret
+    * Foundation
+* Implicit Dependencies. It's currently difficult to change ground.ANGLE,
+  mouse extent, or camera pan, and have everything else adjust accordingly.
+  They have implicit dependencies on each other. I speculate this would be
+  improved by making those dependencies explicit, and managed by World or
+  some other high level node. That should define the central values they
+  all depend on (e.g. planet ANGLE), and pass it down to each child that needs
+  it. Then all deps go strictly from World -> (Mouse, Ground, Sky, etc),
+  and changes can be made in one place.
 
 # Low priority Features
 
