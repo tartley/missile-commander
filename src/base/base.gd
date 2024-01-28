@@ -8,7 +8,7 @@ var destroyed: bool:
 
 # We use a reference to the mouse to swivel our turret towards it
 var mouse:Node2D
-    
+
 func _ready():
     self.destroyed = false
 
