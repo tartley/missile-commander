@@ -68,7 +68,6 @@ A work in progress.
 
 # Refactors
 
-* Dependency injection in World can be done in Main, then it's all together.
 * World mentioned some dependency that isn't injected. Do that in World, too.
 * Abandon the -y transform
 * Delete the useless World node?
@@ -127,100 +126,3 @@ A work in progress.
   or that github issue I commented on or that links to a newer PR against Godot
   to add a replacement for ParalaxBackground
 
-## Done
-
-* Draw the ground using triangle mesh
-* Draw the ground, with hills, using a polygon
-* Draw the ground as a curved planet surface, with hills, using a polygon
-  with the surface at the center at world co-ordinates 0,0.
-* Embed "features" in the ground surface, so we can later ask the ground
-  for the world co-ords of bases & cities.
-* Add a static camera, giving us a sensible view centered above the ground.
-  with scaling to correct for window size/aspect.
-* get rid of that camera x2 zoom.
-  Just draw everything 2x bigger, surely?
-* mouse cursor in world co-ordinates
-
-# Sharing code between nodes
-* Scripts for globally useful functions like polar conversion might go:
-  * In a Singleton, aka "Autoload" node, which are enumerated in the Project
-    settings, autoload tab, and can them be accessed by name from any Node.
-  * Consider autoload nodes with `static func` or `static var`,
-    to create helper functions without having to create an instance to call
-    them.
-  * Use `class_name` to register your script as a new named type in the editor.
-  * Use `extends XXX` to inherit from an existing Node or other type. If not
-    specified, everything inherits from `RefCounted`. Only explicitly `virtual`
-    methods can be reliably overriden. Methods include `_init` and
-    `_static_init`.
-  * All in one: `class_name Character extends Entity`
-
-* Re-org co-ordinates
-  - One camera
-  - set it to show a large area so we can see everything
-    (or should this be in the editor?)
-  - ground renders with (0, 0) at planet center
-  - mouse moves in a polar segment
-  - camera pan left right, in a polar manner so with tilt
-    such that ground rotates beneath us properly
-    (Should work even with high rotation values)
-  - camera also pans up down slightly (polar though)
-
-* 6 cities exist.
-
-* How to raise an error from ground? (see TODO there)
-
-* bombs rain down
-  * I don't think they need to be polar.
-  * Consider drawing creation area for editor?
-
-* missiles should also aim for the gaps between cities
-
-* Replace mouse 'extent_polar:Rect2' with a pair of Polar.
-  (or remove the TODO there if I decide not to)
-
-* See the tutorial way of adding new nodes to the tree programatically.
-  https://docs.godotengine.org/en/4.2/getting_started/first_2d_game/05.the_main_game_scene.html
-
-* Add a text node so I can figure out if scale.y=-1 is a disaster
-  No: I can also set same on the Label to fix the upsid3-down text.
-
-* Detect missiles colliding with the ground
-  - Make the Ground an Area2D, with a CollisionShape2D child, populated with a
-    ConvexPolygon2d (Although ground is a concave shape, a ConcavePolygon2D is
-    not great for collision detection, it is only sensitive at the edges, not
-    throughout the interior. So, we'll have to somehow compose our 'Ground'
-    Area2D out of multiple Shape2Ds.
-  - Add some collision boundary to missils.
-  - on collision, kill the missile
-  - Detect collisions with the hills
-  - Missiles shouldn't collide with each other
-  - Retain the trail, reparenting it to the Ground
-  - delete each trail when all its particles end
-  - A little explosion?
-    - explosion grows over time
-    - explosion fades over time
-    ? explosion is a ring?
-
-* Pops render behind the ground
-* Cities and Missiles too, now I come to think of it
-
-* Mouse cursor can go lower
-* Each city looks different?
-- cities can get destroyed
-
-* Press Escape to exit
-
-* 3 bases exist.
-  * modify their storage on Ground to match Cities: An array of Node2Ds
-  * Ask the ground where they are placed
-  * bases are destroyed by missiles
-
-* Sound effects for missile strike
-
-- Bases have tiny turrets on
-  - That point at the mouse
-  - find a better shape for them. Just a rectangle, perhaps.
-
-* Put all scenes into top level 'src' folder?
-* Put each scene into a folder
