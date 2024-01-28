@@ -45,6 +45,10 @@ func _ready():
 func _notification(what):
     match what:
         MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
+            # First time in here, Input.mouse_mode is 2 (captured already),
+            # and setting it causes no problems.
+            # Next time windows gains focus, we enter here, and value is 0 (visible)
+            # Causing a "NO GRAB" error.
             Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
         MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT:
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
