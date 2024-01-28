@@ -66,15 +66,17 @@ A work in progress.
 
 # Refactors
 
-* Put all scenes into top level 'src' folder?
-* Put each scene into a folder
+* Dependencies. Speculative: World should have (or be) a separate node for
+  defining all the values (const and var) that are currently interdependencies,
+  like those between $Mouse and $Ground (in both directions). Deps go strictly
+  from: World -> (Playfield, Mouse, Ground, Sky, etc) and World can then
+  facilitate interactions betweeen Platfield and all the others.
 * Abandon the -y transform
 * Delete the useless World node
-  * depends on abandoning the -y transform, because trying it without that
-    was a mess: missiles visible but flying upwards, ground nowhere to be
-    seen. (or, probably an equivalent amount of work: Tidying up the above
-    after removing the World while retaining the -y transform in a Node2D
-    root node)
+  * depends on abandoning the -y transform, because trying it without that was
+    a mess: missiles visible but flying upwards, ground nowhere to be seen.
+    (or, probably an equivalent amount of work: Tidying up the above after
+    removing the World while retaining the -y transform in a Node2D root node)
 * consistent angle representation, remove all the +/-PI/2 offsets.
 
 # Low priority Features
@@ -194,3 +196,5 @@ A work in progress.
   - That point at the mouse
   - find a better shape for them. Just a rectangle, perhaps.
 
+* Put all scenes into top level 'src' folder?
+* Put each scene into a folder
