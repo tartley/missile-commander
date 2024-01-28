@@ -1,6 +1,6 @@
 extends Node2D
 
-const SIZE := 60.0
+const SIZE := 40.0
 const verts:Array[Vector2] = [
     Vector2(+SIZE/8, -SIZE/8),
     Vector2(+SIZE/8, SIZE),
@@ -18,4 +18,5 @@ var destroyed:bool:
         self.queue_redraw()
 
 func _draw():
+    draw_polygon(self.verts, [Color.BLACK])
     draw_polyline(self.verts, self.color, 3.0)

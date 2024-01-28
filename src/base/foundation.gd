@@ -1,6 +1,6 @@
 extends Node2D
 
-const SIZE := 100.0
+const SIZE := 80.0
 const original_verts:Array[Vector2] = [
     Vector2(0, -SIZE/2), # bottom
     Vector2(-SIZE/2, 0), # left    
