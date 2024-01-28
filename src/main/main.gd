@@ -24,23 +24,18 @@ func begin_level():
         launch_missile()
 
 func launch_shot(base_id):
+    # TODO should this be a method on Base?
     var start:Vector2 = $World/Ground.bases[base_id].position
     var destination = $World/Mouse.position
     var shot = Shot.instantiate()
-    shot.launch(start, destination, 1000)
+    shot.launch(start, destination, 4000)
     $World.add_child(shot)
 
 func _unhandled_input(event):
     if event is InputEventKey and event.pressed:
         match event.keycode:
             KEY_A:
-                launch_shot(2)
-            KEY_S:
-                launch_shot(1)
-            KEY_W:
-                launch_shot(1)
-            KEY_D:
-                launch_shot(0)               
+                launch_shot(0)
             KEY_ESCAPE:
                 get_tree().quit()
             # ignore others

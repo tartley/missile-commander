@@ -2,7 +2,7 @@ extends Node2D
 
 var Pop:PackedScene = preload("res://src/pop/pop.tscn")
 
-const SIZE := 10.0
+const SIZE := 200.0
 const verts: Array[Vector2] = [
     Vector2(0.0, -SIZE/2.0),
     Vector2(-SIZE/8.0, +SIZE/8.0),
@@ -16,12 +16,11 @@ var destination: Vector2
 func launch(start, destination, speed):
     self.position = start
     self.destination = destination
-    self.rotation = (destination - self.position).angle() + PI / 2
-    self.velocity = Vector2.from_angle(self.rotation - PI / 2) * speed
+    self.velocity = Vector2.from_angle((destination - self.position).angle()) * speed
     
 func _process(delta: float) -> void:
     self.position += velocity * delta
-    if self.position.distance_squared_to(self.destination) < 100:
+    if self.position.distance_squared_to(self.destination) <= 100:
         destination_reached()
 
 func _draw():
