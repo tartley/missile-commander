@@ -16,8 +16,6 @@ var destroyed: bool:
         destroyed = value
         self.queue_redraw()
 
-var mouse:Node2D # unused
-
 func get_regular_verts():
     var retval: Array[Vector2] = []
     var heights:Array[int] = [20, 20, 30, 40, 40, 50, 50]

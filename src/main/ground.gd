@@ -60,6 +60,11 @@ var cities:Array[Node2D] = []
 var bases:Array[Node2D] = []
 var gaps:Array[Vector2] = []
 
+var mouse:Node2D:
+    set(value):
+        for base in self.bases:
+            base.mouse = value
+
 func get_annotated_vert_array(annotated_polars:Array) -> Array:
     '''Convert array of annotated polar co-ords to an array of annotated cartesian co-ords'''
     var retval := []
@@ -93,7 +98,6 @@ func create_features(annotated_verts, feature_name:String, type:PackedScene) -> 
     var feature:Node2D
     for pos in positions:
         feature = type.instantiate()
-        feature.mouse = %Mouse
         feature.position = pos
         feature.rotation = pos.angle() - PI / 2
         add_child(feature)
