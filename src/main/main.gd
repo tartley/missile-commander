@@ -1,6 +1,7 @@
 class_name Main extends Node
 
 var Missile:PackedScene = preload("res://src/missile/missile.tscn")
+var Shot:PackedScene = preload("res://src/shot/shot.tscn")
 
 func positions(nodes:Array) -> Array[Vector2]:
     var retval:Array[Vector2] = []
@@ -22,9 +23,24 @@ func begin_level():
     for _i in range(200):
         launch_missile()
 
+func launch_shot(base_id):
+    var start:Vector2 = $World/Ground.bases[base_id].position
+    var destination = $World/Mouse.position
+    var shot = Shot.instantiate()
+    shot.launch(start, destination, 1000)
+    $World.add_child(shot)
+
 func _unhandled_input(event):
     if event is InputEventKey and event.pressed:
         match event.keycode:
+            KEY_A:
+                launch_shot(2)
+            KEY_S:
+                launch_shot(1)
+            KEY_W:
+                launch_shot(1)
+            KEY_D:
+                launch_shot(0)               
             KEY_ESCAPE:
                 get_tree().quit()
             # ignore others

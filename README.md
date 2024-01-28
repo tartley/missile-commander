@@ -66,6 +66,8 @@ A work in progress.
 
 # Refactors
 
+* Dependency injection in World can be done in Main, then it's all together.
+* World mentioned some dependency that isn't injected. Do that in World, too.
 * Dependencies. Speculative: World should have (or be) a separate node for
   defining all the values (const and var) that are currently interdependencies,
   like those between $Mouse and $Ground (in both directions). Deps go strictly
