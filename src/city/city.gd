@@ -20,7 +20,7 @@ var destroyed: bool:
 
 func get_regular_verts():
     var retval: Array[Vector2] = []
-    var heights:Array[int] = [20, 20, 30, 40, 40, 50, 50]
+    var heights:Array[int] = [20, 25, 30, 35, 40, 45, 50]
     heights.shuffle()
     retval.append(Vector2(-SIZE/2.0, 0))
     for column in range(COLUMNS):
