@@ -11,7 +11,7 @@ A work in progress.
 - Bases can fire Shots
   - Shots are too big
   - Shots are too fast
-  * Some shots miss their destination
+  - Some shots miss their destination
   * Shots should emerge from turret barrel
   - shot sound effect
   * Key repeat

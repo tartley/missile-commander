@@ -26,7 +26,7 @@ func _ready():
 
 func _process(delta: float) -> void:
     self.position += velocity * delta
-    if self.position.distance_squared_to(self.destination) <= 100:
+    if self.position.distance_squared_to(self.destination) <= (self.velocity * delta).length_squared():
         destination_reached()
 
 func _draw():
@@ -34,6 +34,8 @@ func _draw():
     draw_polyline(verts, Color.WHITE, 2.0, true)
 
 func destination_reached():
+    # Fix any inaccuracy due to large inter-frame movement
+    self.position = self.destination
     ## Reparent our trail onto the ground
     #var trail = $Trail
     #trail.reparent(ground)
