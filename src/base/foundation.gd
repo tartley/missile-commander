@@ -20,7 +20,7 @@ var mouse:Node2D
 # TODO: how do verts get initialized at first anyhow?
 
 func get_semicircle(center, radius) -> Array[Vector2]:
-    const SEGMENTS := 4
+    const SEGMENTS := 5
     var vs:Array[Vector2] = []
     for segment in range(SEGMENTS + 1):
         var angle:float = PI - PI * segment / SEGMENTS
@@ -36,6 +36,7 @@ func get_verts() -> Array[Vector2]:
     ])
     vs.append_array(get_semicircle(self.position + Vector2(0, SIZE/4), SIZE/4))
     vs.append_array([
+        
         Vector2(+SIZE/4, SIZE/4), # suppport right top
         Vector2(+SIZE/4, 0), # support right base
     ])
@@ -43,4 +44,4 @@ func get_verts() -> Array[Vector2]:
 
 func _draw():
     draw_polygon(self.verts, [Color.BLACK])
-    draw_polyline(self.verts, self.color, 3.0)
+    draw_polyline(self.verts, self.color, 3.0, true)

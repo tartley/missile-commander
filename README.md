@@ -8,13 +8,8 @@ A work in progress.
 
 ## TODO
 
-- Turret barrel should be higher!
-- base foundation should be topped with a semicircle
-* Turret aiming should take this into account.
-  Should Turret be doing it?
-
 - Bases can fire Shots
-  * Shots are too big
+  - Shots are too big
   - Shots are too fast
   * Some shots miss their destination
   * Shots should emerge from turret barrel
@@ -155,4 +150,9 @@ A work in progress.
   https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
   or that github issue I commented on or that links to a newer PR against Godot
   to add a replacement for ParalaxBackground
+
+- Turret barrel should be higher!
+- base foundation should be topped with a semicircle
+- Turret aiming should take this into account.
+  Should Turret be doing it?
 
