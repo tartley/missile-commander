@@ -3,17 +3,18 @@ extends Node2D
 var Pop:PackedScene = preload("res://src/pop/pop.tscn")
 
 const SPEED := 300
-const SIZE := 4.0
+const SIZE := 1.0
+# An upward pointing missile shape
 const verts: Array[Vector2] = [
-    Vector2(0*SIZE, 6*SIZE),
-    Vector2(1*SIZE, 5*SIZE),
-    Vector2(1*SIZE, -5*SIZE),
-    Vector2(2*SIZE, -6*SIZE),
-    Vector2(0*SIZE, -6*SIZE),
-    Vector2(-2*SIZE, -6*SIZE),
-    Vector2(-1*SIZE, -5*SIZE),
-    Vector2(-1*SIZE, 5*SIZE),
-    Vector2(0*SIZE, 6*SIZE),
+    Vector2(0*SIZE, 8*SIZE), # top
+    Vector2(1*SIZE, 7*SIZE), # right peak
+    Vector2(1*SIZE, -7*SIZE), # top of right fin
+    Vector2(2*SIZE, -8*SIZE), # tip of right fin
+    Vector2(0*SIZE, -8*SIZE), # center bottom
+    Vector2(-2*SIZE, -8*SIZE), # tip of left fin
+    Vector2(-1*SIZE, -7*SIZE), # top of left fin
+    Vector2(-1*SIZE, 7*SIZE), # left peak
+    Vector2(0*SIZE, 8*SIZE), # top
 ]
 
 var velocity: Vector2
