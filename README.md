@@ -8,10 +8,14 @@ A work in progress.
 
 ## TODO
 
+* Turret barrel should be higher!
+* base foundation should be topped with a semicircle
+
 - Bases can fire Shots
   * Shots are too big
   - Shots are too fast
   * Some shots miss their destination
+  * Shots should emerge from turret barrel
   - shot sound effect
   * Key repeat
   * Shots should have a trail

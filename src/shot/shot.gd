@@ -20,11 +20,9 @@ const verts: Array[Vector2] = [
 var velocity: Vector2
 var destination: Vector2
 
-func launch(start, dest):
-    self.position = start
-    self.destination = dest
-    self.rotation = (dest - start).angle() - PI / 2
-    self.velocity = Vector2.from_angle(self.rotation + PI / 2) * SPEED
+func _ready():
+    self.velocity = (self.destination - self.position).normalized() * SPEED
+    self.rotation = (self.destination - self.position).angle() - PI / 2
 
 func _process(delta: float) -> void:
     self.position += velocity * delta

@@ -1,7 +1,6 @@
 class_name Main extends Node
 
 var Missile:PackedScene = preload("res://src/missile/missile.tscn")
-var Shot:PackedScene = preload("res://src/shot/shot.tscn")
 
 func positions(nodes:Array) -> Array[Vector2]:
     var retval:Array[Vector2] = []
@@ -14,7 +13,7 @@ func launch_missile():
     var start := Vector2(randf_range(-2000, +2000), randf_range(14100, 20000))
     var targets:Array[Vector2] = positions($World/Ground.cities) + positions($World/Ground.bases) + $World/Ground.gaps
     var destination:Vector2 = targets.pick_random()
-    var speed := randf_range(50, 100)
+    var speed := randf_range(50, 200)
     missile.launch(start, destination, speed)
     $World.add_child(missile)
     missile.missile_strike.connect($World/Ground.on_missile_strike)
@@ -24,10 +23,10 @@ func begin_level():
         launch_missile()
 
 func launch_shot(base_id):
-    # TODO should this be a method on Base?
-    var shot = Shot.instantiate()
-    shot.launch($World/Ground.bases[base_id].position, $World/Mouse.position)
-    $World.add_child(shot)
+    var base:Node2D = $World/Ground.bases[base_id]
+    var shot:Node2D = base.launch($World/Mouse.position)
+    if shot:
+        $World.add_child(shot)
 
 func _unhandled_input(event):
     if event is InputEventKey and event.pressed:
@@ -36,7 +35,8 @@ func _unhandled_input(event):
                 launch_shot(0)
             KEY_ESCAPE:
                 get_tree().quit()
-            # ignore others
+            _:
+                pass
 
 func _ready() -> void:
     # Inject dependencies
