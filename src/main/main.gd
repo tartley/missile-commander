@@ -25,10 +25,8 @@ func begin_level():
 
 func launch_shot(base_id):
     # TODO should this be a method on Base?
-    var start:Vector2 = $World/Ground.bases[base_id].position
-    var destination = $World/Mouse.position
     var shot = Shot.instantiate()
-    shot.launch(start, destination, 300)
+    shot.launch($World/Ground.bases[base_id].position, $World/Mouse.position)
     $World.add_child(shot)
 
 func _unhandled_input(event):

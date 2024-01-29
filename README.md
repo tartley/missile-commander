@@ -10,7 +10,7 @@ A work in progress.
 
 - Bases can fire Shots
   * Shots are too big
-  * Shots are too fast
+  - Shots are too fast
   * Some shots miss their destination
 * shot sound effect
 * Explosion destroys missiles

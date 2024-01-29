@@ -2,6 +2,7 @@ extends Node2D
 
 var Pop:PackedScene = preload("res://src/pop/pop.tscn")
 
+const SPEED := 300
 const SIZE := 4.0
 const verts: Array[Vector2] = [
     Vector2(0*SIZE, 6*SIZE),
@@ -18,11 +19,11 @@ const verts: Array[Vector2] = [
 var velocity: Vector2
 var destination: Vector2
 
-func launch(start, dest, speed):
+func launch(start, dest):
     self.position = start
     self.destination = dest
     self.rotation = (dest - start).angle() - PI / 2
-    self.velocity = Vector2.from_angle(self.rotation + PI / 2) * speed
+    self.velocity = Vector2.from_angle(self.rotation + PI / 2) * SPEED
 
 func _process(delta: float) -> void:
     self.position += velocity * delta
