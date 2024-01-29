@@ -68,6 +68,9 @@ A work in progress.
 
 # Refactors
 
+* Bases should be parented to the World,
+  then Ground wouldn't need to know about Mouse
+  Then I think that unlocks the following:
 * World mentioned some dependency that isn't injected. Do that in World, too.
 * Abandon the -y transform
 * Delete the useless World node?
