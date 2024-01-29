@@ -2,17 +2,17 @@ extends Node2D
 
 var Pop:PackedScene = preload("res://src/pop/pop.tscn")
 
-const SIZE := 10.0
+const SIZE := 4.0
 const verts: Array[Vector2] = [
-    Vector2(0*SIZE, 4*SIZE),
-    Vector2(1*SIZE, 3*SIZE),
-    Vector2(1*SIZE, -3*SIZE),
-    Vector2(2*SIZE, -4*SIZE),
-    Vector2(0*SIZE, -4*SIZE),
-    Vector2(-2*SIZE, -4*SIZE),
-    Vector2(-1*SIZE, -3*SIZE),
-    Vector2(-1*SIZE, 3*SIZE),
-    Vector2(0*SIZE, 4*SIZE),
+    Vector2(0*SIZE, 6*SIZE),
+    Vector2(1*SIZE, 5*SIZE),
+    Vector2(1*SIZE, -5*SIZE),
+    Vector2(2*SIZE, -6*SIZE),
+    Vector2(0*SIZE, -6*SIZE),
+    Vector2(-2*SIZE, -6*SIZE),
+    Vector2(-1*SIZE, -5*SIZE),
+    Vector2(-1*SIZE, 5*SIZE),
+    Vector2(0*SIZE, 6*SIZE),
 ]
 
 var velocity: Vector2
