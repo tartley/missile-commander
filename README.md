@@ -8,8 +8,10 @@ A work in progress.
 
 ## TODO
 
-* Turret barrel should be higher!
-* base foundation should be topped with a semicircle
+- Turret barrel should be higher!
+- base foundation should be topped with a semicircle
+* Turret aiming should take this into account.
+  Should Turret be doing it?
 
 - Bases can fire Shots
   * Shots are too big
@@ -99,13 +101,13 @@ A work in progress.
     * Trail
     * Warhead
   * City
+  * Base
+    * Turret
+    * Foundation
   * Pop
   * Explosion
   * Mouse
   * Ground
-  * Base
-    * Turret
-    * Foundation
 * Why is city[0] the rightmost?
 * Use Groups for cities?
 * For bases?
