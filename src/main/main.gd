@@ -28,7 +28,7 @@ func launch_shot(base_id):
     var start:Vector2 = $World/Ground.bases[base_id].position
     var destination = $World/Mouse.position
     var shot = Shot.instantiate()
-    shot.launch(start, destination, 4000)
+    shot.launch(start, destination, 300)
     $World.add_child(shot)
 
 func _unhandled_input(event):
