@@ -48,6 +48,4 @@ func _ready() -> void:
     $World/Sky.ground = $World/Ground
     # Also $Mouse needs to know $Ground,
     # But we do that as a global name because I'm too lazy to figure out the dependencies
-
-
     begin_level()
