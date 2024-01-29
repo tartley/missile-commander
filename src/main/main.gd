@@ -32,6 +32,12 @@ func _unhandled_input(event):
     if event is InputEventKey and event.pressed:
         match event.keycode:
             KEY_A:
+                launch_shot(2)
+            KEY_W:
+                launch_shot(1)
+            KEY_S:
+                launch_shot(1)
+            KEY_D:
                 launch_shot(0)
             KEY_ESCAPE:
                 get_tree().quit()
