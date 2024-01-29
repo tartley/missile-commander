@@ -12,8 +12,12 @@ A work in progress.
   * Shots are too big
   - Shots are too fast
   * Some shots miss their destination
-* shot sound effect
-* Explosion destroys missiles
+  - shot sound effect
+  * Key repeat
+  * Shots should have a trail
+
+* Explosion should destroy missiles
+
 * Display ammo under each base
 * Firing a shot reduces ammo from that base
 
@@ -98,6 +102,9 @@ A work in progress.
   * Base
     * Turret
     * Foundation
+* Why is city[0] the rightmost?
+* Use Groups for cities?
+* For bases?
 * Implicit Dependencies. It's currently difficult to change ground.ANGLE,
   mouse extent, or camera pan, and have everything else adjust accordingly.
   They have implicit dependencies on each other. I speculate this would be
@@ -109,11 +116,25 @@ A work in progress.
 
 # Low priority Features
 
+* Fire when out of ammo is click1
+* Fire when base destroyed is click2
+* Warn beep when low ammo
+* Audio listener moves with mouse
+* More particle effects:
+  * Trail on shots, somewhat like missile
+  * Shot launch
+  * pop
+  * explosion
+  * city destroy (red particles?)
+  * base destroy (yellow particles?)
+  * stars
 * Take a look at WorldEnvironment, gamedevacademy says it is crucual for
   atmosphere in Godot games:
   https://gamedevacademy.org/worldenvironment-in-godot-complete-guide/
 * Try FSAA instead of drawing with AA=true
-* Attract mode animations on Intro screen?
+* Game out animation zooms into last exploding city? (And slow-mo?)
+* Program start animation zooms out from central base, to reveal title, etc
+* Attract mode animations while waiting on Intro screen?
 * Animation on launch, to progress to Intro screen?
 * GPUParticles:
   * Use GPU Particle systems / Compatibility renderer for web exports
