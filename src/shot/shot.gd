@@ -21,8 +21,8 @@ var destination: Vector2
 func launch(start, dest, speed):
     self.position = start
     self.destination = dest
-    self.velocity = Vector2.from_angle((dest - self.position).angle()) * speed
     self.rotation = (dest - start).angle() - PI / 2
+    self.velocity = Vector2.from_angle(self.rotation + PI / 2) * speed
 
 func _process(delta: float) -> void:
     self.position += velocity * delta
