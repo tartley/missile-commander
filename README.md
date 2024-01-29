@@ -12,7 +12,7 @@ A work in progress.
   - Shots are too big
   - Shots are too fast
   - Some shots miss their destination
-  * Shots should emerge from turret barrel
+  - Shots should emerge from turret barrel
   - shot sound effect
   * Key repeat
   * Shots should have a trail
@@ -73,9 +73,12 @@ A work in progress.
 
 # Refactors
 
-* Bases should be parented to the World,
-  then Ground wouldn't need to know about Mouse
-  Then I think that unlocks the following:
+* If Bases were in a group, would that prevent Ground having to know about
+  Mouse? Then I think that unlocks the following:
+* Why is city[0] the rightmost? Aha, is it that `.add_child` adds it at the
+  start start of the array of children? Can we make it not do, so cities[0] is
+  leftmost? Does using Groups for cities help?
+* Use Groups for bases?
 * World mentioned some dependency that isn't injected. Do that in World, too.
 * Abandon the -y transform
 * Delete the useless World node?
@@ -85,35 +88,62 @@ A work in progress.
     removing the World while retaining the -y transform in a Node2D root node)
 * consistent angle representation, remove all the +/-PI/2 offsets.
   * get clear in my head how Vector2.angle, etc, work.
-* I reparent some things to Ground, but I should probably reparent them
-  to World.
-* Fix draw order (back to front):
+* I reparent some things to Ground, but I should probably reparent them to
+  World.
+* Fix draw order. Problem is we want draw order to be (back to front):
+
   * Sky
-  * <new parent for missile>
+  * Missile
     * Trail (both initially and after missile is gone)
-    * Warhead
-  * <new parent for shot>
+    * <new child which draws the Warhead, so it is in front of Trail>
+  * Shot
     * Trail
-    * Warhead
+    * <new child which draws the Warhead, so it is in front of Trail>
   * City
-  * Base
+  * Base <no draw>
     * Turret
     * Foundation
   * Pop
   * Explosion
   * Mouse
   * Ground
-* Why is city[0] the rightmost?
-* Use Groups for cities?
-* For bases?
-* Implicit Dependencies. It's currently difficult to change ground.ANGLE,
-  mouse extent, or camera pan, and have everything else adjust accordingly.
-  They have implicit dependencies on each other. I speculate this would be
-  improved by making those dependencies explicit, and managed by World or
-  some other high level node. That should define the central values they
-  all depend on (e.g. planet ANGLE), and pass it down to each child that needs
-  it. Then all deps go strictly from World -> (Mouse, Ground, Sky, etc),
-  and changes can be made in one place.
+
+  But we want City & Base to be children of Ground. They are positioned by the
+  ground, and would move with it if it were to move (although it won't). But
+  treat this as a learning exercise in tree rendering order and CanvasLayers.
+  Hence we add the following layers, drawn in ascending order:
+
+  -- layer 0
+  * Sky
+  * Missile <no draw>
+    * Trail (both initially and after missile is gone)
+    * Warhead
+  * Shot <no draw>
+    * Trail
+    * Warhead
+  -- layer 1
+  * Pop
+  * Explosion
+  * Mouse
+  * Ground <no draw>
+    -- layer 0
+    * City
+    * Base <no draw>
+      * Turret
+      * Foundation
+    -- layer 1
+    * <new child which draws the planet surface>
+
+  Keep ^ this reasoning around somewhere for if we need to return to it.
+
+* Implicit Dependencies. It's currently difficult to change ground.ANGLE, mouse
+  extent, or camera pan, and have everything else adjust accordingly. They have
+  implicit dependencies on each other. I speculate this would be improved by
+  making those dependencies explicit, and managed by World or some other high
+  level node. That should define the central values they all depend on (e.g.
+  planet ANGLE), and pass it down to each child that needs it. Then all deps go
+  strictly from World -> (Mouse, Ground, Sky, etc), and changes can be made in
+  one place.
 
 # Low priority Features
 
@@ -150,9 +180,4 @@ A work in progress.
   https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
   or that github issue I commented on or that links to a newer PR against Godot
   to add a replacement for ParalaxBackground
-
-- Turret barrel should be higher!
-- base foundation should be topped with a semicircle
-- Turret aiming should take this into account.
-  Should Turret be doing it?
 
