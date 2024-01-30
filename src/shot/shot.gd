@@ -36,14 +36,10 @@ func _draw():
 func destination_reached():
     # Fix any inaccuracy due to large inter-frame movement
     self.position = self.destination
-    ## Reparent our trail onto the ground
-    #var trail = $Trail
-    #trail.reparent(ground)
-    #trail.emitting = false
-    # Add a Pop, parented to the World.
-    var world := get_parent()
+    # TODO: Once we have a trail, reparent it to Main. see how Missile does it.
+    var main := get_parent() as Main
     var pop = Pop.instantiate()
     pop.position = self.position
-    world.add_child(pop)
+    main.add_child(pop)
     # And this shot is done
     queue_free()

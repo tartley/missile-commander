@@ -72,8 +72,6 @@ A work in progress.
 
 # Refactors
 
-* I reparent some things to Ground, but I should probably reparent them to
-  Main.
 * Fix draw order. Problem is we want draw order to be (back to front):
 
   * Sky
