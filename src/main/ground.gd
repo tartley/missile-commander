@@ -5,11 +5,7 @@ which will ask us where they should be located.
 '''
 class_name Ground extends Node2D
 
-# The ground is a pizza-slice shaped segment of a circular planet, centered at (0, 0), with:
-const RADIUS := 12000.0
-# extending for PLANET_ANGLE radians on either side of 'straight up':
-const PLANET_ANGLE := PI / 16.0
-const HILL_HEIGHT := RADIUS / 100.0
+const HILL_HEIGHT := Const.RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
 
 # Define the shape of ground in annotated polar co-ordinates, [angle, radius, feature]. Where:
@@ -17,38 +13,38 @@ const COLOR := Color(0.1, 0.5, 0.2)
 # * radius is relative to planet center at origin,
 # * feature is a string indicating the in-game feature located at that point.
 # Approximate the curved surface with straight segments.
-const seg_ang := PLANET_ANGLE / 72
+const seg_ang := Const.PLANET_ANGLE / 72
 const annotated_polar_array := [
     [PI / 2 - 88 * seg_ang, 0],
-    [PI / 2 - 88 * seg_ang, RADIUS],
-    [PI / 2 - 72 * seg_ang, RADIUS],
-    [PI / 2 - 56 * seg_ang, RADIUS, "gap", "hill1"],
-    [PI / 2 - 52 * seg_ang, RADIUS + HILL_HEIGHT, "gap", "hill1"],
-    [PI / 2 - 48 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
-    [PI / 2 - 44 * seg_ang, RADIUS + HILL_HEIGHT, "gap", "hill1"],
-    [PI / 2 - 40 * seg_ang, RADIUS, "gap", "hill1"],
-    [PI / 2 - 34 * seg_ang, RADIUS, "city"],
-    [PI / 2 - 29 * seg_ang, RADIUS, "gap"],
-    [PI / 2 - 24 * seg_ang, RADIUS, "city"],
-    [PI / 2 - 19 * seg_ang, RADIUS, "gap"],
-    [PI / 2 - 14 * seg_ang, RADIUS, "city"],
-    [PI / 2 -  8 * seg_ang, RADIUS, "gap", "hill2"],
-    [PI / 2 -  4 * seg_ang, RADIUS + HILL_HEIGHT, "gap", "hill2"],
-    [PI / 2 +  0 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
-    [PI / 2 +  4 * seg_ang, RADIUS + HILL_HEIGHT, "gap", "hill2"],
-    [PI / 2 +  8 * seg_ang, RADIUS, "gap", "hill2"],
-    [PI / 2 + 14 * seg_ang, RADIUS, "city"],
-    [PI / 2 + 19 * seg_ang, RADIUS, "gap"],
-    [PI / 2 + 24 * seg_ang, RADIUS, "city"],
-    [PI / 2 + 29 * seg_ang, RADIUS, "gap"],
-    [PI / 2 + 34 * seg_ang, RADIUS, "city"],
-    [PI / 2 + 40 * seg_ang, RADIUS, "gap", "hill3"],
-    [PI / 2 + 44 * seg_ang, RADIUS + HILL_HEIGHT, "gap", "hill3"],
-    [PI / 2 + 48 * seg_ang, RADIUS + HILL_HEIGHT, "base"],
-    [PI / 2 + 52 * seg_ang, RADIUS + HILL_HEIGHT, "gap", "hill3"],
-    [PI / 2 + 56 * seg_ang, RADIUS, "gap", "hill3"],
-    [PI / 2 + 72 * seg_ang, RADIUS],
-    [PI / 2 + 88 * seg_ang, RADIUS],
+    [PI / 2 - 88 * seg_ang, Const.RADIUS],
+    [PI / 2 - 72 * seg_ang, Const.RADIUS],
+    [PI / 2 - 56 * seg_ang, Const.RADIUS, "gap", "hill1"],
+    [PI / 2 - 52 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill1"],
+    [PI / 2 - 48 * seg_ang, Const.RADIUS + HILL_HEIGHT, "base"],
+    [PI / 2 - 44 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill1"],
+    [PI / 2 - 40 * seg_ang, Const.RADIUS, "gap", "hill1"],
+    [PI / 2 - 34 * seg_ang, Const.RADIUS, "city"],
+    [PI / 2 - 29 * seg_ang, Const.RADIUS, "gap"],
+    [PI / 2 - 24 * seg_ang, Const.RADIUS, "city"],
+    [PI / 2 - 19 * seg_ang, Const.RADIUS, "gap"],
+    [PI / 2 - 14 * seg_ang, Const.RADIUS, "city"],
+    [PI / 2 -  8 * seg_ang, Const.RADIUS, "gap", "hill2"],
+    [PI / 2 -  4 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill2"],
+    [PI / 2 +  0 * seg_ang, Const.RADIUS + HILL_HEIGHT, "base"],
+    [PI / 2 +  4 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill2"],
+    [PI / 2 +  8 * seg_ang, Const.RADIUS, "gap", "hill2"],
+    [PI / 2 + 14 * seg_ang, Const.RADIUS, "city"],
+    [PI / 2 + 19 * seg_ang, Const.RADIUS, "gap"],
+    [PI / 2 + 24 * seg_ang, Const.RADIUS, "city"],
+    [PI / 2 + 29 * seg_ang, Const.RADIUS, "gap"],
+    [PI / 2 + 34 * seg_ang, Const.RADIUS, "city"],
+    [PI / 2 + 40 * seg_ang, Const.RADIUS, "gap", "hill3"],
+    [PI / 2 + 44 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill3"],
+    [PI / 2 + 48 * seg_ang, Const.RADIUS + HILL_HEIGHT, "base"],
+    [PI / 2 + 52 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill3"],
+    [PI / 2 + 56 * seg_ang, Const.RADIUS, "gap", "hill3"],
+    [PI / 2 + 72 * seg_ang, Const.RADIUS],
+    [PI / 2 + 88 * seg_ang, Const.RADIUS],
     [PI / 2 + 88 * seg_ang, 0],
 ]
 
@@ -72,7 +68,7 @@ func set_up_collisions(av:Geometry.AnnotatedVerts):
     var shapes:Array[Shape2D] = []
     # 1. the circular planet
     var circle = CircleShape2D.new()
-    circle.radius = RADIUS
+    circle.radius = Const.RADIUS
     shapes.append(circle)
     # 2. the three hills
     for hill_name in ["hill1", "hill2", "hill3"]:

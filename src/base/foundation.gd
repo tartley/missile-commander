@@ -17,8 +17,6 @@ var destroyed: bool:
 # We use a reference to the mouse to swivel our turrets towards it
 var mouse:Node2D
 
-# TODO: how do verts get initialized at first anyhow?
-
 func get_semicircle(center, radius) -> Array[Vector2]:
     const SEGMENTS := 5
     var vs:Array[Vector2] = []

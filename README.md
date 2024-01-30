@@ -72,7 +72,6 @@ A work in progress.
 
 # Refactors
 
-* World mentioned some dependency that isn't injected. Do that in World, too.
 * Abandon the -y transform
 * Delete the useless World node?
   * depends on abandoning the -y transform, because trying it without that was
