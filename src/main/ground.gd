@@ -60,11 +60,6 @@ var cities:Array[Node2D] = []
 var bases:Array[Node2D] = []
 var gaps:Array[Vector2] = []
 
-var mouse:Node2D:
-    set(value):
-        for base in self.bases:
-            base.mouse = value
-
 func get_annotated_vert_array(annotated_polars:Array) -> Array:
     '''Convert array of annotated polar co-ords to an array of annotated cartesian co-ords'''
     var retval := []

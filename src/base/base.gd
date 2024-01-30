@@ -13,6 +13,7 @@ var mouse:Node2D
 func _ready():
     self.destroyed = false
     $Turret.position = Vector2(0, 20)
+    self.add_to_group("bases")
 
 func _process(_delta:float):
     if not self.destroyed:

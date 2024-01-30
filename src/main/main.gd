@@ -48,8 +48,9 @@ func _ready() -> void:
     # Inject dependencies
     $World/Camera.mouse = $World/Mouse
     $World/Camera.ground = $World/Ground
-    $World/Ground.mouse = $World/Mouse
     $World/Sky.ground = $World/Ground
+    for base in get_tree().get_nodes_in_group("bases"):
+        base.mouse = $World/Mouse
     # Also $Mouse needs to know $Ground,
     # But we do that as a global name because I'm too lazy to figure out the dependencies
     begin_level()
