@@ -8,18 +8,24 @@ func positions(nodes:Array) -> Array[Vector2]:
         retval.append(node.position)
     return retval
             
+func choose_target() -> Array: # Array of [City|Base|null, Vector2]
+    var targets:Array = []
+    for target in get_tree().get_nodes_in_group("cities") + get_tree().get_nodes_in_group("bases"):
+        targets.append([target, target.position])
+    for pos in $Ground.gaps:
+        targets.append([null, pos])
+    return targets.pick_random()
+
 func launch_missile():
     var missile = Missile.instantiate()
     var start := Vector2(randf_range(-2000, +2000), randf_range(-14100, -20000))
-    var targets:Array[Vector2] = []
-    targets.append_array(positions(get_tree().get_nodes_in_group("cities")))
-    targets.append_array(positions(get_tree().get_nodes_in_group("bases")))
-    targets.append_array($Ground.gaps)
-    var destination:Vector2 = targets.pick_random()
+    var td = choose_target()
+    var target = td[0]
+    var dest = td[1]
     var speed := randf_range(50, 500)
-    missile.launch(start, destination, speed)
+    missile.launch(start, target, dest, speed)
     self.add_child(missile)
-    
+
 func begin_level():
     for _i in range(200):
         launch_missile()

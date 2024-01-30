@@ -12,6 +12,7 @@ const verts: Array[Vector2] = [
 var Pop:PackedScene = preload("res://src/pop/pop.tscn")
 
 var velocity: Vector2
+var target # City or Base or null
 
 func set_up_collisions():
     var collision = CollisionShape2D.new()
@@ -26,8 +27,9 @@ func _ready() -> void:
     $Trail.initial_velocity_min = velocity.length() / 5
     set_up_collisions()
 
-func launch(pos:Vector2, destination:Vector2, speed:float):
+func launch(pos:Vector2, target_:Node2D, destination:Vector2, speed:float):
     self.position = pos
+    self.target = target_
     self.rotation = (destination - position).angle()
     self.velocity = Vector2.from_angle(rotation) * speed
 
@@ -46,6 +48,10 @@ func on_area_entered(_ground:Area2D):
     var trail = $Trail
     trail.reparent(main)
     trail.emitting = false
+
+    # Destroy our target
+    if self.target:
+        self.target.destroyed = true
 
     # Add a Pop, parented to Main
     var pop = Pop.instantiate()
