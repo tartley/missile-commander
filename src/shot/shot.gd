@@ -25,8 +25,9 @@ func _ready():
     self.rotation = (self.destination - self.position).angle() - PI / 2
 
 func _process(delta: float) -> void:
-    self.position += velocity * delta
-    if self.position.distance_squared_to(self.destination) <= (self.velocity * delta).length_squared():
+    var dpos := velocity * delta
+    self.position += dpos
+    if self.position.distance_squared_to(self.destition) <= dpos.length_squared():
         destination_reached()
 
 func _draw():
