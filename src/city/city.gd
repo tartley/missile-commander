@@ -40,6 +40,7 @@ func get_destroyed_verts():
     return retval
 
 func _ready():
+    self.name = Common.get_unique_name(self)
     self.destroyed = false
     self.add_to_group("cities")
 

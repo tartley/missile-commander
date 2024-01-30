@@ -7,6 +7,7 @@ var age:float # seconds
 var progress:float # 0..1
 
 func _ready() -> void:
+    self.name = Common.get_unique_name(self)
     self.age = 0.0
 
 func _process(delta:float) -> void:

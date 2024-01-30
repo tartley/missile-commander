@@ -64,23 +64,25 @@ func get_annotated_vert_array(annotated_polars:Array) -> Array:
         retval.append([vert.x, vert.y, ap.slice(2)])
     return retval
 
+func add_collision_shape(shape:Shape2D, name_:String):
+    var collision = CollisionShape2D.new()
+    collision.shape = shape
+    collision.name = name_
+    add_child(collision)
+
 func set_up_collisions(av:Geometry.AnnotatedVerts):
-    # Set up collision shapes for the ground
-    var shapes:Array[Shape2D] = []
+    ## Set up collision shapes for the ground
+
     # 1. the circular planet
     var circle = CircleShape2D.new()
     circle.radius = Common.RADIUS
-    shapes.append(circle)
+    add_collision_shape(circle, "circle")
+
     # 2. the three hills
     for hill_name in ["hill1", "hill2", "hill3"]:
         var polygon = ConvexPolygonShape2D.new()
         polygon.points = av.get_vertices(hill_name)
-        shapes.append(polygon)
-    # Add all shapes to the ground's collision area
-    for shape in shapes:
-        var collision = CollisionShape2D.new()
-        collision.shape = shape
-        add_child(collision)
+        add_collision_shape(polygon, hill_name)
 
 func create_features(annotated_verts, feature_name:String, type:PackedScene) -> Array[Node2D]:
     var positions = annotated_verts.get_vertices(feature_name)

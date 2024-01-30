@@ -14,6 +14,7 @@ var destroyed: bool:
 var mouse:Node2D
 
 func _ready():
+    self.name = Common.get_unique_name(self)
     self.destroyed = false
     $Turret.size = SIZE
     $Foundation.size = SIZE
