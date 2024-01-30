@@ -8,16 +8,15 @@ A work in progress.
 
 ## TODO
 
-- Bases can fire Shots
-  - Shots are too big
-  - Shots are too fast
-  - Some shots miss their destination
-  - Shots should emerge from turret barrel
-  - shot sound effect
-  * Key repeat
+* Missiles emit 'strike' event. Ground listens, decides whether Pop or
+  Detonation (& destroyed feature) results. (I think this is how it already
+  works. I'm just getting clarity). Whereas:
+* Shots directly cause an Explosion, which does collision check to destroy
+  Missiles.
+* Missile and Shot are quite similar. e.g.
   * Shots should have a trail
-
-* Explosion should destroy missiles
+  * Both accept a start and destination, then move towards it until
+    self-destructing. Are they actually the same class?
 
 * Display ammo under each base
 * Firing a shot reduces ammo from that base
@@ -117,10 +116,10 @@ A work in progress.
   * Sky
   * Missile <no draw>
     * Trail (both initially and after missile is gone)
-    * Warhead
+    * <new child which draws the Warhead, so it is in front of Trail>
   * Shot <no draw>
     * Trail
-    * Warhead
+    * <new child which draws the Warhead, so it is in front of Trail>
   -- layer 1
   * Pop
   * Explosion
@@ -136,6 +135,8 @@ A work in progress.
 
   Keep ^ this reasoning around somewhere for if we need to return to it.
 
+* Base and City have similarities. Do they inherit from the same base class?
+* Pop, Explosion and Detonation (city/base destruction?) have similarities.
 * Implicit Dependencies. It's currently difficult to change ground.ANGLE, mouse
   extent, or camera pan, and have everything else adjust accordingly. They have
   implicit dependencies on each other. I speculate this would be improved by
@@ -147,8 +148,8 @@ A work in progress.
 
 # Low priority Features
 
-* Fire when out of ammo is click1
-* Fire when base destroyed is click2
+* Click1 when fire pressed but out of ammo
+* Click2 when fire pressed but base is destroyed
 * Warn beep when low ammo
 * Audio listener moves with mouse
 * More particle effects:

@@ -28,8 +28,8 @@ func launch_shot(base_id):
     if shot:
         $World.add_child(shot)
 
-func _unhandled_input(event):
-    if event is InputEventKey and event.pressed:
+func _unhandled_input(event:InputEvent):
+    if event is InputEventKey and event.pressed and not event.echo:
         match event.keycode:
             KEY_A:
                 launch_shot(2)
