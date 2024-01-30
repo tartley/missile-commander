@@ -11,26 +11,24 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_3ne2t")
 
-[node name="World" type="Node2D" parent="."]
-
-[node name="Camera" type="Camera2D" parent="World"]
-position = Vector2(0, -12000)
-ignore_rotation = false
-script = ExtResource("2_jm13r")
-
-[node name="Sky" type="Node2D" parent="World"]
-script = ExtResource("3_nw6n4")
-
-[node name="Mouse" type="Node2D" parent="World"]
-script = ExtResource("5_i0hgq")
-
-[node name="Ground" type="Area2D" parent="World"]
-z_index = 2
-collision_mask = 0
-script = ExtResource("4_fvoxd")
-
 [node name="Geometry" type="Node" parent="."]
 script = ExtResource("6_hh5ig")
 
 [node name="Const" type="Node" parent="."]
 script = ExtResource("7_ucqwb")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(0, -12000)
+ignore_rotation = false
+script = ExtResource("2_jm13r")
+
+[node name="Sky" type="Node2D" parent="."]
+script = ExtResource("3_nw6n4")
+
+[node name="Mouse" type="Node2D" parent="."]
+script = ExtResource("5_i0hgq")
+
+[node name="Ground" type="Area2D" parent="."]
+z_index = 2
+collision_mask = 0
+script = ExtResource("4_fvoxd")

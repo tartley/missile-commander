@@ -14,12 +14,12 @@ func launch_missile():
     var targets:Array[Vector2] = []
     targets.append_array(positions(get_tree().get_nodes_in_group("cities")))
     targets.append_array(positions(get_tree().get_nodes_in_group("bases")))
-    targets.append_array($World/Ground.gaps)
+    targets.append_array($Ground.gaps)
     var destination:Vector2 = targets.pick_random()
     var speed := randf_range(50, 200)
     missile.launch(start, destination, speed)
-    $World.add_child(missile)
-    missile.missile_strike.connect($World/Ground.on_missile_strike)
+    self.add_child(missile)
+    missile.missile_strike.connect($Ground.on_missile_strike)
     
 func begin_level():
     for _i in range(200):
@@ -27,9 +27,9 @@ func begin_level():
 
 func launch_shot(base_id):
     var base:Node2D = get_tree().get_nodes_in_group("bases")[base_id]
-    var shot:Node2D = base.launch($World/Mouse.position)
+    var shot:Node2D = base.launch($Mouse.position)
     if shot:
-        $World.add_child(shot)
+        self.add_child(shot)
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
@@ -49,8 +49,8 @@ func _unhandled_input(event:InputEvent):
 
 func _ready() -> void:
     # Inject dependencies
-    $World/Camera.mouse = $World/Mouse
+    $Camera.mouse = $Mouse
     for base in get_tree().get_nodes_in_group("bases"):
-        base.mouse = $World/Mouse
+        base.mouse = $Mouse
 
     begin_level()

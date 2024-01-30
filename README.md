@@ -72,12 +72,6 @@ A work in progress.
 
 # Refactors
 
-* Abandon the -y transform
-* Delete the useless World node?
-  * depends on abandoning the -y transform, because trying it without that was
-    a mess: missiles visible but flying upwards, ground nowhere to be seen.
-    (or, probably an equivalent amount of work: Tidying up the above after
-    removing the World while retaining the -y transform in a Node2D root node)
 * consistent angle representation, remove all the +/-PI/2 offsets.
   * get clear in my head how Vector2.angle, etc, work.
 * I reparent some things to Ground, but I should probably reparent them to
