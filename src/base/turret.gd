@@ -1,11 +1,12 @@
 extends Node2D
 
-const SIZE := 40.0
+const SIZE := 300.0
+# A rectangular gun turret, pointing right
 const verts:Array[Vector2] = [
-    Vector2(+SIZE/8, -SIZE/8),
-    Vector2(+SIZE/8, SIZE),
-    Vector2(-SIZE/8, SIZE),
-    Vector2(-SIZE/8, -SIZE/8),
+    Vector2(-SIZE/8, +SIZE/8), # left(base) top
+    Vector2(+SIZE,   +SIZE/8), # right(tip) top
+    Vector2(+SIZE,   -SIZE/8), # right(tip) bottom
+    Vector2(-SIZE/8, -SIZE/8), # left(base) bottom 
 ]
 const fore := Color.YELLOW
 const fill := Color.BLACK

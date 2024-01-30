@@ -1,14 +1,10 @@
 extends Node2D
 
 const verts: Array[Vector2] = [
-    Vector2(-60, 0),
-    Vector2(-20, 0),
-    Vector2(20, 0),
-    Vector2(60, 0),
-    Vector2(0, -44),
-    Vector2(0, -20),
-    Vector2(0, 20),
-    Vector2(0, 44),
+    Vector2(-60, 0), Vector2(-20, 0),
+    Vector2(+60, 0), Vector2(+20, 0),
+    Vector2(0, -44), Vector2(0, -20),
+    Vector2(0, +44), Vector2(0, +20),
 ]
 
 # mouse can move around in these world co-ordinates
@@ -20,8 +16,8 @@ var polar:Geometry.Polar:
         # constrain new mouse position to lie within maximum extent
         value.constrain(extent_polar)
         polar = value
-        position = polar.radius * Vector2.from_angle(PI/2 - polar.angle)
-        rotation = -polar.angle
+        position = polar.radius * Vector2.from_angle(-PI/2 + polar.angle)
+        rotation = polar.angle
         normalized = extent_polar.normalize(polar)
 
 # normalized mouse position to lie within (-1 to 1, 0 to 1)

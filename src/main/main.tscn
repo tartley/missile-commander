@@ -12,11 +12,9 @@
 script = ExtResource("1_3ne2t")
 
 [node name="World" type="Node2D" parent="."]
-scale = Vector2(1, -1)
 
 [node name="Camera" type="Camera2D" parent="World"]
 position = Vector2(0, -12000)
-scale = Vector2(1, -1)
 ignore_rotation = false
 script = ExtResource("2_jm13r")
 

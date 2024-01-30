@@ -1,6 +1,6 @@
 extends Node2D
 
-const SIZE := 80.0
+const SIZE := 600.0
 
 var verts:Array[Vector2]
 var color:Color

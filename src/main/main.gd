@@ -10,7 +10,7 @@ func positions(nodes:Array) -> Array[Vector2]:
             
 func launch_missile():
     var missile = Missile.instantiate()
-    var start := Vector2(randf_range(-2000, +2000), randf_range(14100, 20000))
+    var start := Vector2(randf_range(-2000, +2000), randf_range(-14100, -20000))
     var targets:Array[Vector2] = []
     targets.append_array(positions(get_tree().get_nodes_in_group("cities")))
     targets.append_array(positions(get_tree().get_nodes_in_group("bases")))
@@ -35,13 +35,13 @@ func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
         match event.keycode:
             KEY_A:
-                launch_shot(2)
+                launch_shot(0)
             KEY_W:
                 launch_shot(1)
             KEY_S:
                 launch_shot(1)
             KEY_D:
-                launch_shot(0)
+                launch_shot(2)
             KEY_ESCAPE:
                 get_tree().quit()
             _:
@@ -52,4 +52,5 @@ func _ready() -> void:
     $World/Camera.mouse = $World/Mouse
     for base in get_tree().get_nodes_in_group("bases"):
         base.mouse = $World/Mouse
+
     begin_level()

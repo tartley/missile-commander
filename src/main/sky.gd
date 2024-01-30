@@ -5,8 +5,8 @@ const STAR_COUNT := 1000
 func get_star_verts() -> Array[Vector2]:
     var x := randf_range(-2800.0, 2800.0)
     var y: = randf_range(
-        Const.RADIUS - get_viewport_rect().size.y * 0.14,
-        Const.RADIUS + get_viewport_rect().size.y * 1.04
+        -Const.RADIUS + get_viewport_rect().size.y * 0.14,
+        -Const.RADIUS - get_viewport_rect().size.y * 1.04
     )
     var size := randf_range(2.0, 6.0)
     return [

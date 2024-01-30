@@ -15,37 +15,37 @@ const COLOR := Color(0.1, 0.5, 0.2)
 # Approximate the curved surface with straight segments.
 const seg_ang := Const.PLANET_ANGLE / 72
 const annotated_polar_array := [
-    [PI / 2 - 88 * seg_ang, 0],
-    [PI / 2 - 88 * seg_ang, Const.RADIUS],
-    [PI / 2 - 72 * seg_ang, Const.RADIUS],
-    [PI / 2 - 56 * seg_ang, Const.RADIUS, "gap", "hill1"],
-    [PI / 2 - 52 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill1"],
-    [PI / 2 - 48 * seg_ang, Const.RADIUS + HILL_HEIGHT, "base"],
-    [PI / 2 - 44 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill1"],
-    [PI / 2 - 40 * seg_ang, Const.RADIUS, "gap", "hill1"],
-    [PI / 2 - 34 * seg_ang, Const.RADIUS, "city"],
-    [PI / 2 - 29 * seg_ang, Const.RADIUS, "gap"],
-    [PI / 2 - 24 * seg_ang, Const.RADIUS, "city"],
-    [PI / 2 - 19 * seg_ang, Const.RADIUS, "gap"],
-    [PI / 2 - 14 * seg_ang, Const.RADIUS, "city"],
-    [PI / 2 -  8 * seg_ang, Const.RADIUS, "gap", "hill2"],
-    [PI / 2 -  4 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill2"],
-    [PI / 2 +  0 * seg_ang, Const.RADIUS + HILL_HEIGHT, "base"],
-    [PI / 2 +  4 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill2"],
-    [PI / 2 +  8 * seg_ang, Const.RADIUS, "gap", "hill2"],
-    [PI / 2 + 14 * seg_ang, Const.RADIUS, "city"],
-    [PI / 2 + 19 * seg_ang, Const.RADIUS, "gap"],
-    [PI / 2 + 24 * seg_ang, Const.RADIUS, "city"],
-    [PI / 2 + 29 * seg_ang, Const.RADIUS, "gap"],
-    [PI / 2 + 34 * seg_ang, Const.RADIUS, "city"],
-    [PI / 2 + 40 * seg_ang, Const.RADIUS, "gap", "hill3"],
-    [PI / 2 + 44 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill3"],
-    [PI / 2 + 48 * seg_ang, Const.RADIUS + HILL_HEIGHT, "base"],
-    [PI / 2 + 52 * seg_ang, Const.RADIUS + HILL_HEIGHT, "gap", "hill3"],
-    [PI / 2 + 56 * seg_ang, Const.RADIUS, "gap", "hill3"],
-    [PI / 2 + 72 * seg_ang, Const.RADIUS],
-    [PI / 2 + 88 * seg_ang, Const.RADIUS],
-    [PI / 2 + 88 * seg_ang, 0],
+    [ -88 * seg_ang, -Const.RADIUS],
+    [ -88 * seg_ang, 0],
+    [ -72 * seg_ang, 0],
+    [ -56 * seg_ang, 0, "gap", "hill1"],
+    [ -52 * seg_ang, HILL_HEIGHT, "gap", "hill1"],
+    [ -48 * seg_ang, HILL_HEIGHT, "base"],
+    [ -44 * seg_ang, HILL_HEIGHT, "gap", "hill1"],
+    [ -40 * seg_ang, 0, "gap", "hill1"],
+    [ -34 * seg_ang, 0, "city"],
+    [ -29 * seg_ang, 0, "gap"],
+    [ -24 * seg_ang, 0, "city"],
+    [ -19 * seg_ang, 0, "gap"],
+    [ -14 * seg_ang, 0, "city"],
+    [ - 8 * seg_ang, 0, "gap", "hill2"],
+    [ - 4 * seg_ang, HILL_HEIGHT, "gap", "hill2"],
+    [ + 0 * seg_ang, HILL_HEIGHT, "base"],
+    [ + 4 * seg_ang, HILL_HEIGHT, "gap", "hill2"],
+    [ + 8 * seg_ang, 0, "gap", "hill2"],
+    [ +14 * seg_ang, 0, "city"],
+    [ +19 * seg_ang, 0, "gap"],
+    [ +24 * seg_ang, 0, "city"],
+    [ +29 * seg_ang, 0, "gap"],
+    [ +34 * seg_ang, 0, "city"],
+    [ +40 * seg_ang, 0, "gap", "hill3"],
+    [ +44 * seg_ang, HILL_HEIGHT, "gap", "hill3"],
+    [ +48 * seg_ang, HILL_HEIGHT, "base"],
+    [ +52 * seg_ang, HILL_HEIGHT, "gap", "hill3"],
+    [ +56 * seg_ang, 0, "gap", "hill3"],
+    [ +72 * seg_ang, 0],
+    [ +88 * seg_ang, 0],
+    [ +88 * seg_ang, -Const.RADIUS],
 ]
 
 const City:PackedScene = preload("res://src/city/city.tscn")
@@ -57,14 +57,15 @@ var gaps:Array[Vector2] = []
 func get_annotated_vert_array(annotated_polars:Array) -> Array:
     '''Convert array of annotated polar co-ords to an array of annotated cartesian co-ords'''
     var retval := []
-    var vert:Vector2
-    for ap:Array in annotated_polars:
-        vert = ap[1] * Vector2.from_angle(ap[0])
+    for ap in annotated_polars:
+        var angle = ap[0] - PI / 2
+        var radius = ap[1] + Const.RADIUS
+        var vert = radius * Vector2.from_angle(angle)
         retval.append([vert.x, vert.y, ap.slice(2)])
     return retval
 
 func set_up_collisions(av:Geometry.AnnotatedVerts):
-    # Set up collision shapes that define the ground
+    # Set up collision shapes for the ground
     var shapes:Array[Shape2D] = []
     # 1. the circular planet
     var circle = CircleShape2D.new()
