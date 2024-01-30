@@ -1,7 +1,5 @@
 extends Node2D
 
-var Pop:PackedScene = preload("res://src/pop/pop.tscn")
-
 const SIZE := 20.0
 # A rightwards pointing triangle
 const verts: Array[Vector2] = [
@@ -10,6 +8,8 @@ const verts: Array[Vector2] = [
     Vector2(-SIZE/2, +SIZE/4), # base top
     Vector2(+SIZE/2,       0), # rightmost tip
 ]
+
+var Pop:PackedScene = preload("res://src/pop/pop.tscn")
 
 var velocity: Vector2
 
@@ -40,18 +40,22 @@ func _draw():
     draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
-func on_area_entered(ground:Area2D):
-    # A Missile has collided with the Ground.
-    # Reparent our trail onto the ground
+func on_area_entered(_ground:Area2D):
+    ## This Missile has collided with the Ground.
+
+    # We will cease to exist, so reparent our trail onto Main.
+    var main := get_parent() as Main
     var trail = $Trail
-    trail.reparent(ground)
+    trail.reparent(main)
     trail.emitting = false
-    # Add a Pop, parented to the World.
-    var world := get_parent()
+
+    # Add a Pop, parented to Main
     var pop = Pop.instantiate()
     pop.position = self.position
-    world.add_child(pop)
+    main.add_child(pop)
+
     # Let Ground destroy any Cities that are too close
     missile_strike.emit(self.position)
+
     # And this missile is done
     queue_free()

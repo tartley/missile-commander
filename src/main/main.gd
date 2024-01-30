@@ -16,7 +16,7 @@ func launch_missile():
     targets.append_array(positions(get_tree().get_nodes_in_group("bases")))
     targets.append_array($Ground.gaps)
     var destination:Vector2 = targets.pick_random()
-    var speed := randf_range(50, 200)
+    var speed := randf_range(50, 500)
     missile.launch(start, destination, speed)
     self.add_child(missile)
     missile.missile_strike.connect($Ground.on_missile_strike)
