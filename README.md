@@ -72,12 +72,6 @@ A work in progress.
 
 # Refactors
 
-* If Bases were in a group, would that prevent Ground having to know about
-  Mouse? Then I think that unlocks the following:
-* Why is city[0] the rightmost? Aha, is it that `.add_child` adds it at the
-  start start of the array of children? Can we make it not do, so cities[0] is
-  leftmost? Does using Groups for cities help?
-* Use Groups for bases?
 * World mentioned some dependency that isn't injected. Do that in World, too.
 * Abandon the -y transform
 * Delete the useless World node?
@@ -181,4 +175,69 @@ A work in progress.
   https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
   or that github issue I commented on or that links to a newer PR against Godot
   to add a replacement for ParalaxBackground
+
+# Godot Lessons
+
+## Draw Order
+
+Objects are drawn obscuring each other (as if back to front) in the order
+of the scene tree:
+
+    1 Main
+    2 - Sky
+    3 - Ground
+    4   - Base1
+    5   - City1
+    6   - City2
+    7   - Base1
+
+Hence, a parent is drawn behind all its children. If you want it in front of
+some of the children, then create a new parent node which draws nothing,
+the children of which are the old parent and all its children, in the
+required order:
+
+    1 Main
+    2 - Sky
+      - GroundRoot <new parent, not drawn>
+    3   - Base1
+    4   - City1
+    5   - City2
+    6   - Base1
+    7   - Ground <old parent, in front of other children>
+
+Sometimes you want a node from elsewhere in the scene tree to be drawn
+in-between siblings. For example, if need Explosion to be parented to
+Main, but be rendered in-between (Cities & Bases), and the Ground.
+
+The solution to this is to use CanvasLayers. Each Node2D has a CanvasLayer,
+defaulting to value 0. Nodes with a higher canvas layer are drawn in front,
+in a separate pass through the scene tree. eg:
+
+    1 Main
+    2 - Sky
+      - GroundRoot <new parent, not drawn>
+    3   - Base1
+    4   - City1
+    5   - City2
+    6   - Base1
+    8   - Ground <layer 1>
+    7 - Explosion <layer 0>
+
+Hence layer 1 rendering draws everything except the ground, with Explosion
+on top, then it draws the Ground on top of that.
+
+## Order of calls
+
+First we call `_init`, going straight down the scene tree:
+
+1 - Main._init
+2   - Sky._init
+3   - Ground._init
+
+Then we call `_ready` as we add nodes to the tree, going downwards but children
+first:
+
+3 - Main._ready
+1   - Sky._ready
+2   - Ground._ready
 

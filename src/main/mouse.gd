@@ -61,4 +61,5 @@ func _input(event: InputEvent):
         )
 
 func _draw():
+    draw_multiline(verts, Color.BLACK, 6.0)
     draw_multiline(verts, Color(.5, .6, .7), 4.0)

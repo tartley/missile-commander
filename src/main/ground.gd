@@ -56,8 +56,6 @@ const City:PackedScene = preload("res://src/city/city.tscn")
 const Base:PackedScene = preload("res://src/base/base.tscn")
 
 var verts:PackedVector2Array
-var cities:Array[Node2D] = []
-var bases:Array[Node2D] = []
 var gaps:Array[Vector2] = []
 
 func get_annotated_vert_array(annotated_polars:Array) -> Array:
@@ -102,8 +100,8 @@ func create_features(annotated_verts, feature_name:String, type:PackedScene) -> 
 func _ready() -> void:
     var annotated_verts := Geometry.AnnotatedVerts.new(get_annotated_vert_array(annotated_polar_array))
     self.verts = annotated_verts.verts
-    self.cities = create_features(annotated_verts, "city", City)
-    self.bases = create_features(annotated_verts, "base", Base)
+    create_features(annotated_verts, "city", City)
+    create_features(annotated_verts, "base", Base)
     self.gaps = annotated_verts.get_vertices("gap")
     set_up_collisions(annotated_verts)
 
@@ -112,6 +110,7 @@ func _draw() -> void:
     draw_polyline(verts, Color(.7, 1, .6), 3.0, true)
 
 func on_missile_strike(strike_position:Vector2):
-    for feature in self.cities + self.bases:
+    var targets := get_tree().get_nodes_in_group("cities") + get_tree().get_nodes_in_group("bases")
+    for feature in targets:
         if strike_position.distance_squared_to(feature.position) < 1000:
             feature.destroyed = true

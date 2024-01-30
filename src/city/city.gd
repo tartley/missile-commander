@@ -39,9 +39,10 @@ func get_destroyed_verts():
     retval.append(Vector2(+SIZE/2.0, 0))
     return retval
 
-func _init():
+func _ready():
     self.destroyed = false
-    
+    self.add_to_group("cities")
+
 func _draw():
     draw_polygon(self.verts, [Color.BLACK])
     draw_polyline(self.verts, self.color, 2.0, true)
