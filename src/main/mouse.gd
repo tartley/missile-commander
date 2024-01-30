@@ -26,12 +26,12 @@ var normalized:Vector2
 func _ready():
     extent_polar = Geometry.PolarExtent.new(
         Geometry.Polar.new(
-            Const.PLANET_ANGLE * -0.99,
-            Const.RADIUS + get_viewport_rect().size.y * 0.06,
+            Common.PLANET_ANGLE * -0.99,
+            Common.RADIUS + get_viewport_rect().size.y * 0.06,
         ),
         Geometry.Polar.new(
-            Const.PLANET_ANGLE * +0.99,
-            Const.RADIUS + get_viewport_rect().size.y * 1.0,
+            Common.PLANET_ANGLE * +0.99,
+            Common.RADIUS + get_viewport_rect().size.y * 1.0,
         ),
     )
     # Dupes behavior of "focus in" event, since we don't get that event on startup on MacOS

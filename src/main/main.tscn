@@ -14,7 +14,7 @@ script = ExtResource("1_3ne2t")
 [node name="Geometry" type="Node" parent="."]
 script = ExtResource("6_hh5ig")
 
-[node name="Const" type="Node" parent="."]
+[node name="Common" type="Node" parent="."]
 script = ExtResource("7_ucqwb")
 
 [node name="Camera" type="Camera2D" parent="."]

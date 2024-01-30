@@ -1,4 +1,4 @@
-class_name Const extends Node
+class_name Common extends Node
 
 # The ground is a pizza-slice shaped segment of a circular planet, centered at (0, 0), with:
 const RADIUS := 12000.0
