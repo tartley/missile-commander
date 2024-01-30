@@ -105,9 +105,3 @@ func _ready() -> void:
 func _draw() -> void:
     draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.7, 1, .6), 3.0, true)
-
-func on_missile_strike(strike_position:Vector2):
-    var targets := get_tree().get_nodes_in_group("cities") + get_tree().get_nodes_in_group("bases")
-    for feature in targets:
-        if strike_position.distance_squared_to(feature.position) < 1000:
-            feature.destroyed = true

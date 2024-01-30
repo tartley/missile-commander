@@ -19,7 +19,6 @@ func launch_missile():
     var speed := randf_range(50, 500)
     missile.launch(start, destination, speed)
     self.add_child(missile)
-    missile.missile_strike.connect($Ground.on_missile_strike)
     
 func begin_level():
     for _i in range(200):

@@ -13,8 +13,6 @@ var Pop:PackedScene = preload("res://src/pop/pop.tscn")
 
 var velocity: Vector2
 
-signal missile_strike(position:Vector2)
-
 func set_up_collisions():
     var collision = CollisionShape2D.new()
     collision.shape = ConvexPolygonShape2D.new()
@@ -53,9 +51,6 @@ func on_area_entered(_ground:Area2D):
     var pop = Pop.instantiate()
     pop.position = self.position
     main.add_child(pop)
-
-    # Let Ground destroy any Cities that are too close
-    missile_strike.emit(self.position)
 
     # And this missile is done
     queue_free()
