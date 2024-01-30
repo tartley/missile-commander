@@ -72,10 +72,8 @@ A work in progress.
 
 # Refactors
 
-* consistent angle representation, remove all the +/-PI/2 offsets.
-  * get clear in my head how Vector2.angle, etc, work.
 * I reparent some things to Ground, but I should probably reparent them to
-  World.
+  Main.
 * Fix draw order. Problem is we want draw order to be (back to front):
 
   * Sky
@@ -123,6 +121,9 @@ A work in progress.
   Keep ^ this reasoning around somewhere for if we need to return to it.
 
 * Base and City have similarities. Do they inherit from the same base class?
+* Turret and Foundation share some of those similarities (ie being destroyable)
+  * Maybe prefer composition over inheritance, a parent no-draw node owns a
+    child of type 'HasVerts' or 'HasVertsDestroyable'
 * Pop, Explosion and Detonation (city/base destruction?) have similarities.
 * Implicit Dependencies. It's currently difficult to change ground.ANGLE, mouse
   extent, or camera pan, and have everything else adjust accordingly. They have
