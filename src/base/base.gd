@@ -1,4 +1,7 @@
 extends Node2D
+
+const SIZE := 100.0
+
 var Shot:PackedScene = preload("res://src/shot/shot.tscn")
 
 var destroyed: bool:
@@ -12,7 +15,9 @@ var mouse:Node2D
 
 func _ready():
     self.destroyed = false
-    $Turret.position = Vector2(0, $Foundation.SIZE / 4)
+    $Turret.size = SIZE
+    $Foundation.size = SIZE
+    $Turret.position = Vector2(0, SIZE / 4)
     self.add_to_group("bases")
 
 func _process(_delta:float):

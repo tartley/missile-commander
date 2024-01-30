@@ -1,21 +1,16 @@
 extends Node2D
 
-const SIZE := 600.0
+# TODO turret and foundation have a couple of identical constructs
 
-var verts:Array[Vector2]
-var color:Color
+const FORE := Color.YELLOW
+const FORE_DESTROYED := Color(.3, .3, .3)
+const FILL := Color.BLACK
+
+var size:float
 var destroyed: bool:
     set(value):
-        if not value:
-            self.verts = get_verts()
-            self.color = Color.YELLOW
-        else:
-            self.color = Color.DIM_GRAY
         destroyed = value
         self.queue_redraw()
-
-# We use a reference to the mouse to swivel our turrets towards it
-var mouse:Node2D
 
 func get_semicircle(center, radius) -> Array[Vector2]:
     const SEGMENTS := 5
@@ -29,17 +24,22 @@ func get_semicircle(center, radius) -> Array[Vector2]:
 func get_verts() -> Array[Vector2]:
     var vs:Array[Vector2] = []
     vs.append_array([
-        Vector2(-SIZE/4, 0), # support left base
-        Vector2(-SIZE/4, SIZE/4), # support left top
+        Vector2(-size/4, 0), # support left base
+        Vector2(-size/4, size/4), # support left top
     ])
-    vs.append_array(get_semicircle(self.position + Vector2(0, SIZE/4), SIZE/4))
+    vs.append_array(get_semicircle(self.position + Vector2(0, size/4), size/4))
     vs.append_array([
-        
-        Vector2(+SIZE/4, SIZE/4), # suppport right top
-        Vector2(+SIZE/4, 0), # support right base
+        Vector2(+size/4, size/4), # suppport right top
+        Vector2(+size/4, 0), # support right base
     ])
     return vs
 
+func get_color() -> Color:
+    if self.destroyed:
+        return FORE_DESTROYED
+    else:
+        return FORE
+
 func _draw():
-    draw_polygon(self.verts, [Color.BLACK])
-    draw_polyline(self.verts, self.color, 3.0, true)
+    draw_polygon(get_verts(), [FILL])
+    draw_polyline(get_verts(), get_color(), 3.0, true)
