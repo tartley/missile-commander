@@ -1,7 +1,7 @@
 extends Node2D
 
 const SIZE := 100.0 # world co-ords
-const DURATION := 2.0 # seconds
+const DURATION := 1.0 # seconds
 
 var age:float # seconds
 var progress:float # 0..1
@@ -21,4 +21,5 @@ func _process(delta:float) -> void:
 
 func _draw() -> void:
     var color := Color(1, 1 - self.progress, 0, 1 - self.progress)
-    draw_circle(Vector2(0, 0), SIZE * self.progress ** 0.3, color)
+    var width := 20.0 - progress * 20.0
+    draw_arc(Vector2.ZERO, SIZE * self.progress ** 0.3, -PI, PI, 16, color, width, true)
