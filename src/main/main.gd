@@ -7,7 +7,7 @@ func positions(nodes:Array) -> Array[Vector2]:
     for node:Node2D in nodes:
         retval.append(node.position)
     return retval
-            
+
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
     for target in get_tree().get_nodes_in_group("cities") + get_tree().get_nodes_in_group("bases"):

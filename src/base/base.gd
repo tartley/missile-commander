@@ -40,22 +40,22 @@ func launch(dest:Vector2):
 
 # _draw
 
-func get_semicircle(center, radius) -> Array[Vector2]:
-    const SEGMENTS := 5
+func get_semicircle(center, radius, segments) -> Array[Vector2]:
     var vs:Array[Vector2] = []
-    for segment in range(SEGMENTS + 1):
-        var angle:float = PI - PI * segment / SEGMENTS
+    for segment in range(segments + 1):
+        var angle:float = PI - PI * segment / segments
         var vert:Vector2 = center + Vector2.from_angle(angle) * radius
         vs.append(vert)
     return vs
 
 func get_verts() -> Array[Vector2]:
+    const DOME_SEGMENTS := 5
     var vs:Array[Vector2] = []
     vs.append_array([
         Vector2(-SIZE/4, 0), # support left base
         Vector2(-SIZE/4, SIZE/4), # support left top
     ])
-    vs.append_array(get_semicircle(Vector2(0, SIZE/4), SIZE/4))
+    vs.append_array(get_semicircle(Vector2(0, SIZE/4), SIZE/4, DOME_SEGMENTS))
     vs.append_array([
         Vector2(+SIZE/4, SIZE/4), # suppport right top
         Vector2(+SIZE/4, 0), # support right base
