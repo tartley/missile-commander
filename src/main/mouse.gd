@@ -27,7 +27,7 @@ func _ready():
     extent_polar = Geometry.PolarExtent.new(
         Geometry.Polar.new(
             Common.PLANET_ANGLE * -0.99,
-            Common.RADIUS + get_viewport_rect().size.y * 0.06,
+            Common.RADIUS + get_viewport_rect().size.y * 0.12,
         ),
         Geometry.Polar.new(
             Common.PLANET_ANGLE * +0.99,
