@@ -87,10 +87,10 @@ A work in progress.
   * Explosion
   * MouseCursor
   * Ground
-    * City
-    * GroundRender
+    * City (show behind parent)
 
-  ...we want City to render in in between Missiles and Explosions.
+  ...we want City to render in in between Missiles and Explosions, but its
+  parent Ground to remain where it is.
 
 ## Solutions
 
@@ -107,7 +107,6 @@ A work in progress.
   * Ground  # moved from bottom/frontmost
     * City
     * CanvasLayer 1  # keeps GroundRender in front of *everything*
-      * GroundRender
   * Pop
   * Explosion
   * Mouse
@@ -234,16 +233,16 @@ Parents cannot access their children, which do not yet exist.
 
 ### _ready()
 
-Then we call `_ready` as we add nodes to the tree, going downwards but children
+The same scene tree as above calls ready going downwards, but children
 first:
 
-    5 - Main
-    1   - Sky (Start with children of Main, in order)
-    4   - Ground (But cannot do Ground until we've done its children)
-    2     - Base1
-    3     - City1
+    1   - Sky (Start at back with children of Main, in order)
+    2     - Base1 (Then try Ground, but must do its children first)
+    3     - City1 (and final child of Ground)
+    4   - Ground (now we can do Ground since all its children are done)
+    5 - Main (Last of all, once all children are done)
 
-Parents can access their children, which have already been both created
+Parents *can* access their children, which have already been both created
 *and* added to the tree.
 
 ## _draw()
@@ -276,7 +275,6 @@ draw code into a new final child.)
 ### CanvasLayer, total control
 
 This draw order can be overridden with CanvasLayers, added as tree nodes.
-TODO read https://docs.godotengine.org/en/4.2/tutorials/2d/canvas_layers.html
 e.g. To draw an explosion, parented to Main, in front of Bases but behind
 Cities:
 
