@@ -1,6 +1,6 @@
 extends Node2D
 
-var Pop:PackedScene = preload("res://src/pop/pop.tscn")
+var BangShot:PackedScene = preload("res://src/bang_shot/bang_shot.tscn")
 
 const SPEED := 300
 const SIZE := 1.0
@@ -39,7 +39,7 @@ func destination_reached():
     self.position = self.destination
     # TODO: Once we have a trail, reparent it to Main. see how Missile does it.
     var main := get_parent() as Main
-    var pop = Pop.instantiate()
+    var pop = BangShot.instantiate()
     pop.position = self.position
     main.add_child(pop)
     # And this shot is done
