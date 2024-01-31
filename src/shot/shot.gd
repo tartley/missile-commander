@@ -27,7 +27,7 @@ func _ready():
 func _process(delta: float) -> void:
     var dpos := velocity * delta
     self.position += dpos
-    if self.position.distance_squared_to(self.destition) <= dpos.length_squared():
+    if self.position.distance_squared_to(self.destination) <= dpos.length_squared():
         destination_reached()
 
 func _draw():

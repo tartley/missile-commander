@@ -8,10 +8,7 @@ A work in progress.
 
 ## TODO
 
-* Missiles emit 'strike' event. Ground listens, decides whether Pop or
-  Detonation (& destroyed feature) results. (I think this is how it already
-  works. I'm just getting clarity). Whereas:
-* Shots directly cause an Explosion, which does collision check to destroy
+* Shots cause an Explosion, which does collision check to destroy
   Missiles.
 * Missile and Shot are quite similar. e.g.
   * Shots should have a trail
