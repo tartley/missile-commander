@@ -72,65 +72,113 @@ A work in progress.
 
 # Refactors
 
-* Fix draw order. Problem is we want draw order to be (back to front):
+* Restore Ground rendering to the parent node, delete that child, and set
+  .show_behind_parent for Cities, Bases, etc.
+
+* Fix draw order:
+
+## Problem
+
+  Problem is, in this simplified scene tree:
 
   * Sky
   * Missile
-    * Trail (both initially and after missile is gone)
-    * <new child which draws the Warhead, so it is in front of Trail>
+    * Trail
+  * Explosion
+  * MouseCursor
+  * Ground
+    * City
+    * GroundRender
+
+  ...we want City to render in in between Missiles and Explosions.
+
+## Solutions
+
+1. Keep the tree as-is, and assign a Canvas Layer to everything. This has the
+   advantage that it should still work no matter how the tree changes in
+   future.
+
+  Hence we can add a CanvasLayer to split apart the children of Ground,
+  and that lets us rearrange the tree:
+
+  * Sky
+  * Missile
+    * Trail
+  * Ground  # moved from bottom/frontmost
+    * City
+    * CanvasLayer 1  # keeps GroundRender in front of *everything*
+      * GroundRender
+  * Pop
+  * Explosion
+  * Mouse
+
+2. Abandon the idea of bases and cities being children of the ground, which was
+   always a bit academic because we aren't actually going to *move* the ground,
+   etc. Hence:
+
+  * Sky
+  * Missile
+    * Trail
   * Shot
     * Trail
-    * <new child which draws the Warhead, so it is in front of Trail>
-  * City
-  * Base <no draw>
-    * Turret
-    * Foundation
+  * City           # moved from within Ground
+  * Base           #
+    * Turret       #
+    * Foundation   #
   * Pop
   * Explosion
   * Mouse
   * Ground
+    * GroundRender # maybe not even required any more?
 
-  But we want City & Base to be children of Ground. They are positioned by the
-  ground, and would move with it if it were to move (although it won't). But
-  treat this as a learning exercise in tree rendering order and CanvasLayers.
-  Hence we add the following layers, drawn in ascending order:
+  I don't like this option though because this seems like ideal practice for a
+  later game of Asteroids, which definitely WILL move, taking any bases, etc,
+  with them.
 
-  -- layer 0
-  * Sky
-  * Missile <no draw>
-    * Trail (both initially and after missile is gone)
-    * <new child which draws the Warhead, so it is in front of Trail>
-  * Shot <no draw>
-    * Trail
-    * <new child which draws the Warhead, so it is in front of Trail>
-  -- layer 1
-  * Pop
-  * Explosion
-  * Mouse
-  * Ground <no draw>
-    -- layer 0
-    * City
-    * Base <no draw>
-      * Turret
-      * Foundation
-    -- layer 1
-    * <new child which draws the planet surface>
+3. Part of this is that we also need to group similar items together, which
+   doesn't currently happen. This will be more of an issue when Missiles are
+   getting added dynamically during a level.
 
-  Keep ^ this reasoning around somewhere for if we need to return to it.
+Hence, for example, put all Missiles, and their Trails, into a 'Missiles' node.
 
-* Base and City have similarities. Do they inherit from the same base class?
-* Turret and Foundation share some of those similarities (ie being destroyable)
-  * Maybe prefer composition over inheritance, a parent no-draw node owns a
-    child of type 'HasVerts' or 'HasVertsDestroyable'
+- singleton node
+* multiple nodes
+
+  - Sky
+  - Trails
+    * Trail (after missile is gone)
+  - Missiles
+    * Missile
+      * Trail (initially)
+      * MissileRender
+  - Shots
+    * Shot
+      * Trail (initially)
+      * ShotRender
+  - Pops
+    * Pop
+  - Explosions
+    * Explosion
+  - Mouse
+  - Ground
+    - Features
+      * City
+      * Base
+        - Turret
+        - Foundation
+    - GroundRender
+
+Phew. I don't yet see how I can avoid having to do this, PLUS then (1) or (2)
+above. Maybe ask on the forums!
+
+* Missile and Shot have similarities.
+  * Both requrie a new child node so that trails appear behind warheads
+* Base and City have similarities.
+* Turret and Foundation have some similar similarities (ie being destroyable) ^
+  Do they inherit from the same base class? Maybe prefer composition over
+  inheritance, a parent no-draw node owns a child of type 'HasVerts' or
+  'HasVertsDestroyable'
 * Pop, Explosion and Detonation (city/base destruction?) have similarities.
-* Implicit Dependencies. It's currently difficult to change ground.ANGLE, mouse
-  extent, or camera pan, and have everything else adjust accordingly. They have
-  implicit dependencies on each other. I speculate this would be improved by
-  making those dependencies explicit, and managed by World or some other high
-  level node. That should define the central values they all depend on (e.g.
-  planet ANGLE), and pass it down to each child that needs it. Then all deps go
-  strictly from World -> (Mouse, Ground, Sky, etc), and changes can be made in
-  one place.
 
 # Low priority Features
 
@@ -170,66 +218,76 @@ A work in progress.
 
 # Godot Lessons
 
-## Draw Order
-
-Objects are drawn obscuring each other (as if back to front) in the order
-of the scene tree:
-
-    1 Main
-    2 - Sky
-    3 - Ground
-    4   - Base1
-    5   - City1
-    6   - City2
-    7   - Base1
-
-Hence, a parent is drawn behind all its children. If you want it in front of
-some of the children, then create a new parent node which draws nothing,
-the children of which are the old parent and all its children, in the
-required order:
-
-    1 Main
-    2 - Sky
-      - GroundRoot <new parent, not drawn>
-    3   - Base1
-    4   - City1
-    5   - City2
-    6   - Base1
-    7   - Ground <old parent, in front of other children>
-
-Sometimes you want a node from elsewhere in the scene tree to be drawn
-in-between siblings. For example, if need Explosion to be parented to
-Main, but be rendered in-between (Cities & Bases), and the Ground.
-
-The solution to this is to use CanvasLayers. Each Node2D has a CanvasLayer,
-defaulting to value 0. Nodes with a higher canvas layer are drawn in front,
-in a separate pass through the scene tree. eg:
-
-    1 Main
-    2 - Sky
-      - GroundRoot <new parent, not drawn>
-    3   - Base1
-    4   - City1
-    5   - City2
-    6   - Base1
-    8   - Ground <layer 1>
-    7 - Explosion <layer 0>
-
-Hence layer 1 rendering draws everything except the ground, with Explosion
-on top, then it draws the Ground on top of that.
-
 ## Order of calls
+
+### _init()
 
 First we call `_init`, going straight down the scene tree:
 
-1 - Main._init
-2   - Sky._init
-3   - Ground._init
+    1 - Main
+    2   - Sky
+    3   - Ground
+    4     - Base1
+    5     - City1
+
+Parents cannot access their children, which do not yet exist.
+
+### _ready()
 
 Then we call `_ready` as we add nodes to the tree, going downwards but children
 first:
 
-3 - Main._ready
-1   - Sky._ready
-2   - Ground._ready
+    5 - Main
+    1   - Sky (Start with children of Main, in order)
+    4   - Ground (But cannot do Ground until we've done its children)
+    2     - Base1
+    3     - City1
+
+Parents can access their children, which have already been both created
+*and* added to the tree.
+
+## _draw()
+
+Just like `_init`, objects are drawn in the order of the scene tree, with
+later entries obscuring earlier ones, ie. back to front:
+
+    1 - Main (background)
+    2   - Sky
+    3   - Ground
+    4     - Base1
+    5     - City1 (foreground)
+
+### Ordering, between siblings
+
+For more control over the draw order of siblings, set the ordering property.
+For example, if adding and deleting a lot of children from a parent, setting
+some children to 'ordering=2' will keep those nodes in front. But this can
+only affect interactions between direct siblings.
+
+### Drawing parents before their children
+
+According to all the above, a parent is drawn behind all its children. If you
+want it in front of some of the children, then set the child's
+`.show_behind_parent`.
+
+(The above para replaces a section about the hack of moving the parent's
+draw code into a new final child.)
+
+### CanvasLayer, total control
+
+This draw order can be overridden with CanvasLayers, added as tree nodes.
+TODO read https://docs.godotengine.org/en/4.2/tutorials/2d/canvas_layers.html
+e.g. To draw an explosion, parented to Main, in front of Bases but behind
+Cities:
+
+    1 - Main
+    2   - Sky
+    3   - Ground
+    4     - Base1 (show behind parent = true)
+          - CanvasLayer 1
+    6       - City1 (show behind parent = true)
+    5   - Explosion
+
+Hence layer 1 rendering draws everything except the City, with Explosion
+on top, then it draws the City on top of that.
 
