@@ -19,5 +19,5 @@ func _process(delta:float) -> void:
 
 func _draw() -> void:
     var color := Color(1, 1 - self.progress, 0, 1 - self.progress)
-    var width := 20.0 - progress * 20.0
+    var width := 20.0 - progress * 19.0
     draw_arc(Vector2.ZERO, SIZE * self.progress ** 0.3, -PI, PI, 16, color, width, true)

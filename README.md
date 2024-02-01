@@ -8,12 +8,21 @@ A work in progress.
 
 ## TODO
 
-* Shots cause an Explosion, which does collision check to destroy
-  Missiles.
-* Missile and Shot are quite similar. e.g.
-  * Shots should have a trail
-  * Both accept a start and destination, then move towards it until
-    self-destructing. Are they actually the same class?
+* Shots cause an BangShot, which:
+  * Looks different from Pop
+  * does per-frame expanding collision check to destroy Missiles.
+  * Destroyed missiles make their own BangShot
+    * smaller
+    * evil green?
+
+* Rename Pop -> BangMissile
+
+* Create BangFeature (City or Base)
+  * Looks different
+  * Uses sound effect currently triggered by city.destroyed=true
+  * maybe particle effect using color of the destroyed feature?
+  * Camera shake?
+  * Sky flash?
 
 * Display ammo under each base
 * Firing a shot reduces ammo from that base
@@ -69,13 +78,88 @@ A work in progress.
 
 # Refactors
 
-* Missile and Shot have similarities.
-* Base and City have similarities.
-* Turret and Foundation have some similar similarities (ie being destroyable) ^
-  Do they inherit from the same base class? Maybe prefer composition over
-  inheritance, a parent no-draw node owns a child of type 'HasVerts' or
-  'HasVertsDestroyable'
-* Pop, Explosion and Detonation (city/base destruction?) have similarities.
+* How to handle similarities between Nodes?
+  * Inheritance: Could inherit from a common base class. Maybe sometimes,
+    but be wary of inheritance hell.
+  * Shared logic: Can I just define methods on a commonly-used class, and call
+    them from each? Maybe sometimes, but this isn't fabulous, it doesn't cover
+    storing common data upon which those functions depend.
+  * Composition: Can I add a variable of a type which defines common traits?
+    It's unclear to me how that would work, e.g. as a 'destroyable'.
+
+City:
+
+    var destroyable := Destroyable.new(
+        get_verts,
+        Color.YELLOW,
+        get_destroyed_verts,
+        Color.GREY,
+    )
+
+    var destroyed:boolean:
+        get():
+            return destroyable.destroyed
+        set(d):
+            destroyable.destroyed = d
+
+    func _draw():
+        destroyable.draw()
+
+I'm not sure it's worth it.
+
+Alternative, destroyable wraps our class, and we define get_verts, color, etc,
+with standard names, so we don't need to pass so much into the contructor:
+
+    var destroyable := Destroyable.new(self)
+
+But we'd still need to forward destroyed, `_draw`, etc.
+
+How about the other way around? Our class wraps a Destroyable.
+
+City:
+
+    func _init(destroyable):
+        ...
+
+I think this looks a lot like owning a Destroyable variable, above.
+
+Ah, the node is a Destroyable:
+
+Destroyable:
+
+    var destroyed:boolean:
+        set(d):
+            if not d:
+                # instantiate BangFeature
+            for child in get_children():
+                child.destroyed = d
+            destroyed = d
+            queue_redraw()
+
+
+    func _init(get_verts, color, get_destroyed_verts, color_destroyed):
+        ...
+
+    func _draw():
+        if destroyed:
+            draw_polygon(get_verts(), [Color.BLACK])
+            draw_multiline(get_verts(), get_color())
+
+City creation, maybe in Main:
+
+    city = Destroyable(get_city_verts, Color.YELLOW, get_city_destroyed_verts, Color.GREY)
+
+This seems ok, but still might not be worth it. Perhaps all the red in the PR would
+convince me. But lack of flexibility might hurt. Also consider:
+
+* Turret is also a Destroyable.
+
+* Missile and Shot are quite similar. e.g.
+  * Shots should have a trail
+  * Both accept a start and destination, then move towards it until
+    self-destructing.
+
+* BangMissile, BangShot, BangFeature have similarities.
 
 # Low priority Features
 
