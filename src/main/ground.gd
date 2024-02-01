@@ -57,10 +57,10 @@ var gaps:Array[Vector2] = []
 func get_annotated_vert_array(annotated_polars:Array) -> Array:
     '''Convert array of annotated polar co-ords to an array of annotated cartesian co-ords'''
     var retval := []
-    for ap in annotated_polars:
-        var angle = ap[0] - PI / 2
-        var radius = ap[1] + Common.RADIUS
-        var vert = radius * Vector2.from_angle(angle)
+    for ap:Array in annotated_polars:
+        var angle:float = ap[0] - PI / 2.0
+        var radius:float = ap[1] + Common.RADIUS
+        var vert:Vector2 = radius * Vector2.from_angle(angle)
         retval.append([vert.x, vert.y, ap.slice(2)])
     return retval
 
