@@ -25,8 +25,9 @@ func _ready() -> void:
     self.trail = get_child(0) as Trail # $Trail stops working if its name changes
     trail.position = Vector2(SIZE/2, 0)
     trail.direction = Vector2(-1, 0)
-    trail.initial_velocity_max = velocity.length() / 5
-    trail.initial_velocity_min = velocity.length() / 5
+    var speed := self.velocity.length()
+    trail.initial_velocity_max = 250 - speed
+    trail.initial_velocity_min = 250 - speed
     set_up_collisions()
 
 func launch(pos:Vector2, target_:Node2D, destination:Vector2, speed:float):
