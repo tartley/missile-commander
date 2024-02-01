@@ -36,5 +36,7 @@ color = Color(0.309804, 0.419608, 1, 1)
 color_ramp = SubResource("Gradient_wnkbf")
 script = ExtResource("2_1acby")
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
 [connection signal="area_entered" from="." to="." method="on_area_entered"]
 [connection signal="finished" from="Trail" to="Trail" method="on_finished"]

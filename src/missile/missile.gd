@@ -16,21 +16,17 @@ var trail: Trail
 var velocity: Vector2
 var target # City or Base or null
 
-func set_up_collisions():
-    var collision = CollisionShape2D.new()
-    collision.shape = ConvexPolygonShape2D.new()
-    collision.shape.points = verts
-    add_child(collision)
-
 func _ready() -> void:
     self.name = Common.get_unique_name(self)
+    # our trail
     self.trail = get_child(0) as Trail # $Trail stops working if its name changes
     trail.position = Vector2(SIZE/2, 0)
-    trail.direction = Vector2(-1, 0)
+    trail.direction = Vector2.LEFT
     var speed := self.velocity.length()
     trail.initial_velocity_max = 250 - speed
     trail.initial_velocity_min = 250 - speed
-    set_up_collisions()
+    # collision shape
+    $CollisionPolygon2D.polygon = self.verts
 
 func launch(pos:Vector2, target_:Node2D, destination:Vector2, speed:float):
     self.position = pos
