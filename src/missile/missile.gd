@@ -9,7 +9,9 @@ const verts: Array[Vector2] = [
     Vector2(+SIZE/2,       0), # rightmost tip
 ]
 
-var Pop:PackedScene = preload("res://src/pop/pop.tscn")
+var PopScene:PackedScene = preload("res://src/pop/pop.tscn")
+var BangShotScene:PackedScene = preload("res://src/bang_shot/bang_shot.tscn")
+
 var trail: Trail
 var velocity: Vector2
 var target # City or Base or null
@@ -43,22 +45,29 @@ func _draw():
     draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
-func on_area_entered(_ground:Area2D):
-    ## This Missile has collided with the Ground.
+func on_area_entered(other):
+    ## This Missile has collided...
 
     # We will cease to exist, so reparent our trail onto Main.
     var main := get_parent() as Main
     trail.reparent(main)
     trail.emitting = false
 
-    # Destroy our target
-    if self.target:
-        self.target.destroyed = true
-
-    # Add a Pop, parented to Main
-    var pop = Pop.instantiate()
-    pop.position = self.position
-    main.add_child(pop)
+    if other is Ground:
+        # Destroy our target
+        if self.target:
+            self.target.destroyed = true
+        # Add a Pop, parented to Main
+        var pop = PopScene.instantiate()
+        pop.position = self.position
+        main.add_child(pop)
+    elif other is BangShot:
+        # Add another BangShot, parented to Main
+        var bangshot = BangShotScene.instantiate()
+        bangshot.position = self.position
+        main.call_deferred("add_child", bangshot)
+    else:
+        assert(false, "unrecognized collision {0}".format([other]))
 
     # And this missile is done
     queue_free()

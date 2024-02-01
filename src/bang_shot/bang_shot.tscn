@@ -3,11 +3,10 @@
 [ext_resource type="Script" path="res://src/bang_shot/bang_shot.gd" id="1_qsbkf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3xhol"]
+radius = 1.0
 
-[node name="BangShot" type="Node2D"]
+[node name="BangShot" type="Area2D"]
 script = ExtResource("1_qsbkf")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3xhol")

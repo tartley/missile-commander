@@ -16,19 +16,19 @@ func choose_target() -> Array: # Array of [City|Base|null, Vector2]
         targets.append([null, pos])
     return targets.pick_random()
 
-func launch_missile():
+func launch_missile(i):
     var missile = Missile.instantiate()
-    var start := Vector2(randf_range(-2000, +2000), randf_range(-14100, -20000))
+    var start := Vector2(randf_range(-2000, +2000), -14100 - i * 500)
     var td = choose_target()
     var target = td[0]
     var dest = td[1]
-    var speed := randf_range(50, 500)
+    var speed := randf_range(400, 500)
     missile.launch(start, target, dest, speed)
     self.add_child(missile)
 
 func begin_level():
-    for _i in range(200):
-        launch_missile()
+    for i in range(100):
+        launch_missile(i)
 
 func launch_shot(base_id):
     var base:Node2D = get_tree().get_nodes_in_group("bases")[base_id]

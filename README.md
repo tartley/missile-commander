@@ -9,9 +9,9 @@ A work in progress.
 ## TODO
 
 * Shots cause an BangShot, which:
-  * Looks different from Pop
-  * does per-frame expanding collision check to destroy Missiles.
-  * Destroyed missiles make their own BangShot
+  - Looks different from Pop
+  - does per-frame expanding collision check to destroy Missiles.
+  - Destroyed missiles make their own BangShot
     * smaller
     * evil green?
 
