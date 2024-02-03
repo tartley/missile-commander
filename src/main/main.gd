@@ -57,5 +57,5 @@ func _ready() -> void:
     $Camera.mouse = $Mouse
     for base in get_tree().get_nodes_in_group("bases"):
         base.mouse = $Mouse
-
     begin_level()
+

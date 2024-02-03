@@ -18,7 +18,7 @@ func get_verts() -> Array[Vector2]:
         Vector2(      0, +size/16), # left(base) top
         Vector2(+size/2, +size/16), # right(tip) top
         Vector2(+size/2, -size/16), # right(tip) bottom
-        Vector2(      0, -size/16), # left(base) bottom 
+        Vector2(      0, -size/16), # left(base) bottom
     ]
 
 func get_color() -> Color:
