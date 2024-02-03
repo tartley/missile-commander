@@ -50,18 +50,19 @@ func on_area_entered(other):
     trail.emitting = false
 
     if other is Ground:
-        # Destroy our target
         if self.target:
             self.target.destroyed = true
-        # Add a Pop, parented to Main
-        var pop = PopScene.instantiate()
-        pop.position = self.position
-        main.add_child(pop)
+            # TODO BangFeature
+        else:
+            var pop = PopScene.instantiate()
+            pop.position = self.position
+            main.add_child(pop)
+
     elif other is BangShot:
-        # Add another BangShot, parented to Main
         var bangshot = BangShotScene.instantiate()
-        bangshot.position = self.position
+        bangshot.init(self.position, other.color_offset + 1)
         main.call_deferred("add_child", bangshot)
+
     else:
         assert(false, "unrecognized collision {0}".format([other]))
 

@@ -40,8 +40,8 @@ func destination_reached():
     self.position = self.destination
     # TODO: Once we have a trail, reparent it to Main. see how Missile does it.
     var main := get_parent() as Main
-    var pop = BangShotScene.instantiate()
-    pop.position = self.position
-    main.add_child(pop)
+    var bangshot = BangShotScene.instantiate()
+    bangshot.init(self.position, 0.0)
+    main.add_child(bangshot)
     # And this shot is done
     queue_free()
