@@ -11,8 +11,23 @@ A work in progress.
 * Shots cause an BangShot, which:
   - Looks different from Pop
   - does per-frame expanding collision check to destroy Missiles.
+  - BangShot color starts magenta, ends blue, I think. Switch that around.
+
+  * Rationalize collisions, between:
+    * BangShot and Missile
+      * They are not accurate?
+        * search changing size of godot collision shapes on the fly
+        * try doing it manually? Point in circle, n**2.
+      * They should destroy missile
+      * and Make new BangShot(generation++)
+    * missile and feature:
+        destroy feature
+        make BangFeature
+    * missile and Ground:
+        make Pop (aka BangMissile)
+
   - Destroyed missiles make their own BangShot
-    * smaller
+    * more wobbly size curve
     * evil green?
 
 * Rename Pop -> BangMissile
