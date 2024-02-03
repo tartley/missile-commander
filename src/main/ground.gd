@@ -48,8 +48,8 @@ const annotated_polar_array := [
     [ +88 * seg_ang, -Common.RADIUS],
 ]
 
-const City:PackedScene = preload("res://src/city/city.tscn")
-const Base:PackedScene = preload("res://src/base/base.tscn")
+const CityScene:PackedScene = preload("res://src/city/city.tscn")
+const BaseScene:PackedScene = preload("res://src/base/base.tscn")
 
 var verts:PackedVector2Array
 var gaps:Array[Vector2] = []
@@ -98,8 +98,8 @@ func create_features(annotated_verts, feature_name:String, type:PackedScene) -> 
 func _ready() -> void:
     var annotated_verts := Geometry.AnnotatedVerts.new(get_annotated_vert_array(annotated_polar_array))
     self.verts = annotated_verts.verts
-    create_features(annotated_verts, "city", City)
-    create_features(annotated_verts, "base", Base)
+    create_features(annotated_verts, "city", CityScene)
+    create_features(annotated_verts, "base", BaseScene)
     self.gaps = annotated_verts.get_vertices("gap")
     set_up_collisions(annotated_verts)
 

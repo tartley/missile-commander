@@ -5,7 +5,7 @@ const FORE := Color.YELLOW
 const FORE_DESTROYED := Color(.3, .3, .3)
 const FILL := Color.BLACK
 
-var Shot:PackedScene = preload("res://src/shot/shot.tscn")
+var ShotScene:PackedScene = preload("res://src/shot/shot.tscn")
 
 # We use a reference to the mouse to swivel our turret towards it
 var mouse:Node2D
@@ -25,7 +25,7 @@ func _ready():
 
 func launch(dest:Vector2):
     if not self.destroyed:
-        var shot = Shot.instantiate()
+        var shot = ShotScene.instantiate()
         shot.position = to_global($Turret.position)
         shot.destination = dest
         return shot

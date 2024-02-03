@@ -1,6 +1,6 @@
 class_name Main extends Node
 
-var Missile:PackedScene = preload("res://src/missile/missile.tscn")
+var MissileScene:PackedScene = preload("res://src/missile/missile.tscn")
 
 func positions(nodes:Array) -> Array[Vector2]:
     var retval:Array[Vector2] = []
@@ -17,7 +17,7 @@ func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     return targets.pick_random()
 
 func launch_missile(i):
-    var missile = Missile.instantiate()
+    var missile = MissileScene.instantiate()
     var start := Vector2(randf_range(-200, +200), -14100 - i * 200)
     var td = choose_target()
     var target = td[0]

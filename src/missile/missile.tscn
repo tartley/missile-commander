@@ -38,5 +38,4 @@ script = ExtResource("2_1acby")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
-[connection signal="area_entered" from="." to="." method="on_area_entered"]
 [connection signal="finished" from="Trail" to="Trail" method="on_finished"]
