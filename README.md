@@ -8,27 +8,40 @@ A work in progress.
 
 ## TODO
 
-* Shots cause an BangShot, which:
-  - Looks different from Pop
-  - does per-frame expanding collision check to destroy Missiles.
-  - BangShot color starts magenta, ends blue, I think. Switch that around.
+* Fix BangShots size
+* BangShots from shots are blue -> purple.
+* BangShots from missiles are purple -> green
+  Remove or modify the `color_offset` thing
 
-  * Rationalize collisions, between:
-    * BangShot and Missile
-      * They are not accurate?
-        * search changing size of godot collision shapes on the fly
-        * try doing it manually? Point in circle, n**2.
-      * They should destroy missile
-      * and Make new BangShot(generation++)
-    * missile and feature:
-        destroy feature
-        make BangFeature
-    * missile and Ground:
-        make Pop (aka BangMissile)
+* Rationalize collisions, between:
 
-  - Destroyed missiles make their own BangShot
-    * more wobbly size curve
-    * evil green?
+  * remove the thing where missiles know their target
+
+  * ground (layer 1) detected by missile
+    missiles detected by ground
+    (ground decides whether target is hit,
+    destroys target,
+    produces big or little bang,
+    asks missile to destroy,
+    (can we just queue_free for the missile,
+    and have a missile _leaving_tree handler
+    reparent the trail?)
+
+  * BangShot and Missile
+    * They are not accurate?
+      * search changing size of godot collision shapes on the fly
+      * try doing it manually? Point in circle, n**2.
+    * They should destroy missile
+    * and Make new BangShot(generation++)
+  * missile and feature:
+      destroy feature
+      make BangFeature
+  * missile and Ground:
+      make Pop (aka BangMissile)
+
+- Destroyed missiles make their own BangShot
+  * more wobbly size curve
+  * evil green?
 
 * Rename Pop -> BangMissile
 
@@ -212,4 +225,9 @@ convince me. But lack of flexibility might hurt. Also consider:
   or that github issue I commented on or that links to a newer PR against Godot
   to add a replacement for ParalaxBackground
 * Fix draw order? (see docs/text/writing/godot-draw-order.md)
+
+* Shots cause an BangShot, which:
+  - Looks different from Pop
+  - does per-frame expanding collision check to destroy Missiles.
+  - BangShot color starts magenta, ends blue, I think. Switch that around.
 
