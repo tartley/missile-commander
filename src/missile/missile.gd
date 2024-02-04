@@ -1,4 +1,4 @@
-extends Node2D
+class_name Missile extends Node2D
 
 const SIZE := 20.0
 # A rightwards pointing triangle
@@ -10,7 +10,6 @@ const verts: Array[Vector2] = [
 ]
 
 var PopScene:PackedScene = preload("res://src/pop/pop.tscn")
-var BangShotScene:PackedScene = preload("res://src/bang_shot/bang_shot.tscn")
 
 var trail: Trail
 var velocity: Vector2
@@ -41,30 +40,26 @@ func _draw():
     draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
-func on_area_entered(other):
-    ## This Missile has collided...
-
-    # We will cease to exist, so reparent our trail onto Main.
+func destroy():
+    print(self, ".destroy ", self)
+    # reparent our trail onto Main
     var main := get_parent() as Main
     trail.reparent(main)
     trail.emitting = false
-
-    if other is Ground:
-        if self.target:
-            self.target.destroyed = true
-            # TODO BangFeature
-        else:
-            var pop = PopScene.instantiate()
-            pop.position = self.position
-            main.add_child(pop)
-
-    elif other is BangShot:
-        var bangshot = BangShotScene.instantiate()
-        bangshot.init(self.position, other.color_offset + 1)
-        main.call_deferred("add_child", bangshot)
-
-    else:
-        assert(false, "unrecognized collision {0}".format([other]))
-
-    # And this missile is done
+    # and this missile is done
     queue_free()
+
+#func on_area_entered(other):
+    ### This Missile has collided...
+    #var main := get_parent() as Main
+    #if other is Ground:
+        #if self.target:
+            #self.target.destroyed = true
+            ## TODO BangFeature
+        #else:
+            #var pop = PopScene.instantiate()
+            #pop.position = self.position
+            #main.add_child(pop)
+    #elif other is BangShot:
+        # ... (now in bangshot.on_entered)
+    #self.destroy()

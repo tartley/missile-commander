@@ -6,7 +6,11 @@
 radius = 1.0
 
 [node name="BangShot" type="Area2D"]
+collision_layer = 0
+input_pickable = false
 script = ExtResource("1_qsbkf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3xhol")
+
+[connection signal="area_entered" from="." to="." method="on_entered"]

@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://src/main/ground.gd" id="4_fvoxd"]
 [ext_resource type="Script" path="res://src/main/mouse.gd" id="5_i0hgq"]
 [ext_resource type="Script" path="res://src/main/geometry.gd" id="6_hh5ig"]
-[ext_resource type="Script" path="res://src/main/const.gd" id="7_ucqwb"]
+[ext_resource type="Script" path="res://src/main/common.gd" id="7_ucqwb"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3ne2t")

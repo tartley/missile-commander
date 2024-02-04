@@ -18,11 +18,11 @@ func choose_target() -> Array: # Array of [City|Base|null, Vector2]
 
 func launch_missile(i):
     var missile = MissileScene.instantiate()
-    var start := Vector2(randf_range(-200, +200), -14100 - i * 200)
+    var start := Vector2(randf_range(-200, +200), -14100 - i * 175)
     var td = choose_target()
     var target = td[0]
     var dest = td[1]
-    var speed := randf_range(400, 500)
+    var speed := randf_range(40, 300)
     missile.launch(start, target, dest, speed)
     self.add_child(missile)
 
