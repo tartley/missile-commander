@@ -60,15 +60,18 @@ func on_leave(missile:Missile):
     self.nearby_missiles.erase(missile)
 
 func destroy_nearby_missiles() -> void:
+    var valid_missiles:Array[Missile] = []
     for missile:Missile in self.nearby_missiles:
-        if not is_instance_valid(missile):
-            self.nearby_missiles.erase(missile)
-        elif self.position.distance_to(missile.position) < self.size:
-            self.nearby_missiles.erase(missile)
-            missile.destroy()
-            # create a bangshot
-            # TODO should this be in missile.destroy?
-            var main:Main = get_parent()
-            var bangshot = BangShotScene.instantiate()
-            bangshot.init_from_missile(missile.position)
-            main.call_deferred("add_child", bangshot)
+        if is_instance_valid(missile):
+            if self.position.distance_to(missile.position) < self.size:
+                self.nearby_missiles.erase(missile)
+                missile.destroy()
+                # create a bangshot
+                # TODO should this be in missile.destroy?
+                var main:Main = get_parent()
+                var bangshot = BangShotScene.instantiate()
+                bangshot.init_from_missile(missile.position)
+                main.call_deferred("add_child", bangshot)
+            else:
+                valid_missiles.append(missile)
+    self.nearby_missiles = valid_missiles
