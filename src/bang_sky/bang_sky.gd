@@ -1,9 +1,12 @@
-class_name BangShot extends Node2D
+"""
+The explosion from shots or missiles detonating in the sky.
+"""
+class_name BangSky extends Node2D
 
 const MAX_SIZE := 150.0 # world co-ords
 const DURATION := 2.5 # seconds
 
-var BangShotScene:PackedScene = preload("res://src/bang_shot/bang_shot.tscn")
+var BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
 
 var progress:float = 0.0 # [0..1]
 var size:float = 0.0 # [0..MAX_SIZE]
@@ -66,12 +69,13 @@ func destroy_nearby_missiles() -> void:
             if self.position.distance_to(missile.position) < self.size:
                 self.nearby_missiles.erase(missile)
                 missile.destroy()
-                # create a bangshot
+                # create an explosion
                 # TODO should this be in missile.destroy?
+                # but then missile has to choose between bangsky and bangground and bangfeature
                 var main:Main = get_parent()
-                var bangshot = BangShotScene.instantiate()
-                bangshot.init_from_missile(missile.position)
-                main.call_deferred("add_child", bangshot)
+                var bangsky = BangSkyScene.instantiate()
+                bangsky.init_from_missile(missile.position)
+                main.call_deferred("add_child", bangsky)
             else:
                 valid_missiles.append(missile)
     self.nearby_missiles = valid_missiles

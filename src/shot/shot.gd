@@ -1,6 +1,6 @@
 class_name Shot extends Node2D
 
-var BangShotScene:PackedScene = preload("res://src/bang_shot/bang_shot.tscn")
+var BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
 
 const SPEED := 500
 const SIZE := 1.0
@@ -40,8 +40,8 @@ func destination_reached():
     self.position = self.destination
     # TODO: Once we have a trail, reparent it to Main. see how Missile does it.
     var main := get_parent() as Main
-    var bangshot = BangShotScene.instantiate()
-    bangshot.init_from_shot(self.destination)
-    main.add_child(bangshot)
+    var bangsky = BangSkyScene.instantiate()
+    bangsky.init_from_shot(self.destination)
+    main.add_child(bangsky)
     # And this shot is done
     queue_free()

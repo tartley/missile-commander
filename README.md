@@ -8,30 +8,11 @@ A work in progress.
 
 ## TODO
 
-* Rename:
-  - Pop      -> BangSmall  | BangMissile  | BangGround
-  * BangShot -> BangMedium | BangShot     | BangSky (shot & missile variants)
-  * <new>    -> BangBig    | BangFeature  | BangFeature (city & base variants)
-
-    ^
-    Arbitrary inconsistant
-
-                ^
-                Consistent but lack association with where they are used
-
-                             ^
-                             Names misleading because
-                             BangShot comes from shots and missiles
-                             Missiles produce all three
-
-                                             ^
-                                             Maybe this is it.
-
 * bangshot needs a sound
 * and we'll need one for bang_feature too
 
-* Create BangFeature (City or Base)
-  * Looks different
+* Create BangFeature (with City or Base variants)
+  * Looks different. Bigger, slower, more dramatic.
   * Uses sound effect currently triggered by city.destroyed=true
     other sound effects should be quieter?
   * particle effect using color of the destroyed feature?

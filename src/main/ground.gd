@@ -5,7 +5,7 @@ which will ask us where they should be located.
 '''
 class_name Ground extends Node2D
 
-var BangShotScene:PackedScene = preload("res://src/bang_shot/bang_shot.tscn")
+var BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
 
 const HILL_HEIGHT := Common.RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
@@ -114,13 +114,14 @@ func on_area_entered(missile:Missile):
     ### A Missile has collided
     if missile.target:
         missile.target.destroyed = true
-        # create a bangshot
+        # create an explosion
         # TODO should this be in missile.destroy?
-        # TODO this should have a different appearance
+        # but then missile has to choose between bangsky and bangground and bangfeature
+        # TODO this should be a BangFeature (which doesn't exist yet)
         var main:Main = get_parent()
-        var bangshot = BangShotScene.instantiate()
-        bangshot.init_from_missile(missile.position)
-        main.call_deferred("add_child", bangshot)
+        var bangsky = BangSkyScene.instantiate()
+        bangsky.init_from_missile(missile.position)
+        main.call_deferred("add_child", bangsky)
     else:
         var main := get_parent() as Main
         var bang_ground = BangGroundScene.instantiate()
