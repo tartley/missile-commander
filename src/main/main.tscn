@@ -30,5 +30,7 @@ script = ExtResource("5_i0hgq")
 
 [node name="Ground" type="Area2D" parent="."]
 z_index = 2
-collision_mask = 0
+collision_layer = 0
 script = ExtResource("4_fvoxd")
+
+[connection signal="area_entered" from="Ground" to="Ground" method="on_area_entered"]

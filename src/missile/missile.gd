@@ -9,8 +9,6 @@ const verts: Array[Vector2] = [
     Vector2(+SIZE/2,       0), # rightmost tip
 ]
 
-var PopScene:PackedScene = preload("res://src/pop/pop.tscn")
-
 var trail: Trail
 var velocity: Vector2
 var target # City or Base or null
@@ -41,25 +39,9 @@ func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
 func destroy():
-    print(self, ".destroy ", self)
     # reparent our trail onto Main
     var main := get_parent() as Main
     trail.reparent(main)
     trail.emitting = false
     # and this missile is done
     queue_free()
-
-#func on_area_entered(other):
-    ### This Missile has collided...
-    #var main := get_parent() as Main
-    #if other is Ground:
-        #if self.target:
-            #self.target.destroyed = true
-            ## TODO BangFeature
-        #else:
-            #var pop = PopScene.instantiate()
-            #pop.position = self.position
-            #main.add_child(pop)
-    #elif other is BangShot:
-        # ... (now in bangshot.on_entered)
-    #self.destroy()

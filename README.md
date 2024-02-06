@@ -197,8 +197,10 @@ convince me. But lack of flexibility might hurt. Also consider:
 * Undestroyed city loses smoke
 * Each city has a name
 * Stars on a parallax background
-  https://docs.godotengine.org/en/stable/classes/class_parallaxbackground.html
-  or that github issue I commented on or that links to a newer PR against Godot
-  to add a replacement for ParalaxBackground
+  Established ParallaxBackground Node does not rotate with the camera,
+  so is no use for me.
+  How about this Godot PR to add a replacement for it?
+  https://github.com/godotengine/godot/pull/87391
+  When it lands I can apparently grab a Godot build to use.
 * Fix draw order? (see docs/text/writing/godot-draw-order.md)
 

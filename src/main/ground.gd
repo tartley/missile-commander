@@ -5,6 +5,8 @@ which will ask us where they should be located.
 '''
 class_name Ground extends Node2D
 
+var BangShotScene:PackedScene = preload("res://src/bang_shot/bang_shot.tscn")
+
 const HILL_HEIGHT := Common.RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
 
@@ -48,8 +50,9 @@ const annotated_polar_array := [
     [ +88 * seg_ang, -Common.RADIUS],
 ]
 
-const CityScene:PackedScene = preload("res://src/city/city.tscn")
 const BaseScene:PackedScene = preload("res://src/base/base.tscn")
+const CityScene:PackedScene = preload("res://src/city/city.tscn")
+const PopScene:PackedScene = preload("res://src/pop/pop.tscn")
 
 var verts:PackedVector2Array
 var gaps:Array[Vector2] = []
@@ -106,3 +109,21 @@ func _ready() -> void:
 func _draw() -> void:
     draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.7, 1, .6), 3.0, true)
+
+func on_area_entered(missile:Missile):
+    ### A Missile has collided
+    if missile.target:
+        missile.target.destroyed = true
+        # create a bangshot
+        # TODO should this be in missile.destroy?
+        # TODO this should have a different appearance
+        var main:Main = get_parent()
+        var bangshot = BangShotScene.instantiate()
+        bangshot.init_from_missile(missile.position)
+        main.call_deferred("add_child", bangshot)
+    else:
+        var main := get_parent() as Main
+        var pop = PopScene.instantiate()
+        pop.position = missile.position
+        main.add_child(pop)
+    missile.destroy()
