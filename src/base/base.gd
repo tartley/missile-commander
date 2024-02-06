@@ -24,13 +24,10 @@ func _ready():
     self.add_to_group("bases")
 
 func launch(dest:Vector2):
-    if not self.destroyed:
-        var shot = ShotScene.instantiate()
-        shot.position = to_global($Turret.position)
-        shot.destination = dest
-        return shot
-    else:
-        return null
+    var shot = ShotScene.instantiate()
+    shot.position = to_global($Turret.position)
+    shot.destination = dest
+    return shot
 
 # process
 
