@@ -8,10 +8,24 @@ A work in progress.
 
 ## TODO
 
-* remove the thing where missiles know their target
-  * ground will decide whether a feature is hit when it hears of the collision.
+* Rename:
+  - Pop      -> BangSmall  | BangMissile  | BangGround
+  * BangShot -> BangMedium | BangShot     | BangSky (shot & missile variants)
+  * <new>    -> BangBig    | BangFeature  | BangFeature (city & base variants)
 
- Rename Pop -> BangMissile
+    ^
+    Arbitrary inconsistant
+
+                ^
+                Consistent but lack association with where they are used
+
+                             ^
+                             Names misleading because
+                             BangShot comes from shots and missiles
+                             Missiles produce all three
+
+                                             ^
+                                             Maybe this is it.
 
 * bangshot needs a sound
 * and we'll need one for bang_feature too
@@ -161,6 +175,10 @@ convince me. But lack of flexibility might hurt. Also consider:
     self-destructing.
 
 * BangMissile, BangShot, BangFeature have similarities.
+
+* remove the thing where missiles know their target
+  * ground will decide whether a feature is hit when it hears of the collision.
+  * Only do this if we gain missiles that steer or change target in-flight
 
 # Low priority Features
 

@@ -1,3 +1,6 @@
+"""
+The explosion of a missile striking the ground (not a city or base)
+"""
 extends Node2D
 
 const SIZE := 150.0 # world co-ords

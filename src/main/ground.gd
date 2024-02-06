@@ -52,7 +52,7 @@ const annotated_polar_array := [
 
 const BaseScene:PackedScene = preload("res://src/base/base.tscn")
 const CityScene:PackedScene = preload("res://src/city/city.tscn")
-const PopScene:PackedScene = preload("res://src/pop/pop.tscn")
+const BangGroundScene:PackedScene = preload("res://src/bang_ground/bang_ground.tscn")
 
 var verts:PackedVector2Array
 var gaps:Array[Vector2] = []
@@ -123,7 +123,7 @@ func on_area_entered(missile:Missile):
         main.call_deferred("add_child", bangshot)
     else:
         var main := get_parent() as Main
-        var pop = PopScene.instantiate()
-        pop.position = missile.position
-        main.add_child(pop)
+        var bang_ground = BangGroundScene.instantiate()
+        bang_ground.position = missile.position
+        main.add_child(bang_ground)
     missile.destroy()
