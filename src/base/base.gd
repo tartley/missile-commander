@@ -23,21 +23,11 @@ func _ready():
     $Turret.position = Vector2(0, SIZE / 4)
     self.add_to_group("bases")
 
-func launch(dest:Vector2):
-    var shot = ShotScene.instantiate()
-    shot.position = to_global($Turret.position)
-    shot.destination = dest
-    return shot
-
-# process
-
 func _process(_delta:float):
     if not self.destroyed:
         var global = to_global($Turret.position)
         var relative = mouse.position - Vector2(global.x, global.y)
         $Turret.rotation = relative.angle() - self.rotation
-
-# draw
 
 func get_semicircle(center, radius, segments) -> Array[Vector2]:
     var vs:Array[Vector2] = []
@@ -70,3 +60,10 @@ func get_color() -> Color:
 func _draw():
     draw_polygon(get_verts(), [FILL])
     draw_polyline(get_verts(), get_color(), 3.0, true)
+
+func launch(dest:Vector2):
+    if not self.destroyed:
+        var shot:Shot = ShotScene.instantiate()
+        shot.position = to_global($Turret.position)
+        shot.destination = dest
+        get_tree().root.get_node("Main").add_child(shot)

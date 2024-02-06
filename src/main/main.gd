@@ -32,9 +32,7 @@ func begin_level():
 
 func launch_shot(base_id):
     var base:Node2D = get_tree().get_nodes_in_group("bases")[base_id]
-    if not base.destroyed:
-        var shot:Node2D = base.launch($Mouse.position)
-        self.add_child(shot)
+    base.launch($Mouse.position)
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:

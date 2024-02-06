@@ -1,4 +1,4 @@
-extends Node2D
+class_name Shot extends Node2D
 
 var BangShotScene:PackedScene = preload("res://src/bang_shot/bang_shot.tscn")
 

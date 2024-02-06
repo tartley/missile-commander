@@ -8,17 +8,13 @@ A work in progress.
 
 ## TODO
 
-* Fix colors of missile bangshot
+* remove the thing where missiles know their target
+  * ground will decide whether a feature is hit when it hears of the collision.
 
-Collisions:
-  * missile and feature:
-      destroy feature
-      make BangFeature
-  * missile and Ground:
-      make Pop (aka BangMissile)
-  * remove the thing where missiles know their target
+ Rename Pop -> BangMissile
 
-* Rename Pop -> BangMissile
+* bangshot needs a sound
+* and we'll need one for bang_feature too
 
 * Create BangFeature (City or Base)
   * Looks different
@@ -30,6 +26,7 @@ Collisions:
 
 * Display ammo under each base
 * Firing a shot reduces ammo from that base
+* No shots when out of ammo
 
 * Intro screen before game starts, with:
   * game title
