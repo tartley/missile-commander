@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cnyv2rvjkbfv2"
-path="res://.godot/imported/shot2.wav-6eac95bfc0d166b35eadc6ee3edf32dd.sample"
+uid="uid://bkl328l7db7lc"
+path="res://.godot/imported/BangSky.wav-de66d95fe07721921720ab552bb2178c.sample"
 
 [deps]
 
-source_file="res://audio/shot2.wav"
-dest_files=["res://.godot/imported/shot2.wav-6eac95bfc0d166b35eadc6ee3edf32dd.sample"]
+source_file="res://audio/BangSky.wav"
+dest_files=["res://.godot/imported/BangSky.wav-de66d95fe07721921720ab552bb2178c.sample"]
 
 [params]
 

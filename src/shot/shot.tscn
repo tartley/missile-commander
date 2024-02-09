@@ -1,11 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://lf0lu47aqkca"]
 
 [ext_resource type="Script" path="res://src/shot/shot.gd" id="1_h65cq"]
-[ext_resource type="AudioStream" uid="uid://cnyv2rvjkbfv2" path="res://audio/shot2.wav" id="2_q372g"]
+[ext_resource type="AudioStream" uid="uid://cnyv2rvjkbfv2" path="res://audio/Shot.wav" id="2_j8w6d"]
 
 [node name="Shot" type="Node2D"]
 script = ExtResource("1_h65cq")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_q372g")
+stream = ExtResource("2_j8w6d")
+volume_db = -2.0
 autoplay = true

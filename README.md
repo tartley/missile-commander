@@ -2,9 +2,19 @@
 
 With vector graphics,
 by [Jonathan Hartley](https://mastodon.social/@tartley),
-using [Godot](https://godotengine.org/).
 
 A work in progress.
+
+## Credits
+
+Made in [Godot](https://godotengine.org/).
+
+Sound effects created using:
+* [Sfxr](http://drpetter.se/project_sfxr.html) by Tomas "DrPetter" Pettersson.
+* [Jsfxr](https://sfxr.me/) by Eric Fredricksen with contributions by Chris McCormick.
+* [Chiptone](https://sfbgames.itch.io/chiptone) by Tom Vian.
+
+TODO: Credit the creators of the original missile command.
 
 ## TODO
 
