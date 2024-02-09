@@ -1,16 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1rg76xh51dyl"]
+[gd_scene load_steps=4 format=3 uid="uid://bewkbmddw2jys"]
 
-[ext_resource type="Script" path="res://src/bang_sky/bang_sky.gd" id="1_5b82d"]
+[ext_resource type="Script" path="res://src/bang_sky/bang_sky.gd" id="1_k60uc"]
+[ext_resource type="AudioStream" uid="uid://b04x1yunq8y16" path="res://audio/explode-city.wav" id="2_wckkb"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3xhol"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vla8k"]
 radius = 1.0
 
 [node name="BangSky" type="Area2D"]
 collision_layer = 0
-input_pickable = false
-script = ExtResource("1_5b82d")
+script = ExtResource("1_k60uc")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_wckkb")
+volume_db = -8.432
+autoplay = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3xhol")
+shape = SubResource("CircleShape2D_vla8k")
 
 [connection signal="area_entered" from="." to="." method="on_entered"]
+[connection signal="area_exited" from="." to="." method="on_leave"]

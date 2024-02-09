@@ -14,8 +14,7 @@ func _ready() -> void:
     self.age = 0.0
 
 func _process(delta:float) -> void:
-    self.age += delta
-    self.progress = self.age / DURATION
+    self.progress += delta / DURATION
     queue_redraw()
     if progress >= 1.0:
         queue_free()

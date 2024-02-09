@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://btc1xjwxychp7"
-path="res://.godot/imported/shot1.wav-b7200d117b343e1f263ed9d68e9cf544.sample"
+uid="uid://btua7m2cxw7mx"
+path="res://.godot/imported/BangFeature.wav-0ef82c45b8d37227b338460b2480b8f7.sample"
 
 [deps]
 
-source_file="res://audio/shot1.wav"
-dest_files=["res://.godot/imported/shot1.wav-b7200d117b343e1f263ed9d68e9cf544.sample"]
+source_file="res://audio/BangFeature.wav"
+dest_files=["res://.godot/imported/BangFeature.wav-0ef82c45b8d37227b338460b2480b8f7.sample"]
 
 [params]
 

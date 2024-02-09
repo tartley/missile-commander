@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwc1pjaal5e2n"]
+
+[ext_resource type="Script" path="res://src/bang_feature/bang_feature.gd" id="1_f2qqy"]
+[ext_resource type="AudioStream" uid="uid://btua7m2cxw7mx" path="res://audio/BangFeature.wav" id="2_fke3h"]
+
+[node name="BangFeature" type="Node2D"]
+script = ExtResource("1_f2qqy")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_fke3h")
+autoplay = true

@@ -1,7 +1,7 @@
 """
 The explosion from shots or missiles detonating in the sky.
 """
-extends Node2D
+class_name BangSky extends Node2D
 
 enum Source {SHOT, MISSILE}
 

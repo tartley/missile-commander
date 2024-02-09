@@ -8,8 +8,8 @@ A work in progress.
 
 ## TODO
 
-* bangshot needs a sound
-* and we'll need one for bang_feature too
+- BangFeature neeeds a sound
+* bangshot needs a sound - maybe like thunder
 
 * Create BangFeature (with City or Base variants)
   * Looks different. Bigger, slower, more dramatic.

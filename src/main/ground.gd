@@ -52,6 +52,7 @@ const annotated_polar_array := [
 
 const BaseScene:PackedScene = preload("res://src/base/base.tscn")
 const CityScene:PackedScene = preload("res://src/city/city.tscn")
+const BangFeatureScene:PackedScene = preload("res://src/bang_feature/bang_feature.tscn")
 const BangGroundScene:PackedScene = preload("res://src/bang_ground/bang_ground.tscn")
 
 var verts:PackedVector2Array
@@ -112,16 +113,13 @@ func _draw() -> void:
 
 func on_area_entered(missile:Missile):
     ### A Missile has collided
-    if missile.target:
+    if missile.target and not missile.target.destroyed:
         missile.target.destroyed = true
         # create an explosion
-        # TODO should this be in missile.destroy?
-        # but then missile has to choose between bangsky and bangground and bangfeature
-        # TODO this should be a BangFeature (which doesn't exist yet)
         var main:Main = get_parent()
-        var bangsky = BangSkyScene.instantiate()
-        bangsky.init_from_missile(missile.position)
-        main.call_deferred("add_child", bangsky)
+        var bang = BangFeatureScene.instantiate()
+        bang.position = missile.position
+        main.call_deferred("add_child", bang)
     else:
         var main := get_parent() as Main
         var bang_ground = BangGroundScene.instantiate()
