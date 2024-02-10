@@ -18,16 +18,6 @@ TODO: Credit the creators of the original missile command.
 
 ## TODO
 
-* Two sounds play when a city is destroyed, one by the
-  BangFeature, and one by the city.
-  * Sanity check it doesn't happen with Bases
-  Problem is, I think it sounds better with them both.
-  * check that
-  * merge the sounds into one
-  * have the explosion play it
-  * remove the city's audioplayer
-  * remove leftover `audio/explode-city.*`
-
 * Rationalize creation of explosions etc.
   * Missile hitting ground is handled by
     ground.on_entered:

@@ -12,7 +12,7 @@ script = ExtResource("1_k60uc")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_n8yp8")
-volume_db = -8.432
+volume_db = 15.086
 autoplay = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

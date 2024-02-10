@@ -10,8 +10,6 @@ var destroyed: bool:
         if value:
             self.verts = get_destroyed_verts()
             self.color = Color(.3, .3, .3)
-            if not self.destroyed:
-                $AudioStreamPlayer2D.playing = true
         else:
             self.verts = get_regular_verts()
             self.color = Color.RED

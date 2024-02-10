@@ -1,12 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dk83v0qqd5oxt"]
+[gd_scene load_steps=2 format=3 uid="uid://dk83v0qqd5oxt"]
 
 [ext_resource type="Script" path="res://src/city/city.gd" id="1_r17s1"]
-[ext_resource type="AudioStream" uid="uid://b04x1yunq8y16" path="res://audio/explode-city.wav" id="2_16ae5"]
 
 [node name="City" type="Node2D"]
 z_index = 1
 script = ExtResource("1_r17s1")
 metadata/_edit_group_ = true
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_16ae5")
