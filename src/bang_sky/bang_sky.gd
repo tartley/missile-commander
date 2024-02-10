@@ -1,7 +1,7 @@
 """
 The explosion from shots or missiles detonating in the sky.
 """
-extends Node2D
+extends Area2D
 
 enum Source {SHOT, MISSILE}
 

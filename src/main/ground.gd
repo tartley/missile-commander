@@ -3,7 +3,7 @@ The ground at the bottom of the screen, including hills for each base.
 The shape we draw determines the positions of the bases and cities,
 which will ask us where they should be located.
 '''
-class_name Ground extends Node2D
+class_name Ground extends Area2D
 
 const BaseScene:PackedScene = preload("res://src/base/base.tscn")
 const CityScene:PackedScene = preload("res://src/city/city.tscn")

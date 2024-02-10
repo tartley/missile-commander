@@ -18,18 +18,12 @@ TODO: Credit the creators of the original missile command.
 
 ## TODO
 
-* rationalize use of .get_verts, .get_color, which look at .destroyed
-  - in Turret
-  - in Base
-  - in City
-  * anywhere else?
-* rationalize use of .destroyed -> .destroy()
-  * in Turret
-  * in Base
-  * in City
-  * anywhere else?
-
 * Rationalize creation of explosions etc.
+
+Current: in layer | detection mask
+
+    Missile [1| ] -> Ground [ |1]
+    Missile [1| ] -> BangSky [ |1]
 
 What if Missile received the collision with Ground event?
 Have to think through layers and masks again, then:
