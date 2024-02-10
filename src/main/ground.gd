@@ -5,7 +5,10 @@ which will ask us where they should be located.
 '''
 class_name Ground extends Node2D
 
-var BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
+const BaseScene:PackedScene = preload("res://src/base/base.tscn")
+const CityScene:PackedScene = preload("res://src/city/city.tscn")
+const BangFeatureScene:PackedScene = preload("res://src/bang_feature/bang_feature.tscn")
+const BangGroundScene:PackedScene = preload("res://src/bang_ground/bang_ground.tscn")
 
 const HILL_HEIGHT := Common.RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
@@ -49,11 +52,6 @@ const annotated_polar_array := [
     [ +88 * seg_ang, 0],
     [ +88 * seg_ang, -Common.RADIUS],
 ]
-
-const BaseScene:PackedScene = preload("res://src/base/base.tscn")
-const CityScene:PackedScene = preload("res://src/city/city.tscn")
-const BangFeatureScene:PackedScene = preload("res://src/bang_feature/bang_feature.tscn")
-const BangGroundScene:PackedScene = preload("res://src/bang_ground/bang_ground.tscn")
 
 var verts:PackedVector2Array
 var gaps:Array[Vector2] = []

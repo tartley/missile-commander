@@ -1,11 +1,11 @@
 extends Node2D
 
+const ShotScene:PackedScene = preload("res://src/shot/shot.tscn")
+
 const SIZE := 100.0
 const FORE := Color.YELLOW
 const FORE_DESTROYED := Color(.3, .3, .3)
 const FILL := Color.BLACK
-
-var ShotScene:PackedScene = preload("res://src/shot/shot.tscn")
 
 # We use a reference to the mouse to swivel our turret towards it
 var mouse:Node2D

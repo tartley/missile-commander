@@ -1,6 +1,6 @@
 class_name Shot extends Node2D
 
-var BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
+const BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
 
 const SPEED := 500
 const SIZE := 1.0

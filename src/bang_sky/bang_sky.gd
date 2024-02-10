@@ -5,10 +5,10 @@ extends Node2D
 
 enum Source {SHOT, MISSILE}
 
+const BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
+
 const MAX_SIZE := 150.0 # world co-ords
 const DURATION := 2.5 # seconds
-
-var BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
 
 var progress:float = 0.0 # [0..1]
 var size:float = 0.0 # [0..MAX_SIZE]
