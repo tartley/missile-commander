@@ -9,17 +9,12 @@ const FILL := Color.BLACK
 
 # We use a reference to the mouse to swivel our turret towards it
 var mouse:Node2D
-
-var destroyed: bool:
-    set(value):
-        destroyed = value
-        if value:
-            $Turret.destroy()
-        self.queue_redraw()
+var verts:Array[Vector2] = get_verts()
+var color:Color = FORE
+var destroyed:bool = false
 
 func _ready():
     self.name = Common.get_unique_name(self)
-    self.destroyed = false
     $Turret.position = Vector2(0, SIZE / 4)
     self.add_to_group("bases")
 
@@ -28,6 +23,10 @@ func _process(_delta:float):
         var global = to_global($Turret.position)
         var relative = mouse.position - Vector2(global.x, global.y)
         $Turret.rotation = relative.angle() - self.rotation
+
+func _draw():
+    draw_polygon(self.verts, [FILL])
+    draw_polyline(self.verts, self.color, 3.0, true)
 
 func get_semicircle(center, radius, segments) -> Array[Vector2]:
     var vs:Array[Vector2] = []
@@ -51,19 +50,16 @@ func get_verts() -> Array[Vector2]:
     ])
     return vs
 
-func get_color() -> Color:
-    if self.destroyed:
-        return FORE_DESTROYED
-    else:
-        return FORE
-
-func _draw():
-    draw_polygon(get_verts(), [FILL])
-    draw_polyline(get_verts(), get_color(), 3.0, true)
-
 func launch(dest:Vector2):
     if not self.destroyed:
         var shot:Shot = ShotScene.instantiate()
         shot.position = to_global($Turret.position)
         shot.destination = dest
         get_tree().root.get_node("Main").add_child(shot)
+
+func destroy():
+    if not self.destroyed:
+        self.queue_redraw()
+    $Turret.destroy()
+    self.color = FORE_DESTROYED
+    self.destroyed = true

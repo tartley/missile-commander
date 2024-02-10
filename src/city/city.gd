@@ -45,3 +45,7 @@ func _ready():
 func _draw():
     draw_polygon(self.verts, [Color.BLACK])
     draw_polyline(self.verts, self.color, 2.0, true)
+
+func destroy():
+    # TODO fix this
+    self.destroyed = true

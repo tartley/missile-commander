@@ -112,7 +112,7 @@ func _draw() -> void:
 func on_area_entered(missile:Missile):
     ### A Missile has collided
     if missile.target and not missile.target.destroyed:
-        missile.target.destroyed = true
+        missile.target.destroy()
         # create an explosion
         var main:Main = get_parent()
         var bang = BangFeatureScene.instantiate()
