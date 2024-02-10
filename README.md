@@ -18,13 +18,38 @@ TODO: Credit the creators of the original missile command.
 
 ## TODO
 
-- BangFeature neeeds a sound
-* bangshot needs a sound - maybe like thunder
+* Two sounds play when a city is destroyed, one by the
+  BangFeature, and one by the city.
+  * Sanity check it doesn't happen with Bases
+  Problem is, I think it sounds better with them both.
+  * check that
+  * merge the sounds into one
+  * have the explosion play it
+  * remove the city's audioplayer
+  * remove leftover `audio/explode-city.*`
 
-* Create BangFeature (with City or Base variants)
+* Rationalize creation of explosions etc.
+  * Missile hitting ground is handled by
+    ground.on_entered:
+        if missile.target (or close to feature):
+            City.destroy():
+        else:
+            create BangGround
+  * City.destroy:
+        if self.destroyed:
+            # create BangGround
+        else:
+            self.destroyed = true
+            # create BangFeature
+  * same for Base
+
+* BangSky should fluctuate in size corresponding to its
+  sound
+
+- Create BangFeature (with City or Base variants)
   * Looks different. Bigger, slower, more dramatic.
-  * Uses sound effect currently triggered by city.destroyed=true
-    other sound effects should be quieter?
+  - Own sound effect
+  - other sound effects should be quieter?
   * particle effect using color of the destroyed feature?
   * Camera shake?
   * Sky flash?
