@@ -12,14 +12,14 @@ var mouse:Node2D
 
 var destroyed: bool:
     set(value):
-        $Turret.destroyed = value
         destroyed = value
+        if value:
+            $Turret.destroy()
         self.queue_redraw()
 
 func _ready():
     self.name = Common.get_unique_name(self)
     self.destroyed = false
-    $Turret.size = SIZE
     $Turret.position = Vector2(0, SIZE / 4)
     self.add_to_group("bases")
 
