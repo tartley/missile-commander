@@ -19,25 +19,25 @@ TODO: Credit the creators of the original missile command.
 ## TODO
 
 * Rationalize creation of explosions etc.
-  * Missile hitting ground is handled by
-    ground.on_entered:
-        if missile.target (or close to feature):
-            City.destroy():
-        else:
-            create BangGround
-  * City.destroy:
-        if self.destroyed:
-            # create BangGround
-        else:
-            self.destroyed = true
-            # create BangFeature
-  * same for Base
 
-* BangSky should fluctuate in size corresponding to its
-  sound
+What if Missile received the collision with Ground event?
+Have to think through layers and masks again, then:
+
+    Missile.on_area_entered(ground:Ground):
+        feature = ground.get_intact_feature(self.position)
+        if feature:
+            feature.destroy()
+            create BangFeature()
+        else:
+            create BangGround()
+
+* I don't like BangSky's sound. A more regular deep bang. Maybe it can
+  fluctuate.
+* Maybe two sounds, for Source.Shot and Source.Missile.
+* BangSky should fluctuate in size.
 
 - Create BangFeature (with City or Base variants)
-  * Looks different. Bigger, slower, more dramatic.
+  - Looks different. Bigger, slower, more dramatic.
   - Own sound effect
   - other sound effects should be quieter?
   * particle effect using color of the destroyed feature?
