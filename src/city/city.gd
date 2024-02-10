@@ -2,21 +2,24 @@ extends Node2D
 
 const COLUMNS := 7
 const SIZE := 100.0
+const FORE := Color.RED
+const FORE_DESTROYED := Color(.3, .3, .3)
+const FILL := Color.BLACK
 
-var verts:Array[Vector2]
-var color:Color
-var destroyed: bool:
-    set(value):
-        if value:
-            self.verts = get_destroyed_verts()
-            self.color = Color(.3, .3, .3)
-        else:
-            self.verts = get_regular_verts()
-            self.color = Color.RED
-        destroyed = value
-        self.queue_redraw()
+var verts := get_regular_verts()
+var color := FORE
+var destroyed := false
 
-func get_regular_verts():
+func _ready():
+    self.name = Common.get_unique_name(self)
+    self.destroyed = false
+    self.add_to_group("cities")
+
+func _draw():
+    draw_polygon(self.verts, [FILL])
+    draw_polyline(self.verts, self.color, 2.0, true)
+
+func get_regular_verts() -> Array[Vector2]:
     var retval: Array[Vector2] = []
     var heights:Array[int] = [20, 25, 30, 35, 40, 45, 50]
     heights.shuffle()
@@ -37,15 +40,9 @@ func get_destroyed_verts():
     retval.append(Vector2(+SIZE/2.0, 0))
     return retval
 
-func _ready():
-    self.name = Common.get_unique_name(self)
-    self.destroyed = false
-    self.add_to_group("cities")
-
-func _draw():
-    draw_polygon(self.verts, [Color.BLACK])
-    draw_polyline(self.verts, self.color, 2.0, true)
-
 func destroy():
-    # TODO fix this
+    self.verts = get_destroyed_verts()
+    self.color = Color(.3, .3, .3)
+    if not self.destroyed:
+        self.queue_redraw()
     self.destroyed = true
