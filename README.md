@@ -18,24 +18,6 @@ TODO: Credit the creators of the original missile command.
 
 ## TODO
 
-* Rationalize creation of explosions etc.
-
-Current: in layer | detection mask
-
-    Missile [1| ] -> Ground [ |1]
-    Missile [1| ] -> BangSky [ |1]
-
-What if Missile received the collision with Ground event?
-Have to think through layers and masks again, then:
-
-    Missile.on_area_entered(ground:Ground):
-        feature = ground.get_intact_feature(self.position)
-        if feature:
-            feature.destroy()
-            create BangFeature()
-        else:
-            create BangGround()
-
 * I don't like BangSky's sound. A more regular deep bang. Maybe it can
   fluctuate.
 * Maybe two sounds, for Source.Shot and Source.Missile.

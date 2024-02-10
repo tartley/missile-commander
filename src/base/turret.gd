@@ -27,7 +27,7 @@ func get_verts() -> Array[Vector2]:
     ]
 
 func destroy() -> void:
+    self.color = FORE_DESTROYED
     if not self.destroyed:
         self.queue_redraw()
     self.destroyed = true
-    self.color = FORE_DESTROYED

@@ -1,5 +1,6 @@
 extends Node2D
 
+const BangFeatureScene:PackedScene = preload("res://src/bang_feature/bang_feature.tscn")
 const ShotScene:PackedScene = preload("res://src/shot/shot.tscn")
 
 const SIZE := 100.0
@@ -57,9 +58,16 @@ func launch(dest:Vector2):
         shot.destination = dest
         get_tree().root.get_node("Main").add_child(shot)
 
+func create_bangfeature():
+    var main:Main = get_tree().root.get_node("Main")
+    var bang = BangFeatureScene.instantiate()
+    bang.position = self.position
+    main.call_deferred("add_child", bang)
+
 func destroy():
-    if not self.destroyed:
-        self.queue_redraw()
     $Turret.destroy()
     self.color = FORE_DESTROYED
+    if not self.destroyed:
+        self.create_bangfeature()
+        self.queue_redraw()
     self.destroyed = true

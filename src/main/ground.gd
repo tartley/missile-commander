@@ -7,7 +7,6 @@ class_name Ground extends Area2D
 
 const BaseScene:PackedScene = preload("res://src/base/base.tscn")
 const CityScene:PackedScene = preload("res://src/city/city.tscn")
-const BangFeatureScene:PackedScene = preload("res://src/bang_feature/bang_feature.tscn")
 const BangGroundScene:PackedScene = preload("res://src/bang_ground/bang_ground.tscn")
 
 const HILL_HEIGHT := Common.RADIUS / 100.0
@@ -110,14 +109,8 @@ func _draw() -> void:
     draw_polyline(verts, Color(.7, 1, .6), 3.0, true)
 
 func on_area_entered(missile:Missile):
-    ### A Missile has collided
-    if missile.target and not missile.target.destroyed:
+    if missile.target:
         missile.target.destroy()
-        # create an explosion
-        var main:Main = get_parent()
-        var bang = BangFeatureScene.instantiate()
-        bang.position = missile.position
-        main.call_deferred("add_child", bang)
     else:
         var main := get_parent() as Main
         var bang_ground = BangGroundScene.instantiate()
