@@ -51,12 +51,14 @@ func get_verts() -> Array[Vector2]:
     ])
     return vs
 
-func launch(dest:Vector2):
+func fire(dest:Vector2):
     if not self.destroyed:
-        var shot:Shot = ShotScene.instantiate()
-        shot.position = to_global($Turret.position)
-        shot.destination = dest
-        get_tree().root.get_node("Main").add_child(shot)
+        if $Ammo.count > 0:
+            $Ammo.decrement()
+            var shot:Shot = ShotScene.instantiate()
+            shot.position = to_global($Turret.position)
+            shot.destination = dest
+            get_tree().root.get_node("Main").add_child(shot)
 
 func create_bangfeature():
     var main:Main = get_tree().root.get_node("Main")

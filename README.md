@@ -18,10 +18,6 @@ Sound effects created using:
 
 ## TODO
 
-* Display ammo under each base
-* Firing a shot reduces ammo from that base
-* No shots when out of ammo
-
 * Intro screen before game starts, with:
   * game title
   * Keys: A | W or S | D to launch from each defence center
@@ -93,15 +89,19 @@ Sound effects created using:
 
 # Decorative / low priority
 
-* I don't like BangSky's sound. A more regular deep bang. Maybe it can
-  fluctuate.
+* CRT glow
 * Maybe two sounds, for Source.Shot and Source.Missile.
-* BangSky should fluctuate in size.
-* BangFeature should use thicker arcs? Or different design. Or additional elements.
-* Incorporating the color of the destroyed feature?
-* particle effect using color of the destroyed feature?
-* Camera shake?
-* Sky flash?
+* BangSky should fluctuate in size. Maybe it is rendered as three different
+  circles, and our computed collision 'size' is the max of them? At the very
+  least, this would be easier to debug/tune than my initial invisible
+  attempt.
+* I don't like BangSky's sound. A more regular deep bang.
+  Maybe it can fluctuate along with the visual.
+* BangFeature should use a different design? Or additional elements?
+  * Incorporating the color of the destroyed feature?
+  * particle effect using color of the destroyed feature?
+  * Camera shake?
+  * Sky flash?
 * Base shape
 * Turret recoil
 * Audio listener moves with mouse
@@ -134,12 +134,10 @@ Sound effects created using:
 * Destroyed city gains smoke
 * Undestroyed city loses smoke
 * Each city has a name
-* Stars on a parallax background
-  Established ParallaxBackground Node does not rotate with the camera,
-  so is no use for me.
-  How about this Godot PR to add a replacement for it?
-  https://github.com/godotengine/godot/pull/87391
-  When it lands I can apparently grab a Godot build to use.
+* Stars on a parallax background Established ParallaxBackground Node does not
+  rotate with the camera, so is no use for me. How about this Godot PR to add a
+  replacement for it? https://github.com/godotengine/godot/pull/87391 When it
+  lands I can apparently grab a Godot build to use.
 * Fix draw order? (see docs/text/writing/godot-draw-order.md)
 
 # Speculative
