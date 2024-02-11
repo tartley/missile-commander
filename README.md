@@ -7,6 +7,8 @@ A work in progress.
 
 ## Credits
 
+Original 1980 concept and implementation by David Theurer for Atari.
+
 Made in [Godot](https://godotengine.org/).
 
 Sound effects created using:
@@ -14,22 +16,7 @@ Sound effects created using:
 * [Jsfxr](https://sfxr.me/) by Eric Fredricksen with contributions by Chris McCormick.
 * [Chiptone](https://sfbgames.itch.io/chiptone) by Tom Vian.
 
-TODO: Credit the creators of the original missile command.
-
 ## TODO
-
-* I don't like BangSky's sound. A more regular deep bang. Maybe it can
-  fluctuate.
-* Maybe two sounds, for Source.Shot and Source.Missile.
-* BangSky should fluctuate in size.
-
-- Create BangFeature (with City or Base variants)
-  - Looks different. Bigger, slower, more dramatic.
-  - Own sound effect
-  - other sound effects should be quieter?
-  * particle effect using color of the destroyed feature?
-  * Camera shake?
-  * Sky flash?
 
 * Display ammo under each base
 * Firing a shot reduces ammo from that base
@@ -46,14 +33,15 @@ TODO: Credit the creators of the original missile command.
   * A game over screen
   * After a second or two, pressing fire returns to intro screen
 
+* Incoming missiles come in waves
+  * introduced by text on screen
+  * fire missiles throughout the wave
+
 * Display a score
   See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text
 
-* Incoming missiles come in waves
-  * introduced by text on screen
-  * Director (find a better name) fires missiles throughout the
-    wave
-  * When a wave ends, give bonus points
+* Bonus points at end of each wave
+* resurrect a city? Or award a shield?
 
 * Pressing escape at any time goes to pause screen, which displays:
   * 'Paused'
@@ -89,77 +77,7 @@ TODO: Credit the creators of the original missile command.
 * How to handle similarities between Nodes?
   * Inheritance: Could inherit from a common base class. Maybe sometimes,
     but be wary of inheritance hell.
-  * Shared logic: Can I just define methods on a commonly-used class, and call
-    them from each? Maybe sometimes, but this isn't fabulous, it doesn't cover
-    storing common data upon which those functions depend.
-  * Composition: Can I add a variable of a type which defines common traits?
-    It's unclear to me how that would work, e.g. as a 'destroyable'.
-
-City:
-
-    var destroyable := Destroyable.new(
-        get_verts,
-        Color.YELLOW,
-        get_destroyed_verts,
-        Color.GREY,
-    )
-
-    var destroyed:boolean:
-        get():
-            return destroyable.destroyed
-        set(d):
-            destroyable.destroyed = d
-
-    func _draw():
-        destroyable.draw()
-
-I'm not sure it's worth it.
-
-Alternative, destroyable wraps our class, and we define get_verts, color, etc,
-with standard names, so we don't need to pass so much into the contructor:
-
-    var destroyable := Destroyable.new(self)
-
-But we'd still need to forward destroyed, `_draw`, etc.
-
-How about the other way around? Our class wraps a Destroyable.
-
-City:
-
-    func _init(destroyable):
-        ...
-
-I think this looks a lot like owning a Destroyable variable, above.
-
-Ah, the node is a Destroyable:
-
-Destroyable:
-
-    var destroyed:boolean:
-        set(d):
-            if not d:
-                # instantiate BangFeature
-            for child in get_children():
-                child.destroyed = d
-            destroyed = d
-            queue_redraw()
-
-
-    func _init(get_verts, color, get_destroyed_verts, color_destroyed):
-        ...
-
-    func _draw():
-        if destroyed:
-            draw_polygon(get_verts(), [Color.BLACK])
-            draw_multiline(get_verts(), get_color())
-
-City creation, maybe in Main:
-
-    city = Destroyable(get_city_verts, Color.YELLOW, get_city_destroyed_verts, Color.GREY)
-
-This seems ok, but still might not be worth it. Perhaps all the red in the PR would
-convince me. But lack of flexibility might hurt. Also consider:
-
+* City and Base are Features? Or Destroyables?
 * Turret is also a Destroyable.
 
 * Missile and Shot are quite similar. e.g.
@@ -173,12 +91,24 @@ convince me. But lack of flexibility might hurt. Also consider:
   * ground will decide whether a feature is hit when it hears of the collision.
   * Only do this if we gain missiles that steer or change target in-flight
 
-# Low priority Features
+# Decorative / low priority
 
+* I don't like BangSky's sound. A more regular deep bang. Maybe it can
+  fluctuate.
+* Maybe two sounds, for Source.Shot and Source.Missile.
+* BangSky should fluctuate in size.
+* BangFeature should use thicker arcs? Or different design. Or additional elements.
+* Incorporating the color of the destroyed feature?
+* particle effect using color of the destroyed feature?
+* Camera shake?
+* Sky flash?
+* Base shape
+* Turret recoil
+* Audio listener moves with mouse
 * Click1 when fire pressed but out of ammo
 * Click2 when fire pressed but base is destroyed
+* Speech synthesis?
 * Warn beep when low ammo
-* Audio listener moves with mouse
 * More particle effects:
   * Trail on shots, somewhat like missile
   * Shot launch
@@ -211,4 +141,10 @@ convince me. But lack of flexibility might hurt. Also consider:
   https://github.com/godotengine/godot/pull/87391
   When it lands I can apparently grab a Godot build to use.
 * Fix draw order? (see docs/text/writing/godot-draw-order.md)
+
+# Speculative
+
+* Planes or satellites fly over
+* Vehicles launch missiles from the sides
+* Bonus points based on time to complete a wave
 

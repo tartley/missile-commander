@@ -7,8 +7,8 @@ enum Source {SHOT, MISSILE}
 
 const BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
 
-const MAX_SIZE := 150.0 # world co-ords
-const DURATION := 2.5 # seconds
+const MAX_SIZE := 175.0 # world co-ords
+const DURATION := 3.0 # seconds
 
 var progress:float = 0.0 # [0..1]
 var size:float = 0.0 # [0..MAX_SIZE]
@@ -29,7 +29,7 @@ func init_from_missile(position_:Vector2) -> void:
 
 func _process(delta:float) -> void:
     self.progress += delta / DURATION
-    self.size = MAX_SIZE * (0.1 + 0.9 * sin(progress * PI))
+    self.size = MAX_SIZE * maxf(0, sin(progress * PI))
     queue_redraw()
     self.destroy_nearby_missiles()
     if progress >= 1.0:
@@ -40,17 +40,17 @@ func _draw() -> void:
     match self.source:
         Source.SHOT:
             color = Color(
-                maxf(1 - progress * 2, progress * 2 - 1.5), # red
+                maxf(1 - progress * 2, progress * 2 - 1.0), # red
                 1 - progress * 2, # green
                 1.0, # blue,
-                1 - progress * 0.75, # alpha
+                .75 - progress * 0.5, # alpha
             )
         Source.MISSILE:
             color = Color(
                 1.0 - progress, # red
-                maxf(0.0, progress - 0.5), # green
+                maxf(0.0, progress * 2 - 0.5), # green
                 1.0 - progress, # blue
-                1 - progress * 0.75, # alpha
+                .75 - progress * 0.5, # alpha
             )
     draw_circle(Vector2.ZERO, self.size, color)
     if Common.DEBUG:
