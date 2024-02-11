@@ -51,3 +51,7 @@ func get_offset(index:int) -> Vector2:
         x = 4 - index * 2
     return Vector2(x * SIZE * 2, y * SIZE * 3)
 
+func destroy():
+    self.count = 0
+    queue_redraw()
+

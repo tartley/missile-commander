@@ -71,6 +71,7 @@ func create_bangfeature():
 
 func destroy():
     $Turret.destroy()
+    $Ammo.destroy()
     self.color = FORE_DESTROYED
     if not self.destroyed:
         self.create_bangfeature()
