@@ -1,6 +1,7 @@
 class_name Main extends Node
 
 const MissileScene:PackedScene = preload("res://src/missile/missile.tscn")
+const TitleScreenScene:PackedScene = preload("res://src/title_screen/title_screen.tscn")
 
 func positions(nodes:Array) -> Array[Vector2]:
     var retval:Array[Vector2] = []
@@ -55,5 +56,7 @@ func _ready() -> void:
     $Camera.mouse = $Mouse
     for base in get_tree().get_nodes_in_group("bases"):
         base.mouse = $Mouse
+
+    add_child(TitleScreenScene.instantiate())
     begin_level()
 

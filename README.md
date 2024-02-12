@@ -65,7 +65,7 @@ Sound effects created using:
   * Missile Commander
   * Mslcmd
   * msl.cmd (in use by some '100 plays' musician)
-  * Missile.cmd
+  * Missile.cmd (no web hits)
 
 * Include credits to original game designers
 * Suggest a mastodon hashtag
