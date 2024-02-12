@@ -23,7 +23,9 @@ Sound effects created using:
   * Keys: A | W or S | D to launch from each defence center
   * 'press fire to start'
   * Pressing fire starts game
-  * Display keys here? Yeah, I guess.
+
+* Font: Orbitron?
+  https://www.theleagueofmoveabletype.com/orbitron
 
 * All cities destroyed is game over
   * A game over screen

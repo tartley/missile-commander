@@ -14,6 +14,14 @@ var source: Source
 func _ready() -> void:
     self.name = Common.get_unique_name(self)
 
+func init_from_city(pos:Vector2):
+    self.position = pos
+    self.source = Source.CITY
+
+func init_from_base(pos:Vector2):
+    self.position = pos
+    self.source = Source.BASE
+
 func _process(delta:float) -> void:
     self.progress += delta / DURATION
     queue_redraw()

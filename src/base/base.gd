@@ -66,8 +66,7 @@ func fire(dest:Vector2):
 func create_bangfeature():
     var main:Main = get_tree().root.get_node("Main")
     var bang = BangFeatureScene.instantiate()
-    bang.position = self.position
-    bang.source = bang.Source.BASE
+    bang.init_from_base(self.position)
     main.call_deferred("add_child", bang)
 
 func destroy():

@@ -45,8 +45,7 @@ func get_destroyed_verts():
 func create_bangfeature():
     var main:Main = get_tree().root.get_node("Main")
     var bang = BangFeatureScene.instantiate()
-    bang.position = self.position
-    bang.source = bang.Source.CITY
+    bang.init_from_city(self.position)
     main.call_deferred("add_child", bang)
 
 func destroy():
