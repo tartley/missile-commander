@@ -46,6 +46,7 @@ func create_bangfeature():
     var main:Main = get_tree().root.get_node("Main")
     var bang = BangFeatureScene.instantiate()
     bang.position = self.position
+    bang.source = bang.Source.CITY
     main.call_deferred("add_child", bang)
 
 func destroy():

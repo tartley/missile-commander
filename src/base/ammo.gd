@@ -30,7 +30,7 @@ func offset_verts(offset, verts):
     return result
 
 func get_offset(index:int) -> Vector2:
-    """Convert an ammo index (0-15), return the co-ordinates that ammo should be drawn at below it's base"""
+    """Convert an ammo index (0-15) into co-ordinates at which that ammo should be drawn"""
     assert(0 <= index and index <= 14, "Ammo.get_offset index {0} out of range".format([index]))
     var x:int
     var y:int
