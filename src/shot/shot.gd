@@ -1,6 +1,6 @@
 class_name Shot extends Node2D
 
-const BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
+const ShotScene:PackedScene = preload("res://src/shot/shot.tscn")
 
 const SPEED := 500
 const SIZE := 1.0
@@ -19,6 +19,12 @@ const verts: Array[Vector2] = [
 
 var velocity: Vector2
 var destination: Vector2
+
+static func create(pos:Vector2, dest:Vector2):
+    var shot:Shot = ShotScene.instantiate()
+    shot.position = pos
+    shot.destination = dest
+    Common.world.add_child(shot)
 
 func _ready():
     self.position += self.velocity * 100

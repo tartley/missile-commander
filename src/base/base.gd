@@ -1,7 +1,5 @@
 class_name Base extends Node2D
 
-const ShotScene:PackedScene = preload("res://src/shot/shot.tscn")
-
 const SIZE := 75.0
 const FORE := Color.YELLOW
 const FORE_DESTROYED := Color(.3, .3, .3)
@@ -56,10 +54,7 @@ func fire(dest:Vector2):
     if not self.destroyed:
         if $Ammo.count > 0:
             $Ammo.decrement()
-            var shot:Shot = ShotScene.instantiate()
-            shot.position = to_global($Turret.position)
-            shot.destination = dest
-            Common.world.add_child(shot)
+            Shot.create(to_global($Turret.position), dest)
 
 func destroy():
     $Turret.destroy()
