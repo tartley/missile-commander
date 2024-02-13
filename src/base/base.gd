@@ -1,4 +1,4 @@
-extends Node2D
+class_name Base extends Node2D
 
 const ShotScene:PackedScene = preload("res://src/shot/shot.tscn")
 
@@ -67,7 +67,7 @@ func destroy():
     $Ammo.destroy()
     self.color = FORE_DESTROYED
     if not self.destroyed:
-        BangFeature.create_from_base(self.position)
+        BangFeature.create(self.position, FORE)
         self.queue_redraw()
     else:
         BangGround.create(self.position)

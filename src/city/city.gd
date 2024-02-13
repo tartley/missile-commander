@@ -1,4 +1,4 @@
-extends Node2D
+class_name City extends Node2D
 
 const COLUMNS := 7
 const SIZE := 100.0
@@ -44,7 +44,7 @@ func destroy():
     self.verts = get_destroyed_verts()
     self.color = FORE_DESTROYED
     if not self.destroyed:
-        BangFeature.create_from_city(self.position)
+        BangFeature.create(self.position, FORE)
         self.queue_redraw()
     else:
         BangGround.create(self.position)
