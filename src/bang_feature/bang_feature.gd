@@ -13,13 +13,12 @@ const DURATION := 3.0 # seconds
 var progress: float # 0..1
 var color:Color
 
-static func create(pos:Vector2, col:Color) -> BangFeature:
-    var bang = BangFeatureScene.instantiate()
+static func create(pos:Vector2, col:Color):
+    var bang := BangFeatureScene.instantiate() as BangFeature
     bang.position = pos
     bang.progress = 0.0
     bang.color = col
     Common.world.add_child(bang)
-    return bang
 
 func _process(delta:float) -> void:
     self.progress += delta / DURATION

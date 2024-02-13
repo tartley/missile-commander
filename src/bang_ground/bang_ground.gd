@@ -11,7 +11,7 @@ const DURATION := 1.0 # seconds
 var progress := 0.0 # 0..1
 
 static func create(pos:Vector2):
-    var bang = BangGroundScene.instantiate()
+    var bang := BangGroundScene.instantiate() as BangGround
     bang.position = pos
     Common.world.add_child(bang)
 

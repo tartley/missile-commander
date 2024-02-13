@@ -16,17 +16,17 @@ var source:Source # What caused this Bang?
 var nearby_missiles:Array[Missile]
 
 static func create(pos:Vector2, src:Source):
-    var bang = BangSkyScene.instantiate()
+    var bang := BangSkyScene.instantiate() as BangSky
     bang.position = pos
     bang.source = src
     bang.get_node("CollisionShape2D").shape.radius = MAX_SIZE
     Common.world.add_child(bang)
 
 static func create_from_shot(pos:Vector2):
-    return create(pos, Source.SHOT)
+    create(pos, Source.SHOT)
 
 static func create_from_missile(pos:Vector2):
-    return create(pos, Source.MISSILE)
+    create(pos, Source.MISSILE)
 
 func _process(delta:float) -> void:
     self.progress += delta / DURATION

@@ -11,11 +11,11 @@ const verts: Array[Vector2] = [
     Vector2(+SIZE/2,       0), # rightmost tip
 ]
 
-var target # City or Base or null
+var target:Node2D # City or Base or null
 var velocity: Vector2
 
 static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float):
-    var missile = MissileScene.instantiate()
+    var missile := MissileScene.instantiate() as Missile
     missile.position = pos
     missile.target = tgt
     missile.rotation = (dest - pos).angle()

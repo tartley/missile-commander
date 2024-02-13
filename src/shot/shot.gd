@@ -21,7 +21,7 @@ var velocity: Vector2
 var destination: Vector2
 
 static func create(pos:Vector2, dest:Vector2):
-    var shot:Shot = ShotScene.instantiate()
+    var shot := ShotScene.instantiate() as Shot
     shot.position = pos
     shot.destination = dest
     Common.world.add_child(shot)

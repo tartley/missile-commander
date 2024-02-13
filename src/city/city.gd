@@ -43,7 +43,7 @@ func destroy():
     self.color = FORE_DESTROYED
     if not self.destroyed:
         BangFeature.create(self.position, FORE)
+        self.destroyed = true
         self.queue_redraw()
     else:
         BangGround.create(self.position)
-    self.destroyed = true
