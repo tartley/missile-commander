@@ -1,5 +1,7 @@
 class_name Missile extends Node2D
 
+const MissileScene:PackedScene = preload("res://src/missile/missile.tscn")
+
 const SIZE := 20.0
 # A rightwards pointing triangle
 const verts: Array[Vector2] = [
@@ -9,8 +11,16 @@ const verts: Array[Vector2] = [
     Vector2(+SIZE/2,       0), # rightmost tip
 ]
 
-var velocity: Vector2
 var target # City or Base or null
+var velocity: Vector2
+
+static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float):
+    var missile = MissileScene.instantiate()
+    missile.position = pos
+    missile.target = tgt
+    missile.rotation = (dest - pos).angle()
+    missile.velocity = Vector2.from_angle(missile.rotation) * speed
+    Common.world.add_child(missile)
 
 func _ready() -> void:
     # our trail
@@ -21,12 +31,6 @@ func _ready() -> void:
     $Trail.initial_velocity_min = 250 - speed
     # collision shape
     $CollisionPolygon2D.polygon = self.verts
-
-func launch(pos:Vector2, target_:Node2D, destination:Vector2, speed:float):
-    self.position = pos
-    self.target = target_
-    self.rotation = (destination - position).angle()
-    self.velocity = Vector2.from_angle(rotation) * speed
 
 func _process(delta: float) -> void:
     self.position += velocity * delta

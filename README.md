@@ -21,8 +21,6 @@ the Open Font License (OFL).
 
 ## TODO
 
-* missile.launch should be a new style 'create' constructor that adds to World
-
 * Intro screen before game starts, with:
   - game title
   * Consider title should be fixed in screen co-ordinates

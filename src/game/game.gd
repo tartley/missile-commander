@@ -1,7 +1,5 @@
 extends Node
 
-const MissileScene:PackedScene = preload("res://src/missile/missile.tscn")
-
 var mouse:Mouse
 
 func _ready():
@@ -23,14 +21,12 @@ func _unhandled_input(event:InputEvent):
                 pass
 
 func launch_missile(i):
-    var missile = MissileScene.instantiate()
     var start := Vector2(randf_range(-2000, +2000), -14100 - i * 150)
     var td = choose_target()
     var target = td[0]
     var dest = td[1]
     var speed := randf_range(40, 300)
-    missile.launch(start, target, dest, speed)
-    self.add_child(missile)
+    Missile.create(start, target, dest, speed)
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
