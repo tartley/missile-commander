@@ -9,19 +9,16 @@ const verts: Array[Vector2] = [
     Vector2(+SIZE/2,       0), # rightmost tip
 ]
 
-var trail: Trail
 var velocity: Vector2
 var target # City or Base or null
 
 func _ready() -> void:
-    self.name = Common.get_unique_name(self)
     # our trail
-    self.trail = get_child(0) as Trail # $Trail stops working if its name changes
-    trail.position = Vector2(SIZE/2, 0)
-    trail.direction = Vector2.LEFT
+    $Trail.position = Vector2(SIZE/2, 0)
+    $Trail.direction = Vector2.LEFT
     var speed := self.velocity.length()
-    trail.initial_velocity_max = 250 - speed
-    trail.initial_velocity_min = 250 - speed
+    $Trail.initial_velocity_max = 250 - speed
+    $Trail.initial_velocity_min = 250 - speed
     # collision shape
     $CollisionPolygon2D.polygon = self.verts
 
@@ -39,6 +36,7 @@ func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
 func destroy():
+    var trail := $Trail
     trail.reparent(Common.world)
     trail.emitting = false
     queue_free()

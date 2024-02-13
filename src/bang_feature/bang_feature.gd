@@ -21,9 +21,6 @@ static func create(pos:Vector2, col:Color) -> BangFeature:
     Common.world.add_child(bang)
     return bang
 
-func _ready() -> void:
-    self.name = Common.get_unique_name(self)
-
 func _process(delta:float) -> void:
     self.progress += delta / DURATION
     queue_redraw()

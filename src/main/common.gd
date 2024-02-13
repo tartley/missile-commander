@@ -10,6 +10,3 @@ const PLANET_ANGLE := PI / 16.0
 
 # Populated in respective _ready handler
 static var world:World
-
-static func get_unique_name(obj:Node, name_:String=obj.name) -> String:
-    return "{0}-{1}".format([name_, obj.get_instance_id()])

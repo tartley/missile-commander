@@ -14,7 +14,6 @@ var color:Color = FORE
 var destroyed:bool = false
 
 func _ready():
-    self.name = Common.get_unique_name(self)
     $Turret.size = SIZE
     $Turret.position = Vector2(0, SIZE * 3/8)
     self.add_to_group("bases")
