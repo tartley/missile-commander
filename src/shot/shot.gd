@@ -36,12 +36,7 @@ func _draw():
     draw_polyline(verts, Color.WHITE, 2.0, true)
 
 func destination_reached():
-    # Fix any inaccuracy due to large inter-frame movement
-    self.position = self.destination
     # TODO: Once we have a trail, reparent it to Main. see how Missile does it.
-    var main := get_parent() as Main
-    var bangsky = BangSkyScene.instantiate()
-    bangsky.init_from_shot(self.destination)
-    main.add_child(bangsky)
+    BangSky.create_from_shot(self.destination)
     # And this shot is done
     queue_free()

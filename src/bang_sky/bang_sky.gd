@@ -1,7 +1,7 @@
 """
 The explosion from shots or missiles detonating in the sky.
 """
-extends Area2D
+class_name BangSky extends Area2D
 
 enum Source {SHOT, MISSILE}
 
@@ -15,17 +15,19 @@ var size:float = 0.0 # [0..MAX_SIZE]
 var source:Source # What caused this Bang?
 var nearby_missiles:Array[Missile]
 
-func init(position_:Vector2, source_:Source) -> void:
-    self.name = Common.get_unique_name(self)
-    self.position = position_
-    self.source = source_
-    $CollisionShape2D.shape.radius = MAX_SIZE
+static func _create(pos:Vector2, src:Source):
+    var bang = BangSkyScene.instantiate()
+    bang.name = Common.get_unique_name(bang)
+    bang.position = pos
+    bang.source = src
+    bang.get_node("CollisionShape2D").shape.radius = MAX_SIZE
+    Common.main.call_deferred("add_child", bang)
 
-func init_from_shot(position_:Vector2) -> void:
-    self.init(position_, Source.SHOT)
+static func create_from_shot(pos:Vector2):
+    return _create(pos, Source.SHOT)
 
-func init_from_missile(position_:Vector2) -> void:
-    self.init(position_, Source.MISSILE)
+static func create_from_missile(pos:Vector2):
+    return _create(pos, Source.MISSILE)
 
 func _process(delta:float) -> void:
     self.progress += delta / DURATION
@@ -69,13 +71,7 @@ func destroy_nearby_missiles() -> void:
             if self.position.distance_to(missile.position) < self.size:
                 self.nearby_missiles.erase(missile)
                 missile.destroy()
-                # create an explosion
-                # TODO should this be in missile.destroy?
-                # but then missile has to choose between bangsky and bangground and bangfeature
-                var main:Main = get_parent()
-                var bangsky = BangSkyScene.instantiate()
-                bangsky.init_from_missile(missile.position)
-                main.call_deferred("add_child", bangsky)
+                BangSky.create_from_missile(missile.position)
             else:
                 valid_missiles.append(missile)
     self.nearby_missiles = valid_missiles
