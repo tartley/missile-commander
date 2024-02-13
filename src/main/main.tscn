@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvl60w5q1oghk"]
+[gd_scene load_steps=9 format=3 uid="uid://dvl60w5q1oghk"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_3ne2t"]
+[ext_resource type="Script" path="res://src/main/world.gd" id="2_38wir"]
 [ext_resource type="Script" path="res://src/main/camera.gd" id="2_jm13r"]
 [ext_resource type="Script" path="res://src/main/sky.gd" id="3_nw6n4"]
 [ext_resource type="Script" path="res://src/main/ground.gd" id="4_fvoxd"]
@@ -12,6 +13,7 @@
 script = ExtResource("1_3ne2t")
 
 [node name="World" type="Node" parent="."]
+script = ExtResource("2_38wir")
 
 [node name="Ground" type="Area2D" parent="World"]
 z_index = 2
@@ -29,11 +31,11 @@ position = Vector2(0, -12000)
 ignore_rotation = false
 script = ExtResource("2_jm13r")
 
-[node name="Geometry" type="Node" parent="."]
-script = ExtResource("6_hh5ig")
-
 [node name="Common" type="Node" parent="."]
 script = ExtResource("7_ucqwb")
+
+[node name="Geometry" type="Node" parent="."]
+script = ExtResource("6_hh5ig")
 
 [connection signal="child_exiting_tree" from="." to="." method="on_child_exit"]
 [connection signal="area_entered" from="World/Ground" to="World/Ground" method="on_area_entered"]

@@ -36,7 +36,7 @@ func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
     for target in get_tree().get_nodes_in_group("cities") + get_tree().get_nodes_in_group("bases"):
         targets.append([target, target.position])
-    for pos in Common.main.get_node("World/Ground").gaps: # TODO Static on Ground?
+    for pos in Common.world.get_node("Ground").gaps: # TODO Static on Ground?
         targets.append([null, pos])
     return targets.pick_random()
 

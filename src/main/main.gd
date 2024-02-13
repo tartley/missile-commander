@@ -3,10 +3,7 @@ class_name Main extends Node
 const TitleScreenScene:PackedScene = preload("res://src/title_screen/title_screen.tscn")
 const GameScene:PackedScene = preload("res://src/game/game.tscn")
 
-func _ready() -> void:
-    # Make this root node available from everywhere
-    Common.main = get_tree().root.get_node("Main")
-
+func _ready():
     # Inject dependencies
     # TODO A lot of things need Mouse injecting. Should it be globally available? Like main is?
     $World/Camera.mouse = $World/Mouse

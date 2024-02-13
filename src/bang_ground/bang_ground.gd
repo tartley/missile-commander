@@ -14,7 +14,7 @@ var progress:float # 0..1
 static func create(pos:Vector2):
     var bang = BangGroundScene.instantiate()
     bang.position = pos
-    Common.main.add_child(bang)
+    Common.world.add_child(bang)
 
 func _ready() -> void:
     self.name = Common.get_unique_name(self)

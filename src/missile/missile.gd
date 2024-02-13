@@ -39,6 +39,6 @@ func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
 func destroy():
-    trail.reparent(Common.main)
+    trail.reparent(Common.world)
     trail.emitting = false
     queue_free()

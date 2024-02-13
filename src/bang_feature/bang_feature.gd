@@ -18,7 +18,7 @@ static func create(pos:Vector2, col:Color) -> BangFeature:
     bang.position = pos
     bang.progress = 0.0
     bang.color = col
-    Common.main.call_deferred("add_child", bang)
+    Common.world.add_child(bang)
     return bang
 
 func _ready() -> void:

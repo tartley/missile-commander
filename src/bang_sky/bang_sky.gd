@@ -21,7 +21,7 @@ static func _create(pos:Vector2, src:Source):
     bang.position = pos
     bang.source = src
     bang.get_node("CollisionShape2D").shape.radius = MAX_SIZE
-    Common.main.call_deferred("add_child", bang)
+    Common.world.add_child(bang)
 
 static func create_from_shot(pos:Vector2):
     return _create(pos, Source.SHOT)

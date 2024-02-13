@@ -60,7 +60,7 @@ func fire(dest:Vector2):
             var shot:Shot = ShotScene.instantiate()
             shot.position = to_global($Turret.position)
             shot.destination = dest
-            Common.main.add_child(shot)
+            Common.world.add_child(shot)
 
 func destroy():
     $Turret.destroy()
