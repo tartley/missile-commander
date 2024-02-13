@@ -40,7 +40,7 @@ func _draw():
 
 func destroy():
     # reparent our trail onto Main
-    var main := get_parent() as Main
+    var main:Main = get_tree().root.get_node("Main")
     trail.reparent(main)
     trail.emitting = false
     # and this missile is done

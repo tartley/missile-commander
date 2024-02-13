@@ -1,4 +1,4 @@
-extends Node2D
+class_name Mouse extends Node2D
 
 const verts: Array[Vector2] = [
     Vector2(-60, 0), Vector2(-20, 0),

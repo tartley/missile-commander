@@ -22,7 +22,40 @@ Sound effects created using:
   * game title
   * Keys: A | W or S | D to launch from each defence center
   * 'press fire to start'
-  * Pressing fire starts game
+  * Pressing fire starts game:
+
+Initial scene tree:
+
+* Main
+  * Camera
+  * Sky
+  * Mouse
+  * Ground
+    * Bases
+    * Cities
+
+`Main._ready` adds:
+
+  o TitleScreen
+    * Title
+
+Press fire, handled by TitleScreen
+* `queue_free()`
+
+Main handles `on_child_exit`, waiting for `TitleScreen._exit_tree`:
+* Adds Game(main=main)
+
+* Main
+  * Camera
+  * Sky
+  * Mouse
+  * Ground
+    * Bases
+    * Cities
+  o Game
+
+
+  * 
 
 * Font: Orbitron?
   https://www.theleagueofmoveabletype.com/orbitron

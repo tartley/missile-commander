@@ -1,5 +1,6 @@
 class_name Common extends Node
 
+# Draw a few on-screen debug hints
 const DEBUG := false
 
 # The ground is a pizza-slice shaped segment of a circular planet, centered at (0, 0), with:
