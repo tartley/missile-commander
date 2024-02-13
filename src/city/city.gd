@@ -1,7 +1,5 @@
 extends Node2D
 
-const BangFeatureScene:PackedScene = preload("res://src/bang_feature/bang_feature.tscn")
-
 const COLUMNS := 7
 const SIZE := 100.0
 const FORE := Color.RED
@@ -42,16 +40,12 @@ func get_destroyed_verts():
     retval.append(Vector2(+SIZE/2.0, 0))
     return retval
 
-func create_bangfeature():
-    var main:Main = get_tree().root.get_node("Main")
-    var bang = BangFeatureScene.instantiate()
-    bang.init_from_city(self.position)
-    main.call_deferred("add_child", bang)
-
 func destroy():
     self.verts = get_destroyed_verts()
     self.color = FORE_DESTROYED
     if not self.destroyed:
-        self.create_bangfeature()
+        BangFeature.create_from_city(self.position)
         self.queue_redraw()
+    else:
+        BangGround.create(self.position)
     self.destroyed = true

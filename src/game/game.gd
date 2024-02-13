@@ -10,7 +10,6 @@ func _ready():
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
-        print("Game._unhandled_input ", event)
         match event.keycode:
             KEY_A:
                 launch_shot(0)

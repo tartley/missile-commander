@@ -7,7 +7,6 @@ class_name Ground extends Area2D
 
 const BaseScene:PackedScene = preload("res://src/base/base.tscn")
 const CityScene:PackedScene = preload("res://src/city/city.tscn")
-const BangGroundScene:PackedScene = preload("res://src/bang_ground/bang_ground.tscn")
 
 const HILL_HEIGHT := Common.RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
@@ -112,8 +111,5 @@ func on_area_entered(missile:Missile):
     if missile.target:
         missile.target.destroy()
     else:
-        var main := get_parent() as Main
-        var bang_ground = BangGroundScene.instantiate()
-        bang_ground.position = missile.position
-        main.add_child(bang_ground)
+        BangGround.create(missile.position)
     missile.destroy()

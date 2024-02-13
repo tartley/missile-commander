@@ -1,20 +1,15 @@
 class_name TitleScreen extends Node
 
 func _unhandled_input(event:InputEvent):
-    print("TitleScreen._unhandled_input")
     if event is InputEventKey and event.pressed and not event.echo:
         match event.keycode:
             KEY_A:
-                exit()
+                queue_free()
             KEY_W:
-                exit()
+                queue_free()
             KEY_S:
-                exit()
+                queue_free()
             KEY_D:
-                exit()
+                queue_free()
             _:
                 pass
-
-func exit():
-    print("TitleScreen.exit")
-    queue_free()

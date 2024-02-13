@@ -1,13 +1,20 @@
 """
 The explosion of a missile striking the ground (not a city or base)
 """
-extends Node2D
+class_name BangGround extends Node2D
+
+const BangGroundScene:PackedScene = preload("res://src/bang_ground/bang_ground.tscn")
 
 const SIZE := 150.0 # world co-ords
 const DURATION := 1.0 # seconds
 
 var age:float # seconds
 var progress:float # 0..1
+
+static func create(pos:Vector2):
+    var bang = BangGroundScene.instantiate()
+    bang.position = pos
+    Common.main.add_child(bang)
 
 func _ready() -> void:
     self.name = Common.get_unique_name(self)
