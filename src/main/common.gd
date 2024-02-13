@@ -10,3 +10,4 @@ const PLANET_ANGLE := PI / 16.0
 
 # Populated in respective _ready handler
 static var world:World
+static var screen:Screen

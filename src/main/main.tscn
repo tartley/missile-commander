@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvl60w5q1oghk"]
+[gd_scene load_steps=10 format=3 uid="uid://dvl60w5q1oghk"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_3ne2t"]
 [ext_resource type="Script" path="res://src/main/world.gd" id="2_38wir"]
+[ext_resource type="Script" path="res://src/main/screen.gd" id="2_dkibe"]
 [ext_resource type="Script" path="res://src/main/camera.gd" id="2_jm13r"]
 [ext_resource type="Script" path="res://src/main/sky.gd" id="3_nw6n4"]
 [ext_resource type="Script" path="res://src/main/ground.gd" id="4_fvoxd"]
@@ -11,6 +12,9 @@
 
 [node name="Main" type="Node"]
 script = ExtResource("1_3ne2t")
+
+[node name="Screen" type="CanvasLayer" parent="."]
+script = ExtResource("2_dkibe")
 
 [node name="World" type="Node" parent="."]
 script = ExtResource("2_38wir")

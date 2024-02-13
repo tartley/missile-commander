@@ -23,10 +23,10 @@ the Open Font License (OFL).
 
 * Intro screen before game starts, with:
   - game title
-  * Consider title should be fixed in screen co-ordinates
+  - Consider title should be fixed in screen co-ordinates
+  - Pressing fire starts game
   * Keys: A | W or S | D to launch from each defence center
   * 'press fire to start'
-  - Pressing fire starts game
 
 * All cities destroyed is game over
   * A game over screen

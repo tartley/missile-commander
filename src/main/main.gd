@@ -13,7 +13,7 @@ func _ready():
     # Begin by showing the title screen
     var title_screen:TitleScreen = TitleScreenScene.instantiate()
     title_screen.tree_exited.connect(on_title_screen_exit)
-    add_child(title_screen)
+    Common.screen.add_child(title_screen)
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
