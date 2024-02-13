@@ -8,9 +8,9 @@ func _ready() -> void:
     Common.main = get_tree().root.get_node("Main")
 
     # Inject dependencies
-    $Camera.mouse = $Mouse
+    $World/Camera.mouse = $World/Mouse
     for base in get_tree().get_nodes_in_group("bases"):
-        base.mouse = $Mouse
+        base.mouse = $World/Mouse
 
     # Begin by showing the title screen
     var title_screen:TitleScreen = TitleScreenScene.instantiate()
@@ -27,5 +27,5 @@ func _unhandled_input(event:InputEvent):
 
 func on_title_screen_exit():
     var game = GameScene.instantiate()
-    game.mouse = $Mouse
+    game.mouse = $World/Mouse
     add_child.call_deferred(game)

@@ -11,27 +11,29 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_3ne2t")
 
+[node name="World" type="Node" parent="."]
+
+[node name="Ground" type="Area2D" parent="World"]
+z_index = 2
+collision_layer = 0
+script = ExtResource("4_fvoxd")
+
+[node name="Mouse" type="Node2D" parent="World"]
+script = ExtResource("5_i0hgq")
+
+[node name="Sky" type="Node2D" parent="World"]
+script = ExtResource("3_nw6n4")
+
+[node name="Camera" type="Camera2D" parent="World"]
+position = Vector2(0, -12000)
+ignore_rotation = false
+script = ExtResource("2_jm13r")
+
 [node name="Geometry" type="Node" parent="."]
 script = ExtResource("6_hh5ig")
 
 [node name="Common" type="Node" parent="."]
 script = ExtResource("7_ucqwb")
 
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2(0, -12000)
-ignore_rotation = false
-script = ExtResource("2_jm13r")
-
-[node name="Sky" type="Node2D" parent="."]
-script = ExtResource("3_nw6n4")
-
-[node name="Mouse" type="Node2D" parent="."]
-script = ExtResource("5_i0hgq")
-
-[node name="Ground" type="Area2D" parent="."]
-z_index = 2
-collision_layer = 0
-script = ExtResource("4_fvoxd")
-
 [connection signal="child_exiting_tree" from="." to="." method="on_child_exit"]
-[connection signal="area_entered" from="Ground" to="Ground" method="on_area_entered"]
+[connection signal="area_entered" from="World/Ground" to="World/Ground" method="on_area_entered"]
