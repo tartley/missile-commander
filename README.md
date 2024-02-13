@@ -16,49 +16,17 @@ Sound effects created using:
 * [Jsfxr](https://sfxr.me/) by Eric Fredricksen with contributions by Chris McCormick.
 * [Chiptone](https://sfbgames.itch.io/chiptone) by Tom Vian.
 
+Font 'Orbitron' by [Matt McInerney](http://pixelspread.com/), licensed under
+the Open Font License (OFL).
+
 ## TODO
 
 * Intro screen before game starts, with:
-  * game title
+  - game title
+  * Consider title should be fixed in screen co-ordinates
   * Keys: A | W or S | D to launch from each defence center
   * 'press fire to start'
-  * Pressing fire starts game:
-
-Initial scene tree:
-
-* Main
-  * Camera
-  * Sky
-  * Mouse
-  * Ground
-    * Bases
-    * Cities
-
-`Main._ready` adds:
-
-  o TitleScreen
-    * Title
-
-Press fire, handled by TitleScreen
-* `queue_free()`
-
-Main handles `on_child_exit`, waiting for `TitleScreen._exit_tree`:
-* Adds Game(main=main)
-
-* Main
-  * Camera
-  * Sky
-  * Mouse
-  * Ground
-    * Bases
-    * Cities
-  o Game
-
-
-  * 
-
-* Font: Orbitron?
-  https://www.theleagueofmoveabletype.com/orbitron
+  - Pressing fire starts game
 
 * All cities destroyed is game over
   * A game over screen

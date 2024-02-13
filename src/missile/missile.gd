@@ -39,9 +39,6 @@ func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
 func destroy():
-    # reparent our trail onto Main
-    var main:Main = get_tree().root.get_node("Main")
-    trail.reparent(main)
+    trail.reparent(Common.main)
     trail.emitting = false
-    # and this missile is done
     queue_free()
