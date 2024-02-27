@@ -17,8 +17,6 @@ func _unhandled_input(event:InputEvent):
                 launch_shot(1)
             KEY_D:
                 launch_shot(2)
-            _:
-                pass
 
 func launch_missile(i):
     var start := Vector2(randf_range(-2000, +2000), -14100 - i * 150)

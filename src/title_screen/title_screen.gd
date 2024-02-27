@@ -27,5 +27,3 @@ func _unhandled_input(event:InputEvent):
                 queue_free()
             KEY_D:
                 queue_free()
-            _:
-                pass

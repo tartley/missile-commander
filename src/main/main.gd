@@ -20,8 +20,6 @@ func _unhandled_input(event:InputEvent):
         match event.keycode:
             KEY_ESCAPE:
                 get_tree().quit()
-            _:
-                pass
 
 func on_title_screen_exit():
     var game = GameScene.instantiate()
