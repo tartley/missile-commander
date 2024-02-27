@@ -10,6 +10,8 @@ var verts := get_regular_verts()
 var color := FORE
 var destroyed := false
 
+signal city_destroyed
+
 func _ready():
     self.add_to_group("cities")
 
@@ -45,5 +47,6 @@ func destroy():
         BangFeature.create(self.position, FORE)
         self.destroyed = true
         self.queue_redraw()
+        self.city_destroyed.emit()
     else:
         BangGround.create(self.position)

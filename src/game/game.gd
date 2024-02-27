@@ -1,10 +1,13 @@
 extends Node
 
 var mouse:Mouse
+var ground:Ground
 
 func _ready():
-    for i in range(100):
+    for i in range(1000):
         launch_missile(i)
+    for city:City in get_tree().get_nodes_in_group("cities"):
+        city.city_destroyed.connect(on_city_destroyed)
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
@@ -37,3 +40,12 @@ func choose_target() -> Array: # Array of [City|Base|null, Vector2]
 func launch_shot(base_id):
     var base:Node2D = get_tree().get_nodes_in_group("bases")[base_id]
     base.fire(self.mouse.position)
+
+func on_city_destroyed():
+    var remaining := 0
+    for city in get_tree().get_nodes_in_group("cities"):
+        if not city.destroyed:
+            remaining += 1
+    if remaining == 0:
+        # TODO some special effect first
+        queue_free()

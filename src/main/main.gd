@@ -24,4 +24,11 @@ func _unhandled_input(event:InputEvent):
 func on_title_screen_exit():
     var game = GameScene.instantiate()
     game.mouse = $World/Mouse
+    game.ground = $World/Ground
+    game.tree_exited.connect(on_game_exit)
     add_child.call_deferred(game)
+
+func on_game_exit():
+    # TODO display game over screen
+    print("game over")
+
