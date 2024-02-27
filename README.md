@@ -1,9 +1,10 @@
-# Missile Command 2023
+# Missile.cmd
 
-With vector graphics,
-by [Jonathan Hartley](https://mastodon.social/@tartley),
+Classic vector graphic city defence.
 
-A work in progress.
+## Status
+
+A work-in-progress.
 
 ## Credits
 
@@ -11,26 +12,22 @@ Original 1980 concept and implementation by David Theurer for Atari.
 
 Made in [Godot](https://godotengine.org/).
 
+Font 'Orbitron' by [Matt McInerney](http://pixelspread.com/), licensed under
+the Open Font License (OFL).
+
 Sound effects created using:
 * [Sfxr](http://drpetter.se/project_sfxr.html) by Tomas "DrPetter" Pettersson.
 * [Jsfxr](https://sfxr.me/) by Eric Fredricksen with contributions by Chris McCormick.
 * [Chiptone](https://sfbgames.itch.io/chiptone) by Tom Vian.
 
-Font 'Orbitron' by [Matt McInerney](http://pixelspread.com/), licensed under
-the Open Font License (OFL).
+This remake by Jonathan Hartley, https://tartley.com/pages/about
 
 ## TODO
 
-* Intro screen before game starts, with:
-  - game title
-  - Consider title should be fixed in screen co-ordinates
-  - Pressing fire starts game
-  * Keys: A | W or S | D to launch from each defence center
-  * 'press fire to start'
-
 * All cities destroyed is game over
   * A game over screen
-  * After a second or two, pressing fire returns to intro screen
+  * After a few seconds, returns to title screen
+  * pressing fire also returns to title screen
 
 * Incoming missiles come in waves
   * introduced by text on screen
@@ -62,14 +59,9 @@ the Open Font License (OFL).
 
 * High score
 
-* Rename for findability?
-  * Missile Commander
-  * Mslcmd
-  * msl.cmd (in use by some '100 plays' musician)
-  * Missile.cmd (no web hits)
-
-* Include credits to original game designers
+* Credits in the game?
 * Suggest a mastodon hashtag
+
 
 # Refactors
 
