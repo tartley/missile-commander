@@ -26,7 +26,7 @@ func launch_missile(i):
     var td = choose_target()
     var target = td[0]
     var dest = td[1]
-    var speed := randf_range(40, 300)
+    var speed := randf_range(400, 3000)
     Missile.create(start, target, dest, speed)
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]

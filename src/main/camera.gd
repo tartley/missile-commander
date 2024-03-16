@@ -13,3 +13,4 @@ func _process(_delta):
         radius * sin(rotation),
         -radius * cos(rotation) - get_viewport_rect().size.y * mouse.normalized.y * 0.1
     )
+

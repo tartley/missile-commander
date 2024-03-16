@@ -2,6 +2,7 @@ class_name Main extends Node
 
 const TitleScreenScene:PackedScene = preload("res://src/title_screen/title_screen.tscn")
 const GameScene:PackedScene = preload("res://src/game/game.tscn")
+const GameOverScene:PackedScene = preload("res://src/game_over/game_over.tscn")
 
 func _ready():
     # Inject dependencies
@@ -29,6 +30,5 @@ func on_title_screen_exit():
     add_child.call_deferred(game)
 
 func on_game_exit():
-    # TODO display game over screen
-    print("game over")
-
+    var game_over:GameOver = GameOverScene.instantiate()
+    Common.screen.add_child(game_over)
