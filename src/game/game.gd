@@ -20,13 +20,16 @@ func _unhandled_input(event:InputEvent):
                 launch_shot(1)
             KEY_D:
                 launch_shot(2)
+            KEY_F1:
+                for city in get_tree().get_nodes_in_group("cities"):
+                    city.destroy()
 
 func launch_missile(i):
     var start := Vector2(randf_range(-2000, +2000), -14100 - i * 150)
     var td = choose_target()
     var target = td[0]
     var dest = td[1]
-    var speed := randf_range(400, 3000)
+    var speed := randf_range(40, 300)
     Missile.create(start, target, dest, speed)
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
@@ -49,3 +52,5 @@ func on_city_destroyed():
     if remaining == 0:
         # TODO some special effect first
         queue_free()
+
+
