@@ -42,16 +42,17 @@ func get_destroyed_verts():
     return retval
 
 func reset():
-    self.verts = get_regular_verts()
-    self.color = FORE
-    self.destroyed = false
-    self.queue_redraw()
+    if not verts or destroyed:
+        self.verts = get_regular_verts()
+        self.color = FORE
+        self.destroyed = false
+        self.queue_redraw()
 
 func destroy():
     self.verts = get_destroyed_verts()
-    self.color = FORE_DESTROYED
     if not self.destroyed:
         BangFeature.create(self.position, FORE)
+        self.color = FORE_DESTROYED
         self.destroyed = true
         self.queue_redraw()
         self.city_destroyed.emit()
