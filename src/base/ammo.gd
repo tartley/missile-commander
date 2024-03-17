@@ -2,8 +2,12 @@ extends Node2D
 
 const SIZE := 8.0
 const FORE := Color.GRAY
+const MAX := 15
 
-var count := 15
+var count : int
+
+func _ready():
+    reset()
 
 func _draw():
     for i in range(self.count):
@@ -30,7 +34,7 @@ func offset_verts(offset, verts):
     return result
 
 func get_offset(index:int) -> Vector2:
-    """Convert an ammo index (0-15) into co-ordinates at which that ammo should be drawn"""
+    """Convert an ammo index (0-14) into co-ordinates at which that ammo should be drawn"""
     assert(0 <= index and index <= 14, "Ammo.get_offset index {0} out of range".format([index]))
     var x:int
     var y:int
@@ -50,6 +54,10 @@ func get_offset(index:int) -> Vector2:
         y = -1
         x = 4 - index * 2
     return Vector2(x * SIZE * 2, y * SIZE * 3)
+
+func reset():
+    self.count = MAX
+    queue_redraw()
 
 func destroy():
     self.count = 0

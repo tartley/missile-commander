@@ -5,14 +5,13 @@ const FORE_DESTROYED := Color(.3, .3, .3)
 const FILL := Color.BLACK
 
 var size:float
-var destroyed:bool = false
 var verts:Array[Vector2]
 var color:Color
 
 func _ready():
     self.size = get_parent().SIZE
     self.verts = get_verts()
-    self.color = FORE
+    self.reset()
 
 func _draw():
     draw_polygon(self.verts, [FILL])
@@ -27,8 +26,10 @@ func get_verts() -> Array[Vector2]:
         Vector2(     0, -size/16), # left(base) bottom
     ]
 
+func reset():
+    self.color = FORE
+    self.queue_redraw()
+
 func destroy() -> void:
     self.color = FORE_DESTROYED
-    if not self.destroyed:
-        self.queue_redraw()
-    self.destroyed = true
+    self.queue_redraw()

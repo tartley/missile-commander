@@ -10,11 +10,7 @@ func _ready():
     $World/Camera.mouse = $World/Mouse
     for base in get_tree().get_nodes_in_group("bases"):
         base.mouse = $World/Mouse
-
-    # Begin by showing the title screen
-    var title_screen:TitleScreen = TitleScreenScene.instantiate()
-    title_screen.tree_exited.connect(on_title_screen_exit)
-    Common.screen.add_child(title_screen)
+    show_title_screen()
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
@@ -22,7 +18,13 @@ func _unhandled_input(event:InputEvent):
             KEY_ESCAPE:
                 get_tree().quit()
 
+func show_title_screen():
+    var title_screen:TitleScreen = TitleScreenScene.instantiate()
+    title_screen.tree_exited.connect(on_title_screen_exit)
+    Common.screen.add_child(title_screen)
+
 func on_title_screen_exit():
+    # start the game
     var game = GameScene.instantiate()
     game.mouse = $World/Mouse
     game.ground = $World/Ground
@@ -31,4 +33,8 @@ func on_title_screen_exit():
 
 func on_game_exit():
     var game_over:GameOver = GameOverScene.instantiate()
+    game_over.tree_exited.connect(on_game_over_exit)
     Common.screen.add_child(game_over)
+
+func on_game_over_exit():
+    show_title_screen()

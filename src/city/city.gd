@@ -6,13 +6,14 @@ const FORE := Color.RED
 const FORE_DESTROYED := Color(.3, .3, .3)
 const FILL := Color.BLACK
 
-var verts := get_regular_verts()
-var color := FORE
-var destroyed := false
+var verts : Array[Vector2]
+var color : Color
+var destroyed : bool
 
 signal city_destroyed
 
 func _ready():
+    self.reset()
     self.add_to_group("cities")
 
 func _draw():
@@ -39,6 +40,12 @@ func get_destroyed_verts():
         retval.append(Vector2(-SIZE/2.0 + column * SIZE/COLUMNS, heights[column]))
     retval.append(Vector2(+SIZE/2.0, 0))
     return retval
+
+func reset():
+    self.verts = get_regular_verts()
+    self.color = FORE
+    self.destroyed = false
+    self.queue_redraw()
 
 func destroy():
     self.verts = get_destroyed_verts()

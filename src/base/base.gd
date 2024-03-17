@@ -8,10 +8,11 @@ const FILL := Color.BLACK
 # We use a reference to the mouse to swivel our turret towards it
 var mouse:Node2D
 var verts:Array[Vector2] = get_verts()
-var color:Color = FORE
-var destroyed:bool = false
+var color:Color
+var destroyed:bool
 
 func _ready():
+    self.reset()
     $Turret.size = SIZE
     $Turret.position = Vector2(0, SIZE * 3/8)
     self.add_to_group("bases")
@@ -56,6 +57,13 @@ func fire(dest:Vector2):
             $Ammo.decrement()
             Shot.create(to_global($Turret.position), dest)
 
+func reset():
+    $Turret.reset()
+    $Ammo.reset()
+    self.color = FORE
+    self.destroyed = false
+    self.queue_redraw()
+
 func destroy():
     $Turret.destroy()
     $Ammo.destroy()
@@ -66,3 +74,4 @@ func destroy():
     else:
         BangGround.create(self.position)
     self.destroyed = true
+

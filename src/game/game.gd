@@ -7,7 +7,10 @@ func _ready():
     for i in range(1000):
         launch_missile(i)
     for city:City in get_tree().get_nodes_in_group("cities"):
+        city.reset()
         city.city_destroyed.connect(on_city_destroyed)
+    for base:Base in get_tree().get_nodes_in_group("bases"):
+        base.reset()
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:

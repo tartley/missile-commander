@@ -2,6 +2,10 @@ class_name TitleScreen extends Node2D
 
 const font:FontFile = preload("res://fonts/Orbitron Medium.otf")
 
+func _ready():
+    for missile in get_tree().get_nodes_in_group("missiles"):
+        missile.destroy()
+
 func _draw():
     var rect = get_viewport_rect()
     var height = rect.size.y / 3

@@ -10,3 +10,7 @@ func _draw():
     var height = 256
     draw_string(font, Vector2(0, y), text, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, height, Color.BLACK)
     draw_string_outline(font, Vector2(0, y), text, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, height, 8, Color.CYAN)
+
+func _unhandled_input(event:InputEvent):
+    if event is InputEventKey and event.pressed and not event.echo:
+        queue_free()

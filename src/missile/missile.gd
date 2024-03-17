@@ -23,6 +23,7 @@ static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float):
     Common.world.add_child(missile)
 
 func _ready() -> void:
+    self.add_to_group("missiles")
     # our trail
     $Trail.position = Vector2(SIZE/2, 0)
     $Trail.direction = Vector2.LEFT
@@ -41,6 +42,7 @@ func _draw():
 
 func destroy():
     var trail := $Trail
-    trail.reparent(Common.world)
-    trail.emitting = false
+    if trail:
+        trail.reparent(Common.world)
+        trail.emitting = false
     queue_free()
