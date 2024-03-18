@@ -24,14 +24,17 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
 
 ## TODO
 
-* New screenshot
-  * mastodon poll for name
-    Missile Command 2024
-    MISSILE.CMD
-    Missile Commander
-    Missile Com
+* Automate release for:
+  * With version number in executable filename
+  * Linux
+  * MacOS
+  * Windows
+  * Web
 
+* Check name poll on mastodon
 * Suggest a mastodon hashtag
+
+* mouse buttons fire
 
 * Display a score
   See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text
@@ -46,16 +49,6 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
 * Resurrect a city, in the least convenient position
   (prefer this over awarding a shield, since it forces player to defend
   multiple locations)
-
-* Version number
-  * in executable filename
-  * on title screen
-
-* Automate release for:
-  * Linux
-  * MacOS
-  * Windows
-  * Web
 
 * Upload to itchio?
 

@@ -19,6 +19,11 @@ func _draw():
         font, Vector2(0, rect.size.y / 2 + 128), "Press fire to start",
         HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, 64, Color.CYAN
     )
+    var vstr : String = "Version %s (work in progress)" % ProjectSettings.get_setting("application/config/version", "unknown")
+    draw_string(
+        font, Vector2(rect.position.x + 16, rect.end.y - 16), vstr, HORIZONTAL_ALIGNMENT_LEFT, rect.size.x, 48, Color("666")
+    )
+
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
