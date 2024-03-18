@@ -7,6 +7,7 @@ version := $(shell grep <project.godot "config/version" | cut -d'"' -f2 | tr '.'
 
 release:  ## Create Linux executable in dist/
 	godot --quiet --headless --export-release 'Linux/X11' dist/Missile-Commander-v$(version)
+	godot --quiet --headless --export-release 'Windows Desktop' dist/Missile-Commander-v$(version).exe
 
 clean:  ## Remove dist/*
 	rm -rf dist/*
