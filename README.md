@@ -24,20 +24,34 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
 
 ## TODO
 
-* Automate release for:
-  * With version number in executable filename
+* Automate release with version number in executable filename for:
   * Linux
   * MacOS
   * Windows
-  * Web
+  * Web?
 
 * Check name poll on mastodon
-* Suggest a mastodon hashtag
+
+* Change name to "Missile Commander"
+
+* A custom icon to replace the default godot.svg
 
 * mouse buttons fire
 
 * Display a score
   See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text
+
+* BUG: Rarely, a falling missile can pass right through an explosion.
+       Saw one fly right plain across the explode as it was at greatest radius.
+       Other missiles were destroyed by that same explosion.
+* BUG: missile.gd:44 @ destroy(): Node not found: "Trail" (relative to "/root/Main/World/@Area2D@28").
+       sometimes a destroyed missile has no trail.... hmmm...
+            missile.gd:44 @ destroy()
+            bang_sky.gd:72 @ destroy_nearby_missiles()
+            bang_sky.gd:35 @ _process()
+* BUG: mouse capture reportedly doesn't work in i3
+* BUG: mouse capture doesn't work in web
+* BUG: fullscreen doesn't work in web, needs to be in response to user event
 
 * Incoming missiles come in waves
   * text on screen
@@ -68,6 +82,7 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
 * High score
 
 * Credits in the game?
+* Suggest a mastodon hashtag. Put in README/credits.
 
 * City/base destruction (BangFeature) needs special effects:
   * screen shake / zoom
@@ -75,10 +90,6 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
   * smoke trail
   * erode base verts?
   * base turret droops?
-
-* BUG: mouse capture reportedly doesn't work in i3
-* BUG: mouse capture doesn't work in web
-* BUG: fullscreen doesn't work in web, needs to be in response to user event
 
 * BangSky should fluctuate in size. Maybe it is rendered as three different
   circles, and our computed collision 'size' is the max of them? At the very
