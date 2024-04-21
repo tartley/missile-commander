@@ -21,13 +21,10 @@ Sound effects created using:
 * [Chiptone](https://sfbgames.itch.io/chiptone) by Tom Vian.
 
 This remake made in [Godot](https://godotengine.org/) by [Jonathan
-Hartley](https://tartley.com/pages/about).
+Hartley](https://tartley.com/pages/about), and Zander Hartley.
 
 
 ## TODO
-
-* Title screen should say "use the mouse to aim"
-* title screen should say "mouse buttons fire"
 
 * Display a score
   See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text
