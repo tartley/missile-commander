@@ -1,16 +1,16 @@
 # Missile Commander
 
-Vector graphic remake of city defence arcade classic "Missile Command".
+Vector graphic remake of 1980 city defence arcade classic "Missile Command".
 
 ## Status
 
-A work-in-progress.
+A work-in-progress. Not remotely finished, but playable for 30 seconds.
+The incoming missiles have no 'end of wave' - they just slowly dwindle
+to nothing, leaving you waiting forever.
 
 ## Credits
 
 Original 1980 concept and implementation by David Theurer for Atari.
-
-Made in [Godot](https://godotengine.org/).
 
 Font 'Orbitron' by [Matt McInerney](http://pixelspread.com/), licensed under
 the Open Font License (OFL).
@@ -20,11 +20,13 @@ Sound effects created using:
 * [Jsfxr](https://sfxr.me/) by Eric Fredricksen with contributions by Chris McCormick.
 * [Chiptone](https://sfbgames.itch.io/chiptone) by Tom Vian.
 
-This remake by Jonathan Hartley, https://tartley.com/pages/about
+This remake made in [Godot](https://godotengine.org/) by [Jonathan
+Hartley](https://tartley.com/pages/about).
+
 
 ## TODO
 
-* mouse buttons fire
+* mouse buttons should fire
 * Title screen should say "use the mouse to aim"
 * title screen should say "mouse buttons fire"
 
