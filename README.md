@@ -26,7 +26,6 @@ Hartley](https://tartley.com/pages/about).
 
 ## TODO
 
-* mouse buttons should fire
 * Title screen should say "use the mouse to aim"
 * title screen should say "mouse buttons fire"
 

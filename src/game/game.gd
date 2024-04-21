@@ -24,8 +24,23 @@ func _unhandled_input(event:InputEvent):
             KEY_D:
                 launch_shot(2)
             KEY_F1:
-                for city in get_tree().get_nodes_in_group("cities"):
-                    city.destroy()
+                debug_destroy_cities()
+    if event is InputEventMouseButton and event.pressed:
+        match event.button_index:
+            MOUSE_BUTTON_LEFT:
+                launch_shot(0)
+            MOUSE_BUTTON_MIDDLE:
+                launch_shot(1)
+            MOUSE_BUTTON_RIGHT:
+                launch_shot(2)
+
+func debug_destroy_cities():
+    for city in get_tree().get_nodes_in_group("cities"):
+        city.destroy()
+
+func launch_shot(base_id):
+    var base:Node2D = get_tree().get_nodes_in_group("bases")[base_id]
+    base.fire(self.mouse.position)
 
 func launch_missile(i):
     var start := Vector2(randf_range(-2000, +2000), -14100 - i * 150)
@@ -43,10 +58,6 @@ func choose_target() -> Array: # Array of [City|Base|null, Vector2]
         targets.append([null, pos])
     return targets.pick_random()
 
-func launch_shot(base_id):
-    var base:Node2D = get_tree().get_nodes_in_group("bases")[base_id]
-    base.fire(self.mouse.position)
-
 func on_city_destroyed():
     var remaining := 0
     for city in get_tree().get_nodes_in_group("cities"):
@@ -55,5 +66,3 @@ func on_city_destroyed():
     if remaining == 0:
         # TODO some special effect first
         queue_free()
-
-

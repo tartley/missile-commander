@@ -27,12 +27,8 @@ func _draw():
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
-        match event.keycode:
-            KEY_A:
-                queue_free()
-            KEY_W:
-                queue_free()
-            KEY_S:
-                queue_free()
-            KEY_D:
-                queue_free()
+        if event.keycode in [KEY_A, KEY_W, KEY_S, KEY_D]:
+            queue_free()
+    if event is InputEventMouseButton and event.pressed:
+        if event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_RIGHT]:
+            queue_free()
