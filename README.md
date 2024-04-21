@@ -1,6 +1,6 @@
-# Missile.cmd
+# Missile Commander
 
-Classic vector graphic city defence.
+Vector graphic remake of city defence arcade classic "Missile Command".
 
 ## Status
 
@@ -24,18 +24,25 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
 
 ## TODO
 
-* Title screen should say "use the mouse to aim"
-
-* Automate release with version number in executable filename for:
-  * Linux
-  * MacOS
-  * Windows
-  * Web?
-
 * mouse buttons fire
+* Title screen should say "use the mouse to aim"
+* title screen should say "mouse buttons fire"
 
 * Display a score
   See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text
+
+* BUG: mouse capture doesn't work in web. Perhaps my clever minimal event
+       handlers are insufficient.
+* BUG: fullscreen doesn't work in web, needs to be in response to a user event
+       i.e. we must add a 'fullscreen' toggle button.
+
+* Automate release with version number in executable filename for:
+  * Linux
+  * Windows
+  * Web?
+  * MacOS? Requires me to pay money to Apple???
+
+* A custom icon to replace the default godot.svg
 
 * Incoming missiles should come in waves
   * text on screen
@@ -59,10 +66,6 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
          bang_sky.gd:35 @ _process()
        Sometimes a destroyed missile has no trail.... hmmm...
 * BUG: mouse capture reportedly doesn't work in i3
-* BUG: mouse capture doesn't work in web. Perhaps my clever minimal event
-       handlers are insufficient.
-* BUG: fullscreen doesn't work in web, needs to be in response to a user event
-       i.e. we must add a 'fullscreen' toggle button.
 
 * A custom icon for downloadable executable
 
