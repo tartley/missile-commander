@@ -24,39 +24,22 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
 
 ## TODO
 
+* Title screen should say "use the mouse to aim"
+
 * Automate release with version number in executable filename for:
   * Linux
   * MacOS
   * Windows
   * Web?
 
-* Check name poll on mastodon
-
-* Change name to "Missile Commander"
-
-* A custom icon to replace the default godot.svg
-
 * mouse buttons fire
 
 * Display a score
   See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text
 
-* BUG: Rarely, a falling missile can pass right through an explosion.
-       Saw one fly right plain across the explode as it was at greatest radius.
-       Other missiles were destroyed by that same explosion.
-* BUG: missile.gd:44 @ destroy(): Node not found: "Trail" (relative to "/root/Main/World/@Area2D@28").
-       sometimes a destroyed missile has no trail.... hmmm...
-            missile.gd:44 @ destroy()
-            bang_sky.gd:72 @ destroy_nearby_missiles()
-            bang_sky.gd:35 @ _process()
-* BUG: mouse capture reportedly doesn't work in i3
-* BUG: mouse capture doesn't work in web
-* BUG: fullscreen doesn't work in web, needs to be in response to user event
-
-* Incoming missiles come in waves
+* Incoming missiles should come in waves
   * text on screen
   * alert sound
-  * speech?
   * fire missiles throughout the wave
 
 * Bonus points at end of each wave
@@ -64,7 +47,26 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
   (prefer this over awarding a shield, since it forces player to defend
   multiple locations)
 
-* Upload to itchio?
+* BUG: Rarely, a falling missile can pass right through an explosion.
+       Saw one fly right plain across the explode as it was at greatest radius.
+       Other missiles were destroyed by that same explosion.
+       Cal also reports collision detection errors.
+       Consider completely removing use of godot collisions and just doing it
+       myself, brute force.
+* BUG: missile.gd:44 @ destroy(): Node not found: "Trail" (relative to "/root/Main/World/@Area2D@28").
+         missile.gd:44 @ destroy()
+         bang_sky.gd:72 @ destroy_nearby_missiles()
+         bang_sky.gd:35 @ _process()
+       Sometimes a destroyed missile has no trail.... hmmm...
+* BUG: mouse capture reportedly doesn't work in i3
+* BUG: mouse capture doesn't work in web. Perhaps my clever minimal event
+       handlers are insufficient.
+* BUG: fullscreen doesn't work in web, needs to be in response to a user event
+       i.e. we must add a 'fullscreen' toggle button.
+
+* A custom icon for downloadable executable
+
+* CRT glow
 
 * Remove Esc to immediate exit
 * Pressing escape at any time goes to pause screen, which displays:
@@ -76,8 +78,6 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
 * Pressing R returns to Intro
 * Pressing Q quits the program
 * losing focus during game also goes to this pause screen
-
-* CRT glow
 
 * High score
 
