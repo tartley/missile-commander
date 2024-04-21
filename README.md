@@ -1,6 +1,6 @@
-# Missile.cmd
+# Missile Commander
 
-Classic vector graphic city defence.
+Vector graphic remake of city defence arcade classic "Missile Command".
 
 ## Status
 
@@ -31,8 +31,6 @@ This remake by Jonathan Hartley, https://tartley.com/pages/about
   * Web?
 
 * Check name poll on mastodon
-
-* Change name to "Missile Commander"
 
 * A custom icon to replace the default godot.svg
 
