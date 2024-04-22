@@ -16,6 +16,7 @@ func _draw():
     # Instructions
     var color := Color.DARK_CYAN
     var ypos : int = rect.size.y / 2
+    var font_size := 64
     for line in [
         "Use mouse to aim,",
         "and mouse buttons or A, S, and D,",
@@ -24,9 +25,9 @@ func _draw():
         "Press fire to start",
     ]:
         draw_string(
-            font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, 64, color,
+            font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, color,
         )
-        ypos += 64
+        ypos += font_size
 
     # Version
     var vstr : String = "Version %s: Unfinished but playable for 30 seconds." % ProjectSettings.get_setting("application/config/version", "unknown")

@@ -26,21 +26,38 @@ Hartley](https://tartley.com/pages/about), and Zander Hartley.
 
 ## TODO
 
+* Is the following a case of checking for variables != null (or truthy) before
+  using them? If the instance has been marked for deletion then it will not be
+  null, but dereferencing it will be treated as though it was null. Instead use
+  is_instance_valid. Alternatively, do not use such values after marking for
+  deletion, i.e. do not use that variable again, or delete the value from your
+  array, etc.)
+
+* BUG: Sometimes a destroyed missile has no trail.... hmmm...
+  missile.gd:44 @ destroy(): Node not found: "Trail" (relative to "/root/Main/World/@Area2D@28").
+    missile.gd:44 @ destroy()
+    bang_sky.gd:72 @ destroy_nearby_missiles()
+    bang_sky.gd:35 @ _process()
+
 * Display a score
   See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text
+
+* Automate release with version number in executable filename for:
+  * Linux
+  * Windows
+
+* New screenshots, title screen (new title) and 'action' (with score)
+  * commit and upload to itchio
+  * upload latest README as description while I'm at it
+  * I suppose I ought to upload a new release too
 
 * BUG: mouse capture doesn't work in web. Perhaps my clever minimal event
        handlers are insufficient.
 * BUG: fullscreen doesn't work in web, needs to be in response to a user event
        i.e. we must add a 'fullscreen' toggle button.
 
-* Automate release with version number in executable filename for:
-  * Linux
-  * Windows
-  * Web?
-  * MacOS? Requires me to pay money to Apple???
-
-* A custom icon to replace the default godot.svg
+* Make a release including 'web' platform.
+  * Add it to documented platforms.
 
 * Incoming missiles should come in waves
   * text on screen
@@ -50,7 +67,7 @@ Hartley](https://tartley.com/pages/about), and Zander Hartley.
 * Bonus points at end of each wave
 * Resurrect a city, in the least convenient position
   (prefer this over awarding a shield, since it forces player to defend
-  multiple locations)
+  multiple separate locations)
 
 * BUG: Rarely, a falling missile can pass right through an explosion.
        Saw one fly right plain across the explode as it was at greatest radius.
@@ -58,16 +75,15 @@ Hartley](https://tartley.com/pages/about), and Zander Hartley.
        Cal also reports collision detection errors.
        Consider completely removing use of godot collisions and just doing it
        myself, brute force.
-* BUG: missile.gd:44 @ destroy(): Node not found: "Trail" (relative to "/root/Main/World/@Area2D@28").
-         missile.gd:44 @ destroy()
-         bang_sky.gd:72 @ destroy_nearby_missiles()
-         bang_sky.gd:35 @ _process()
-       Sometimes a destroyed missile has no trail.... hmmm...
+
 * BUG: mouse capture reportedly doesn't work in i3
 
-* A custom icon for downloadable executable
-
 * CRT glow
+
+* Consider rich text label for title screen so that I can use bold, colors, etc.
+  https://docs.godotengine.org/en/stable/tutorials/ui/bbcode_in_richtextlabel.html
+
+* A custom icon for downloadable executables
 
 * Remove Esc to immediate exit
 * Pressing escape at any time goes to pause screen, which displays:
@@ -82,7 +98,7 @@ Hartley](https://tartley.com/pages/about), and Zander Hartley.
 
 * High score
 
-* Credits in the game?
+* Credits in the game
 * Suggest a mastodon hashtag. Put in README/credits.
 
 * City/base destruction (BangFeature) needs special effects:
@@ -92,7 +108,7 @@ Hartley](https://tartley.com/pages/about), and Zander Hartley.
   * erode base verts?
   * base turret droops?
 
-* BangSky should fluctuate in size. Maybe it is rendered as three different
+* BangSky should fluctuate in size? Maybe it is rendered as three different
   circles, and our computed collision 'size' is the max of them? At the very
   least, this would be easier to debug/tune than my initial invisible
   attempt.
