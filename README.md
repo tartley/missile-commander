@@ -17,27 +17,29 @@ the Open Font License (OFL).
 
 Sound effects created using:
 * [Sfxr](http://drpetter.se/project_sfxr.html) by Tomas "DrPetter" Pettersson.
-* [Jsfxr](https://sfxr.me/) by Eric Fredricksen with contributions by Chris McCormick.
+* [Jsfxr](https://sfxr.me/) by Eric Fredricksen with contributions by Chris
+  McCormick.
 * [Chiptone](https://sfbgames.itch.io/chiptone) by Tom Vian.
 
-This remake made in [Godot](https://godotengine.org/) by [Jonathan
-Hartley](https://tartley.com/pages/about), and Zander Hartley.
-
+This remake made in [Godot](https://godotengine.org/) by Zander Hartley (aged
+12) and [Jonathan Hartley](https://tartley.com/pages/about).
 
 ## TODO
 
-* Is the following a case of checking for variables != null (or truthy) before
-  using them? If the instance has been marked for deletion then it will not be
-  null, but dereferencing it will be treated as though it was null. Instead use
-  is_instance_valid. Alternatively, do not use such values after marking for
-  deletion, i.e. do not use that variable again, or delete the value from your
-  array, etc.)
+* Move all of Godot project into a subfolder
+  Then images such as screenshots don't have to be pro-actively marked as "do
+  not import", generating a config file for each.
 
-* BUG: Sometimes a destroyed missile has no trail.... hmmm...
-  missile.gd:44 @ destroy(): Node not found: "Trail" (relative to "/root/Main/World/@Area2D@28").
-    missile.gd:44 @ destroy()
-    bang_sky.gd:72 @ destroy_nearby_missiles()
-    bang_sky.gd:35 @ _process()
+* BUG: Rarely, a falling missile can pass right through an explosion. Cal also
+  reports collision detection errors. I once saw one fly right plain across the
+  explode as it was at greatest radius. Other missiles were destroyed by that
+  same explosion. I don't actually know how that happens.
+
+  Consider completely removing use of Godot collisions:
+
+  1. Time the current method.
+  2. Replace current method with a brute force one.
+  3. Compare timings.
 
 * Display a score
   See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text
@@ -51,14 +53,6 @@ Hartley](https://tartley.com/pages/about), and Zander Hartley.
   * upload latest README as description while I'm at it
   * I suppose I ought to upload a new release too
 
-* BUG: mouse capture doesn't work in web. Perhaps my clever minimal event
-       handlers are insufficient.
-* BUG: fullscreen doesn't work in web, needs to be in response to a user event
-       i.e. we must add a 'fullscreen' toggle button.
-
-* Make a release including 'web' platform.
-  * Add it to documented platforms.
-
 * Incoming missiles should come in waves
   * text on screen
   * alert sound
@@ -69,14 +63,24 @@ Hartley](https://tartley.com/pages/about), and Zander Hartley.
   (prefer this over awarding a shield, since it forces player to defend
   multiple separate locations)
 
-* BUG: Rarely, a falling missile can pass right through an explosion.
-       Saw one fly right plain across the explode as it was at greatest radius.
-       Other missiles were destroyed by that same explosion.
-       Cal also reports collision detection errors.
-       Consider completely removing use of godot collisions and just doing it
-       myself, brute force.
-
+* BUG: mouse capture doesn't work in web. Needs to be in response to a user
+  event. Also: Perhaps my clever minimal event handlers are insufficient.
+* BUG: fullscreen doesn't work in web, needs to be in response to a user event
+       i.e. we must add a 'fullscreen' toggle button.
+* Make a release including 'web' platform.
+  * Add it to documented platforms.
 * BUG: mouse capture reportedly doesn't work in i3
+* Is the following a case of checking for variables != null (or truthy) before
+  using them? If the instance has been marked for deletion then it will not
+  be null, but dereferencing it will be treated as though it was null.
+  Instead use is_instance_valid. Alternatively, do not use such values after
+  marking for deletion, i.e. do not use that variable again, or delete the
+  value from your array, etc.)
+* BUG: Sometimes a destroyed missile has no trail.... hmmm...
+  missile.gd:44 @ destroy(): Node not found: "Trail" (relative to "/root/Main/World/@Area2D@28").
+    missile.gd:44 @ destroy()
+    bang_sky.gd:72 @ destroy_nearby_missiles()
+    bang_sky.gd:35 @ _process()
 
 * CRT glow
 
@@ -85,16 +89,10 @@ Hartley](https://tartley.com/pages/about), and Zander Hartley.
 
 * A custom icon for downloadable executables
 
-* Remove Esc to immediate exit
-* Pressing escape at any time goes to pause screen, which displays:
-  * 'Paused'
-  * 'Esc to resume'
-  * 'R to restart' (if a game is in progress)
-  * 'Q to quit'
-* Pressing Esc resumes
-* Pressing R returns to Intro
-* Pressing Q quits the program
-* losing focus during game also goes to this pause screen
+* Esc in game goes to game-over (via existing `destroy_all_cities`)
+* Esc on game-over goes to title screen
+* Esc on title screen exits
+* Add instructions "Esc to exit defence console"
 
 * High score
 
