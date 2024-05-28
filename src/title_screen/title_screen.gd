@@ -46,11 +46,19 @@ func _draw():
         font, Vector2(rect.position.x + 16, rect.end.y - 16), vstr, HORIZONTAL_ALIGNMENT_LEFT, rect.size.x, 48, Color("888")
     )
 
+func event_is_fire_button(event) -> bool:
+    return bool(
+        (
+            event is InputEventKey and
+            not event.echo and
+            event.keycode in [KEY_A, KEY_W, KEY_S, KEY_D]
+        ) or (
+            event is InputEventMouseButton and
+            event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_RIGHT]
+        ) and
+        event.pressed
+    )
 
 func _unhandled_input(event:InputEvent):
-    if event is InputEventKey and event.pressed and not event.echo:
-        if event.keycode in [KEY_A, KEY_W, KEY_S, KEY_D]:
-            queue_free()
-    if event is InputEventMouseButton and event.pressed:
-        if event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_RIGHT]:
-            queue_free()
+    if event_is_fire_button(event):
+        queue_free()
