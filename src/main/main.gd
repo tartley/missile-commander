@@ -21,7 +21,7 @@ func _unhandled_input(event:InputEvent):
 func show_title_screen():
     var title_screen:TitleScreen = TitleScreenScene.instantiate()
     title_screen.tree_exited.connect(on_title_screen_exit)
-    Common.screen.add_child(title_screen)
+    Common.screen.add_child.call_deferred(title_screen)
 
 func on_title_screen_exit():
     # start the game
