@@ -14,3 +14,5 @@ func _draw():
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
         queue_free()
+    if event is InputEventMouseButton and event.pressed:
+        queue_free()
