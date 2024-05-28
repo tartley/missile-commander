@@ -8,15 +8,17 @@ func _ready():
 
 func _draw():
     var rect = get_viewport_rect()
-    var height = rect.size.y / 3
     # Title
-    draw_string(font, Vector2(0, height), "Missile Commander", HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, 256, Color.BLACK)
-    draw_string_outline(font, Vector2(0, height), "Missile Commander", HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, 256, 8, Color.CYAN)
+    var ypos:int = rect.size.y / 3
+    var font_size := 256
+    for line in ["Missile", "Commander"]:
+        draw_string(font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, Color.BLACK)
+        draw_string_outline(font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, 8, Color.CYAN)
+        ypos += font_size
 
     # Instructions
-    var color := Color.DARK_CYAN
-    var ypos : int = rect.size.y / 2
-    var font_size := 64
+    ypos = rect.size.y * 7 / 12
+    font_size = 64
     for line in [
         "Use mouse to aim,",
         "and mouse buttons or A, S, and D,",
@@ -24,9 +26,8 @@ func _draw():
         "",
         "Press fire to start",
     ]:
-        draw_string(
-            font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, color,
-        )
+        draw_string_outline(font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, 8, Color.DARK_CYAN)
+        draw_string(font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, Color.CYAN)
         ypos += font_size
 
     # Version
