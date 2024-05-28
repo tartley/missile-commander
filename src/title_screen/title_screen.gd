@@ -6,6 +6,16 @@ func _ready():
     for missile in get_tree().get_nodes_in_group("missiles"):
         missile.destroy()
 
+func get_version() -> String:
+    var version:String = ProjectSettings.get_setting("application/config/version")
+    assert(version, "'version' not found")
+    return version
+
+func get_description() -> String:
+    var description:String = ProjectSettings.get_setting("application/config/description")
+    assert(description, "'description' not found")
+    return description
+
 func _draw():
     var rect = get_viewport_rect()
     # Title
@@ -31,9 +41,9 @@ func _draw():
         ypos += font_size
 
     # Version
-    var vstr : String = "Version %s: Unfinished but playable for 30 seconds." % ProjectSettings.get_setting("application/config/version", "unknown")
+    var vstr : String = "Version %s: %s" % [get_version(), get_description()]
     draw_string(
-        font, Vector2(rect.position.x + 16, rect.end.y - 16), vstr, HORIZONTAL_ALIGNMENT_LEFT, rect.size.x, 48, Color("666")
+        font, Vector2(rect.position.x + 16, rect.end.y - 16), vstr, HORIZONTAL_ALIGNMENT_LEFT, rect.size.x, 48, Color("888")
     )
 
 
