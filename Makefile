@@ -10,6 +10,7 @@ release := $(shell echo $(ver) | tr '.' '-')
 version: ## Display the project version that will be produced by 'make build'
 	@:
 	$(info $(ver))
+	$(info $(desc))
 .PHONY: version
 
 build:  ## Create Linux executable in dist/
