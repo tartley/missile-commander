@@ -74,4 +74,3 @@ func destroy():
     else:
         BangGround.create(self.position)
     self.destroyed = true
-

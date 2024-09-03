@@ -62,4 +62,3 @@ func reset():
 func destroy():
     self.count = 0
     queue_redraw()
-
