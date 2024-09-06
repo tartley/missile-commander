@@ -5,7 +5,11 @@ help: ## Show this help.
 
 proj_dir := "project"
 ver := $(shell grep "config/version" <"$(proj_dir)/project.godot" | cut -d'"' -f2)
+# Version with dots replaced, for use in build output filenames
 release := $(shell echo $(ver) | tr '.' '-')
+linux_binary := dist/Missile-Commander
+windows_binary := dist/Missile-Commander.exe
+sources := $(shell find project/)
 
 version: ## Display the project version that will be produced by 'make build'
 	@:
@@ -13,12 +17,28 @@ version: ## Display the project version that will be produced by 'make build'
 	$(info $(desc))
 .PHONY: version
 
-build:  ## Create Linux executable in dist/
-	godot --quiet --headless --export-release 'Linux/X11' dist/Missile-Commander-v$(release)
-	godot --quiet --headless --export-release 'Windows Desktop' dist/Missile-Commander-v$(release).exe
-.PHONY: release
+$(linux_binary): $(sources)
+	( \
+		cd project && \
+		godot --quiet --headless \
+			--export-release 'Linux/X11' ../$(linux_binary) \
+	)
+linux: $(linux_binary) ## Build Linux binary in dist/
+.PHONY: linux
+
+$(windows_binary): $(sources)
+	( \
+		cd project && \
+		godot --quiet --headless \
+			--export-release 'Windows Desktop' ../$(windows_binary) \
+	)
+windows: $(windows_binary) ## Build Windows binary in dist/
+.PHONY: windows
+
+build: windows linux  ## Build Windows and Linux binaries in dist/
+.PHONY: build
 
 clean:  ## Remove built and intermediate files
-	echo rm -rf dist/*
+	rm -rf dist/*
 .PHONY: clean
 
