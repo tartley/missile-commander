@@ -69,7 +69,6 @@ func destroy_nearby_missiles() -> void:
     for missile:Missile in self.nearby_missiles:
         if is_instance_valid(missile):
             if self.position.distance_to(missile.position) < self.size:
-                self.nearby_missiles.erase(missile)
                 missile.destroy()
                 BangSky.create_from_missile(missile.position)
             else:
