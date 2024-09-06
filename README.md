@@ -26,16 +26,6 @@ This remake made in [Godot](https://godotengine.org/) by Zander Hartley (aged
 
 ## TODO
 
-* make release
-  - build
-  - bump version
-  - upload
-  - commit
-  - tag
-
-* New screenshots, title screen (new title) and 'action' (with score)
-  * New release
-
 * BUG: Rarely, a falling missile can pass right through an explosion. Cal also
   reports collision detection errors. I once saw one fly right plain across the
   explode as it was at greatest radius. Other missiles were destroyed by that
