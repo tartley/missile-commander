@@ -7,11 +7,14 @@ proj_dir := "project"
 ver := $(shell grep "config/version" <"$(proj_dir)/project.godot" | cut -d'"' -f2)
 # Version with dots replaced, for use in build output filenames
 release := $(shell echo $(ver) | tr '.' '-')
-name_linux := missile-commander
-name_windows := Missile\ Commander.exe
-binary_linux := dist/$(name_linux)
-binary_windows := dist/$(name_windows)
+# Our source code
 sources := $(shell find project -path project/.godot -prune -o -print)
+# Output directories for built project
+dist_linux := dist/missile-commander-linux
+dist_windows := dist/missile-commander-windows
+exe_linux := $(dist_linux)/missile-commander
+exe_windows := $(dist_windows)/Missile\ Commander.exe
+# Path to install tools
 exe_dir := ~/.local/bin
 
 edit: ## Edit the project in Godot
@@ -31,21 +34,23 @@ version: ## Display the project version that will be produced by 'make build'
 	$(info $(ver))
 .PHONY: version
 
-$(binary_linux): $(sources)
+$(exe_linux): $(sources)
+	mkdir -p $(dist_linux)
 	cd project ;\
-	godot --quiet --headless --export-release 'Linux/X11' ../$(binary_linux)
+	godot --quiet --headless --export-release 'Linux' ../$(exe_linux)
 
-$(binary_windows): $(sources)
+$(exe_windows): $(sources)
+	mkdir -p $(dist_windows)
 	cd project ;\
-	godot --quiet --headless --export-release 'Windows Desktop' ../$(binary_windows)
+	godot --quiet --headless --export-release 'Windows' ../$(exe_windows)
 
-linux: $(binary_linux) ## Build Linux binary in dist/
+linux: $(exe_linux) ## Build Linux binary in dist/
 .PHONY: linux
 
-windows: $(binary_windows) ## Build Windows binary in dist/
+windows: $(exe_windows) ## Build Windows binary in dist/
 .PHONY: windows
 
-build: windows linux  ## Build Windows and Linux binaries in dist/
+build: linux windows ## Build Windows and Linux binaries in dist/
 .PHONY: build
 
 # Install a command-line tool used to upload to itch.io
@@ -57,7 +62,7 @@ $(exe_dir)/butler:
 	butler -V
 
 upload: build $(exe_dir)/butler  ## Upload builds to itch.io
-	butler push --if-changed --userversion $(ver) $(binary_linux) tartley/missile-commander:linux
-	butler push --if-changed --userversion $(ver) $(binary_windows) tartley/missile-commander:windows
+	butler push --if-changed --userversion $(ver) $(dist_linux) tartley/missile-commander:linux
+	butler push --if-changed --userversion $(ver) $(dist_windows) tartley/missile-commander:windows
 .PHONY: upload
 
