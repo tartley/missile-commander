@@ -11,10 +11,17 @@ linux_binary := dist/Missile-Commander
 windows_binary := dist/Missile-Commander.exe
 sources := $(shell find project/)
 
+edit: ## Edit the project in Godot
+	(cd project ; godot project.godot) &
+.PHONY: edit
+
+run: ## Run the project
+	(cd project ; godot) &
+.PHONY: run
+
 version: ## Display the project version that will be produced by 'make build'
 	@:
 	$(info $(ver))
-	$(info $(desc))
 .PHONY: version
 
 $(linux_binary): $(sources)
