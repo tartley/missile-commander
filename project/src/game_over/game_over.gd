@@ -1,6 +1,6 @@
 class_name GameOver extends Node2D
 
-const font:FontFile = preload("res://fonts/Orbitron Medium.otf")
+const font:FontFile = preload("res://fonts/Orbitron-Medium.otf")
 
 var text = "Game Over"
 
