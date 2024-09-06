@@ -64,8 +64,8 @@ bump:
 .PHONY: bump
 
 upload: build $(exe_dir)/butler  ## Upload builds to itch.io
-	$(shell bin/upload $(shell bin/version) linux $(dist_linux))
-	$(shell bin/upload $(shell bin/version) windows $(dist_windows))
+	$(shell bin/upload $(version) linux $(dist_linux))
+	$(shell bin/upload $(version) windows $(dist_windows))
 .PHONY: upload
 
 release: ## Top level command to build, bump, commit, tag, push, upload
