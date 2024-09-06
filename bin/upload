@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+usage() {
+    echo "Usage: upload VERSION PLATFORM FOLDER" >&2
+    echo "Where: VERSION = Should be from godot project settings, digits and '.' only." >&2
+    echo "       PLATFORM = {linux|windows}" >&2
+    echo "       FOLDER = Folder containing built executable" >&2
+    echo "   eg: upload 0.2 linux dist/missile-commander-linux" >&2
+}
+
+if [ "$#" -ne 3 ]; then
+    echo "Error: wrong number of arguments, should be three." >&2
+    usage
+    exit 1
+fi
+
+version="$1"
+platform="$2"
+folder="$3"
+
+if [[ ! "$version" =~ ^[.0-9]+$ ]]; then
+    echo "Error: Bad version: $version" >&2
+    usage
+    exit 1
+fi
+
+if [ "$platform" != "linux" -a "$platform" != "windows" ]; then
+    echo "Error: Bad platform: $platform"
+    usage
+    exit 1
+fi
+
+if [ ! -d "$folder" ]; then
+    echo "Error: Bad folder: $folder" >&2
+    usage
+    exit 1
+fi
+
+previous=$(butler status tartley/missile-commander | grep ${platform} | cut -d'|' -f5 | tr -d ' ')
+if [ "$previous" = "$version" ]; then
+    echo "Error: Version '$version' matches previous upload" >&2
+    butler status tartley/missile-commander
+    exit 1
+fi
+
+butler push --if-changed --userversion ${version} ${folder} tartley/missile-commander:${platform}

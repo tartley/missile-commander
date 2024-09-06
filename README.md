@@ -26,12 +26,12 @@ This remake made in [Godot](https://godotengine.org/) by Zander Hartley (aged
 
 ## TODO
 
-* Automate release
-  * Linux
-  * Windows
-
-* uploads should refresh description
-  * any other metadata
+* make release
+  - build
+  - bump version
+  - upload
+  - commit
+  - tag
 
 * New screenshots, title screen (new title) and 'action' (with score)
   * New release

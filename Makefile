@@ -1,14 +1,13 @@
+SHELL=/bin/bash
+
 help: ## Show this help.
 	@# Optionally add 'sort' before 'awk'
 	@grep -E '^[^_][a-zA-Z_\/\.%-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-10s\033[0m %s\n", $$1, $$2}'
 .PHONY: help
 
-proj_dir := "project"
-ver := $(shell grep "config/version" <"$(proj_dir)/project.godot" | cut -d'"' -f2)
-# Version with dots replaced, for use in build output filenames
-release := $(shell echo $(ver) | tr '.' '-')
 # Our source code
 sources := $(shell find project -path project/.godot -prune -o -print)
+version = $(shell grep config/version project/project.godot | cut -d'"' -f2)
 # Output directories for built project
 dist_linux := dist/missile-commander-linux
 dist_windows := dist/missile-commander-windows
@@ -28,11 +27,6 @@ run: ## Run the project
 clean:  ## Remove built and intermediate files
 	rm -rf dist/*
 .PHONY: clean
-
-version: ## Display the project version that will be produced by 'make build'
-	@:
-	$(info $(ver))
-.PHONY: version
 
 $(exe_linux): $(sources)
 	mkdir -p $(dist_linux)
@@ -61,8 +55,18 @@ $(exe_dir)/butler:
 	chmod a+x butler ;\
 	butler -V
 
+bump:
+	$(eval major := $(shell echo $(version) | cut -d. -f1))
+	$(eval minor := $(shell echo $(version) | cut -d. -f2))
+	$(eval bumped := $(shell echo $(major).$$(($(minor)+1))))
+	$(info $(bumped))
+	$(shell sed -i s#config/version=\"$(version)\"#config/version=\"$(bumped)\"# project/project.godot)
+	$(info $(version))
+	@:
+.PHONY: bump
+
 upload: build $(exe_dir)/butler  ## Upload builds to itch.io
-	butler push --if-changed --userversion $(ver) $(dist_linux) tartley/missile-commander:linux
-	butler push --if-changed --userversion $(ver) $(dist_windows) tartley/missile-commander:windows
+	$(shell bin/upload $(shell bin/version) linux $(dist_linux))
+	$(shell bin/upload $(shell bin/version) windows $(dist_windows))
 .PHONY: upload
 
