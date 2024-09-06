@@ -60,9 +60,7 @@ bump:
 	$(eval minor := $(shell echo $(version) | cut -d. -f2))
 	$(eval bumped := $(shell echo $(major).$$(($(minor)+1))))
 	$(info $(bumped))
-	$(shell sed -i s#config/version=\"$(version)\"#config/version=\"$(bumped)\"# project/project.godot)
-	$(info $(version))
-	@:
+	sed -i s!config/version=\"$(version)\"!config/version=\"$(bumped)\"! project/project.godot
 .PHONY: bump
 
 upload: build $(exe_dir)/butler  ## Upload builds to itch.io
