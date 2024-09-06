@@ -68,3 +68,11 @@ upload: build $(exe_dir)/butler  ## Upload builds to itch.io
 	$(shell bin/upload $(shell bin/version) windows $(dist_windows))
 .PHONY: upload
 
+release: ## build, bump, commit, tag, upload
+	$(MAKE) build
+	$(MAKE) bump
+	git add .
+	git commit -m "v$(version)"
+	git tag -a -m "" "v$(version)"
+	git push --follow-tags
+.PHONY: release
