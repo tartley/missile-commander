@@ -30,10 +30,11 @@ static func create_from_missile(pos:Vector2):
 
 func _process(delta:float) -> void:
     self.progress += delta / DURATION
-    self.size = MAX_SIZE * maxf(0, sin(progress * PI))
-    queue_redraw()
-    self.destroy_nearby_missiles()
-    if progress >= 1.0:
+    if progress < 1.0:
+        self.size = MAX_SIZE * maxf(0, sin(progress * PI))
+        self.destroy_nearby_missiles()
+        queue_redraw()
+    else:
         queue_free()
 
 func _draw() -> void:
