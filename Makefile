@@ -70,8 +70,8 @@ upload: build $(exe_dir)/butler  ## Upload builds to itch.io
 
 release: ## Top level command to build, bump, commit, tag, push, upload
 	@git diff --quiet || (echo "Uncommitted diffs" ; false)
-	$(MAKE) build
 	$(MAKE) bump
+	$(MAKE) build
 	git add .
 	git commit -m "v$(version)"
 	git tag -a -m "" "v$(version)"

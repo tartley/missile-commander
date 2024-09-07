@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Missile Commander"
 config/description="Unfinished, but playable for 30 seconds. Has some bugs!"
-config/version="0.8"
+config/version="0.9"
 run/main_scene="res://src/main/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
