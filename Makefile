@@ -69,12 +69,12 @@ upload: build $(exe_dir)/butler  ## Upload builds to itch.io
 .PHONY: upload
 
 release: ## Top level command to build, bump, commit, tag, push, upload
-	#@git diff --quiet || (echo "Uncommitted diffs" ; false)
+	@git diff --quiet || (echo "Uncommitted diffs" ; false)
 	$(MAKE) bump
 	$(MAKE) build
 	git add .
 	git commit -m "v$(version)"
 	git tag -a -m "" "v$(version)"
-	#git push --follow-tags
-	#$(MAKE) upload
+	git push --follow-tags
+	$(MAKE) upload
 .PHONY: release
