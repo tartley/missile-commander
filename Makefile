@@ -31,6 +31,18 @@ clean:  ## Remove built and intermediate files
 	rm -rf dist/*
 .PHONY: clean
 
+assert_no_diffs:
+	git diff --quiet || (echo "Error: Uncommitted diffs" ; git status -s ; false)
+.PHONY: assert_no_diffs
+
+bump:  ## Bump the minor version number in-place in project.godot
+	$(eval major := $(shell echo $(version) | cut -d. -f1))
+	$(eval minor := $(shell echo $(version) | cut -d. -f2))
+	$(eval bumped := $(shell echo $(major).$$(($(minor)+1))))
+	sed -i s!config/version=\"$(version)\"!config/version=\"$(bumped)\"! project/project.godot
+	$(eval version := $(bumped))
+.PHONY: bump
+
 $(exe_linux): $(sources)
 	mkdir -p $(dist_linux)
 	cd project ;\
@@ -58,44 +70,20 @@ $(exe_dir)/butler:
 	chmod a+x butler ;\
 	butler -V
 
-assert_no_diffs:
-	git diff --quiet || (echo "Error: Uncommitted diffs" ; git status -s ; false)
-.PHONY: assert_no_diffs
+commit: ## Commit changes
+	git add .
+	git commit -m "v$(version)"
 
-bump:
-	$(eval major := $(shell echo $(version) | cut -d. -f1))
-	$(eval minor := $(shell echo $(version) | cut -d. -f2))
-	$(eval bumped := $(shell echo $(major).$$(($(minor)+1))))
-	$(info "bumped" $(bumped))
-	sed -i s!config/version=\"$(version)\"!config/version=\"$(bumped)\"! project/project.godot
-	@echo "bump 1: $(version)"
-	$(eval version := $(bumped))
-	@echo "bump 2: $(version)"
-
-.PHONY: bump
+tag: ## tag current commit with version, and push
+	git tag -a -m "" "v$(version)"
+	git push --follow-tags
+.PHONY: tag
 
 upload: build $(exe_dir)/butler  ## Upload builds to itch.io
 	bin/upload $(version) linux $(dist_linux)
 	bin/upload $(version) windows $(dist_windows)
 .PHONY: upload
 
-release: assert_no_diffs bump build ## Top level command to build, bump, commit, tag, push, upload
-	@echo "release 1: $(version)"
-	# git add .
-	# git commit -m "v$(version)"
-	# git tag -a -m "" "v$(version)"
-	# git push --follow-tags
-	# $(MAKE) upload
+release: assert_no_diffs bump build commit tag upload ## Top level command to bump, build, commit, tag, and upload
 .PHONY: release
 
-# Debugging:
-
-value := one
-
-outer: inner
-	@echo "outer $(value)"
-
-inner:
-	@echo "inner $(value)"
-	$(eval value := two)
-	@echo "inner $(value)"
