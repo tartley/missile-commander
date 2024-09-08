@@ -7,7 +7,7 @@ help: ## Show this help.
 
 # Our source code
 sources := $(shell find project -path project/.godot -prune -o -print)
-version = $(shell grep config/version project/project.godot | cut -d'"' -f2)
+version := $(shell grep config/version project/project.godot | cut -d'"' -f2)
 # Output directories for built project
 dist_linux := dist/missile-commander-linux
 dist_windows := dist/missile-commander-windows
@@ -23,6 +23,9 @@ edit: ## Edit the project in Godot
 run: ## Run the project
 	(cd project ; godot) &
 .PHONY: run
+
+version: ## Show the current project version number, from project.godot
+	@echo $(version)
 
 clean:  ## Remove built and intermediate files
 	rm -rf dist/*
@@ -59,8 +62,11 @@ bump:
 	$(eval major := $(shell echo $(version) | cut -d. -f1))
 	$(eval minor := $(shell echo $(version) | cut -d. -f2))
 	$(eval bumped := $(shell echo $(major).$$(($(minor)+1))))
-	$(info $(bumped))
+	$(info "bumped" $(bumped))
 	sed -i s!config/version=\"$(version)\"!config/version=\"$(bumped)\"! project/project.godot
+	$(eval version := $(bumped))
+	$(info "version" $(version))
+
 .PHONY: bump
 
 upload: build $(exe_dir)/butler  ## Upload builds to itch.io
@@ -70,11 +76,25 @@ upload: build $(exe_dir)/butler  ## Upload builds to itch.io
 
 release: ## Top level command to build, bump, commit, tag, push, upload
 	@git diff --quiet || (echo "Uncommitted diffs" ; false)
+	@echo "1: $(version)"
 	$(MAKE) bump
-	$(MAKE) build
-	git add .
-	git commit -m "v$(version)"
-	git tag -a -m "" "v$(version)"
-	git push --follow-tags
-	$(MAKE) upload
+	@echo "2: $(version)"
+	# $(MAKE) build
+	# git add .
+	# git commit -m "v$(version)"
+	# git tag -a -m "" "v$(version)"
+	# git push --follow-tags
+	# $(MAKE) upload
 .PHONY: release
+
+# Debugging:
+
+value := one
+
+outer: inner
+	@echo "outer $(value)"
+
+inner:
+	@echo "inner $(value)"
+	$(eval value := two)
+	@echo "inner $(value)"
