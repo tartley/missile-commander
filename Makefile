@@ -58,14 +58,19 @@ $(exe_dir)/butler:
 	chmod a+x butler ;\
 	butler -V
 
+assert_no_diffs:
+	git diff --quiet || (echo "Error: Uncommitted diffs" ; git status -s ; false)
+.PHONY: assert_no_diffs
+
 bump:
 	$(eval major := $(shell echo $(version) | cut -d. -f1))
 	$(eval minor := $(shell echo $(version) | cut -d. -f2))
 	$(eval bumped := $(shell echo $(major).$$(($(minor)+1))))
 	$(info "bumped" $(bumped))
 	sed -i s!config/version=\"$(version)\"!config/version=\"$(bumped)\"! project/project.godot
+	@echo "bump 1: $(version)"
 	$(eval version := $(bumped))
-	$(info "version" $(version))
+	@echo "bump 2: $(version)"
 
 .PHONY: bump
 
@@ -74,12 +79,8 @@ upload: build $(exe_dir)/butler  ## Upload builds to itch.io
 	bin/upload $(version) windows $(dist_windows)
 .PHONY: upload
 
-release: ## Top level command to build, bump, commit, tag, push, upload
-	@git diff --quiet || (echo "Uncommitted diffs" ; false)
-	@echo "1: $(version)"
-	$(MAKE) bump
-	@echo "2: $(version)"
-	# $(MAKE) build
+release: assert_no_diffs bump build ## Top level command to build, bump, commit, tag, push, upload
+	@echo "release 1: $(version)"
 	# git add .
 	# git commit -m "v$(version)"
 	# git tag -a -m "" "v$(version)"
