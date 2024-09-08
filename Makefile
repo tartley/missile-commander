@@ -32,7 +32,7 @@ clean:  ## Remove built and intermediate files
 .PHONY: clean
 
 assert_no_diffs:
-	git diff --quiet || (echo "Error: Uncommitted diffs" ; git status -s ; false)
+	@git diff --quiet || (echo "Error: Uncommitted diffs" ; git status -s ; false)
 .PHONY: assert_no_diffs
 
 bump:  ## Bump the minor version number in-place in project.godot
@@ -72,11 +72,11 @@ $(exe_dir)/butler:
 
 commit: ## Commit changes
 	git add .
-	git commit -m "v$(version)"
+	git commit -q -m "v$(version)"
 
 tag: ## tag current commit with version, and push
 	git tag -a -m "" "v$(version)"
-	git push --follow-tags
+	git push -q --follow-tags
 .PHONY: tag
 
 upload: build $(exe_dir)/butler  ## Upload builds to itch.io
