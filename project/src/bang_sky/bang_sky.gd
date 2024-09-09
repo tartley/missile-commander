@@ -3,8 +3,6 @@ The explosion from shots or missiles detonating in the sky.
 """
 class_name BangSky extends Area2D
 
-enum Source {SHOT, MISSILE}
-
 const BangSkyScene:PackedScene = preload("res://src/bang_sky/bang_sky.tscn")
 
 const MAX_SIZE := 175.0 # world co-ords
@@ -12,7 +10,10 @@ const DURATION := 3.0 # seconds
 
 var progress:float = 0.0 # [0..1]
 var size:float = 0.0 # [0..MAX_SIZE]
+
+enum Source {SHOT, MISSILE}
 var source:Source # What caused this Bang?
+
 var nearby_missiles:Array[Missile]
 
 static func create(pos:Vector2, src:Source):
@@ -65,9 +66,14 @@ func on_leave(missile:Missile):
     self.nearby_missiles.erase(missile)
 
 func destroy_nearby_missiles() -> void:
+    # TODO: This approach has a slight problem, in that missiles we destroy are
+    # deleted from our nearby_missiles array, but references to the missile
+    # still exist in other BangSky's nearby_missiles. But I guess when we call
+    # this method on those other BankSkys, they now detect the missile is
+    # invalid and remove references to it from their array.
     var valid_missiles:Array[Missile] = []
     for missile:Missile in self.nearby_missiles:
-        if is_instance_valid(missile):
+        if missile and is_instance_valid(missile) and !missile.is_queued_for_deletion():
             if self.position.distance_to(missile.position) < self.size:
                 missile.destroy()
                 BangSky.create_from_missile(missile.position)

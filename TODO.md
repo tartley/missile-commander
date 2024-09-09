@@ -1,34 +1,6 @@
 ## TODO
 
-* BUG: Ten thousand instances of message:
-
-    E 0:00:58:0891   missile.gd:44 @ destroy(): Node not found: "Trail" (relative to "/root/Main/World/@Area2D@632").
-      <C++ Error>    Method/function failed. Returning: nullptr
-      <C++ Source>   scene/main/node.cpp:1792 @ get_node()
-      <Stack Trace>  missile.gd:44 @ destroy()
-                     bang_sky.gd:72 @ destroy_nearby_missiles()
-                     bang_sky.gd:35 @ _process()
-        var trail := $Trail
-
-    even with only 1000 missiles. Could it be that when a bangsky destroys a
-    missile, it removes that missile from its 'nearby_missiles' array,
-    but not from all the other explosion's arrays?
-
-* BUG: Rarely, a falling missile can pass right through an explosion. Cal also
-  reports collision detection errors. I once saw one fly right plain across the
-  explode as it was at greatest radius. Other missiles were destroyed by that
-  same explosion. I don't actually know how that happens.
-
-IDEA:
-
-    Consider removing the explosion of missiles when they die, so that a single
-    shot explosion will easily hit multiple missiles
-
-  Consider completely removing use of Godot collisions:
-
-  1. Time the current method.
-  2. Replace current method with a brute force one.
-  3. Compare timings.
+* Check for other instances of is_instance_valid, replace with more robust check
 
 * Display a score
   See https://docs.godotengine.org/en/stable/tutorials/2d/custom_drawing_in_2d.html#drawing-text

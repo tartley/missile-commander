@@ -42,7 +42,6 @@ func _draw():
 
 func destroy():
     var trail := $Trail
-    if is_instance_valid(trail):
-        trail.reparent(Common.world)
-        trail.emitting = false
+    trail.reparent(Common.world)
+    trail.emitting = false
     queue_free()

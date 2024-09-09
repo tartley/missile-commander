@@ -8,6 +8,6 @@ const RADIUS := 12000.0
 # extending for PLANET_ANGLE radians on either side of 'straight up':
 const PLANET_ANGLE := PI / 16.0
 
-# Populated in respective _ready handler
+# Populated in respective _ready handlers
 static var world:World
 static var screen:Screen

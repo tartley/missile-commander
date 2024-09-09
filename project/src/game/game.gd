@@ -43,7 +43,7 @@ func launch_shot(base_id):
     base.fire(self.mouse.position)
 
 func launch_missile(i):
-    var start := Vector2(randf_range(-2000, +2000), -14100 - i * 150)
+    var start := Vector2(randf_range(-2000, +2000), -14100 - i * 5)
     var td = choose_target()
     var target = td[0]
     var dest = td[1]
