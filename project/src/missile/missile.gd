@@ -33,7 +33,8 @@ func _ready() -> void:
     self.trail.initial_velocity_max = 250 - speed
     self.trail.initial_velocity_min = 250 - speed
     # collision shape
-    $CollisionPolygon2D.polygon = self.verts
+    var collision := $CollisionPolygon2D as CollisionPolygon2D
+    collision.polygon = self.verts
 
 func _process(delta: float) -> void:
     self.position += velocity * delta
