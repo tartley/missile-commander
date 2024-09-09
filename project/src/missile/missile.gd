@@ -13,6 +13,7 @@ const verts: Array[Vector2] = [
 
 var target:Node2D # City or Base or null
 var velocity: Vector2
+var trail:Trail
 
 static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float):
     var missile := MissileScene.instantiate() as Missile
@@ -25,11 +26,12 @@ static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float):
 func _ready() -> void:
     self.add_to_group("missiles")
     # our trail
-    $Trail.position = Vector2(SIZE/2, 0)
-    $Trail.direction = Vector2.LEFT
     var speed := self.velocity.length()
-    $Trail.initial_velocity_max = 250 - speed
-    $Trail.initial_velocity_min = 250 - speed
+    self.trail = $Trail as Trail
+    self.trail.position = Vector2(SIZE/2, 0)
+    self.trail.direction = Vector2.LEFT
+    self.trail.initial_velocity_max = 250 - speed
+    self.trail.initial_velocity_min = 250 - speed
     # collision shape
     $CollisionPolygon2D.polygon = self.verts
 
@@ -41,7 +43,6 @@ func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
 func destroy():
-    var trail := $Trail
-    trail.reparent(Common.world)
-    trail.emitting = false
+    self.trail.reparent(Common.world)
+    self.trail.emitting = false
     queue_free()
