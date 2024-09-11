@@ -25,3 +25,33 @@ Sound effects created using:
 
 Made in [Godot](https://godotengine.org/).
 
+## Godot Scene Tree diagram
+
+  ```
+  Main
+  |=Screen
+  | |-TitleScreen
+  | | |=Title Label ?
+  | |-GameOver Label ?
+  |=World
+  | |=ScoreLabel Label
+  | |=Ground Area2D
+  | | |-City Node2D (x6)
+  | | |-Base Node2D (x3)
+  | | | |=Turret Node2D
+  | |=Mouse Node2D
+  | |=Sky Node2D
+  | |=Camera Camera2D
+  | |-Missile Node2D  # Rain down from the sky
+  | | |=Trail ParticleCPU
+  | |-Shot Node2D  # Player fires upwards
+  | |-BangGround? Node2D  # Missiles detonate on the ground
+  | |-BangSky Node2D  # Shots or missiles detonate in the air
+  | |-BangFeature Node2D  # Missiles destroy a city or base
+  | |-Trail ParticleCPU  # Reparented after missile destroyed
+  |=Common  # Common data members and functions
+  |=Geometry  # Geometry functions
+
+  = Node placed in tree statically, from the Godot editor
+  - Node placed in tree dynamically, at run-time.
+  ```
