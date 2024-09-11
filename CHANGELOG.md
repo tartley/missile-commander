@@ -1,10 +1,16 @@
-#### v0.14
+### v0.15
 
-* Automate the upload of new versions to itch.io
 * Fix thousands of log errors of the form "*missile.gd:44 @ destroy(): Node not
   found: 'Trail'*".
 * Fix longstanding collision detection bug preventing missiles from being
   destroyed by sky explosions.
+* Add a score. Ten points per missile shot down.
+* Mouse cursor allowed to go a fraction lower altitude.
+
+#### v0.14
+
+* Automate the upload of new versions to itch.io
+
 
 #### v0.13
 
