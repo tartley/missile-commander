@@ -11,5 +11,6 @@ const PLANET_ANGLE := PI / 16.0
 const font:FontFile = preload("res://fonts/Orbitron-Medium.otf")
 
 # Populated in respective _ready handlers
-static var world:World
+static var score:Score
 static var screen:Screen
+static var world:World
