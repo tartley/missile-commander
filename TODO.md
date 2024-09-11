@@ -1,7 +1,5 @@
 ## TODO
 
-* Let mouse cursor go a fraction lower?
-
 * Deploy a player README and CHANGELOG to users
   * player README includes itcho.io url
   * Can changelog be auto uploaded with releases?

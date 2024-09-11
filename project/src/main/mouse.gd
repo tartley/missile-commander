@@ -1,5 +1,6 @@
 class_name Mouse extends Node2D
 
+# Crosshair mouse cursor
 const verts: Array[Vector2] = [
     Vector2(-60, 0), Vector2(-20, 0),
     Vector2(+60, 0), Vector2(+20, 0),
@@ -27,7 +28,7 @@ func _ready():
     extent_polar = Geometry.PolarExtent.new(
         Geometry.Polar.new(
             Common.PLANET_ANGLE * -0.99,
-            Common.RADIUS + get_viewport_rect().size.y * 0.12,
+            Common.RADIUS + get_viewport_rect().size.y * 0.10,
         ),
         Geometry.Polar.new(
             Common.PLANET_ANGLE * +0.99,
