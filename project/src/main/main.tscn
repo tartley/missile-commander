@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvl60w5q1oghk"]
+[gd_scene load_steps=11 format=3 uid="uid://dvl60w5q1oghk"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_3ne2t"]
 [ext_resource type="Script" path="res://src/main/world.gd" id="2_38wir"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/main/camera.gd" id="2_jm13r"]
 [ext_resource type="Script" path="res://src/main/sky.gd" id="3_nw6n4"]
 [ext_resource type="Script" path="res://src/main/ground.gd" id="4_fvoxd"]
+[ext_resource type="Script" path="res://src/main/score.gd" id="4_v14l7"]
 [ext_resource type="Script" path="res://src/main/mouse.gd" id="5_i0hgq"]
 [ext_resource type="Script" path="res://src/main/geometry.gd" id="6_hh5ig"]
 [ext_resource type="Script" path="res://src/main/common.gd" id="7_ucqwb"]
@@ -23,6 +24,10 @@ script = ExtResource("2_38wir")
 z_index = 2
 collision_layer = 0
 script = ExtResource("4_fvoxd")
+
+[node name="Score" type="Node2D" parent="World"]
+z_index = 2
+script = ExtResource("4_v14l7")
 
 [node name="Mouse" type="Node2D" parent="World"]
 script = ExtResource("5_i0hgq")

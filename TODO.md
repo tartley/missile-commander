@@ -1,9 +1,8 @@
 ## TODO
 
 * Display a score
-  * I think score should become a permanent attribute of World
-    * Then we can statically position it above 'Ground' in the godot editor
-    * Then previous score stays visible after a game ends
+  > I think score should become a permanent attribute of World
+  * ten points per destroyed missile
 
 * Let mouse cursor go a fraction lower?
 
