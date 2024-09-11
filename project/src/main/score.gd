@@ -3,7 +3,10 @@ class_name Score extends Node2D
 const font_size := 48
 const font_color := Color.DIM_GRAY
 
-var value := 0
+var value:int:
+    set(new):
+        value = new
+        self.queue_redraw()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,13 +19,8 @@ func _draw() -> void:
     var posn := Vector2(-text_size.x/2, 0)
     draw_string(Common.font, posn, msg, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, font_color)
 
-func add(operand:int) -> void:
-    self.value += operand
-    self.queue_redraw()
-
-func thousands(number:int) -> String:
-    # Format positive integers with comma thousands separators
-    # TODO: use locale appropriate separators
+func thousands(number:int, separator:String=" ") -> String:
+    # Format positive integers with "thin space" thousands separators
     var text := "%02d" % number
     var chunks := []
     var chunk:String
@@ -36,4 +34,4 @@ func thousands(number:int) -> String:
         chunks.push_back(chunk)
         end -= 3
     chunks.reverse()
-    return ",".join(chunks)
+    return separator.join(chunks)

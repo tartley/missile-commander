@@ -72,7 +72,7 @@ func destroy_nearby_missiles() -> void:
             if self.position.distance_to(missile.position) < self.size:
                 missile.destroy()
                 BangSky.create_from_missile(missile.position)
-                Common.score.add(10)
+                Common.score.value += 10
             else:
                 valid_missiles.append(missile)
     self.nearby_missiles = valid_missiles

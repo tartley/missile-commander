@@ -1,9 +1,5 @@
 ## TODO
 
-* Display a score
-  > I think score should become a permanent attribute of World
-  * ten points per destroyed missile
-
 * Let mouse cursor go a fraction lower?
 
 * Deploy a player README and CHANGELOG to users

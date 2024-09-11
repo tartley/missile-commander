@@ -11,6 +11,7 @@ func _ready():
         city.city_destroyed.connect(on_city_destroyed)
     for base:Base in get_tree().get_nodes_in_group("bases"):
         base.reset()
+    Common.score.value = 0
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
