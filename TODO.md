@@ -1,7 +1,5 @@
 ## TODO
 
-* Each base has 10 shots, not 15.
-
 * Go re-read that analysis of the original.
 
 * Bug

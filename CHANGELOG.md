@@ -3,6 +3,7 @@
 ### v0.16
 
 * Releases now include a README and this CHANGELOG, as HTML.
+* Bases have 10 shots each, not 15.
 
 ### v0.15 2024-09-11
 
