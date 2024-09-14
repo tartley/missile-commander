@@ -4,6 +4,7 @@
 
 * Releases now include a README and this CHANGELOG, as HTML.
 * Bases have 10 missiles each, not 15.
+* Internal renames in the code: missile->bomb, shot->missile.
 
 ### v0.15 2024-09-11
 

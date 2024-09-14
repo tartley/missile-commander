@@ -47,5 +47,10 @@ This is from memory, I should confirm the details.
   | Where:
   | `=` Node placed in tree statically, from the Godot editor
   | `-` Node placed in tree dynamically, at run-time.
-  ```
+
+## Release Checklist
+
+* Update Changelog, including date on version
+* make release
+* Consider swinging by itch.io and pasting changelog into there.
 
