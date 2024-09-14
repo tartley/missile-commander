@@ -1,5 +1,5 @@
 """
-The explosion from shots or bombs detonating in the sky.
+The explosion from missiles or bombs detonating in the sky.
 """
 class_name BangSky extends Area2D
 
@@ -11,7 +11,7 @@ const DURATION := 3.0 # seconds
 var progress:float = 0.0 # [0..1]
 var size:float = 0.0 # [0..MAX_SIZE]
 
-enum Source {SHOT, BOMB}
+enum Source {MISSILE, BOMB}
 var source:Source # What caused this Bang?
 
 var nearby_bombs:Array[Bomb]
@@ -23,8 +23,8 @@ static func create(pos:Vector2, src:Source):
     bang.get_node("CollisionShape2D").shape.radius = MAX_SIZE
     Common.world.add_child(bang)
 
-static func create_from_shot(pos:Vector2):
-    create(pos, Source.SHOT)
+static func create_from_missile(pos:Vector2):
+    create(pos, Source.MISSILE)
 
 static func create_from_bomb(pos:Vector2):
     create(pos, Source.BOMB)
@@ -41,7 +41,7 @@ func _process(delta:float) -> void:
 func _draw() -> void:
     var color:Color
     match self.source:
-        Source.SHOT:
+        Source.MISSILE:
             color = Color(
                 maxf(1 - progress * 2, progress * 2 - 1.0), # red
                 1 - progress * 2, # green

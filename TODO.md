@@ -24,9 +24,6 @@
   * Add it to documented platforms.
 * BUG: mouse capture reportedly doesn't work in i3
 
-* Rename missile -> bomb
-* Rename shot -> missile
-
 * Incoming bombs should come in waves
   * text on screen
   * alert sound

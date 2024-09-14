@@ -17,29 +17,29 @@ func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
         match event.keycode:
             KEY_A:
-                launch_shot(0)
+                launch_missile(0)
             KEY_W:
-                launch_shot(1)
+                launch_missile(1)
             KEY_S:
-                launch_shot(1)
+                launch_missile(1)
             KEY_D:
-                launch_shot(2)
+                launch_missile(2)
             KEY_F1:
                 debug_destroy_cities()
     if event is InputEventMouseButton and event.pressed:
         match event.button_index:
             MOUSE_BUTTON_LEFT:
-                launch_shot(0)
+                launch_missile(0)
             MOUSE_BUTTON_MIDDLE:
-                launch_shot(1)
+                launch_missile(1)
             MOUSE_BUTTON_RIGHT:
-                launch_shot(2)
+                launch_missile(2)
 
 func debug_destroy_cities():
     for city in get_tree().get_nodes_in_group("cities"):
         city.destroy()
 
-func launch_shot(base_id):
+func launch_missile(base_id):
     var base:Node2D = get_tree().get_nodes_in_group("bases")[base_id]
     base.fire(self.mouse.position)
 

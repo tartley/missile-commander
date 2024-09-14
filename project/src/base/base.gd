@@ -55,7 +55,7 @@ func fire(dest:Vector2):
     if not self.destroyed:
         if $Ammo.count > 0:
             $Ammo.decrement()
-            Shot.create(to_global($Turret.position), dest)
+            Missile.create(to_global($Turret.position), dest)
 
 func reset():
     $Turret.reset()

@@ -1,6 +1,6 @@
-class_name Shot extends Node2D
+class_name Missile extends Node2D
 
-const ShotScene:PackedScene = preload("res://src/shot/shot.tscn")
+const MissileScene:PackedScene = preload("res://src/missile/missile.tscn")
 
 const SPEED := 500
 const SIZE := 1.0
@@ -21,10 +21,10 @@ var velocity: Vector2
 var destination: Vector2
 
 static func create(pos:Vector2, dest:Vector2):
-    var shot := ShotScene.instantiate() as Shot
-    shot.position = pos
-    shot.destination = dest
-    Common.world.add_child(shot)
+    var missile := MissileScene.instantiate() as Missile
+    missile.position = pos
+    missile.destination = dest
+    Common.world.add_child(missile)
 
 func _ready():
     self.position += self.velocity * 100
@@ -43,6 +43,6 @@ func _draw():
 
 func destination_reached():
     # TODO: Once we have a trail, reparent it to World. see how Bomb does it.
-    BangSky.create_from_shot(self.destination)
-    # And this shot is done
+    BangSky.create_from_missile(self.destination)
+    # And this missile is done
     queue_free()
