@@ -1,10 +1,5 @@
 ## TODO
 
-* Deploy a player README and CHANGELOG to users
-  * player README includes itcho.io url
-  * Can changelog be auto uploaded with releases?
-  * Should releases be uploaded to github?
-
 * Each base has 10 shots, not 15.
 
 * Go re-read that analysis of the original.

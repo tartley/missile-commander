@@ -31,6 +31,12 @@ clean:  ## Remove built and intermediate files
 	rm -rf dist/*
 .PHONY: clean
 
+README-players.html: README-players.md
+	pandoc --from markdown --to html --standalone $< -o $@
+
+CHANGELOG.html: CHANGELOG.md
+	pandoc --from markdown --to html --standalone $< -o $@
+
 assert_no_diffs:
 	@git diff --quiet || (echo "Error: Uncommitted diffs" ; git status -s ; false)
 .PHONY: assert_no_diffs
@@ -53,10 +59,14 @@ $(exe_windows): $(sources)
 	cd project ;\
 	godot --quiet --headless --export-release 'Windows' ../$(exe_windows)
 
-linux: $(exe_linux) ## Build Linux binary in dist/
+linux: $(exe_linux) README-players.html CHANGELOG.html ## Build Linux binary in dist/
+	cp README-players.html dist/missile-commander-linux/README.html
+	cp CHANGELOG.html dist/missile-commander-linux/
 .PHONY: linux
 
-windows: $(exe_windows) ## Build Windows binary in dist/
+windows: $(exe_windows) README-players.html CHANGELOG.html ## Build Windows binary in dist/
+	cp README-players.html dist/missile-commander-windows/README.html
+	cp CHANGELOG.html dist/missile-commander-windows/
 .PHONY: windows
 
 build: linux windows ## Build Windows and Linux binaries in dist/

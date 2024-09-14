@@ -1,6 +1,8 @@
 # Missile Commander
 
-2024 vector graphic remake of the 1980 city defence arcade classic "Missile Command".
+A 2024 vector graphic remake of the 1980 city defence arcade classic "Missile Command".
+
+This file is notes about development.
 
 ## Status
 
@@ -8,24 +10,13 @@ An unfinished work-in-progress. Playable for 30 seconds, but the initial
 wave of missiles just gradually loses steam until all the missiles have fallen
 and then nothing happens.
 
-## Credits
+## Source
 
-By Zander Hartley (aged 12) and [Jonathan Hartley](https://tartley.com/pages/about).
-
-Original 1980 concept and implementation by David Theurer for Atari.
-
-Font [Orbitron](https://fonts.google.com/specimen/Orbitron) by [Matt
-McInerney](http://pixelspread.com/), licensed under the Open Font License (OFL).
-
-Sound effects created using:
-* [Sfxr](http://drpetter.se/project_sfxr.html) by Tomas "DrPetter" Pettersson.
-* [Jsfxr](https://sfxr.me/) by Eric Fredricksen with contributions by Chris
-  McCormick.
-* [Chiptone](https://sfbgames.itch.io/chiptone) by Tom Vian.
-
-Made in [Godot](https://godotengine.org/).
+https://github.com/tartley/missile-commander/
 
 ## Godot Scene Tree diagram
+
+This is from memory, I should confirm the details.
 
   ```
   Main
@@ -51,7 +42,10 @@ Made in [Godot](https://godotengine.org/).
   | |-Trail ParticleCPU  # Reparented after missile destroyed
   |=Common  # Common data members and functions
   |=Geometry  # Geometry functions
-
-  = Node placed in tree statically, from the Godot editor
-  - Node placed in tree dynamically, at run-time.
   ```
+
+  | Where:
+  | `=` Node placed in tree statically, from the Godot editor
+  | `-` Node placed in tree dynamically, at run-time.
+  ```
+
