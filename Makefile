@@ -32,10 +32,10 @@ clean:  ## Remove built and intermediate files
 .PHONY: clean
 
 README-players.html: README-players.md
-	pandoc --from markdown --to html --standalone $< -o $@
+	pandoc --from markdown --to html --standalone $< -o $@ --metadata title="README"
 
 CHANGELOG.html: CHANGELOG.md
-	pandoc --from markdown --to html --standalone $< -o $@
+	pandoc --from markdown --to html --standalone $< -o $@ --metadata title="ChangeLog"
 
 assert_no_diffs:
 	@git diff --quiet || (echo "Error: Uncommitted diffs" ; git status -s ; false)
