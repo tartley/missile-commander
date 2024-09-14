@@ -1,5 +1,5 @@
 """
-The explosion of a missile striking a city or base.
+The explosion of a bomb striking a city or base.
 """
 class_name BangFeature extends Node2D
 

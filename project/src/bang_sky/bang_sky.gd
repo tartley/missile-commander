@@ -1,5 +1,5 @@
 """
-The explosion from shots or missiles detonating in the sky.
+The explosion from shots or bombs detonating in the sky.
 """
 class_name BangSky extends Area2D
 
@@ -11,10 +11,10 @@ const DURATION := 3.0 # seconds
 var progress:float = 0.0 # [0..1]
 var size:float = 0.0 # [0..MAX_SIZE]
 
-enum Source {SHOT, MISSILE}
+enum Source {SHOT, BOMB}
 var source:Source # What caused this Bang?
 
-var nearby_missiles:Array[Missile]
+var nearby_bombs:Array[Bomb]
 
 static func create(pos:Vector2, src:Source):
     var bang := BangSkyScene.instantiate() as BangSky
@@ -26,14 +26,14 @@ static func create(pos:Vector2, src:Source):
 static func create_from_shot(pos:Vector2):
     create(pos, Source.SHOT)
 
-static func create_from_missile(pos:Vector2):
-    create(pos, Source.MISSILE)
+static func create_from_bomb(pos:Vector2):
+    create(pos, Source.BOMB)
 
 func _process(delta:float) -> void:
     self.progress += delta / DURATION
     if progress < 1.0:
         self.size = MAX_SIZE * maxf(0, sin(progress * PI))
-        self.destroy_nearby_missiles()
+        self.destroy_nearby_bombs()
         queue_redraw()
     else:
         queue_free()
@@ -48,7 +48,7 @@ func _draw() -> void:
                 1.0, # blue,
                 .75 - progress * 0.5, # alpha
             )
-        Source.MISSILE:
+        Source.BOMB:
             color = Color(
                 1.0 - progress, # red
                 maxf(0.0, progress * 2 - 0.5), # green
@@ -59,20 +59,20 @@ func _draw() -> void:
     if Common.DEBUG:
         draw_arc(Vector2.ZERO, MAX_SIZE, 0, TAU, 20, Color.DARK_MAGENTA)
 
-func on_entered(missile:Missile):
-    self.nearby_missiles.append(missile)
+func on_entered(bomb:Bomb):
+    self.nearby_bombs.append(bomb)
 
-func on_leave(missile:Missile):
-    self.nearby_missiles.erase(missile)
+func on_leave(bomb:Bomb):
+    self.nearby_bombs.erase(bomb)
 
-func destroy_nearby_missiles() -> void:
-    var valid_missiles:Array[Missile] = []
-    for missile:Missile in self.nearby_missiles:
-        if missile and is_instance_valid(missile) and !missile.is_queued_for_deletion():
-            if self.position.distance_to(missile.position) < self.size:
-                missile.destroy()
-                BangSky.create_from_missile(missile.position)
+func destroy_nearby_bombs() -> void:
+    var valid_bombs:Array[Bomb] = []
+    for bomb:Bomb in self.nearby_bombs:
+        if bomb and is_instance_valid(bomb) and !bomb.is_queued_for_deletion():
+            if self.position.distance_to(bomb.position) < self.size:
+                bomb.destroy()
+                BangSky.create_from_bomb(bomb.position)
                 Common.score.value += 10
             else:
-                valid_missiles.append(missile)
-    self.nearby_missiles = valid_missiles
+                valid_bombs.append(bomb)
+    self.nearby_bombs = valid_bombs

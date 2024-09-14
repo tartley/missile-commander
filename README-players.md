@@ -5,7 +5,7 @@ A 2024 vector graphic remake of the 1980 city defence arcade classic "Missile Co
 ## Status
 
 An unfinished work-in-progress. Playable for 30 seconds, but the initial
-wave of missiles just gradually loses steam until all the missiles have fallen
+wave of bombs just gradually loses steam until all the bombs have fallen
 and then nothing happens.
 
 ## Install

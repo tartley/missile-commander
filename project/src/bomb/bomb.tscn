@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://beborlibqojkp"]
 
-[ext_resource type="Script" path="res://src/missile/missile.gd" id="1_dnsy8"]
-[ext_resource type="Script" path="res://src/missile/trail.gd" id="2_1acby"]
+[ext_resource type="Script" path="res://src/bomb/bomb.gd" id="1_b76ab"]
+[ext_resource type="Script" path="res://src/bomb/trail.gd" id="2_hdljl"]
 
 [sub_resource type="Curve" id="Curve_jjgk3"]
 _data = [Vector2(0.0827068, 0.24535), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -11,10 +11,10 @@ point_count = 2
 offsets = PackedFloat32Array(0.0102041, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.635294, 0.635294, 0.631373, 0)
 
-[node name="Missile" type="Area2D"]
+[node name="Bomb" type="Area2D"]
 z_index = 2
 collision_mask = 0
-script = ExtResource("1_dnsy8")
+script = ExtResource("1_b76ab")
 metadata/_edit_group_ = true
 
 [node name="Trail" type="CPUParticles2D" parent="."]
@@ -34,7 +34,7 @@ scale_amount_max = 16.0
 scale_amount_curve = SubResource("Curve_jjgk3")
 color = Color(0.309804, 0.419608, 1, 1)
 color_ramp = SubResource("Gradient_wnkbf")
-script = ExtResource("2_1acby")
+script = ExtResource("2_hdljl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 

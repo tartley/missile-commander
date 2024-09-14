@@ -1,6 +1,7 @@
 ## TODO
 
 * Go re-read that analysis of the original.
+  https://www.retrogamedeconstructionzone.com/2019/11/missilie-command-deep-dive.html
 
 * Bug
     WARNING: 1 RID of type "CanvasItem" was leaked.
@@ -26,17 +27,22 @@
 * Rename missile -> bomb
 * Rename shot -> missile
 
-* Incoming missiles should come in waves
+* Incoming bombs should come in waves
   * text on screen
   * alert sound
-  * fire missiles throughout the wave
+  * fire bombs throughout the wave
 
 * End of wave:
   * repairs 1 base
-  * resupplies missiles
-  * Bonus score for remaining cities, missiles
+  * resupplies bombs
+  * Bonus score for remaining cities, bombs
   * Reaching score thresholds can resurrect a city
 
+* Differences between waves
+  * Number of cities / bases targetted during the wave (arcade fixed this at 3 + 3 bases)
+  * Proportion of bombs targetting active cities vs empty space or destroyed features.
+
+* Cluster bombs fragment into several halfway down
 * smart bombs that dodge
 
 * Esc in game goes to game-over (via existing `destroy_all_cities`)
@@ -52,7 +58,7 @@
 
 * Planes or satellites fly over
 
-* Vehicles launch missiles from the sides
+* Vehicles launch bombs from the sides
 
 * In-game upgrade available notification
   https://itch.io/docs/butler/pushing.html#looking-for-updates
@@ -86,8 +92,8 @@
   but could use Forward+ renderer for desktop (incl MacOS). What's the situation now?
   Do we prefer one renderer over another?
 * More particle effects:
-  * Trail on shots, somewhat like missile
-  * Shot launch
+  * Trail on missiles, somewhat like bombs
+  * missiles launch
   * city destroy (red particles?)
   * base destroy (yellow particles?)
 * City/base destruction (BangFeature) needs special effects:

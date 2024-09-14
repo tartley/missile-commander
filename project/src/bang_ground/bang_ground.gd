@@ -1,5 +1,5 @@
 """
-The explosion of a missile striking the ground (not a city or base)
+The explosion of a bomb striking the ground (not a city or base)
 """
 class_name BangGround extends Node2D
 

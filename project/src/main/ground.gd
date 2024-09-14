@@ -107,9 +107,9 @@ func _draw() -> void:
     draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.7, 1, .6), 3.0, true)
 
-func on_area_entered(missile:Missile):
-    if missile.target:
-        missile.target.destroy()
+func on_area_entered(bomb:Bomb):
+    if bomb.target:
+        bomb.target.destroy()
     else:
-        BangGround.create(missile.position)
-    missile.destroy()
+        BangGround.create(bomb.position)
+    bomb.destroy()

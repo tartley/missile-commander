@@ -7,7 +7,7 @@ This file is notes about development.
 ## Status
 
 An unfinished work-in-progress. Playable for 30 seconds, but the initial
-wave of missiles just gradually loses steam until all the missiles have fallen
+wave of bombs just gradually loses steam until all the missiles have fallen
 and then nothing happens.
 
 ## Source
@@ -33,13 +33,13 @@ This is from memory, I should confirm the details.
   | |=Mouse Node2D
   | |=Sky Node2D
   | |=Camera Camera2D
-  | |-Missile Node2D  # Rain down from the sky
+  | |-Bomb Node2D  # Rain down from the sky
   | | |=Trail ParticleCPU
-  | |-Shot Node2D  # Player fires upwards
-  | |-BangGround? Node2D  # Missiles detonate on the ground
-  | |-BangSky Node2D  # Shots or missiles detonate in the air
-  | |-BangFeature Node2D  # Missiles destroy a city or base
-  | |-Trail ParticleCPU  # Reparented after missile destroyed
+  | |-Missile Node2D  # Player fires upwards
+  | |-BangGround? Node2D  # Bombs detonate on the ground
+  | |-BangSky Node2D  # Missiles or bombs detonate in the air
+  | |-BangFeature Node2D  # Bombs destroy a city or base
+  | |-Trail ParticleCPU  # Reparented after bomb destroyed
   |=Common  # Common data members and functions
   |=Geometry  # Geometry functions
   ```

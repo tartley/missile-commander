@@ -1,6 +1,6 @@
-class_name Missile extends Node2D
+class_name Bomb extends Node2D
 
-const MissileScene:PackedScene = preload("res://src/missile/missile.tscn")
+const BombScene:PackedScene = preload("res://src/bomb/bomb.tscn")
 
 const SIZE := 20.0
 # A rightwards pointing triangle
@@ -16,15 +16,15 @@ var velocity: Vector2
 var trail:Trail
 
 static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float):
-    var missile := MissileScene.instantiate() as Missile
-    missile.position = pos
-    missile.target = tgt
-    missile.rotation = (dest - pos).angle()
-    missile.velocity = Vector2.from_angle(missile.rotation) * speed
-    Common.world.add_child(missile)
+    var bomb := BombScene.instantiate() as Bomb
+    bomb.position = pos
+    bomb.target = tgt
+    bomb.rotation = (dest - pos).angle()
+    bomb.velocity = Vector2.from_angle(bomb.rotation) * speed
+    Common.world.add_child(bomb)
 
 func _ready() -> void:
-    self.add_to_group("missiles")
+    self.add_to_group("bombs")
     # our trail
     var speed := self.velocity.length()
     self.trail = $Trail as Trail

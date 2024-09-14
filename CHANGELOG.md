@@ -3,14 +3,14 @@
 ### v0.16
 
 * Releases now include a README and this CHANGELOG, as HTML.
-* Bases have 10 shots each, not 15.
+* Bases have 10 missiles each, not 15.
 
 ### v0.15 2024-09-11
 
 * Fix thousands of log errors of the form "*missile.gd:44 @ destroy(): Node not found: 'Trail'*".
-* Fix longstanding collision detection bug preventing missiles from being destroyed by sky
+* Fix longstanding collision detection bug preventing bombs from being destroyed by sky
   explosions.
-* Add a score. Ten points per missile shot down. Uses 'thin space' character as a thousands
+* Add a score. Ten points per bomb shot down. Uses 'thin space' character as a thousands
   separator.
 * Mouse cursor allowed to go a fraction lower altitude.
 
@@ -21,7 +21,7 @@
 ### v0.13 2024-09-08
 
 * Game runs, is playable for 30 seconds, correctly handles a "game over" if all
-  cities are destroyed, but otherwise the wave of falling missiles just
+  cities are destroyed, but otherwise the wave of falling bombs just
   gradually runs out, and nothing after that ever happens.
 
 Versions older than this are lost to history, although development started on a flight from

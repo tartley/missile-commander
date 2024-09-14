@@ -1,8 +1,8 @@
 class_name TitleScreen extends Node2D
 
 func _ready():
-    for missile in get_tree().get_nodes_in_group("missiles"):
-        missile.destroy()
+    for bomb in get_tree().get_nodes_in_group("bombs"):
+        bomb.destroy()
 
 func get_version() -> String:
     var version:String = ProjectSettings.get_setting("application/config/version")
