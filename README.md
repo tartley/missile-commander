@@ -44,8 +44,7 @@ This is from memory, I should confirm the details.
   |=Geometry  # Geometry functions
   ```
 
-  | Where:
-  | `=` Node placed in tree statically, from the Godot editor
-  | `-` Node placed in tree dynamically, at run-time.
-  ```
+> Where:
+> `=` Node placed in tree statically, from the Godot editor
+> `-` Node placed in tree dynamically, at run-time.
 
