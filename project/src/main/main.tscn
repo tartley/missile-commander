@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvl60w5q1oghk"]
+[gd_scene load_steps=12 format=3 uid="uid://dvl60w5q1oghk"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_3ne2t"]
 [ext_resource type="Script" path="res://src/main/world.gd" id="2_38wir"]
 [ext_resource type="Script" path="res://src/main/screen.gd" id="2_dkibe"]
 [ext_resource type="Script" path="res://src/main/camera.gd" id="2_jm13r"]
 [ext_resource type="Script" path="res://src/main/sky.gd" id="3_nw6n4"]
+[ext_resource type="Script" path="res://src/main/labels.gd" id="4_8qnl0"]
 [ext_resource type="Script" path="res://src/main/ground.gd" id="4_fvoxd"]
 [ext_resource type="Script" path="res://src/main/score.gd" id="4_v14l7"]
 [ext_resource type="Script" path="res://src/main/mouse.gd" id="5_i0hgq"]
@@ -19,6 +20,9 @@ script = ExtResource("2_dkibe")
 
 [node name="World" type="Node" parent="."]
 script = ExtResource("2_38wir")
+
+[node name="Labels" type="Node2D" parent="World"]
+script = ExtResource("4_8qnl0")
 
 [node name="Ground" type="Area2D" parent="World"]
 z_index = 2

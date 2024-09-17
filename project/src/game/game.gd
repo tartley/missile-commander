@@ -2,16 +2,18 @@ extends Node
 
 var mouse:Mouse
 var ground:Ground
+var level:Level
 
 func _ready():
-    for i in range(1000):
-        launch_bomb(i)
+    # repair all cities and bases
     for city:City in get_tree().get_nodes_in_group("cities"):
         city.reset()
         city.city_destroyed.connect(on_city_destroyed)
     for base:Base in get_tree().get_nodes_in_group("bases"):
         base.reset()
     Common.score.value = 0
+    self.level = Level.create(1)
+    self.add_child(self.level)
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
@@ -42,22 +44,6 @@ func debug_destroy_cities():
 func launch_missile(base_id):
     var base:Node2D = get_tree().get_nodes_in_group("bases")[base_id]
     base.fire(self.mouse.position)
-
-func launch_bomb(i):
-    var start := Vector2(randf_range(-2000, +2000), -14100 - i * 5)
-    var td = choose_target()
-    var target = td[0]
-    var dest = td[1]
-    var speed := randf_range(40, 300)
-    Bomb.create(start, target, dest, speed)
-
-func choose_target() -> Array: # Array of [City|Base|null, Vector2]
-    var targets:Array = []
-    for target in get_tree().get_nodes_in_group("cities") + get_tree().get_nodes_in_group("bases"):
-        targets.append([target, target.position])
-    for pos in Common.world.get_node("Ground").gaps: # TODO Static on Ground?
-        targets.append([null, pos])
-    return targets.pick_random()
 
 func on_city_destroyed():
     var remaining := 0

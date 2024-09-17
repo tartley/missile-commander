@@ -4,11 +4,18 @@
   https://www.retrogamedeconstructionzone.com/2019/11/missilie-command-deep-dive.html
 
 * Bug
+    ```
     WARNING: 1 RID of type "CanvasItem" was leaked.
     WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
          at: cleanup (core/object/object.cpp:2284)
-    ERROR: 1 resources still in use at exit (run with --verbose for details).
-       at: clear (core/io/resource.cpp:604)
+    Leaked instance: GDScriptNativeClass:9223372048464609921
+    Leaked instance: GDScript:9223372061483730177 - Resource path: res://src/title_screen/title_screen.gd
+    Leaked instance: Node2D:111971144986 - Node name: TitleScreen
+    Hint: Leaked instances typically happen when nodes are removed from the scene tree (with `remove_child()`) but not freed (with `free()` or `queue_free()`).
+    ERROR: 1 resources still in use at exit.
+       at: clear (core/io/resource.cpp:599)
+    Resource still in use: res://src/title_screen/title_screen.gd (GDScript)
+    ```
 
 * Bug
     NO_GRAB on grabbing mouse
@@ -24,20 +31,24 @@
   * Add it to documented platforms.
 * BUG: mouse capture reportedly doesn't work in i3
 
-* Incoming bombs should come in waves
-  * text on screen
-  * alert sound
+* Levels
+  > intro text before a wave
+  > pause before first bombs fall
+  * start next wave
+  * outro text on end of wave
+  * resupply ammo during outro
+  * repair bases during outro
+  * score bonuses during outro
+    * remaining missiles
+    * remaining cities
+  * score thresholds repair cities?
+  * sounds during intro / outro?
   * fire bombs throughout the wave
-
-* End of wave:
-  * repairs 1 base
-  * resupplies bombs
-  * Bonus score for remaining cities, bombs
-  * Reaching score thresholds can resurrect a city
 
 * Differences between waves
   * Number of cities / bases targetted during the wave (arcade fixed this at 3 + 3 bases)
   * Proportion of bombs targetting active cities vs empty space or destroyed features.
+  * Speed distribution of bombs
 
 * Cluster bombs fragment into several halfway down
 * smart bombs that dodge
