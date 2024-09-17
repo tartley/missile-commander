@@ -34,6 +34,7 @@
 * Levels
   > intro text before a wave
   > pause before first bombs fall
+  * Experiment using 'await' between delayed events
   * start next wave
   * outro text on end of wave
   * resupply ammo during outro
@@ -44,6 +45,9 @@
   * score thresholds repair cities?
   * sounds during intro / outro?
   * fire bombs throughout the wave
+
+* Tidying
+  * Should title_screen/game_over use Labels?
 
 * Differences between waves
   * Number of cities / bases targetted during the wave (arcade fixed this at 3 + 3 bases)
