@@ -7,21 +7,23 @@ static func create(difficulty_:int) -> Level:
     level.difficulty = difficulty_
     return level
 
-func delay(duration:float, callable:Callable) -> void:
-    var timer := get_tree().create_timer(duration, false)
-    timer.timeout.connect(callable)
+func asleep(duration:float) -> void:
+    await get_tree().create_timer(duration, false).timeout
 
 func _ready() -> void:
-    delay(1.0, display_level_start)
+    await asleep(1)
+    intro()
+    await asleep(1)
+    create_bombs()
+    await asleep(1)
+    Common.labels.remove_all()
 
-func display_level_start() -> void:
+func intro() -> void:
     Common.labels.add("Wave %s" % self.difficulty, Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
-    delay(1.0, launch_bombs)
 
-func launch_bombs() -> void:
+func create_bombs() -> void:
     for i in range(2 ** (self.difficulty + 1)):
         launch_bomb(i)
-    delay(1, Common.labels.remove_all)
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
