@@ -11,6 +11,8 @@ const verts: Array[Vector2] = [
     Vector2(+SIZE/2,       0), # rightmost tip
 ]
 
+static var all:Array[Bomb] = []
+
 var target:Node2D # City or Base or null
 var velocity: Vector2
 var trail:Trail
@@ -24,8 +26,12 @@ static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float) -> Bomb:
     Common.world.add_child(bomb)
     return bomb
 
+static func destroy_all():
+    for bomb in Bomb.all.duplicate():
+        bomb.destroy()
+
 func _ready() -> void:
-    self.add_to_group("bombs")
+    Bomb.all.append(self)
     # our trail
     var speed := self.velocity.length()
     self.trail = $Trail as Trail
@@ -48,3 +54,4 @@ func destroy():
     self.trail.reparent(Common.world)
     self.trail.emitting = false
     queue_free()
+    Bomb.all.erase(self)

@@ -5,6 +5,7 @@ var ground:Ground
 var level:Level
 
 func _ready():
+    Common.score.value = 0
     # repair all cities
     for city:City in City.all:
         city.reset()
@@ -12,7 +13,6 @@ func _ready():
     # repair & re-arm all bases
     for base:Base in Base.all:
         base.reset()
-    Common.score.value = 0
     create_level(1)
 
 func create_level(difficulty:int):
@@ -37,7 +37,7 @@ func _unhandled_input(event:InputEvent):
             KEY_F1:
                 debug_destroy_cities()
             KEY_F2:
-                debug_destroy_bombs()
+                Bomb.destroy_all()
     if event is InputEventMouseButton and event.pressed:
         match event.button_index:
             MOUSE_BUTTON_LEFT:
@@ -50,12 +50,6 @@ func _unhandled_input(event:InputEvent):
 func debug_destroy_cities():
     for city in City.all:
         city.destroy()
-
-func debug_destroy_bombs():
-    print("dd bombs")
-    for bomb in get_tree().get_nodes_in_group("bombs"):
-        print(bomb)
-        bomb.destroy()
 
 func launch_missile(base_id):
     var base:Node2D = Base.all[base_id]
