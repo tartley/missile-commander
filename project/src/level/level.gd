@@ -12,6 +12,9 @@ func asleep(duration:float) -> void:
     await get_tree().create_timer(duration, false).timeout
 
 func _ready() -> void:
+    intro.call_deferred()
+
+func intro():
     await asleep(1)
     Common.labels.add("Wave %s" % self.difficulty, Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
     await asleep(1)
