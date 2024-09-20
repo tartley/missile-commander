@@ -35,15 +35,26 @@
   > intro text before a wave
   > pause before first bombs fall
   > Experiment using 'await' between delayed events
-  * start next wave
-  * outro text on end of wave
-  * resupply ammo during outro
-  * repair bases during outro
+  > start next wave
+  > outro text on end of wave
+  > resupply ammo during outro
+    * with sound effects dit-dat-dot!
+  * repair a single base during outro
+    * prefer central base if needed
+    * with sound effect after rearm: dit-dat-dot-daah!
+  * start wave text appears with more flourish?
+    * Sound effect
+    * Fade / size in?
+  * end wave text flourish
+    * sound effect
+    * fade / size in?
   * score bonuses during outro
     * remaining missiles
+      * with sound effect
     * remaining cities
+      * with sound effect
   * score thresholds repair cities?
-  * sounds during intro / outro?
+    * with sound effect
   * fire bombs throughout the wave
 
 * Tidying

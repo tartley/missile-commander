@@ -41,13 +41,16 @@ func create_bombs() -> void:
     for i in range(2 ** (self.difficulty + 1)):
         create_bomb(i)
 
+func rearm_bases():
+    for base:Base in Base.all:
+        base.rearm()
+        await asleep(0.5)
+
 func outro() -> void:
     await asleep(2)
     Common.labels.add("End of wave", Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
     await asleep(1.5)
-    # re-arm all bases
-    for base:Base in Base.all:
-        base.rearm()
+    self.rearm_bases()
     await asleep(1.5)
     Common.labels.remove_all()
     self.queue_free()
