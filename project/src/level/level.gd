@@ -12,7 +12,12 @@ func asleep(duration:float) -> void:
     await get_tree().create_timer(duration, false).timeout
 
 func _ready() -> void:
-    intro()
+    await asleep(1)
+    Common.labels.add("Wave %s" % self.difficulty, Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
+    await asleep(1)
+    create_bombs()
+    await asleep(1)
+    Common.labels.remove_all()
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
@@ -35,14 +40,6 @@ func create_bomb(i):
 func create_bombs() -> void:
     for i in range(2 ** (self.difficulty + 1)):
         create_bomb(i)
-
-func intro() -> void:
-    await asleep(1)
-    Common.labels.add("Wave %s" % self.difficulty, Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
-    await asleep(1)
-    create_bombs()
-    await asleep(1)
-    Common.labels.remove_all()
 
 func outro() -> void:
     await asleep(1)
