@@ -15,13 +15,14 @@ var target:Node2D # City or Base or null
 var velocity: Vector2
 var trail:Trail
 
-static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float):
+static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float) -> Bomb:
     var bomb := BombScene.instantiate() as Bomb
     bomb.position = pos
     bomb.target = tgt
     bomb.rotation = (dest - pos).angle()
     bomb.velocity = Vector2.from_angle(bomb.rotation) * speed
     Common.world.add_child(bomb)
+    return bomb
 
 func _ready() -> void:
     self.add_to_group("bombs")

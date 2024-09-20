@@ -1,6 +1,7 @@
 class_name Level extends Node
 
 var difficulty:int = 0
+var bomb_count:int = 0
 
 static func create(difficulty_:int) -> Level:
     var level:Level = Level.new()
@@ -11,19 +12,7 @@ func asleep(duration:float) -> void:
     await get_tree().create_timer(duration, false).timeout
 
 func _ready() -> void:
-    await asleep(1)
     intro()
-    await asleep(1)
-    create_bombs()
-    await asleep(1)
-    Common.labels.remove_all()
-
-func intro() -> void:
-    Common.labels.add("Wave %s" % self.difficulty, Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
-
-func create_bombs() -> void:
-    for i in range(2 ** (self.difficulty + 1)):
-        launch_bomb(i)
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
@@ -33,13 +22,36 @@ func choose_target() -> Array: # Array of [City|Base|null, Vector2]
         targets.append([null, pos])
     return targets.pick_random()
 
-func launch_bomb(i):
+func create_bomb(i):
     var start := Vector2(randf_range(-2000, +2000), -14100 - i * 5)
     var td = choose_target()
     var target = td[0]
     var dest = td[1]
     var speed := randf_range(40, 300)
-    Bomb.create(start, target, dest, speed)
+    var bomb := Bomb.create(start, target, dest, speed)
+    bomb.tree_exiting.connect(bomb_exiting)
+    self.bomb_count += 1
 
-func _process(_delta: float) -> void:
-    pass
+func create_bombs() -> void:
+    for i in range(2 ** (self.difficulty + 1)):
+        create_bomb(i)
+
+func intro() -> void:
+    await asleep(1)
+    Common.labels.add("Wave %s" % self.difficulty, Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
+    await asleep(1)
+    create_bombs()
+    await asleep(1)
+    Common.labels.remove_all()
+
+func outro() -> void:
+    await asleep(1)
+    Common.labels.add("End of wave", Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
+    await asleep(1)
+    Common.labels.remove_all()
+    self.queue_free()
+
+func bomb_exiting() -> void:
+    self.bomb_count -= 1
+    if self.bomb_count <= 0:
+        self.outro()

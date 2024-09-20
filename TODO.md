@@ -34,7 +34,7 @@
 * Levels
   > intro text before a wave
   > pause before first bombs fall
-  * Experiment using 'await' between delayed events
+  > Experiment using 'await' between delayed events
   * start next wave
   * outro text on end of wave
   * resupply ammo during outro
