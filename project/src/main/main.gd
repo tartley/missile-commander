@@ -8,7 +8,7 @@ func _ready():
     # Inject dependencies
     # TODO A lot of things need Mouse injecting. Should it be globally available? Like main is?
     $World/Camera.mouse = $World/Mouse
-    for base in get_tree().get_nodes_in_group("bases"):
+    for base in Base.all:
         base.mouse = $World/Mouse
     show_title_screen()
 

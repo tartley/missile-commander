@@ -5,6 +5,8 @@ const FORE := Color.YELLOW
 const FORE_DESTROYED := Color(.3, .3, .3)
 const FILL := Color.BLACK
 
+static var all:Array[Base] = []
+
 # We use a reference to the mouse to swivel our turret towards it
 var mouse:Node2D
 var verts:Array[Vector2] = get_verts()
@@ -15,7 +17,7 @@ func _ready():
     self.reset()
     $Turret.size = SIZE
     $Turret.position = Vector2(0, SIZE * 3/8)
-    self.add_to_group("bases")
+    Base.all.append(self)
 
 func _process(_delta:float):
     if not self.destroyed:

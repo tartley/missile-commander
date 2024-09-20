@@ -10,7 +10,7 @@ func _ready():
         city.reset()
         city.city_destroyed.connect(on_city_destroyed)
     # repair & re-arm all bases
-    for base:Base in get_tree().get_nodes_in_group("bases"):
+    for base:Base in Base.all:
         base.reset()
     Common.score.value = 0
     create_level(1)
@@ -50,7 +50,7 @@ func debug_destroy_cities():
         city.destroy()
 
 func launch_missile(base_id):
-    var base:Node2D = get_tree().get_nodes_in_group("bases")[base_id]
+    var base:Node2D = Base.all[base_id]
     base.fire(self.mouse.position)
 
 func on_city_destroyed():
