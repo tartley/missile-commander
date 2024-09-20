@@ -36,6 +36,8 @@ func _unhandled_input(event:InputEvent):
                 launch_missile(2)
             KEY_F1:
                 debug_destroy_cities()
+            KEY_F2:
+                debug_destroy_bombs()
     if event is InputEventMouseButton and event.pressed:
         match event.button_index:
             MOUSE_BUTTON_LEFT:
@@ -48,6 +50,12 @@ func _unhandled_input(event:InputEvent):
 func debug_destroy_cities():
     for city in City.all:
         city.destroy()
+
+func debug_destroy_bombs():
+    print("dd bombs")
+    for bomb in get_tree().get_nodes_in_group("bombs"):
+        print(bomb)
+        bomb.destroy()
 
 func launch_missile(base_id):
     var base:Node2D = Base.all[base_id]
