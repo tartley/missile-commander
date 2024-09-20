@@ -61,10 +61,13 @@ func fire(dest:Vector2):
 
 func reset():
     $Turret.reset()
-    $Ammo.reset()
     self.color = FORE
     self.destroyed = false
     self.queue_redraw()
+    self.rearm()
+
+func rearm():
+    $Ammo.reset()
 
 func destroy():
     $Turret.destroy()
