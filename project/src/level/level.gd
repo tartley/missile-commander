@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
-    for target in get_tree().get_nodes_in_group("cities") + Base.all:
+    for target in City.all + Base.all:
         targets.append([target, target.position])
     for pos in Common.world.get_node("Ground").gaps: # TODO Static on Ground?
         targets.append([null, pos])

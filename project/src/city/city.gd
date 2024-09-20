@@ -6,15 +6,17 @@ const FORE := Color.RED
 const FORE_DESTROYED := Color(.3, .3, .3)
 const FILL := Color.BLACK
 
-var verts : Array[Vector2]
-var color : Color
-var destroyed : bool
+static var all:Array[City] = []
+
+var verts:Array[Vector2]
+var color:Color
+var destroyed:bool
 
 signal city_destroyed
 
 func _ready():
     self.reset()
-    self.add_to_group("cities")
+    self.all.append(self)
 
 func _draw():
     draw_polygon(self.verts, [FILL])

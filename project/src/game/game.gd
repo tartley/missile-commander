@@ -6,7 +6,7 @@ var level:Level
 
 func _ready():
     # repair all cities
-    for city:City in get_tree().get_nodes_in_group("cities"):
+    for city:City in City.all:
         city.reset()
         city.city_destroyed.connect(on_city_destroyed)
     # repair & re-arm all bases
@@ -46,7 +46,7 @@ func _unhandled_input(event:InputEvent):
                 launch_missile(2)
 
 func debug_destroy_cities():
-    for city in get_tree().get_nodes_in_group("cities"):
+    for city in City.all:
         city.destroy()
 
 func launch_missile(base_id):
@@ -55,7 +55,7 @@ func launch_missile(base_id):
 
 func on_city_destroyed():
     var remaining := 0
-    for city in get_tree().get_nodes_in_group("cities"):
+    for city in City.all:
         if not city.destroyed:
             remaining += 1
     if remaining == 0:
