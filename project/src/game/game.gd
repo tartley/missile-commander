@@ -5,15 +5,23 @@ var ground:Ground
 var level:Level
 
 func _ready():
-    # repair all cities and bases
+    # repair all cities
     for city:City in get_tree().get_nodes_in_group("cities"):
         city.reset()
         city.city_destroyed.connect(on_city_destroyed)
+    # repair & re-arm all bases
     for base:Base in get_tree().get_nodes_in_group("bases"):
         base.reset()
     Common.score.value = 0
-    self.level = Level.create(1)
-    self.add_child(self.level)
+    create_level(1)
+
+func create_level(difficulty:int):
+    self.level = Level.create(difficulty)
+    self.add_child.call_deferred(self.level)
+    self.level.tree_exiting.connect(level_exiting)
+
+func level_exiting():
+    create_level(self.level.difficulty + 1)
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:

@@ -42,7 +42,7 @@ func create_bombs() -> void:
         create_bomb(i)
 
 func outro() -> void:
-    await asleep(1)
+    await asleep(2)
     Common.labels.add("End of wave", Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
     await asleep(1)
     Common.labels.remove_all()
@@ -51,4 +51,4 @@ func outro() -> void:
 func bomb_exiting() -> void:
     self.bomb_count -= 1
     if self.bomb_count <= 0:
-        self.outro()
+        self.outro.call_deferred()
