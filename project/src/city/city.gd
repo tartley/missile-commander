@@ -14,6 +14,13 @@ var destroyed:bool
 
 signal city_destroyed
 
+static func remaining() -> int:
+    var r:int = 0
+    for city in City.all:
+        if not city.destroyed:
+            r += 1
+    return r
+
 func _ready():
     self.reset()
     self.all.append(self)

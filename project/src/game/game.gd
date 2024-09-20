@@ -62,10 +62,6 @@ func launch_missile(base_id):
     base.fire(self.mouse.position)
 
 func on_city_destroyed():
-    var remaining := 0
-    for city in City.all:
-        if not city.destroyed:
-            remaining += 1
-    if remaining == 0:
+    if City.remaining() == 0:
         # TODO some special effect first
         queue_free()
