@@ -1,10 +1,12 @@
 class_name Level extends Node
 
+const LevelScene:PackedScene = preload("res://src/level/level.tscn")
+
 var difficulty:int = 0
 var bomb_count:int = 0
 
 static func create(difficulty_:int) -> Level:
-    var level:Level = Level.new()
+    var level:Level = LevelScene.instantiate()
     level.difficulty = difficulty_
     return level
 
@@ -45,8 +47,12 @@ func create_bombs() -> void:
         create_bomb(i)
 
 func rearm_bases():
+    var audio:AudioStreamPlayer = get_node("AudioStreamPlayer") as AudioStreamPlayer
+    audio.pitch_scale = 1.0
     for base:Base in Base.all:
         base.rearm()
+        audio.play()
+        audio.pitch_scale *= 1.27
         await asleep(0.5)
 
 func outro() -> void:

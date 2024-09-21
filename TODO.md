@@ -1,8 +1,5 @@
 ## TODO
 
-* Go re-read that analysis of the original.
-  https://www.retrogamedeconstructionzone.com/2019/11/missilie-command-deep-dive.html
-
 * Bug
     ```
     WARNING: 1 RID of type "CanvasItem" was leaked.
@@ -22,14 +19,6 @@
     An idea: Comment there suggests we get that event twice, and one of them causes the NO_GRAB
     error, while the other does not. Can we distinguish between those events, to conditionally
     grab the mouse?
-
-* BUG: mouse capture doesn't work in web. Needs to be in response to a user
-  event. Also: Perhaps my clever minimal event handlers are insufficient.
-* BUG: fullscreen doesn't work in web, needs to be in response to a user event
-       i.e. we must add a 'fullscreen' toggle button.
-* Make a web release
-  * Add it to documented platforms.
-* BUG: mouse capture reportedly doesn't work in i3
 
 * Levels
   > intro text before a wave
@@ -57,21 +46,48 @@
     * with sound effect
   * fire bombs throughout the wave
 
+* BUG: mouse capture doesn't work in web. Needs to be in response to a user
+  event. Also: Perhaps my clever minimal event handlers are insufficient.
+* BUG: fullscreen doesn't work in web, needs to be in response to a user event
+  i.e. we must add a 'fullscreen' toggle button to title screen.
+* Make a web release
+  * Add it to documented platforms.
+* BUG: mouse capture reportedly doesn't work in i3
+
 * Tidying
+  * Read about lables, themes, fonts, etc.
+  * Should it be functions on Screen which add labels?
+  * Consider adding static edit-time labels which the game code activates
+  * Consider adding cities and bases statically which the game code
+    activates and positions
   * Should title_screen/game_over use Labels?
+  * Consolidate terminology for level/wave/difficulty
 
 * Differences between waves
-  * Number of cities / bases targetted during the wave (arcade fixed this at 3 + 3 bases)
-  * Proportion of bombs targetting active cities vs empty space or destroyed features.
+  * Go re-read that analysis of the original.
+    https://www.retrogamedeconstructionzone.com/2019/11/missilie-command-deep-dive.html
+  * Number of bombs
+  * Number of cities / bases targetted during the wave (arcade fixed this at 3 +
+    3 bases)
+  * Proportion of bombs targetting active cities vs empty space or destroyed
+    features.
   * Speed distribution of bombs
 
 * Cluster bombs fragment into several halfway down
+  * variation between waves
 * smart bombs that dodge
+  * variation between waves
 
-* Esc in game goes to game-over (via existing `destroy_all_cities`)
+* Buttons to start game on:
+  * Easy (wave 1)
+  * Medium (wave X)
+  * Hard (wave Y)
+
+* Esc in game adds "[Esc] again to quit" lable for 2 seconds.
+* Esc again with label quits game, via "destroy_all_cities", goes to game-over.
 * Esc on game-over goes to title screen
 * Esc on title screen exits
-* Add instructions "Esc to exit defence console"
+* Add instructions "[Esc] to exit defence console"
 
 * Credits in the game
   * with links one can click

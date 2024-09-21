@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cu62jhv3be1hn"]
+[gd_scene load_steps=3 format=3 uid="uid://cu62jhv3be1hn"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_ap4gb"]
+[ext_resource type="AudioStream" uid="uid://ch3x66bjnffqq" path="res://audio/dub.wav" id="2_b2juy"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_ap4gb")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_b2juy")
