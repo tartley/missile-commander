@@ -27,7 +27,7 @@
   > start next wave
   > outro text on end of wave
   > resupply ammo during outro
-    * with sound effects dit-dat-dot!
+    > with sound effects dit-dat-dot!
   * repair a single base during outro
     * prefer central base if needed
     * with sound effect after rearm: dit-dat-dot-daah!

@@ -69,7 +69,7 @@ windows: $(exe_windows) README-players.html CHANGELOG.html ## Build Windows bina
 	cp CHANGELOG.html dist/missile-commander-windows/
 .PHONY: windows
 
-build: linux windows ## Build Windows and Linux binaries in dist/
+build: linux windows ## Build all binaries in dist/
 .PHONY: build
 
 # Install a command-line tool used to upload to itch.io
