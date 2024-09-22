@@ -1,31 +1,33 @@
 # Missile Commander
 
-A 2024 vector graphic remake of the 1980 city defence arcade classic "Missile Command".
-
-This file is notes about development.
-
-See also TODO.md.
+A 2024 vector graphic remake of the 1980 city defence arcade classic "Missile
+Command".
 
 ## Status
 
-An unfinished work-in-progress. Playable for a minute, but the
-waves of falling bombs are not remotely balanced for difficulty. 
+An unfinished work-in-progress. Playable for a minute, but the waves of falling
+bombs are not remotely balanced for difficulty.
 
-## Source
+See [TODO.md](TODO.md), and [README-players.md](README-players.md).
 
-https://github.com/tartley/missile-commander/
+## Links
+
+To play or download: https://tartley.itch.io/missile-commander
+
+Source code: https://github.com/tartley/missile-commander
 
 ## Godot Scene Tree diagram
 
 This is from memory, I should confirm the details.
 
   ```
-  Main
-  |=Screen
+  Main Node
+  |=Screen Node
   | |-TitleScreen
   | | |=Title Label ?
   | |-GameOver Label ?
-  |=World
+  | |=Labels Node2D
+  |=World Node
   | |=ScoreLabel Label
   | |=Ground Area2D
   | | |-City Node2D (x6)
@@ -34,6 +36,8 @@ This is from memory, I should confirm the details.
   | |=Mouse Node2D
   | |=Sky Node2D
   | |=Camera Camera2D
+  | |-Game
+  | | |-Level
   | |-Bomb Node2D  # Rain down from the sky
   | | |=Trail ParticleCPU
   | |-Missile Node2D  # Player fires upwards

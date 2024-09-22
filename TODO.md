@@ -46,6 +46,9 @@
     * with sound effect
   * fire bombs throughout the wave
 
+* When all bases destroyed (or when out of ammo?) accellerate time so you don't
+  have to wait for bombs to fall.
+
 * BUG: mouse capture doesn't work in web. Needs to be in response to a user
   event. Also: Perhaps my clever minimal event handlers are insufficient.
 * BUG: fullscreen doesn't work in web, needs to be in response to a user event
