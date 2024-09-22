@@ -4,11 +4,12 @@ A 2024 vector graphic remake of the 1980 city defence arcade classic "Missile Co
 
 This file is notes about development.
 
+See also TODO.md.
+
 ## Status
 
-An unfinished work-in-progress. Playable for 30 seconds, but the initial
-wave of bombs just gradually loses steam until all the missiles have fallen
-and then nothing happens.
+An unfinished work-in-progress. Playable for a minute, but the
+waves of falling bombs are not remotely balanced for difficulty. 
 
 ## Source
 
