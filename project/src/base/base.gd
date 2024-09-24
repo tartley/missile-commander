@@ -69,8 +69,11 @@ func reset():
     self.queue_redraw()
     self.rearm()
 
+func needs_rearm():
+    return $Ammo.needs_rearm()
+
 func rearm():
-    $Ammo.reset()
+    $Ammo.rearm()
 
 func destroy():
     $Turret.destroy()

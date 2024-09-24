@@ -50,10 +50,11 @@ func rearm_bases():
     var audio:AudioStreamPlayer = get_node("AudioStreamPlayer") as AudioStreamPlayer
     audio.pitch_scale = 1.0
     for base:Base in Base.all:
-        base.rearm()
-        audio.play()
-        audio.pitch_scale *= 1.27
-        await asleep(0.5)
+        if base.needs_rearm():
+            base.rearm()
+            audio.play()
+            audio.pitch_scale *= 1.27
+            await asleep(0.5)
 
 func outro() -> void:
     await asleep(2)

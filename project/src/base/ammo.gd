@@ -7,7 +7,7 @@ const MAX := 10
 var count : int
 
 func _ready():
-    reset()
+    rearm()
 
 func _draw():
     for i in range(self.count):
@@ -52,7 +52,10 @@ func get_offset(index:int) -> Vector2:
         x = 3 - index * 2
     return Vector2(x * SIZE * 2, y * SIZE * 3)
 
-func reset():
+func needs_rearm():
+    return self.count < MAX
+
+func rearm():
     self.count = MAX
     queue_redraw()
 
