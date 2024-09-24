@@ -6,6 +6,9 @@ const FORE_DESTROYED := Color(.3, .3, .3)
 const FILL := Color.BLACK
 
 static var all:Array[Base] = []
+static var left:Base
+static var center:Base
+static var right:Base
 
 # We use a reference to the mouse to swivel our turret towards it
 var mouse:Node2D
@@ -29,11 +32,11 @@ func _draw():
     draw_polygon(self.verts, [FILL])
     draw_polyline(self.verts, self.color, 2.0, true)
 
-func get_dome(center, radius, segments) -> Array[Vector2]:
+func get_dome(pos, radius, segments) -> Array[Vector2]:
     var vs:Array[Vector2] = []
     for segment in range(segments + 1):
         var angle:float = PI * 3/4 - PI/2 * segment / segments
-        var vert:Vector2 = center + Vector2.from_angle(angle) * radius
+        var vert:Vector2 = pos + Vector2.from_angle(angle) * radius
         vs.append(vert)
     return vs
 

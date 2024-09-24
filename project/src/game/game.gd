@@ -18,22 +18,22 @@ func _ready():
 func create_level(difficulty:int):
     self.level = Level.create(difficulty)
     self.add_child.call_deferred(self.level)
-    self.level.tree_exiting.connect(level_exiting)
+    self.level.tree_exiting.connect(on_level_exit)
 
-func level_exiting():
+func on_level_exit():
     create_level(self.level.difficulty + 1)
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
         match event.keycode:
             KEY_A:
-                launch_missile(0)
+                Base.left.fire(self.mouse.position)
             KEY_W:
-                launch_missile(1)
+                Base.center.fire(self.mouse.position)
             KEY_S:
-                launch_missile(1)
+                Base.center.fire(self.mouse.position)
             KEY_D:
-                launch_missile(2)
+                Base.right.fire(self.mouse.position)
             KEY_F1:
                 debug_destroy_cities()
             KEY_F2:
@@ -41,19 +41,15 @@ func _unhandled_input(event:InputEvent):
     if event is InputEventMouseButton and event.pressed:
         match event.button_index:
             MOUSE_BUTTON_LEFT:
-                launch_missile(0)
+                Base.left.fire(self.mouse.position)
             MOUSE_BUTTON_MIDDLE:
-                launch_missile(1)
+                Base.center.fire(self.mouse.position)
             MOUSE_BUTTON_RIGHT:
-                launch_missile(2)
+                Base.right.fire(self.mouse.position)
 
 func debug_destroy_cities():
     for city in City.all:
         city.destroy()
-
-func launch_missile(base_id):
-    var base:Node2D = Base.all[base_id]
-    base.fire(self.mouse.position)
 
 func on_city_destroyed():
     if City.remaining() == 0:
