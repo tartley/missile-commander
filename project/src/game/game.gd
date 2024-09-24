@@ -35,8 +35,10 @@ func _unhandled_input(event:InputEvent):
             KEY_D:
                 Base.right.fire(self.mouse.position)
             KEY_F1:
-                debug_destroy_cities()
+                debug_destroy_city()
             KEY_F2:
+                debug_destroy_base()
+            KEY_F3:
                 Bomb.destroy_all()
     if event is InputEventMouseButton and event.pressed:
         match event.button_index:
@@ -47,9 +49,20 @@ func _unhandled_input(event:InputEvent):
             MOUSE_BUTTON_RIGHT:
                 Base.right.fire(self.mouse.position)
 
-func debug_destroy_cities():
-    for city in City.all:
-        city.destroy()
+func debug_destroy_feature(type):
+    var intact := []
+    for feature in type.all:
+        if not feature.destroyed:
+            intact.append(feature)
+    if intact:
+        var feature = intact.pick_random()
+        feature.destroy()
+
+func debug_destroy_city():
+    debug_destroy_feature(City)
+
+func debug_destroy_base():
+    debug_destroy_feature(Base)
 
 func on_city_destroyed():
     if City.remaining() == 0:
