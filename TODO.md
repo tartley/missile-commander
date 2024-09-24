@@ -48,13 +48,26 @@
 
 * When all bases destroyed (or when out of ammo?) accellerate time so you don't
   have to wait for bombs to fall.
+  * Holding fire accellerates time?
+  * When it's a button for a base that has no ammo?
+  * But that means you can't do it if all bases have ammo?
+  * Maybe any fire button should do it if held down?
+  * But then you'd have to burn a missile to engage it?
+  * But is that a big deal, who would really care?
+  * Maybe another button instead of fire?
+  * If this was a feature, we'd need a hint that appeared on-screen when
+    ammo was gone but bombs remained.
 
-* BUG: mouse capture doesn't work in web. Needs to be in response to a user
-  event. Also: Perhaps my clever minimal event handlers are insufficient.
-* BUG: fullscreen doesn't work in web, needs to be in response to a user event
-  i.e. we must add a 'fullscreen' toggle button to title screen.
+* BUG: fullscreen & mouse capture don't work in web. Both these need to be in
+  response to a user event. So:
+  * In web, start windowed.
+  * Start game button on title screen
+  * Switch to fullscreen & capture mouse in button handler.
+  * A title-screen checkbox for fullscreen, which defaults to true.
+
 * Make a web release
-  * Add it to documented platforms.
+  * Add it to platforms listed in README, itch.io page.
+
 * BUG: mouse capture reportedly doesn't work in i3
 
 * Tidying
@@ -98,11 +111,9 @@
   * with links one can click
   * A mastodon hashtag (also put in README, itch.io description)
 
-* High score
+* High score?
 
 * Planes or satellites fly over
-
-* Vehicles launch bombs from the sides
 
 * In-game upgrade available notification
   https://itch.io/docs/butler/pushing.html#looking-for-updates

@@ -2,7 +2,11 @@
 
 ### v0.17
 
-
+* Rearm all bases between levels.
+* Repair one base between levels, preferring the central one.
+* Bombs dropped gradually throughout the wave, instead of all at once.
+* Refactor: Consolidate whole level control into new 'lifecycle' function.
+* Refactor: Alias bases as Base.{left,center,right}.
 
 ### v0.16 2024-09-23
 

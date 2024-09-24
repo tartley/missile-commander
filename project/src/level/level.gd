@@ -23,19 +23,23 @@ func asleep(duration:float) -> void:
 
 func lifecycle():
     await asleep(1)
-    Common.labels.add("Wave %s" % self.difficulty, Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
+    # TODO:
+    # * Decide whether to add labels to Screen or World (ie should they move with camera)
+    # * Perhaps this call should become ".create_label", then caller can choose which to add it to.
+    Common.screen.add_label("Wave %s" % self.difficulty, Vector2(0.5, 0.4), 64, Color.PURPLE)
     await asleep(1)
     create_bombs()
     await asleep(1)
-    Common.labels.remove_all()
+    Common.screen.remove_all_labels()
     await self.last_bomb_done
     await asleep(2.75)
-    Common.labels.add("End of wave", Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
+    Common.screen.add_label("End of wave", Vector2(0.5, 0.4), 64, Color.PURPLE)
     await asleep(1.5)
+    await self.bonus_for_ammo()
     await self.rearm_bases()
     await self.restore_one_base()
     await asleep(1.5)
-    Common.labels.remove_all()
+    Common.screen.remove_all_labels()
     self.queue_free()
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
@@ -65,10 +69,14 @@ func bomb_exiting() -> void:
     if get_tree() and Bomb.all.size() <= 0 and self.bombs <= 0:
         self.last_bomb_done.emit()
 
+func bonus_for_ammo():
+    pass
+
 func rearm_bases():
     self.player.pitch_scale = 1.0
     for base:Base in Base.all:
         if base.needs_rearm():
+            Common.screen.add_label("Rearming bases", Vector2(0.5, 0.45), 64, Color.WEB_PURPLE)
             base.rearm()
             self.player.play()
             self.player.pitch_scale *= 1.27
@@ -81,6 +89,7 @@ func restore_one_base():
     bases.append_array(sides)
     for base:Base in bases:
         if base.destroyed:
+            Common.screen.add_label("Rebuilding one base", Vector2(0.5, 0.5), 64, Color.WEB_PURPLE)
             base.reset()
             self.player.pitch_scale = 1 / 1.27
             self.player.play()

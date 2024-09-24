@@ -14,4 +14,3 @@ const font:FontFile = preload("res://fonts/Orbitron-Medium.otf")
 static var score:Score
 static var screen:Screen
 static var world:World
-static var labels:Labels
