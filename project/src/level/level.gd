@@ -19,7 +19,9 @@ func _ready() -> void:
     lifecycle.call_deferred()
 
 func asleep(duration:float) -> void:
-    await get_tree().create_timer(duration, false).timeout
+    var tree:SceneTree = get_tree()
+    if tree:
+        await tree.create_timer(duration, false).timeout
 
 func lifecycle():
     await asleep(1)
