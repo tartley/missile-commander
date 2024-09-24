@@ -3,26 +3,35 @@ class_name Level extends Node
 const LevelScene:PackedScene = preload("res://src/level/level.tscn")
 
 var difficulty:int = 0
-var bomb_count:int = 0
+
+signal last_bomb_done
 
 static func create(difficulty_:int) -> Level:
     var level:Level = LevelScene.instantiate()
     level.difficulty = difficulty_
     return level
 
+func _ready() -> void:
+    lifecycle.call_deferred()
+
 func asleep(duration:float) -> void:
     await get_tree().create_timer(duration, false).timeout
 
-func _ready() -> void:
-    intro.call_deferred()
-
-func intro():
+func lifecycle():
     await asleep(1)
     Common.labels.add("Wave %s" % self.difficulty, Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
     await asleep(1)
     create_bombs()
     await asleep(1)
     Common.labels.remove_all()
+    await self.last_bomb_done
+    await asleep(2.75)
+    Common.labels.add("End of wave", Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
+    await asleep(1.5)
+    self.rearm_bases()
+    await asleep(1.5)
+    Common.labels.remove_all()
+    self.queue_free()
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
@@ -40,11 +49,14 @@ func create_bomb(i):
     var speed := randf_range(40, 300)
     var bomb := Bomb.create(start, target, dest, speed)
     bomb.tree_exiting.connect(bomb_exiting)
-    self.bomb_count += 1
 
 func create_bombs() -> void:
     for i in range(2 ** (self.difficulty + 1)):
         create_bomb(i)
+
+func bomb_exiting() -> void:
+    if Bomb.all.size() <= 0 and get_tree():
+        self.last_bomb_done.emit()
 
 func rearm_bases():
     var audio:AudioStreamPlayer = get_node("AudioStreamPlayer") as AudioStreamPlayer
@@ -55,17 +67,3 @@ func rearm_bases():
             audio.play()
             audio.pitch_scale *= 1.27
             await asleep(0.5)
-
-func outro() -> void:
-    await asleep(2)
-    Common.labels.add("End of wave", Vector2(0, -Common.RADIUS * 1.1), 64, Color.PURPLE)
-    await asleep(1.5)
-    self.rearm_bases()
-    await asleep(1.5)
-    Common.labels.remove_all()
-    self.queue_free()
-
-func bomb_exiting() -> void:
-    self.bomb_count -= 1
-    if self.bomb_count <= 0:
-        self.outro.call_deferred()
