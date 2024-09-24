@@ -28,15 +28,10 @@
   > outro text on end of wave
   > resupply ammo during outro
     > with sound effects dit-dat-dot!
-  * repair a single base during outro
-    * prefer central base if needed
-    * with sound effect after rearm: dit-dat-dot-daah!
-  * start wave text appears with more flourish?
-    * Sound effect
-    * Fade / size in?
-  * end wave text flourish
-    * sound effect
-    * fade / size in?
+  > repair a single base during outro
+    > prefer central base if needed
+    > with sound effect after rearm: dit-dat-dot-daah!
+  > fire bombs throughout the wave
   * score bonuses during outro
     * remaining missiles
       * with sound effect
@@ -44,7 +39,12 @@
       * with sound effect
   * score thresholds repair cities?
     * with sound effect
-  * fire bombs throughout the wave
+  * start wave text appears with more flourish?
+    * Sound effect
+    * Fade / size in?
+  * end wave text flourish
+    * sound effect
+    * fade / size in?
 
 * When all bases destroyed (or when out of ammo?) accellerate time so you don't
   have to wait for bombs to fall.
@@ -75,6 +75,8 @@
   * Proportion of bombs targetting active cities vs empty space or destroyed
     features.
   * Speed distribution of bombs
+  * Smaller timing between successive bombs. Cluster them.
+  * Allow greater deviation from vertical descent
 
 * Cluster bombs fragment into several halfway down
   * variation between waves
