@@ -2,6 +2,7 @@ class_name Level extends Node
 
 const LevelScene:PackedScene = preload("res://src/level/level.tscn")
 
+var player:AudioStreamPlayer
 var difficulty:int = 0
 
 signal last_bomb_done
@@ -12,6 +13,7 @@ static func create(difficulty_:int) -> Level:
     return level
 
 func _ready() -> void:
+    self.player = $AudioStreamPlayer
     lifecycle.call_deferred()
 
 func asleep(duration:float) -> void:
@@ -59,11 +61,10 @@ func bomb_exiting() -> void:
         self.last_bomb_done.emit()
 
 func rearm_bases():
-    var audio:AudioStreamPlayer = get_node("AudioStreamPlayer") as AudioStreamPlayer
-    audio.pitch_scale = 1.0
+    self.player.pitch_scale = 1.0
     for base:Base in Base.all:
         if base.needs_rearm():
             base.rearm()
-            audio.play()
-            audio.pitch_scale *= 1.27
+            self.player.play()
+            self.player.pitch_scale *= 1.27
             await asleep(0.5)
