@@ -18,11 +18,6 @@
     Resource still in use: res://src/title_screen/title_screen.gd (GDScript)
     ```
 
-* Bug
-    NO_GRAB on grabbing mouse. An idea: Comment there suggests we get that event
-    twice, and one of them causes the NO_GRAB error, while the other does not.
-    Can we distinguish between those events, to conditionally grab the mouse?
-
 * Levels
   > intro text before a wave
   > pause before first bombs fall
@@ -35,11 +30,32 @@
   > repair a single base during outro
     > prefer central base if needed
     > with sound effect after rearm: dit-dat-dot-daah!
-  * score bonuses during outro
-    * remaining missiles
-      * with sound effect
-    * remaining cities
-      * with sound effect
+  > Move score values onto Score object
+  > Score for each missile shot: 10
+  * Bonus for remaining ammo: sum(range(remaining + 1))
+       0   0
+       1   1
+       2   3
+       .   .
+       4  10
+       .   .
+      10  55
+       .   .
+      14 105
+       .   .
+      20 210
+      24 300
+      28 406
+      30 465
+    * with sound effect
+  * Bonus for remaining cities:
+      1  10
+      2  20
+      3  40
+      4  80
+      5 160
+      6 320
+    * with sound effect
   * score thresholds repair cities?
     * with sound effect
   * start wave text appears with more flourish?
@@ -72,6 +88,11 @@
     ammo was gone but bombs remained.
 
 * BUG: mouse capture reportedly doesn't work in i3
+
+* Bug
+    NO_GRAB on grabbing mouse. An idea: Comment there suggests we get that event
+    twice, and one of them causes the NO_GRAB error, while the other does not.
+    Can we distinguish between those events, to conditionally grab the mouse?
 
 * Tidying
   * Read about lables, themes, fonts, etc.
