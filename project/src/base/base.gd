@@ -62,18 +62,21 @@ func fire(dest:Vector2):
             $Ammo.decrement()
             Missile.create(to_global($Turret.position), dest)
 
-func reset():
-    $Turret.reset()
-    self.color = FORE
-    self.destroyed = false
-    self.queue_redraw()
-    self.rearm()
-
 func needs_rearm():
     return $Ammo.needs_rearm()
 
 func rearm():
     $Ammo.rearm()
+
+func rebuild():
+    $Turret.reset()
+    self.color = FORE
+    self.destroyed = false
+    self.queue_redraw()
+
+func reset():
+    self.rebuild()
+    self.rearm()
 
 func destroy():
     $Turret.destroy()

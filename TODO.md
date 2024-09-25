@@ -49,12 +49,12 @@
       30 465
     * with sound effect
   * Bonus for remaining cities:
-      1  10
-      2  20
-      3  40
-      4  80
-      5 160
-      6 320
+      1  10  10
+      2  20  30
+      3  40  60
+      4  80 100
+      5 160 150
+      6 320 210
     * with sound effect
   * score thresholds repair cities?
     * with sound effect
