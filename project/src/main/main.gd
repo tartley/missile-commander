@@ -26,10 +26,10 @@ func exit():
 
 func show_title_screen():
     var title_screen:TitleScreen = TitleScreenScene.instantiate()
-    title_screen.tree_exited.connect(on_title_screen_exit)
+    title_screen.tree_exited.connect(start_game)
     Common.screen.add_child.call_deferred(title_screen)
 
-func on_title_screen_exit():
+func start_game():
     if Main.exiting:
         return
     # start the game
