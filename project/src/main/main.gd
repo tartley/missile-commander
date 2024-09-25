@@ -4,6 +4,8 @@ const TitleScreenScene:PackedScene = preload("res://src/title_screen/title_scree
 const GameScene:PackedScene = preload("res://src/game/game.tscn")
 const GameOverScene:PackedScene = preload("res://src/game_over/game_over.tscn")
 
+static var exiting := false
+
 func _ready():
     # Inject dependencies
     # TODO A lot of things need Mouse injecting. Should it be globally available? Like main is?
@@ -16,7 +18,11 @@ func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
         match event.keycode:
             KEY_ESCAPE:
-                get_tree().quit()
+                exit()
+
+func exit():
+    Main.exiting = true
+    get_tree().quit()
 
 func show_title_screen():
     var title_screen:TitleScreen = TitleScreenScene.instantiate()
@@ -24,6 +30,8 @@ func show_title_screen():
     Common.screen.add_child.call_deferred(title_screen)
 
 func on_title_screen_exit():
+    if Main.exiting:
+        return
     # start the game
     var game = GameScene.instantiate()
     game.mouse = $World/Mouse

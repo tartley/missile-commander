@@ -17,11 +17,11 @@ exe_windows := $(dist_windows)/Missile\ Commander.exe
 exe_dir := ~/.local/bin
 
 edit: ## Edit the project in Godot
-	(cd project ; godot project.godot) &
+	(cd project ; godot project.godot $(ARGS)) &
 .PHONY: edit
 
 run: ## Run the project
-	(cd project ; godot) &
+	(cd project ; godot $(ARGS)) &
 .PHONY: run
 
 version: ## Show the current project version number, from project.godot

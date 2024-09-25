@@ -1,6 +1,11 @@
 ## TODO
 
-* Bug
+* Leaks:
+    Hint: Leaked instances typically happen when nodes are removed from the
+    scene tree (with `remove_child()`) but not freed (with `free()` or
+    `queue_free()`).
+
+  * an old one:
     ```
     WARNING: 1 RID of type "CanvasItem" was leaked.
     WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
@@ -8,17 +13,15 @@
     Leaked instance: GDScriptNativeClass:9223372048464609921
     Leaked instance: GDScript:9223372061483730177 - Resource path: res://src/title_screen/title_screen.gd
     Leaked instance: Node2D:111971144986 - Node name: TitleScreen
-    Hint: Leaked instances typically happen when nodes are removed from the scene tree (with `remove_child()`) but not freed (with `free()` or `queue_free()`).
     ERROR: 1 resources still in use at exit.
        at: clear (core/io/resource.cpp:599)
     Resource still in use: res://src/title_screen/title_screen.gd (GDScript)
     ```
 
 * Bug
-    NO_GRAB on grabbing mouse
-    An idea: Comment there suggests we get that event twice, and one of them causes the NO_GRAB
-    error, while the other does not. Can we distinguish between those events, to conditionally
-    grab the mouse?
+    NO_GRAB on grabbing mouse. An idea: Comment there suggests we get that event
+    twice, and one of them causes the NO_GRAB error, while the other does not.
+    Can we distinguish between those events, to conditionally grab the mouse?
 
 * Levels
   > intro text before a wave
@@ -28,10 +31,10 @@
   > outro text on end of wave
   > resupply ammo during outro
     > with sound effects dit-dat-dot!
+  > fire bombs throughout the wave
   > repair a single base during outro
     > prefer central base if needed
     > with sound effect after rearm: dit-dat-dot-daah!
-  > fire bombs throughout the wave
   * score bonuses during outro
     * remaining missiles
       * with sound effect
@@ -40,23 +43,11 @@
   * score thresholds repair cities?
     * with sound effect
   * start wave text appears with more flourish?
-    * Sound effect
+    * Sound effect?
     * Fade / size in?
   * end wave text flourish
-    * sound effect
+    * sound effect?
     * fade / size in?
-
-* When all bases destroyed (or when out of ammo?) accellerate time so you don't
-  have to wait for bombs to fall.
-  * Holding fire accellerates time?
-  * When it's a button for a base that has no ammo?
-  * But that means you can't do it if all bases have ammo?
-  * Maybe any fire button should do it if held down?
-  * But then you'd have to burn a missile to engage it?
-  * But is that a big deal, who would really care?
-  * Maybe another button instead of fire?
-  * If this was a feature, we'd need a hint that appeared on-screen when
-    ammo was gone but bombs remained.
 
 * BUG: fullscreen & mouse capture don't work in web. Both these need to be in
   response to a user event. So:
@@ -68,14 +59,22 @@
 * Make a web release
   * Add it to platforms listed in README, itch.io page.
 
+* When bases destroyed or out of ammo, accellerate time so you don't
+  have to wait for bombs to fall.
+  * Holding fire accellerates time?
+  * When it's a button for a base that has no ammo?
+  * But that means you can't do it if all bases have ammo?
+  * Maybe any fire button should do it if held down?
+  * But then you'd have to burn a missile to engage it?
+  * But is that a big deal, who would really care?
+  * Maybe another button instead of fire?
+  * If this was a feature, we'd need a hint that appeared on-screen when
+    ammo was gone but bombs remained.
+
 * BUG: mouse capture reportedly doesn't work in i3
 
 * Tidying
   * Read about lables, themes, fonts, etc.
-  * Should it be functions on Screen which add labels?
-  * Consider adding static edit-time labels which the game code activates
-  * Consider adding cities and bases statically which the game code
-    activates and positions
   * Should title_screen/game_over use Labels?
   * Consolidate terminology for level/wave/difficulty
 
@@ -162,7 +161,9 @@
   * Vary each one slightly in tone?
   * Maybe it can fluctuate along with the visual?
 * Speech synthesis?
-* Game over animation zooms into last exploding city? (And slow-mo?)
+* Game over animation:
+  * zoom camera into last exploding city?
+  * slow-mo?
+  * Text "game over" grows within the explosion?
 * Program start animation zooms out from central base, to reveal title, etc
-* Each city has a name?
 
