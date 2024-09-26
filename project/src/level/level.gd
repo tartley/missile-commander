@@ -3,6 +3,8 @@ class_name Level extends Node
 const LevelScene:PackedScene = preload("res://src/level/level.tscn")
 
 var player:AudioStreamPlayer
+var labeller:Labeller
+
 var difficulty:int = 0
 var bombs:int
 
@@ -15,6 +17,8 @@ static func create(difficulty_:int) -> Level:
 
 func _ready() -> void:
     self.player = $AudioStreamPlayer
+    self.labeller = $Labeller
+    self.labeller.target = Common.screen
     self.bombs = 2 ** (self.difficulty + 1)
     lifecycle.call_deferred()
 
@@ -25,24 +29,20 @@ func asleep(duration:float) -> void:
 
 func lifecycle():
     await asleep(1)
-    # TODO:
-    # * Decide whether to add labels to Screen or World (ie should they move with camera)
-    # * Perhaps this call should become ".create_label", then caller can choose which to add it to.
-    Common.screen.add_label("Wave %s" % self.difficulty, Vector2(0.5, 0.4), 64, Color.PURPLE)
+    self.labeller.add("Wave %s" % self.difficulty, 64, Color.PURPLE, Vector2(0.5, 0.4))
     await asleep(1)
     create_bombs()
     await asleep(1)
-    Common.screen.remove_all_labels()
+    self.labeller.remove_all_labels()
     await self.last_bomb_done
     await asleep(2.75)
-    Common.screen.add_label("End of wave", Vector2(0.5, 0.35), 64, Color.PURPLE)
+    self.labeller.add("End of wave", 64, Color.PURPLE, Vector2(0.5, 0.35))
     await asleep(1.5)
     await self.bonus_for_ammo()
     await self.rebuild_one_base()
-    await asleep(1.5)
     await self.rearm_bases()
     await asleep(0.5)
-    Common.screen.remove_all_labels()
+    self.labeller.remove_all_labels()
     self.queue_free()
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
@@ -82,17 +82,21 @@ func rebuild_one_base():
     bases.append_array(sides)
     for base:Base in bases:
         if base.destroyed:
-            Common.screen.add_label("Rebuilding one base", Vector2(0.5, 0.45), 64, Color.WEB_PURPLE)
+            self.labeller.add("Rebuilding one base", 64, Color.WEB_PURPLE)
             base.rebuild()
             self.player.pitch_scale = 1 / 1.27
             self.player.play()
+            await asleep(0.5)
             break
 
 func rearm_bases():
+    var labelled := false
     self.player.pitch_scale = 1.0
     for base:Base in Base.all:
         if base.needs_rearm():
-            Common.screen.add_label("Rearming bases", Vector2(0.5, 0.5), 64, Color.WEB_PURPLE)
+            if not labelled:
+                self.labeller.add("Rearming bases", 64, Color.WEB_PURPLE)
+                labelled = true
             base.rearm()
             self.player.play()
             self.player.pitch_scale *= 1.27

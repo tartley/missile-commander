@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcs6345ytfrq0"]
+
+[ext_resource type="Script" path="res://src/labeller/labeller.gd" id="1_n4lwd"]
+
+[node name="Labeller" type="Node"]
+script = ExtResource("1_n4lwd")
