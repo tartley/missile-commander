@@ -35,7 +35,6 @@ func start_game():
     # start the game
     var game = GameScene.instantiate()
     game.mouse = $World/Mouse
-    game.ground = $World/Ground
     game.tree_exited.connect(on_game_exit)
     add_child.call_deferred(game)
 

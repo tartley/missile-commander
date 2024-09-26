@@ -1,7 +1,6 @@
 extends Node
 
 var mouse:Mouse
-var ground:Ground
 var level:Level
 
 func _ready():
