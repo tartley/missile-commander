@@ -25,7 +25,7 @@ func _ready():
 func _process(_delta:float):
     if not self.destroyed:
         var global = to_global($Turret.position)
-        var relative = mouse.position - Vector2(global.x, global.y)
+        var relative = mouse.position - global
         $Turret.rotation = relative.angle() - self.rotation
 
 func _draw():
