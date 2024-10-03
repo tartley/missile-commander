@@ -5,18 +5,15 @@ Command".
 
 ## Status
 
-An unfinished work-in-progress. Playable for a minute, but the waves of falling
-bombs are not remotely balanced for difficulty.
+Playable but unfinished. Missing some planned features. See [TODO.md](TODO.md).
 
-See [TODO.md](TODO.md), and [README-players.md](README-players.md).
+Built executables are uploaded [to itch.io](https://tartley.itch.io/missile-commander).
 
-## Links
+## Overview
 
-To play or download: https://tartley.itch.io/missile-commander
+Made in Godot v4.
 
-Source code: https://github.com/tartley/missile-commander
-
-## Godot Scene Tree diagram
+### Scene tree
 
 This is from memory, I should confirm the details.
 
@@ -26,7 +23,6 @@ This is from memory, I should confirm the details.
   | |-TitleScreen
   | | |=Title Label ?
   | |-GameOver Label ?
-  | |=Labels Node2D
   |=World Node
   | |=ScoreLabel Label
   | |=Ground Area2D
@@ -50,12 +46,13 @@ This is from memory, I should confirm the details.
   ```
 
 > Where:
-> `=` Node placed in tree statically, from the Godot editor
-> `-` Node placed in tree dynamically, at run-time.
+> `=` Node placed in tree in the Godot editor
+> `-` Node placed in tree in code, at run-time.
 
 ## Release Checklist
 
 * Update Changelog, including date on version
+* Update README & README-player
 * make release
-* Consider swinging by itch.io and pasting changelog into there.
+* Swinging by itch.io, paste status, changelog.
 

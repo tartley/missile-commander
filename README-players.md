@@ -1,22 +1,32 @@
 # Missile Commander
 
-A 2024 vector graphic remake of the 1980 city defence arcade classic "Missile Command".
+A 2024 vector graphic remake of the 1980 city defence arcade classic "Missile
+Command".
 
 ## Status
 
-An unfinished work-in-progress. Playable for 30 seconds, but the initial
-wave of bombs just gradually loses steam until all the bombs have fallen
-and then nothing happens.
+Playable but unfinished. Missing some planned features (web release, level
+differentiation, fancy bomb types, difficulty tuning, credits in-game, high
+score, juice including CRT glow, parallax starfield, update notifications)
 
 ## Install
 
-Download a Linux or Windows zip file from [https://tartley.itch.io/missile-commander](https://tartley.itch.io/missile-commander).
+Download a Linux or Windows zip file from [Itchio](https://tartley.itch.io/missile-commander).
 
-Extract everything from the zip file, and double click the program to run.
+Extract all files from the zip, and double click the executable program to run.
+No install is required.
+
+## Play
+
+Use mouse to aim your cursor. Press left, center, and right mouse buttons to
+launch missiles from your three yellow ground bases. Alternatively use keyboard
+`A`, `S` and `D` to fire. Use the missiles to protect your red cities from waves
+of falling bombs.
 
 ## Credits
 
-By Zander Hartley (aged 12) and [Jonathan Hartley](https://tartley.com/pages/about).
+By [Jonathan](https://tartley.com/pages/about) & Zander Hartley (aged 12). See
+the [source code](https://github.com/tartley/missile-commander).
 
 Original 1980 concept and implementation by David Theurer for Atari.
 
