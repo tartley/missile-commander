@@ -1,22 +1,23 @@
 ## TODO
 
-* Leaks:
-    Hint: Leaked instances typically happen when nodes are removed from the
-    scene tree (with `remove_child()`) but not freed (with `free()` or
-    `queue_free()`).
-
-  * an old one:
-    ```
-    WARNING: 1 RID of type "CanvasItem" was leaked.
-    WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
-         at: cleanup (core/object/object.cpp:2284)
-    Leaked instance: GDScriptNativeClass:9223372048464609921
-    Leaked instance: GDScript:9223372061483730177 - Resource path: res://src/title_screen/title_screen.gd
-    Leaked instance: Node2D:111971144986 - Node name: TitleScreen
-    ERROR: 1 resources still in use at exit.
-       at: clear (core/io/resource.cpp:599)
-    Resource still in use: res://src/title_screen/title_screen.gd (GDScript)
-    ```
+* A longstanding leak reported on exit. title_screen.gd still in use. Run with
+  --verbose to see:
+  ```
+  WARNING: 1 RID of type "CanvasItem" was leaked.
+  WARNING: ObjectDB instances leaked at exit
+  Leaked instance: GDScriptNativeClass:9223372048464609921
+  Leaked instance: GDScript:9223372061483730177 -
+      Resource path: res://src/title_screen/title_screen.gd
+  Leaked instance: Node2D:111971144986 - Node name: TitleScreen
+  ERROR: 1 resources still in use at exit.
+     at: clear (core/io/resource.cpp:599)
+  Resource still in use: res://src/title_screen/title_screen.gd (GDScript)
+  ```
+  Hint: Leaked instances typically happen when nodes are removed from the
+  scene tree (with `remove_child()`) but not freed (with `free()` or
+  `queue_free()`).
+  queue_free is called. Does the free fail because something else in-tree has a
+  reference to it?
 
 * Levels
   > intro text before a wave
@@ -34,29 +35,31 @@
   > Score for each missile shot: 10
   > Diversion to write utils for positioning centered labels,
     > even when there are a row of them with uneven sizes.
-  * Bonus for remaining ammo: sum(range(remaining + 1))
-       0   0
-       1   1
-       2   3
-       .   .
-       4  10
-       .   .
-      10  55
-       .   .
-      14 105
-       .   .
-      20 210
-      24 300
-      28 406
-      30 465
-    * with sound effect
+  > * Bonus for remaining ammo: sum(range(remaining + 1))
+  >      0   0
+  >      1   1
+  >      2   3
+  >      .   .
+  >      4  10
+  >      .   .
+  >     10  55
+  >      .   .
+  >     14 105
+  >      .   .
+  >     20 210
+  >     24 300
+  >     28 406
+  >     30 465
+  >   * with sound effect
+  * Bonus counter label should be right-aligned
   * Bonus for remaining cities:
-      1  10  10
-      2  20  30
-      3  40  60
-      4  80 100
-      5 160 150
-      6 320 210
+      n 10x2^n      10xtriangular number
+      1     10      10
+      2     20      30
+      3     40      60
+      4     80     100
+      5    160     150
+      6    320     210
     * with sound effect
   * score thresholds repair cities?
     * with sound effect

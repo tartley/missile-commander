@@ -14,12 +14,19 @@ var value:int:
 func _ready() -> void:
     Common.score = self
     self.position = Vector2(0, -Common.RADIUS * 0.993)
+    self.reset()
 
 func _draw() -> void:
     var msg := format(value)
     var text_size := Common.font.get_string_size(msg, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
     var posn := Vector2(-text_size.x/2, 0)
     draw_string(Common.font, posn, msg, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, font_color)
+
+func reset():
+    self.value = 0
+
+func add(amount:int):
+    self.value += amount
 
 func format(number:int, separator:String=" ") -> String:
     # Format positive integers with "thin space" thousands separators

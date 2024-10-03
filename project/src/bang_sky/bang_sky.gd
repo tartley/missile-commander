@@ -72,7 +72,7 @@ func destroy_nearby_bombs() -> void:
             if self.position.distance_to(bomb.position) < self.size:
                 bomb.destroy()
                 BangSky.create_from_bomb(bomb.position)
-                Common.score.value += Score.BOMB_DESTROYED
+                Common.score.add(Score.BOMB_DESTROYED)
             else:
                 valid_bombs.append(bomb)
     self.nearby_bombs = valid_bombs

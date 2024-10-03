@@ -86,10 +86,11 @@ func bonus_for_ammo():
     var counter := 0
     for base:Base in Base.all:
         for i in range(base.ammo - 1, -1, -1):
-            $AudioStreamPlayer.play(0.1)
+            $AudioStreamPlayer.play(0.01)
             base.ammo = i
             counter += 1
             bonus += counter
+            Common.score.add(counter)
             value.text = "%4d" % bonus
             await asleep(0.07)
 

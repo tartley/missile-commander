@@ -95,7 +95,7 @@ func reset():
 
 func destroy():
     $Turret.destroy()
-    $Ammo.destroy()
+    self.ammo = 0
     self.color = FORE_DESTROYED
     if not self.destroyed:
         BangFeature.create(self.position, FORE)
