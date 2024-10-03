@@ -14,7 +14,6 @@ func init(target_):
 func get_label(text:String, font_size:int, color:Color) -> Label:
     var label := Label.new()
     label.text = text
-    label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
     var settings := LabelSettings.new()
     settings.font = Common.font
     settings.font_size = font_size
@@ -41,6 +40,10 @@ func add_centered(labels:Array, rel_y:float=-1):
     var max_height := 0.0
     for label in labels:
         label.position = self.curpos
+        # TODO This is part of the solution
+        # It is set to _END by default, and my current code places things
+        # correctly using that. But I want to set to _BEGIN for the ammo counter.
+        label.grow_horizontal = Control.GROW_DIRECTION_END
         target.add_child(label)
         self.curpos += Vector2(label.size.x, 0)
         max_height = max(max_height, label.size.y)

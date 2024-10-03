@@ -2,7 +2,6 @@ class_name Level extends Node
 
 const LevelScene:PackedScene = preload("res://src/level/level.tscn")
 
-var player:AudioStreamPlayer
 var labeller:Labeller
 
 var difficulty:int = 0
@@ -16,7 +15,6 @@ static func create(difficulty_:int) -> Level:
     return level
 
 func _ready() -> void:
-    self.player = $AudioStreamPlayer
     $Labeller.init(Common.screen)
     self.bombs = 2 ** (self.difficulty + 1)
     lifecycle.call_deferred()
@@ -75,35 +73,51 @@ func bomb_exiting() -> void:
 
 func bonus_for_ammo():
     var desc:Label = $Labeller.get_label("Bonus for remaining ammo: ", 64, Color.WEB_PURPLE)
-    var value:Label = $Labeller.get_label("000", 64, Color.WEB_PURPLE)
+    var value:Label = $Labeller.get_label("0000", 64, Color.WEB_PURPLE)
     $Labeller.add_centered([desc, value] as Array[Label])
-    for i in range(100): # TODO use real bonus value
-        value.text = "%3d" % i
-        await asleep(0.03)
 
-func rebuild_one_base():
+    value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+    value.text = "0"
+    await asleep(0.75)
+
+    $AudioStreamPlayer.pitch_scale = 1 / 1.27 / 1.27
+
+    var bonus := 0
+    var counter := 0
+    for base:Base in Base.all:
+        for i in range(base.ammo - 1, -1, -1):
+            $AudioStreamPlayer.play(0.1)
+            base.ammo = i
+            counter += 1
+            bonus += counter
+            value.text = "%4d" % bonus
+            await asleep(0.07)
+
+func _sorted_bases() -> Array[Base]:
     var sides:Array[Base] = [Base.left, Base.right]
     sides.shuffle()
     var bases:Array[Base] = [Base.center]
     bases.append_array(sides)
-    for base:Base in bases:
+    return bases
+
+func rebuild_one_base():
+    $AudioStreamPlayer.pitch_scale = 1 / 1.27
+    for base:Base in _sorted_bases():
         if base.destroyed:
             $Labeller.add_centered([$Labeller.get_label("Rebuilding one base", 64, Color.WEB_PURPLE)])
             base.rebuild()
-            self.player.pitch_scale = 1 / 1.27
-            self.player.play()
+            $AudioStreamPlayer.play()
             await asleep(0.75)
             break
 
 func rearm_bases():
     var labelled := false
-    self.player.pitch_scale = 1.0
     for base:Base in Base.all:
         if base.needs_rearm():
             if not labelled:
                 $Labeller.add_centered([$Labeller.get_label("Rearming bases", 64, Color.WEB_PURPLE)])
                 labelled = true
             base.rearm()
-            self.player.play()
-            self.player.pitch_scale *= 1.27
+            $AudioStreamPlayer.play()
+            $AudioStreamPlayer.pitch_scale *= 1.27
             await asleep(0.75)

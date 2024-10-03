@@ -16,6 +16,12 @@ var verts:Array[Vector2] = get_verts()
 var color:Color
 var destroyed:bool
 
+var ammo:int:
+    get:
+        return $Ammo.count
+    set(value):
+        $Ammo.count = value
+
 func _ready():
     self.reset()
     $Turret.size = SIZE
@@ -67,15 +73,15 @@ func get_verts() -> Array[Vector2]:
 
 func fire(dest:Vector2):
     if not self.destroyed:
-        if $Ammo.count > 0:
-            $Ammo.decrement()
+        if self.ammo > 0:
+            self.ammo -= 1
             Missile.create(to_global($Turret.position), dest)
 
 func needs_rearm():
-    return $Ammo.needs_rearm()
+    return self.ammo < $Ammo.MAX
 
 func rearm():
-    $Ammo.rearm()
+    self.ammo = $Ammo.MAX
 
 func rebuild():
     $Turret.reset()

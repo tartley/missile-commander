@@ -4,10 +4,11 @@ const SIZE := 8.0
 const FORE := Color.GRAY
 const MAX := 10
 
-var count : int
-
-func _ready():
-    rearm()
+var count : int = MAX:
+    set(value):
+        assert(0 <= value and value <= MAX)
+        count = value
+        queue_redraw()
 
 func _draw():
     for i in range(self.count):
@@ -16,7 +17,6 @@ func _draw():
 func decrement():
     assert(self.count > 0)
     self.count -= 1
-    queue_redraw()
 
 func get_verts() -> Array[Vector2]:
     """A single triangle pointing along +y"""
@@ -51,14 +51,3 @@ func get_offset(index:int) -> Vector2:
         y = -1
         x = 3 - index * 2
     return Vector2(x * SIZE * 2, y * SIZE * 3)
-
-func needs_rearm():
-    return self.count < MAX
-
-func rearm():
-    self.count = MAX
-    queue_redraw()
-
-func destroy():
-    self.count = 0
-    queue_redraw()
