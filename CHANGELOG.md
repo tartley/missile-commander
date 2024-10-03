@@ -1,10 +1,10 @@
 ## Changelog
 
-### v0.17
+### v0.17 2024-10-03
 
-* Rearm all bases between levels.
 * Repair one base between levels, preferring the central one.
 * Bombs dropped gradually throughout the wave, instead of all at once.
+* End of level score bonus for remaining ammo
 * Refactor: Consolidate whole level control into new 'lifecycle' function.
 * Refactor: Alias bases as Base.{left,center,right}.
 
