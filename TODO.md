@@ -32,6 +32,8 @@
     > with sound effect after rearm: dit-dat-dot-daah!
   > Move score values onto Score object
   > Score for each missile shot: 10
+  > Diversion to write utils for positioning centered labels,
+    > even when there are a row of them with uneven sizes.
   * Bonus for remaining ammo: sum(range(remaining + 1))
        0   0
        1   1

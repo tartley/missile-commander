@@ -21,6 +21,15 @@ func _ready():
     $Turret.size = SIZE
     $Turret.position = Vector2(0, SIZE * 3/8)
     Base.all.append(self)
+    match len(Base.all):
+        1:
+            Base.left = self
+        2:
+            Base.center = self
+        3:
+            Base.right = self
+        _:
+            assert(false, "more than 3 bases?")
 
 func _process(_delta:float):
     if not self.destroyed:

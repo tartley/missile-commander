@@ -40,7 +40,7 @@ func lifecycle():
     await self.bonus_for_ammo()
     await self.rebuild_one_base()
     await self.rearm_bases()
-    await asleep(0.5)
+    await asleep(0.75)
     $Labeller.remove_all_labels()
     self.queue_free()
 
@@ -68,6 +68,8 @@ func create_bombs() -> void:
         create_bomb()
 
 func bomb_exiting() -> void:
+    # A bomb has left the scene tree.
+    # Was it the last one of the level?
     if not Main.exiting and Bomb.all.size() <= 0 and self.bombs <= 0:
         self.last_bomb_done.emit()
 
@@ -78,7 +80,6 @@ func bonus_for_ammo():
     for i in range(100): # TODO use real bonus value
         value.text = "%3d" % i
         await asleep(0.03)
-
 
 func rebuild_one_base():
     var sides:Array[Base] = [Base.left, Base.right]
@@ -91,7 +92,7 @@ func rebuild_one_base():
             base.rebuild()
             self.player.pitch_scale = 1 / 1.27
             self.player.play()
-            await asleep(0.5)
+            await asleep(0.75)
             break
 
 func rearm_bases():
@@ -105,4 +106,4 @@ func rearm_bases():
             base.rearm()
             self.player.play()
             self.player.pitch_scale *= 1.27
-            await asleep(0.5)
+            await asleep(0.75)

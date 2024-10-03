@@ -101,9 +101,6 @@ func _ready() -> void:
     create_features(annotated_verts, "city", CityScene)
     create_features(annotated_verts, "base", BaseScene)
     assert(Base.all.size() == 3)
-    Base.left = Base.all[0]
-    Base.center = Base.all[1]
-    Base.right = Base.all[2]
     self.gaps = annotated_verts.get_vertices("gap")
     set_up_collisions(annotated_verts)
 
