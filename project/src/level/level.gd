@@ -17,8 +17,7 @@ static func create(difficulty_:int) -> Level:
 
 func _ready() -> void:
     self.player = $AudioStreamPlayer
-    self.labeller = $Labeller
-    self.labeller.target = Common.screen
+    $Labeller.init(Common.screen)
     self.bombs = 2 ** (self.difficulty + 1)
     lifecycle.call_deferred()
 
@@ -29,20 +28,20 @@ func asleep(duration:float) -> void:
 
 func lifecycle():
     await asleep(1)
-    self.labeller.add("Wave %s" % self.difficulty, 64, Color.PURPLE, Vector2(0.5, 0.4))
+    $Labeller.add_centered([$Labeller.get_label("Wave %s" % self.difficulty, 64, Color.PURPLE)] as Array[Label], 0.4)
     await asleep(1)
     create_bombs()
     await asleep(1)
-    self.labeller.remove_all_labels()
+    $Labeller.remove_all_labels()
     await self.last_bomb_done
     await asleep(2.75)
-    self.labeller.add("End of wave", 64, Color.PURPLE, Vector2(0.5, 0.35))
+    $Labeller.add_centered([$Labeller.get_label("End of wave", 64, Color.PURPLE)] as Array[Label], 0.4)
     await asleep(1.5)
     await self.bonus_for_ammo()
     await self.rebuild_one_base()
     await self.rearm_bases()
     await asleep(0.5)
-    self.labeller.remove_all_labels()
+    $Labeller.remove_all_labels()
     self.queue_free()
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
@@ -73,7 +72,13 @@ func bomb_exiting() -> void:
         self.last_bomb_done.emit()
 
 func bonus_for_ammo():
-    pass
+    var desc:Label = $Labeller.get_label("Bonus for remaining ammo: ", 64, Color.WEB_PURPLE)
+    var value:Label = $Labeller.get_label("000", 64, Color.WEB_PURPLE)
+    $Labeller.add_centered([desc, value] as Array[Label])
+    for i in range(100): # TODO use real bonus value
+        value.text = "%3d" % i
+        await asleep(0.03)
+
 
 func rebuild_one_base():
     var sides:Array[Base] = [Base.left, Base.right]
@@ -82,7 +87,7 @@ func rebuild_one_base():
     bases.append_array(sides)
     for base:Base in bases:
         if base.destroyed:
-            self.labeller.add("Rebuilding one base", 64, Color.WEB_PURPLE)
+            $Labeller.add_centered([$Labeller.get_label("Rebuilding one base", 64, Color.WEB_PURPLE)])
             base.rebuild()
             self.player.pitch_scale = 1 / 1.27
             self.player.play()
@@ -95,7 +100,7 @@ func rearm_bases():
     for base:Base in Base.all:
         if base.needs_rearm():
             if not labelled:
-                self.labeller.add("Rearming bases", 64, Color.WEB_PURPLE)
+                $Labeller.add_centered([$Labeller.get_label("Rearming bases", 64, Color.WEB_PURPLE)])
                 labelled = true
             base.rearm()
             self.player.play()
