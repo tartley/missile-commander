@@ -51,7 +51,7 @@
   >     28 406
   >     30 465
   >   * with sound effect
-  * Bonus counter label should be right-aligned
+  > * Bonus counter label should be right-aligned
   * Bonus for remaining cities:
       n 10x2^n      10xtriangular number
       1     10      10

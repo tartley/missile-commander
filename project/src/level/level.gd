@@ -2,6 +2,10 @@ class_name Level extends Node
 
 const LevelScene:PackedScene = preload("res://src/level/level.tscn")
 
+const color1 := Color.MEDIUM_PURPLE
+const color3 := Color(0.531, 0.216, 0.565)
+const color2 := (color1 + color3) / 2
+
 var labeller:Labeller
 
 var difficulty:int = 0
@@ -26,14 +30,14 @@ func asleep(duration:float) -> void:
 
 func lifecycle():
     await asleep(1)
-    $Labeller.add_centered([$Labeller.get_label("Wave %s" % self.difficulty, 64, Color.PURPLE)] as Array[Label], 0.4)
+    $Labeller.add_centered([$Labeller.get_label("Wave %s" % self.difficulty, 64, Color.YELLOW)] as Array[Label], 0.4)
     await asleep(1)
     create_bombs()
     await asleep(1)
     $Labeller.remove_all_labels()
     await self.last_bomb_done
     await asleep(2.75)
-    $Labeller.add_centered([$Labeller.get_label("End of wave", 64, Color.PURPLE)] as Array[Label], 0.4)
+    $Labeller.add_centered([$Labeller.get_label("End of wave", 64, Color.YELLOW)] as Array[Label], 0.4)
     await asleep(1.5)
     await self.bonus_for_ammo()
     await self.rebuild_one_base()
@@ -78,8 +82,8 @@ func bomb_exiting() -> void:
         self.last_bomb_done.emit()
 
 func bonus_for_ammo():
-    var desc:Label = $Labeller.get_label("Bonus for remaining ammo: ", 64, Color.WEB_PURPLE)
-    var value:Label = $Labeller.get_label("0000", 64, Color.WEB_PURPLE)
+    var desc:Label = $Labeller.get_label("Bonus for remaining ammo:", 64, color1)
+    var value:Label = $Labeller.get_label("0000", 64, color1)
     $Labeller.add_centered([desc, value] as Array[Label])
     # value label should be right aligned as we modify the bonus it displays
     value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -114,7 +118,7 @@ func rebuild_one_base():
     $AudioStreamPlayer.pitch_scale = 1 / 1.27
     for base:Base in _sorted_bases():
         if base.destroyed:
-            $Labeller.add_centered([$Labeller.get_label("Rebuilding one base", 64, Color.WEB_PURPLE)])
+            $Labeller.add_centered([$Labeller.get_label("Rebuilding one base", 64, color2)])
             base.rebuild()
             $AudioStreamPlayer.play()
             await asleep(1)
@@ -125,7 +129,7 @@ func rearm_bases():
     for base:Base in [Base.center, Base.left, Base.right]:
         if base.needs_rearm():
             if not labelled:
-                $Labeller.add_centered([$Labeller.get_label("Rearming bases", 64, Color.WEB_PURPLE)])
+                $Labeller.add_centered([$Labeller.get_label("Rearming bases", 64, color3)])
                 labelled = true
             base.rearm()
             $AudioStreamPlayer.play()
