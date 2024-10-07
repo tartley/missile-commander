@@ -38,7 +38,8 @@ func _unhandled_input(event:InputEvent):
             KEY_F2:
                 debug_destroy_base()
             KEY_F3:
-                Bomb.destroy_all()
+                self.level.end_bombs()
+
     if event is InputEventMouseButton and event.pressed:
         match event.button_index:
             MOUSE_BUTTON_LEFT:

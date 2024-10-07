@@ -61,9 +61,15 @@ func create_bomb():
     self.bombs -= 1
 
 func create_bombs() -> void:
-    for i in range(self.bombs):
+    while self.bombs > 0:
         await asleep(1)
         create_bomb()
+        self.bombs -= 1
+
+func end_bombs() -> void:
+    self.bombs = 0
+    Bomb.destroy_all()
+    self.last_bomb_done.emit()
 
 func bomb_exiting() -> void:
     # A bomb has left the scene tree.
