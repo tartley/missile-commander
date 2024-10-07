@@ -81,10 +81,9 @@ func bonus_for_ammo():
     await asleep(0.75)
 
     $AudioStreamPlayer.pitch_scale = 1 / 1.27 / 1.27
-
     var bonus := 0
     var counter := 0
-    for base:Base in Base.all:
+    for base:Base in [Base.left, Base.right, Base.center]:
         for i in range(base.ammo - 1, -1, -1):
             $AudioStreamPlayer.play(0.01)
             base.ammo = i
@@ -93,6 +92,7 @@ func bonus_for_ammo():
             Common.score.add(counter)
             value.text = "%4d" % bonus
             await asleep(0.07)
+    await asleep(0.75)
 
 func _sorted_bases() -> Array[Base]:
     var sides:Array[Base] = [Base.left, Base.right]
@@ -108,12 +108,12 @@ func rebuild_one_base():
             $Labeller.add_centered([$Labeller.get_label("Rebuilding one base", 64, Color.WEB_PURPLE)])
             base.rebuild()
             $AudioStreamPlayer.play()
-            await asleep(0.75)
+            await asleep(1)
             break
 
 func rearm_bases():
     var labelled := false
-    for base:Base in Base.all:
+    for base:Base in [Base.center, Base.left, Base.right]:
         if base.needs_rearm():
             if not labelled:
                 $Labeller.add_centered([$Labeller.get_label("Rearming bases", 64, Color.WEB_PURPLE)])

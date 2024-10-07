@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.18 (in progress)
+
+* Fix minor visual artifacts where cities meet the ground
+
 ### v0.17 2024-10-03
 
 * Repair one base between levels, preferring the central one.

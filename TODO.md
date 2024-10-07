@@ -73,9 +73,9 @@
 * BUG: fullscreen & mouse capture don't work in web. Both these need to be in
   response to a user event. So:
   * In web, start windowed.
-  * Start game button on title screen
-  * Switch to fullscreen & capture mouse in button handler.
-  * A title-screen checkbox for fullscreen, which defaults to true.
+  * Clicking on the window captures mouse
+  * Toggle: [X] Fullscreen (F11)
+  * Start game button (which later will become easy/medium/hard buttons)
 
 * Make a web release
   * Add it to platforms listed in README, itch.io page.
@@ -191,5 +191,8 @@
   * zoom camera into last exploding city?
   * slow-mo?
   * Text "game over" grows within the explosion?
+  * animation should be unskippable, to prevent rapid presses of fire at the
+    end of a frantic game from skipping over this and starting a new game,
+    erasing the attained score.
 * Program start animation zooms out from central base, to reveal title, etc
 
