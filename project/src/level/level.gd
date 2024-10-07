@@ -81,9 +81,12 @@ func bonus_for_ammo():
     var desc:Label = $Labeller.get_label("Bonus for remaining ammo: ", 64, Color.WEB_PURPLE)
     var value:Label = $Labeller.get_label("0000", 64, Color.WEB_PURPLE)
     $Labeller.add_centered([desc, value] as Array[Label])
-
+    # value label should be right aligned as we modify the bonus it displays
     value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+    value.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+    value.position.x = value.position.x + value.size.x
     value.text = "0"
+
     await asleep(0.75)
 
     $AudioStreamPlayer.pitch_scale = 1 / 1.27 / 1.27
