@@ -125,13 +125,9 @@ func rebuild_one_base():
             break
 
 func rearm_bases():
-    var labelled := false
-    for base:Base in [Base.center, Base.left, Base.right]:
-        if base.needs_rearm():
-            if not labelled:
-                $Labeller.add_centered([$Labeller.get_label("Rearming bases", 64, color3)])
-                labelled = true
-            base.rearm()
-            $AudioStreamPlayer.play()
-            $AudioStreamPlayer.pitch_scale *= 1.27
-            await asleep(0.75)
+    $Labeller.add_centered([$Labeller.get_label("Rearming bases", 64, color3)])
+    $AudioStreamPlayer.play()
+    $AudioStreamPlayer.pitch_scale *= 1.27
+    for base:Base in Base.all:
+        base.rearm()
+    await asleep(0.75)

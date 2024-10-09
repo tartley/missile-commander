@@ -77,9 +77,6 @@ func fire(dest:Vector2):
             self.ammo -= 1
             Missile.create(to_global($Turret.position), dest)
 
-func needs_rearm():
-    return self.ammo < $Ammo.MAX
-
 func rearm():
     self.ammo = $Ammo.MAX
 
