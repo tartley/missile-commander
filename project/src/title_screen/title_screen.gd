@@ -16,31 +16,37 @@ func get_description() -> String:
 func _draw():
     var rect = get_viewport_rect()
     # Title
-    var ypos:int = rect.size.y / 3
+    var ypos:int = rect.size.y / 4
     var font_size := 256
+    var color := Color.CYAN
     for line in ["Missile", "Commander"]:
         draw_string(
-            Common.font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER,
+            Common.font_bold, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER,
             rect.size.x, font_size, Color.BLACK
         )
         draw_string_outline(
-            Common.font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER,
-            rect.size.x, font_size, 8, Color.CYAN
+            Common.font_bold, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER,
+            rect.size.x, font_size, 8, color
         )
         ypos += font_size
 
     # Instructions
-    ypos = rect.size.y * 7 / 12
-    font_size = 64
+    ypos = rect.size.y * 1 / 2
+    font_size = 72
+    color *= (0.85 ** 5)
     for line in [
         "Use mouse to aim,",
         "and mouse buttons or A, S, and D,",
-        "to fire from left, center, or right base.",
+        "to fire from left, center, or right bases.",
+        "Defend our cities!",
         "",
         "Press fire to start",
     ]:
-        draw_string_outline(Common.font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, 8, Color.DARK_CYAN)
-        draw_string(Common.font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, Color.CYAN)
+        if "Press fire" in line:
+            color = Color.YELLOW
+        else:
+            color /= 0.85
+        draw_string(Common.font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, color)
         ypos += font_size
 
     # Version
