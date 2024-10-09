@@ -19,39 +19,51 @@
   queue_free is called. Does the free fail because something else in-tree has a
   reference to it?
 
-* Levels
-  > intro text before a wave
-  > pause before first bombs fall
-  > Experiment using 'await' between delayed events
-  > start next wave
-  > outro text on end of wave
-  > resupply ammo during outro
-    > with sound effects dit-dat-dot!
-  > fire bombs throughout the wave
-  > repair a single base during outro
-    > prefer central base if needed
-    > with sound effect after rearm: dit-dat-dot-daah!
-  > Move score values onto Score object
-  > Score for each missile shot: 10
-  > Diversion to write utils for positioning centered labels,
-    > even when there are a row of them with uneven sizes.
-  > * Bonus for remaining ammo: sum(range(remaining + 1))
-  >      0   0
-  >      1   1
-  >      2   3
-  >      .   .
-  >      4  10
-  >      .   .
-  >     10  55
-  >      .   .
-  >     14 105
-  >      .   .
-  >     20 210
-  >     24 300
-  >     28 406
-  >     30 465
-  >   * with sound effect
-  > * Bonus counter label should be right-aligned
+* Differences between waves
+  * Consolidate terminology for level/wave/difficulty
+  * Go re-read that analysis of the original.
+    https://www.retrogamedeconstructionzone.com/2019/11/missilie-command-deep-dive.html
+  * Number of bombs
+  * Number of cities / bases targetted during the wave (arcade fixed this at 3 +
+    3 bases)
+  * Proportion of bombs targetting active cities vs empty space or destroyed
+    features.
+  * Speed distribution of bombs
+  * Smaller timing between successive bombs. Cluster them.
+  * Allow greater deviation from vertical descent
+
+* Cluster bombs fragment into several halfway down
+  * variation between waves
+* smart bombs that dodge
+  * variation between waves
+
+* BUG: fullscreen & mouse capture don't work in web. Both these need to be in
+  response to a user event. So:
+  * In web, start windowed.
+  * Clicking on the window captures mouse
+  * Toggle: [X] Fullscreen (F11)
+  * Start game button (which later will become easy/medium/hard buttons)
+
+* Make a web release
+  * Add it to platforms listed in README, itch.io page.
+
+* End of level show
+  * Bonus popup from each base, INSTEAD of current HUD text?
+    Ah, this relies upon bonus value being per-base, not (as currently)
+    growing with the total amount of remaining ammo. Hmmm... That would encourage
+    players to concentrate on using ammo from one base while hoarding it at others.
+    That might not be terrible, since it acts in opposition to what's best for the
+    player. It means these bonuses will be very low at higher levels where the number
+    of incoming bombs is presumably high. Hmm. Maybe higher levels should not consistently
+    have such a high number of bombs? Certainly we should not have number of bombs exceed
+    the number of player missiles, except to the extent we can expect (or force) multiple
+    bombs to be destroyable with one shot. Ah, but actually, we could have a high number
+    of bombs, but have many of them miss, so an adept player could still hold back many
+    shots and score a bonus.
+  * Visual effect to highlight base repair.
+  * ...Instead of current HUD text?
+    Or should current HUD text be one line, that describes what's currently happening,
+    instead of multiple lines as currently. Hmmm.
   * Bonus for remaining cities:
       n 10x2^n      10xtriangular number
       1     10      10
@@ -70,56 +82,25 @@
     * sound effect?
     * fade / size in?
 
-* BUG: fullscreen & mouse capture don't work in web. Both these need to be in
-  response to a user event. So:
-  * In web, start windowed.
-  * Clicking on the window captures mouse
-  * Toggle: [X] Fullscreen (F11)
-  * Start game button (which later will become easy/medium/hard buttons)
-
-* Make a web release
-  * Add it to platforms listed in README, itch.io page.
-
-* When bases destroyed or out of ammo, accellerate time so you don't
-  have to wait for bombs to fall.
-  * Holding fire accellerates time?
-  * When it's a button for a base that has no ammo?
-  * But that means you can't do it if all bases have ammo?
-  * Maybe any fire button should do it if held down?
-  * But then you'd have to burn a missile to engage it?
-  * But is that a big deal, who would really care?
-  * Maybe another button instead of fire?
-  * If this was a feature, we'd need a hint that appeared on-screen when
-    ammo was gone but bombs remained.
+* Time accelleration for impatient players
+  * Scenario: Awaiting slow bombs to fall, either because they will miss, or because we are
+    out of ammo.
+  * Scenario: Don't care about the inter-wave show
+  * Holding [space] or any other mouse button accellerates time
+  * Can we make the effect ramp up?
+  * With a sound effect?
 
 * BUG: mouse capture reportedly doesn't work in i3
 
 * Bug
-    NO_GRAB on grabbing mouse. An idea: Comment there suggests we get that event
-    twice, and one of them causes the NO_GRAB error, while the other does not.
-    Can we distinguish between those events, to conditionally grab the mouse?
+    NO_GRAB error on grabbing mouse. An idea: Comment there suggests we get that
+    event twice, and one of them causes the NO_GRAB error, while the other does
+    not. Can we distinguish between those events, to conditionally grab the
+    mouse?
 
 * Tidying
   * Read about lables, themes, fonts, etc.
   * Should title_screen/game_over use Labels?
-  * Consolidate terminology for level/wave/difficulty
-
-* Differences between waves
-  * Go re-read that analysis of the original.
-    https://www.retrogamedeconstructionzone.com/2019/11/missilie-command-deep-dive.html
-  * Number of bombs
-  * Number of cities / bases targetted during the wave (arcade fixed this at 3 +
-    3 bases)
-  * Proportion of bombs targetting active cities vs empty space or destroyed
-    features.
-  * Speed distribution of bombs
-  * Smaller timing between successive bombs. Cluster them.
-  * Allow greater deviation from vertical descent
-
-* Cluster bombs fragment into several halfway down
-  * variation between waves
-* smart bombs that dodge
-  * variation between waves
 
 * Buttons to start game on:
   * Easy (wave 1)
@@ -132,9 +113,15 @@
 * Esc on title screen exits
 * Add instructions "[Esc] to exit defence console"
 
-* Credits in the game
+* Credits, in game
   * with links one can click
   * A mastodon hashtag (also put in README, itch.io description)
+* Rules, in game.
+  * Behind an "Advanced play" button
+  * Scoring
+  * Rebuilt base at the end of each level
+  * Rebuilt city every X points
+  * Time accelleration
 
 * High score?
 
@@ -182,6 +169,8 @@
   * erode base verts?
   * base turret droops?
 * BangSky should fluctuate in size?
+* Repetitive sounds should vary a bit - maybe adjust pitch of launch depending on how far
+  the missile is going? Adjust pitch of bangs randomly? Plus a notch for their generation?
 * I don't like BangSky's sound
   * A more regular deep bang?
   * Vary each one slightly in tone?
