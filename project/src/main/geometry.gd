@@ -1,5 +1,10 @@
 class_name Geometry extends Node
 
+# TODO Split this file. A file defines a class. No need to define sub classes
+# within a file except for internal use. Presumably not the only way to achieve
+# this, but one benefit is that callers can use Polar directly instead of
+# Geometry.Polar.
+
 # A polar co-ordinate
 class Polar:
     var angle:float # Relative to straight up, in radians, increasing clockwise.

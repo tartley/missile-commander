@@ -1,6 +1,9 @@
-# Godot 4+ specific ignores
+# Godot 4+
 .godot/
+
+# This project
 /dist/
-README-players.html
 CHANGELOG.html
+README-players.html
+tags
 

@@ -1,5 +1,10 @@
 ## TODO
 
+* nvim integration
+  https://alicegg.tech/2024/11/01/godot-nvim
+
+* TODOs in the source, or copy them here
+
 * A longstanding leak reported on exit. title_screen.gd still in use. Run with
   --verbose to see:
   ```
@@ -19,23 +24,52 @@
   queue_free is called. Does the free fail because something else in-tree has a
   reference to it?
 
-* Differences between waves
-  * Consolidate terminology for level/wave/difficulty
-  * Go re-read that analysis of the original.
-    https://www.retrogamedeconstructionzone.com/2019/11/missilie-command-deep-dive.html
-  * Number of bombs
-  * Number of cities / bases targetted during the wave (arcade fixed this at 3 +
-    3 bases)
-  * Proportion of bombs targetting active cities vs empty space or destroyed
-    features.
-  * Speed distribution of bombs
-  * Smaller timing between successive bombs. Cluster them.
-  * Allow greater deviation from vertical descent
+* Check out kenney's assets science fiction sounds
+  * And add to credits if we use
 
 * Cluster bombs fragment into several halfway down
-  * variation between waves
-* smart bombs that dodge
-  * variation between waves
+  * Arcade broke into up to four
+
+* smart bombs that dodge expanding explosions
+
+* Bomber planes
+  * fly lower and slower (12 seconds to cross)
+* Satellites start in level 2
+  * take 8 seconds to cross
+  * Drop bombs
+  * As level increases:
+    * Fly lower
+    * Drop more bombs
+* Only one such vehicle appears at a time
+
+* Arcade rebuilds ALL bases between levels
+  (and this would simplify end of level show, consolidating the rebuild/rearm)
+
+* Differences between waves
+  * Consolidate terminology for level/wave/difficulty
+  * Go re-read that analysis of the Arcade.
+    https://www.retrogamedeconstructionzone.com/2019/11/missilie-command-deep-dive.html
+  * Bombs more numerous
+    Arcade starts with 8 in wave 1
+  * Bombs fall faster
+  * Bombs target more cities/bases during a wave
+    (arcade fixed this at 3 cities + 3 bases on every wave)
+  * Bombs more likely to target active cities
+  * Bombs more likely to target bases
+  * Bombs drop more rapidly, clustered one after another
+  * Bombs angle of descent can deviate further from vertical
+  * Cluster bombs more numerous
+  * Cluster bombs split into more
+  * Satellite frequency
+  * Satellites speed increases
+  * Satellite number of bombs increases
+  * Satellite altitude decreases
+  * Satellites cluster bombs increase
+  * Bomber frequency
+  * Bomber speed increases
+  * Bomber number of bombs dropped increases
+  * Bomber altitude decreases
+  * Bomber smart bombs increase
 
 * BUG: fullscreen & mouse capture don't work in web. Both these need to be in
   response to a user event. So:
