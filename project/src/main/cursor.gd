@@ -1,6 +1,6 @@
-class_name Mouse extends Node2D
+class_name Cursor extends Node2D
 
-# Crosshair mouse cursor
+# Crosshair cursor
 const verts: Array[Vector2] = [
     Vector2(-60, 0), Vector2(-20, 0),
     Vector2(+60, 0), Vector2(+20, 0),
@@ -8,20 +8,20 @@ const verts: Array[Vector2] = [
     Vector2(0, +44), Vector2(0, +20),
 ]
 
-# mouse can move around in these world co-ordinates
+# Cursor can move around in these world co-ordinates
 var extent_polar:Geometry.PolarExtent
 
-# Mouse current position in polar world co-ordinates
+# Current position in polar world co-ordinates
 var polar:Geometry.Polar:
     set(value):
-        # constrain new mouse position to lie within maximum extent
+        # constrain new position to lie within maximum extent
         value.constrain(extent_polar)
         polar = value
         position = polar.radius * Vector2.from_angle(-PI/2 + polar.angle)
         rotation = polar.angle
         normalized = extent_polar.normalize(polar)
 
-# normalized mouse position to lie within (-1 to 1, 0 to 1)
+# normalized position to lie within (-1 to 1, 0 to 1)
 var normalized:Vector2
 
 func _ready():
@@ -36,7 +36,7 @@ func _ready():
         ),
     )
     # Dupes behavior of "focus in" event, since we don't get that event on startup on MacOS
-    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+    # Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     polar = Geometry.Polar.new(0, 0)
 
 func _notification(what):

@@ -10,7 +10,6 @@ var value:int:
         value = new
         self.queue_redraw()
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     Common.score = self
     self.position = Vector2(0, -Common.RADIUS * 0.993)

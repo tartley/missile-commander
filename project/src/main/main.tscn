@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://src/main/sky.gd" id="3_nw6n4"]
 [ext_resource type="Script" path="res://src/main/ground.gd" id="4_fvoxd"]
 [ext_resource type="Script" path="res://src/main/score.gd" id="4_v14l7"]
-[ext_resource type="Script" path="res://src/main/mouse.gd" id="5_i0hgq"]
+[ext_resource type="Script" path="res://src/main/cursor.gd" id="5_i0hgq"]
 [ext_resource type="Script" path="res://src/main/geometry.gd" id="6_hh5ig"]
 [ext_resource type="Script" path="res://src/main/common.gd" id="7_ucqwb"]
 
@@ -29,7 +29,7 @@ script = ExtResource("4_fvoxd")
 z_index = 2
 script = ExtResource("4_v14l7")
 
-[node name="Mouse" type="Node2D" parent="World"]
+[node name="Cursor" type="Node2D" parent="World"]
 script = ExtResource("5_i0hgq")
 
 [node name="Sky" type="Node2D" parent="World"]

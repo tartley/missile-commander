@@ -7,9 +7,9 @@ const GameOverScene:PackedScene = preload("res://src/game_over/game_over.tscn")
 static var exiting := false
 
 func _ready():
-    $World/Camera.mouse = $World/Mouse
+    $World/Camera.cursor = $World/Cursor
     for base in Base.all:
-        base.mouse = $World/Mouse
+        base.cursor = $World/Cursor
     show_title_screen()
 
 func _unhandled_input(event:InputEvent):
@@ -32,7 +32,7 @@ func start_game():
         return
     # start the game
     var game = GameScene.instantiate()
-    game.mouse = $World/Mouse
+    game.cursor = $World/Cursor
     game.tree_exited.connect(on_game_exit)
     add_child.call_deferred(game)
 

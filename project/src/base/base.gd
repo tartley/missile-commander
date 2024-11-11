@@ -10,8 +10,8 @@ static var left:Base
 static var center:Base
 static var right:Base
 
-# We use a reference to the mouse to swivel our turret towards it
-var mouse:Node2D
+# We use a reference to the cursor to swivel our turret towards it
+var cursor:Node2D
 var verts:Array[Vector2] = get_verts()
 var color:Color
 var destroyed:bool
@@ -40,7 +40,7 @@ func _ready():
 func _process(_delta:float):
     if not self.destroyed:
         var global = to_global($Turret.position)
-        var relative = mouse.position - global
+        var relative = cursor.position - global
         $Turret.rotation = relative.angle() - self.rotation
 
 func _draw():

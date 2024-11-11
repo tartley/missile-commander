@@ -1,6 +1,6 @@
 extends Node
 
-var mouse:Mouse
+var cursor:Cursor
 var level:Level
 
 func _ready():
@@ -26,13 +26,13 @@ func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
         match event.keycode:
             KEY_A:
-                Base.left.fire(self.mouse.position)
+                Base.left.fire(self.cursor.position)
             KEY_W:
-                Base.center.fire(self.mouse.position)
+                Base.center.fire(self.cursor.position)
             KEY_S:
-                Base.center.fire(self.mouse.position)
+                Base.center.fire(self.cursor.position)
             KEY_D:
-                Base.right.fire(self.mouse.position)
+                Base.right.fire(self.cursor.position)
             KEY_F1:
                 debug_destroy_city()
             KEY_F2:
@@ -43,11 +43,11 @@ func _unhandled_input(event:InputEvent):
     if event is InputEventMouseButton and event.pressed:
         match event.button_index:
             MOUSE_BUTTON_LEFT:
-                Base.left.fire(self.mouse.position)
+                Base.left.fire(self.cursor.position)
             MOUSE_BUTTON_MIDDLE:
-                Base.center.fire(self.mouse.position)
+                Base.center.fire(self.cursor.position)
             MOUSE_BUTTON_RIGHT:
-                Base.right.fire(self.mouse.position)
+                Base.right.fire(self.cursor.position)
 
 func debug_destroy_feature(type):
     var intact := []
