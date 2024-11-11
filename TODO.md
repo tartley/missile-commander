@@ -1,9 +1,7 @@
 ## TODO
 
-* Mouse should be named Cursor
 * Common/Geometry are perhaps badly considered
-  * Polar should be its own file/class
-  * PolarRect should be it's own file/class
+  * And should not be in the scene tree
 * Level needs to know Ground, for selecting targets
 * Consider ground exposing Node2D nodes 'gaps'
 * Ground should expose current cities, while destroyed cities go into 'gaps'
@@ -185,6 +183,12 @@
     * running program icon
 * Turret recoil
 * Audio listener moves with mouse?
+  It is already centered on the camera. I'm not sure I like this.
+  Explosions to the side are very quiet. If I make them louder then the effect
+  is more subtle, is it even achieving anything except puzzlingly inconsistent
+  volume levels? This would be doubly true for a lister on the cursor, which
+  gets even further away from the far side of the world. Maybe I just remove
+  the audio listener.
 * Sound when fire pressed but base is destroyed
 * Click2 when fire pressed but out of ammo
 * Beepy warning on low ammo

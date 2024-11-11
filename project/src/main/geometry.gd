@@ -1,42 +1,5 @@
 class_name Geometry extends Node
 
-# A polar co-ordinate
-class Polar:
-    var angle:float # Relative to straight up, in radians, increasing clockwise.
-    var radius:float
-
-    func _init(a:float, r: float):
-        self.angle=a
-        self.radius=r
-
-    func constrain(extent:PolarExtent) -> void:
-        angle = min(extent.end.angle, max(extent.start.angle, angle))
-        radius = min(extent.end.radius, max(extent.start.radius, radius))
-
-# Polar equivalent of a Rect, defining a section of an Annulus.
-class PolarExtent:
-    var start:Polar
-    var end:Polar
-
-    var width:float:
-        get:
-            return self.end.angle - self.start.angle
-
-    var height:float:
-        get:
-            return self.end.radius - self.start.radius
-
-    func _init(s:Polar, e:Polar):
-        self.start = s
-        self.end = e
-
-    func normalize(polar:Geometry.Polar) -> Vector2:
-        '''Convert polar co-ord's position within polar extent to range x:(-1 to +1), y:(0 to 1)'''
-        return Vector2(
-            polar.angle / self.width,
-            (polar.radius - self.start.radius) / self.height,
-        )
-
 # Manage an array of vertices, each one of which has an array of associated string annotations.
 # .verts exposes the whole array of vector2s,
 # .get_vertices(ANNO) returns an array of just the Vector2s with ANNO as an annotation.
