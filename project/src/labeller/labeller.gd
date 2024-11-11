@@ -40,9 +40,6 @@ func add_centered(labels:Array, rel_y:float=-1):
     var max_height := 0.0
     for label in labels:
         label.position = self.curpos
-        # TODO This is part of the solution
-        # It is set to _END by default, and my current code places things
-        # correctly using that. But I want to set to _BEGIN for the ammo counter.
         label.grow_horizontal = Control.GROW_DIRECTION_END
         target.add_child(label)
         self.curpos += Vector2(label.size.x, 0)
@@ -51,8 +48,6 @@ func add_centered(labels:Array, rel_y:float=-1):
     self.curpos += Vector2(0, max_height * line_spacing)
 
 func remove_all_labels() -> void:
-    # TODO: only remove the labels
-    # TODO: only remove the labels we added
     for label:Label in target.get_children():
         target.remove_child(label)
         label.queue_free()

@@ -7,9 +7,6 @@ const GameOverScene:PackedScene = preload("res://src/game_over/game_over.tscn")
 static var exiting := false
 
 func _ready():
-    # Inject dependencies
-    # TODO A lot of things need Mouse injecting. Should it be globally available? Like main is?
-	# TODO: Mouse should become Cursor.
     $World/Camera.mouse = $World/Mouse
     for base in Base.all:
         base.mouse = $World/Mouse

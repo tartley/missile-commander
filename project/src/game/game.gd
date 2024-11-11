@@ -66,5 +66,4 @@ func debug_destroy_base():
 
 func on_city_destroyed():
     if City.remaining() == 0:
-        # TODO some special effect first
         queue_free()

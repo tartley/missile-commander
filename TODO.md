@@ -1,9 +1,12 @@
 ## TODO
 
-* nvim integration
-  https://alicegg.tech/2024/11/01/godot-nvim
-
-* TODOs in the source, or copy them here
+* Mouse should be named Cursor
+* Common/Geometry are perhaps badly considered
+  * Polar should be its own file/class
+  * PolarRect should be it's own file/class
+* Level needs to know Ground, for selecting targets
+* Consider ground exposing Node2D nodes 'gaps'
+* Ground should expose current cities, while destroyed cities go into 'gaps'
 
 * A longstanding leak reported on exit. title_screen.gd still in use. Run with
   --verbose to see:
@@ -56,7 +59,8 @@
     (arcade fixed this at 3 cities + 3 bases on every wave)
   * Bombs more likely to target active cities
   * Bombs more likely to target bases
-  * Bombs drop more rapidly, clustered one after another
+  * More Bombs drop concurrently
+  * Groups of bombs have smaller pauses between them
   * Bombs angle of descent can deviate further from vertical
   * Cluster bombs more numerous
   * Cluster bombs split into more
@@ -70,6 +74,7 @@
   * Bomber number of bombs dropped increases
   * Bomber altitude decreases
   * Bomber smart bombs increase
+  * Aim at bases at start of level, at cities at end
 
 * BUG: fullscreen & mouse capture don't work in web. Both these need to be in
   response to a user event. So:

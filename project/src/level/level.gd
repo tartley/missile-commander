@@ -50,7 +50,7 @@ func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
     for target in City.all + Base.all:
         targets.append([target, target.position])
-    for pos in Common.world.get_node("Ground").gaps: # TODO Static on Ground?
+    for pos in Common.world.get_node("Ground").gaps:
         targets.append([null, pos])
     return targets.pick_random()
 

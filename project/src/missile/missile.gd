@@ -42,7 +42,5 @@ func _draw():
     draw_polyline(verts, Color.WHITE, 2.0, true)
 
 func destination_reached():
-    # TODO: Once we have a trail, reparent it to World. see how Bomb does it.
     BangSky.create_from_missile(self.destination)
-    # And this missile is done
     queue_free()
