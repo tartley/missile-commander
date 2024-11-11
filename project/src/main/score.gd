@@ -12,7 +12,7 @@ var value:int:
 
 func _ready() -> void:
     Common.score = self
-    self.position = Vector2(0, -Common.RADIUS * 0.993)
+    self.position = Vector2(0, -Ground.RADIUS * 0.993)
     self.reset()
 
 func _draw() -> void:

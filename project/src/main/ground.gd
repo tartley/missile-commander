@@ -8,7 +8,12 @@ class_name Ground extends Area2D
 const BaseScene:PackedScene = preload("res://src/base/base.tscn")
 const CityScene:PackedScene = preload("res://src/city/city.tscn")
 
-const HILL_HEIGHT := Common.RADIUS / 100.0
+# The ground is a pizza-slice shaped segment of a circular planet, centered at (0, 0), with:
+const RADIUS := 12000.0
+# extending for PLANET_ANGLE radians on either side of 'straight up':
+const PLANET_ANGLE := PI / 16.0
+
+const HILL_HEIGHT := RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
 
 # Define the shape of ground in annotated polar co-ordinates, [angle, radius, feature]. Where:
@@ -16,9 +21,9 @@ const COLOR := Color(0.1, 0.5, 0.2)
 # * radius is relative to planet center at origin,
 # * feature is a string indicating the in-game feature located at that point.
 # Approximate the curved surface with straight segments.
-const seg_ang := Common.PLANET_ANGLE / 72
+const seg_ang := PLANET_ANGLE / 72
 const annotated_polar_array := [
-    [ -88 * seg_ang, -Common.RADIUS],
+    [ -88 * seg_ang, -RADIUS],
     [ -88 * seg_ang, 0],
     [ -72 * seg_ang, 0],
     [ -56 * seg_ang, 0, "gap", "hill1"],
@@ -48,7 +53,7 @@ const annotated_polar_array := [
     [ +56 * seg_ang, 0, "gap", "hill3"],
     [ +72 * seg_ang, 0],
     [ +88 * seg_ang, 0],
-    [ +88 * seg_ang, -Common.RADIUS],
+    [ +88 * seg_ang, -RADIUS],
 ]
 
 var verts:PackedVector2Array
@@ -59,7 +64,7 @@ func get_annotated_vert_array(annotated_polars:Array) -> Array:
     var retval := []
     for ap:Array in annotated_polars:
         var angle:float = ap[0] - PI / 2.0
-        var radius:float = ap[1] + Common.RADIUS
+        var radius:float = ap[1] + RADIUS
         var vert:Vector2 = radius * Vector2.from_angle(angle)
         retval.append([vert.x, vert.y, ap.slice(2)])
     return retval
@@ -74,7 +79,7 @@ func set_up_collisions(av:Geometry.AnnotatedVerts):
     ## Set up collision shapes for the ground
     # 1. the circular planet
     var circle = CircleShape2D.new()
-    circle.radius = Common.RADIUS
+    circle.radius = RADIUS
     add_collision_shape(circle, "circle")
     # 2. the three hills
     for hill_name in ["hill1", "hill2", "hill3"]:

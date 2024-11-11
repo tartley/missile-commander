@@ -5,7 +5,7 @@ const GameScene:PackedScene = preload("res://src/game/game.tscn")
 const GameOverScene:PackedScene = preload("res://src/game_over/game_over.tscn")
 
 # Draw a few on-screen debug hints
-const DEBUG := true
+const DEBUG := false
 
 static var exiting := false
 
