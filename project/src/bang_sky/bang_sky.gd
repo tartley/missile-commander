@@ -56,7 +56,7 @@ func _draw() -> void:
                 .75 - progress * 0.5, # alpha
             )
     draw_circle(Vector2.ZERO, self.size, color)
-    if Common.DEBUG:
+    if Main.DEBUG:
         draw_arc(Vector2.ZERO, MAX_SIZE, 0, TAU, 20, Color.DARK_MAGENTA)
 
 func on_entered(bomb:Bomb):

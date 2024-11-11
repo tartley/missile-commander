@@ -4,6 +4,9 @@ const TitleScreenScene:PackedScene = preload("res://src/title_screen/title_scree
 const GameScene:PackedScene = preload("res://src/game/game.tscn")
 const GameOverScene:PackedScene = preload("res://src/game_over/game_over.tscn")
 
+# Draw a few on-screen debug hints
+const DEBUG := true
+
 static var exiting := false
 
 func _ready():
