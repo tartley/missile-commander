@@ -5,4 +5,4 @@ class_name Screen extends Node
 
 func _ready():
     # Make this node available from everywhere
-    Common.screen = self
+    Main.screen = self

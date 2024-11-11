@@ -24,7 +24,7 @@ static func create(pos:Vector2, dest:Vector2):
     var missile := MissileScene.instantiate() as Missile
     missile.position = pos
     missile.destination = dest
-    Common.world.add_child(missile)
+    Main.world.add_child(missile)
 
 func _ready():
     self.position += self.velocity * 100

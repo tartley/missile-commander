@@ -21,7 +21,7 @@ static func create(pos:Vector2, src:Source):
     bang.position = pos
     bang.source = src
     bang.get_node("CollisionShape2D").shape.radius = MAX_SIZE
-    Common.world.add_child(bang)
+    Main.world.add_child(bang)
 
 static func create_from_missile(pos:Vector2):
     create(pos, Source.MISSILE)
@@ -72,7 +72,7 @@ func destroy_nearby_bombs() -> void:
             if self.position.distance_to(bomb.position) < self.size:
                 bomb.destroy()
                 BangSky.create_from_bomb(bomb.position)
-                Common.score.add(Score.BOMB_DESTROYED)
+                Main.score.add(Score.BOMB_DESTROYED)
             else:
                 valid_bombs.append(bomb)
     self.nearby_bombs = valid_bombs

@@ -4,7 +4,7 @@ var cursor:Cursor
 var level:Level
 
 func _ready():
-    Common.score.reset()
+    Main.score.reset()
     # repair all cities
     for city:City in City.all:
         city.reset()

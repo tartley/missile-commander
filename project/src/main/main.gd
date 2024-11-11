@@ -9,6 +9,11 @@ const font_bold:FontFile = preload("res://fonts/Orbitron.black.otf")
 # Draw a few on-screen debug hints
 const DEBUG := false
 
+# Populated in respective _ready handlers
+static var score:Score
+static var screen:Screen
+static var world:World
+
 static var exiting := false
 
 func _ready():
@@ -30,7 +35,7 @@ func exit():
 func show_title_screen():
     var title_screen:TitleScreen = TitleScreenScene.instantiate()
     title_screen.tree_exited.connect(start_game)
-    Common.screen.add_child.call_deferred(title_screen)
+    Main.screen.add_child.call_deferred(title_screen)
 
 func start_game():
     if Main.exiting:
@@ -44,7 +49,7 @@ func start_game():
 func on_game_exit():
     var game_over:GameOver = GameOverScene.instantiate()
     game_over.tree_exited.connect(on_game_over_exit)
-    Common.screen.add_child(game_over)
+    Main.screen.add_child(game_over)
 
 func on_game_over_exit():
     show_title_screen()

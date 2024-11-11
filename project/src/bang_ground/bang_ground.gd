@@ -13,7 +13,7 @@ var progress := 0.0 # 0..1
 static func create(pos:Vector2):
     var bang := BangGroundScene.instantiate() as BangGround
     bang.position = pos
-    Common.world.add_child(bang)
+    Main.world.add_child(bang)
 
 func _process(delta:float) -> void:
     self.progress += delta / DURATION

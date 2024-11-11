@@ -18,7 +18,7 @@ static func create(pos:Vector2, col:Color):
     bang.position = pos
     bang.progress = 0.0
     bang.color = col
-    Common.world.add_child(bang)
+    Main.world.add_child(bang)
 
 func _process(delta:float) -> void:
     self.progress += delta / DURATION

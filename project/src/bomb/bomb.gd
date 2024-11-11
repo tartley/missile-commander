@@ -23,7 +23,7 @@ static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float) -> Bomb:
     bomb.target = tgt
     bomb.rotation = (dest - pos).angle()
     bomb.velocity = Vector2.from_angle(bomb.rotation) * speed
-    Common.world.add_child(bomb)
+    Main.world.add_child(bomb)
     return bomb
 
 static func destroy_all():
@@ -51,7 +51,7 @@ func _draw():
     draw_polyline(verts, Color(.8, 7, .4), 2.0, true)
 
 func destroy():
-    self.trail.reparent(Common.world)
+    self.trail.reparent(Main.world)
     self.trail.emitting = false
     queue_free()
     Bomb.all.erase(self)

@@ -19,7 +19,7 @@ static func create(difficulty_:int) -> Level:
     return level
 
 func _ready() -> void:
-    $Labeller.init(Common.screen)
+    $Labeller.init(Main.screen)
     self.bombs = 2 ** (self.difficulty + 1)
     lifecycle.call_deferred()
 
@@ -50,7 +50,7 @@ func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
     for target in City.all + Base.all:
         targets.append([target, target.position])
-    for pos in Common.world.get_node("Ground").gaps:
+    for pos in Main.world.get_node("Ground").gaps:
         targets.append([null, pos])
     return targets.pick_random()
 
@@ -102,7 +102,7 @@ func bonus_for_ammo():
             base.ammo = i
             counter += 1
             bonus += counter
-            Common.score.add(counter)
+            Main.score.add(counter)
             value.text = "%4d" % bonus
             await asleep(0.07)
     await asleep(0.75)
