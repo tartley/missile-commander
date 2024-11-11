@@ -15,7 +15,7 @@ func get_label(text:String, font_size:int, color:Color) -> Label:
     var label := Label.new()
     label.text = text
     var settings := LabelSettings.new()
-    settings.font = Common.font
+    settings.font = Main.font
     settings.font_size = font_size
     settings.font_color = color
     label.label_settings = settings
@@ -27,7 +27,7 @@ func add_centered(labels:Array, rel_y:float=-1):
     # width of all labels placed side-by-side
     var width:=0.0
     for label in labels:
-        width += Common.font.get_string_size(label.text, HORIZONTAL_ALIGNMENT_CENTER, -1, label.label_settings.font_size).x
+        width += Main.font.get_string_size(label.text, HORIZONTAL_ALIGNMENT_CENTER, -1, label.label_settings.font_size).x
 
     # Set current to where we should place these labels
     if rel_y != -1:

@@ -21,11 +21,11 @@ func _draw():
     var color := Color.CYAN
     for line in ["Missile", "Commander"]:
         draw_string(
-            Common.font_bold, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER,
+            Main.font_bold, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER,
             rect.size.x, font_size, Color.BLACK
         )
         draw_string_outline(
-            Common.font_bold, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER,
+            Main.font_bold, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER,
             rect.size.x, font_size, 8, color
         )
         ypos += font_size
@@ -46,13 +46,13 @@ func _draw():
             color = Color.YELLOW
         else:
             color /= 0.85
-        draw_string(Common.font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, color)
+        draw_string(Main.font, Vector2(0, ypos), line, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, color)
         ypos += font_size
 
     # Version
     var vstr : String = "Version %s: %s" % [get_version(), get_description()]
     draw_string(
-        Common.font, Vector2(rect.position.x + 16, rect.end.y - 16), vstr, HORIZONTAL_ALIGNMENT_LEFT, rect.size.x, 48, Color("888")
+        Main.font, Vector2(rect.position.x + 16, rect.end.y - 16), vstr, HORIZONTAL_ALIGNMENT_LEFT, rect.size.x, 48, Color("888")
     )
 
 func event_is_fire_button(event) -> bool:

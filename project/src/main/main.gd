@@ -3,6 +3,8 @@ class_name Main extends Node
 const TitleScreenScene:PackedScene = preload("res://src/title_screen/title_screen.tscn")
 const GameScene:PackedScene = preload("res://src/game/game.tscn")
 const GameOverScene:PackedScene = preload("res://src/game_over/game_over.tscn")
+const font:FontFile = preload("res://fonts/Orbitron.light.otf")
+const font_bold:FontFile = preload("res://fonts/Orbitron.black.otf")
 
 # Draw a few on-screen debug hints
 const DEBUG := false

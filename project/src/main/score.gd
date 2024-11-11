@@ -17,9 +17,9 @@ func _ready() -> void:
 
 func _draw() -> void:
     var msg := format(value)
-    var text_size := Common.font.get_string_size(msg, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
+    var text_size := Main.font.get_string_size(msg, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
     var posn := Vector2(-text_size.x/2, 0)
-    draw_string(Common.font, posn, msg, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, font_color)
+    draw_string(Main.font, posn, msg, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, font_color)
 
 func reset():
     self.value = 0
