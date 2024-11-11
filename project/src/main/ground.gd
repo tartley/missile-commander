@@ -59,6 +59,28 @@ const annotated_polar_array := [
 var verts:PackedVector2Array
 var gaps:Array[Vector2] = []
 
+
+# Manage an array of vertices, each one of which has an array of associated string annotations.
+# .verts exposes the whole array of vector2s,
+# .get_vertices(ANNO) returns an array of just the Vector2s with ANNO as an annotation.
+class AnnotatedVerts:
+    var verts:Array[Vector2] = []
+    var verts_by_annotation := {}
+
+    func _init(vertex_annotation_array:Array) -> void:
+        var vert:Vector2
+        for av:Array in vertex_annotation_array:
+            vert = Vector2(av[0], av[1])
+            verts.append(vert)
+            for annotation:String in av.slice(2)[0]:
+                if annotation not in verts_by_annotation:
+                    self.verts_by_annotation[annotation] = [] as Array[Vector2]
+                self.verts_by_annotation[annotation].append(vert)
+
+    func get_vertices(annotation:String) -> Array[Vector2]:
+        return self.verts_by_annotation[annotation]
+
+
 func get_annotated_vert_array(annotated_polars:Array) -> Array:
     '''Convert array of annotated polar co-ords to an array of annotated cartesian co-ords'''
     var retval := []
@@ -75,7 +97,7 @@ func add_collision_shape(shape:Shape2D, name_:String):
     collision.name = name_
     add_child(collision)
 
-func set_up_collisions(av:Geometry.AnnotatedVerts):
+func set_up_collisions(av:AnnotatedVerts):
     ## Set up collision shapes for the ground
     # 1. the circular planet
     var circle = CircleShape2D.new()
@@ -101,7 +123,7 @@ func create_features(annotated_verts, feature_name:String, type:PackedScene) -> 
     return retval
 
 func _ready() -> void:
-    var annotated_verts := Geometry.AnnotatedVerts.new(get_annotated_vert_array(annotated_polar_array))
+    var annotated_verts := AnnotatedVerts.new(get_annotated_vert_array(annotated_polar_array))
     self.verts = annotated_verts.verts
     create_features(annotated_verts, "city", CityScene)
     create_features(annotated_verts, "base", BaseScene)

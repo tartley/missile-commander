@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvl60w5q1oghk"]
+[gd_scene load_steps=9 format=3 uid="uid://dvl60w5q1oghk"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_3ne2t"]
 [ext_resource type="Script" path="res://src/main/world.gd" id="2_38wir"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://src/main/ground.gd" id="4_fvoxd"]
 [ext_resource type="Script" path="res://src/main/score.gd" id="4_v14l7"]
 [ext_resource type="Script" path="res://src/main/cursor.gd" id="5_i0hgq"]
-[ext_resource type="Script" path="res://src/main/geometry.gd" id="6_hh5ig"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_3ne2t")
@@ -38,8 +37,5 @@ script = ExtResource("3_nw6n4")
 position = Vector2(0, -12000)
 ignore_rotation = false
 script = ExtResource("2_jm13r")
-
-[node name="Geometry" type="Node" parent="."]
-script = ExtResource("6_hh5ig")
 
 [connection signal="area_entered" from="World/Ground" to="World/Ground" method="on_area_entered"]
