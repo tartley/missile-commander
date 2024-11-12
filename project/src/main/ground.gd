@@ -116,10 +116,7 @@ func create_features(annotated_verts, feature_name:String, type:PackedScene, cls
     var retval:Array[Node2D] = []
     var feature:Node2D
     for pos in positions:
-        if type:
-            feature = type.instantiate()
-        else:
-            feature = cls.new()
+        feature = type.instantiate() if type else cls.new()
         feature.position = pos
         feature.rotation = pos.angle() - PI / 2
         feature.show_behind_parent = true
