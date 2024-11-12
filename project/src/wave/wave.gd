@@ -11,7 +11,7 @@ var labeller:Labeller
 # When a game begins, waves of bombs start to fall, starting with wave 1
 var number:int
 # Various factors determine how hard this wave is going to be
-var bombs:int
+var bomb_count:int
 
 signal last_bomb_done
 
@@ -24,8 +24,8 @@ func _ready() -> void:
     $Labeller.init(Main.screen)
 
     # use 'number' to determine what this wave consists of
-    self.bombs = 6 + self.number * 2
-
+    self.bomb_count = 6 + self.number * 2
+    # self.targets = self.select_targets(self.bomb_count, self.number)
     lifecycle.call_deferred()
 
 func asleep(duration:float) -> void:
@@ -67,22 +67,22 @@ func create_bomb():
     var speed := randf_range(40, 300)
     var bomb := Bomb.create(start, target, dest, speed)
     bomb.tree_exiting.connect(bomb_exiting)
-    self.bombs -= 1
 
 func create_bombs() -> void:
-    while self.bombs > 0:
+    while self.bomb_count > 0:
         await asleep(1)
         create_bomb()
+        self.bomb_count -= 1
 
 func end_bombs() -> void:
-    self.bombs = 0
+    self.bomb_count = 0
     Bomb.destroy_all()
     self.last_bomb_done.emit()
 
 func bomb_exiting() -> void:
     # A bomb has left the scene tree.
     # Was it the last one of the wave?
-    if not Main.exiting and Bomb.all.size() <= 0 and self.bombs <= 0:
+    if not Main.exiting and Bomb.all.size() <= 0 and self.bomb_count <= 0:
         self.last_bomb_done.emit()
 
 func bonus_for_ammo():
