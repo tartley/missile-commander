@@ -12,9 +12,11 @@ const CityScene:PackedScene = preload("res://src/city/city.tscn")
 const RADIUS := 12000.0
 # extending for PLANET_ANGLE radians on either side of 'straight up':
 const PLANET_ANGLE := PI / 16.0
-
 const HILL_HEIGHT := RADIUS / 100.0
 const COLOR := Color(0.1, 0.5, 0.2)
+# How close must a bomb land to destroy a feature, squared
+const EPSILON := 100
+
 
 # Define the shape of ground in annotated polar co-ordinates, [angle, radius, feature]. Where:
 # * angle=0 is straight up,
@@ -135,9 +137,17 @@ func _draw() -> void:
     draw_polygon(verts, [Color.BLACK])
     draw_polyline(verts, Color(.7, 1, .6), 3.0, true)
 
+func find_target(pos:Vector2) -> Object:
+    var features := City.all + Base.all
+    for feature in features:
+        if not feature.destroyed and pos.distance_squared_to(feature.position) < EPSILON:
+            return feature
+    return null
+
 func on_area_entered(bomb:Bomb):
-    if bomb.target:
-        bomb.target.destroy()
+    var target := find_target(bomb.position)
+    if target:
+        target.destroy()
     else:
         BangGround.create(bomb.position)
     bomb.destroy()

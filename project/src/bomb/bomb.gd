@@ -13,14 +13,14 @@ const verts: Array[Vector2] = [
 
 static var all:Array[Bomb] = []
 
-var target:Node2D # City or Base or null
 var velocity: Vector2
 var trail:Trail
+var target:Node2D
 
-static func create(pos:Vector2, tgt:Node2D, dest:Vector2, speed:float) -> Bomb:
+static func create(pos:Vector2, target_:Node2D, dest:Vector2, speed:float) -> Bomb:
     var bomb := BombScene.instantiate() as Bomb
     bomb.position = pos
-    bomb.target = tgt
+    bomb.target = target_
     bomb.rotation = (dest - pos).angle()
     bomb.velocity = Vector2.from_angle(bomb.rotation) * speed
     Main.world.add_child(bomb)

@@ -1,6 +1,11 @@
 ## TODO
 
+* When selecting a null target (a miss), use a Node2D with correct position
+  Ground should supply them.
+
 * Wave chooses bomb destinations in advance
+  NO: Initial destinations might be gone when bomb is launched
+  we should choose hit/miss counts in advance, then choose target at bomb launch.
 
 * Cluster bombs fragment into several halfway down
   * Arcade broke into up to four
