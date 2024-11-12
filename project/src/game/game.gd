@@ -12,15 +12,15 @@ func _ready():
     # repair & re-arm all bases
     for base:Base in Base.all:
         base.reset()
-    create_level(1)
+    create_levels()
 
-func create_level(difficulty:int):
-    self.level = Level.create(difficulty)
-    self.add_child.call_deferred(self.level)
-    self.level.tree_exiting.connect(on_level_exit)
-
-func on_level_exit():
-    create_level(self.level.difficulty + 1)
+func create_levels():
+    var level_number:int = 1
+    while true:
+        self.level = Level.create(level_number)
+        self.add_child.call_deferred(self.level)
+        await self.level.tree_exiting
+        level_number += 1
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:

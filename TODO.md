@@ -1,32 +1,8 @@
 ## TODO
 
-* Common/Geometry are perhaps badly considered
-  * And should not be in the scene tree
-* Level needs to know Ground, for selecting targets
-* Consider ground exposing Node2D nodes 'gaps'
-* Ground should expose current cities, while destroyed cities go into 'gaps'
-
-* A longstanding leak reported on exit. title_screen.gd still in use. Run with
-  --verbose to see:
-  ```
-  WARNING: 1 RID of type "CanvasItem" was leaked.
-  WARNING: ObjectDB instances leaked at exit
-  Leaked instance: GDScriptNativeClass:9223372048464609921
-  Leaked instance: GDScript:9223372061483730177 -
-      Resource path: res://src/title_screen/title_screen.gd
-  Leaked instance: Node2D:111971144986 - Node name: TitleScreen
-  ERROR: 1 resources still in use at exit.
-     at: clear (core/io/resource.cpp:599)
-  Resource still in use: res://src/title_screen/title_screen.gd (GDScript)
-  ```
-  Hint: Leaked instances typically happen when nodes are removed from the
-  scene tree (with `remove_child()`) but not freed (with `free()` or
-  `queue_free()`).
-  queue_free is called. Does the free fail because something else in-tree has a
-  reference to it?
-
-* Check out kenney's assets science fiction sounds
-  * And add to credits if we use
+* Level chooses number of bombs in advance
+  * start with 8 on level 1, increase by 2 each time
+* Level chooses bomb destinations in advance
 
 * Cluster bombs fragment into several halfway down
   * Arcade broke into up to four
@@ -84,6 +60,25 @@
 * Make a web release
   * Add it to platforms listed in README, itch.io page.
 
+* BUG: A longstanding leak reported on exit. title_screen.gd still in use.
+  Run with --verbose to see:
+  ```
+  WARNING: 1 RID of type "CanvasItem" was leaked.
+  WARNING: ObjectDB instances leaked at exit
+  Leaked instance: GDScriptNativeClass:9223372048464609921
+  Leaked instance: GDScript:9223372061483730177 -
+      Resource path: res://src/title_screen/title_screen.gd
+  Leaked instance: Node2D:111971144986 - Node name: TitleScreen
+  ERROR: 1 resources still in use at exit.
+     at: clear (core/io/resource.cpp:599)
+  Resource still in use: res://src/title_screen/title_screen.gd (GDScript)
+  ```
+  Hint: Leaked instances typically happen when nodes are removed from the
+  scene tree (with `remove_child()`) but not freed (with `free()` or
+  `queue_free()`).
+  queue_free is called. Does the free fail because something else in-tree has a
+  reference to it?
+
 * End of level show
   * Bonus popup from each base, INSTEAD of current HUD text?
     Ah, this relies upon bonus value being per-base, not (as currently)
@@ -101,7 +96,7 @@
   * ...Instead of current HUD text?
     Or should current HUD text be one line, that describes what's currently happening,
     instead of multiple lines as currently. Hmmm.
-  * Bonus for remaining cities:
+  * Bonus for remaining cities: SEE existing stash
       n 10x2^n      10xtriangular number
       1     10      10
       2     20      30
@@ -189,6 +184,8 @@
   volume levels? This would be doubly true for a lister on the cursor, which
   gets even further away from the far side of the world. Maybe I just remove
   the audio listener.
+* Check out kenney's assets science fiction sounds
+  * And add to credits if we use
 * Sound when fire pressed but base is destroyed
 * Click2 when fire pressed but out of ammo
 * Beepy warning on low ammo

@@ -8,19 +8,19 @@ const color2 := (color1 + color3) / 2
 
 var labeller:Labeller
 
-var difficulty:int = 0
+var number:int = 0
 var bombs:int
 
 signal last_bomb_done
 
-static func create(difficulty_:int) -> Level:
+static func create(number_:int) -> Level:
     var level:Level = LevelScene.instantiate()
-    level.difficulty = difficulty_
+    level.number = number_
     return level
 
 func _ready() -> void:
     $Labeller.init(Main.screen)
-    self.bombs = 2 ** (self.difficulty + 1)
+    self.bombs = 2 ** (self.number + 1)
     lifecycle.call_deferred()
 
 func asleep(duration:float) -> void:
@@ -30,7 +30,7 @@ func asleep(duration:float) -> void:
 
 func lifecycle():
     await asleep(1)
-    $Labeller.add_centered([$Labeller.get_label("Wave %s" % self.difficulty, 64, Color.YELLOW)] as Array[Label], 0.4)
+    $Labeller.add_centered([$Labeller.get_label("Wave %s" % self.number, 64, Color.YELLOW)] as Array[Label], 0.4)
     await asleep(1)
     create_bombs()
     await asleep(1)

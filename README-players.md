@@ -18,8 +18,8 @@ No install is required.
 
 ## Credits
 
-By [Jonathan](https://tartley.com/pages/about) & Zander Hartley (aged 12). See
-the [source code](https://github.com/tartley/missile-commander).
+This 2024 remake by [Jonathan](https://tartley.com/pages/about) & Zander Hartley
+(aged 12). See the [source code](https://github.com/tartley/missile-commander).
 
 Original 1980 concept and implementation [by David
 Theurer](https://en.wikipedia.org/wiki/Missile_Command) for Atari.
