@@ -8,7 +8,9 @@ const color2 := (color1 + color3) / 2
 
 var labeller:Labeller
 
-var number:int = 0
+# When a game begins, waves of bombs start to fall, starting with wave 1
+var number:int
+# Various factors determine how hard this wave is going to be
 var bombs:int
 
 signal last_bomb_done
@@ -20,7 +22,10 @@ static func create(wave_number:int) -> Wave:
 
 func _ready() -> void:
     $Labeller.init(Main.screen)
-    self.bombs = 2 ** (self.number + 1)
+
+    # use 'number' to determine what this wave consists of
+    self.bombs = 6 + self.number * 2
+
     lifecycle.call_deferred()
 
 func asleep(duration:float) -> void:
@@ -68,7 +73,6 @@ func create_bombs() -> void:
     while self.bombs > 0:
         await asleep(1)
         create_bomb()
-        self.bombs -= 1
 
 func end_bombs() -> void:
     self.bombs = 0

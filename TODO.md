@@ -1,7 +1,5 @@
 ## TODO
 
-* Wave chooses number of bombs in advance
-  * start with 8 on wave 1, increase by 2 each time
 * Wave chooses bomb destinations in advance
 
 * Cluster bombs fragment into several halfway down

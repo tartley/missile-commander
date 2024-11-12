@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://ch3x66bjnffqq" path="res://audio/dub.wav" id="2_2j7la"]
 [ext_resource type="Script" path="res://src/labeller/labeller.gd" id="3_abmfo"]
 
-[node name="Level" type="Node"]
+[node name="Wave" type="Node"]
 script = ExtResource("1_a0411")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
