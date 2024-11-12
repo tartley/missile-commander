@@ -1,6 +1,6 @@
-class_name Level extends Node
+class_name Wave extends Node
 
-const LevelScene:PackedScene = preload("res://src/level/level.tscn")
+const WaveScene:PackedScene = preload("res://src/wave/wave.tscn")
 
 const color1 := Color.MEDIUM_PURPLE
 const color3 := Color(0.531, 0.216, 0.565)
@@ -13,10 +13,10 @@ var bombs:int
 
 signal last_bomb_done
 
-static func create(number_:int) -> Level:
-    var level:Level = LevelScene.instantiate()
-    level.number = number_
-    return level
+static func create(wave_number:int) -> Wave:
+    var wave:Wave = WaveScene.instantiate()
+    wave.number = wave_number
+    return wave
 
 func _ready() -> void:
     $Labeller.init(Main.screen)
@@ -77,7 +77,7 @@ func end_bombs() -> void:
 
 func bomb_exiting() -> void:
     # A bomb has left the scene tree.
-    # Was it the last one of the level?
+    # Was it the last one of the wave?
     if not Main.exiting and Bomb.all.size() <= 0 and self.bombs <= 0:
         self.last_bomb_done.emit()
 

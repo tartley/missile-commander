@@ -1,8 +1,8 @@
 ## TODO
 
-* Level chooses number of bombs in advance
-  * start with 8 on level 1, increase by 2 each time
-* Level chooses bomb destinations in advance
+* Wave chooses number of bombs in advance
+  * start with 8 on wave 1, increase by 2 each time
+* Wave chooses bomb destinations in advance
 
 * Cluster bombs fragment into several halfway down
   * Arcade broke into up to four
@@ -11,19 +11,19 @@
 
 * Bomber planes
   * fly lower and slower (12 seconds to cross)
-* Satellites start in level 2
+* Satellites start in wave 2
   * take 8 seconds to cross
   * Drop bombs
-  * As level increases:
+  * As wave increases:
     * Fly lower
     * Drop more bombs
 * Only one such vehicle appears at a time
 
-* Arcade rebuilds ALL bases between levels
-  (and this would simplify end of level show, consolidating the rebuild/rearm)
+* Arcade rebuilds ALL bases between waves
+  (and this would simplify end of wave show, consolidating the rebuild/rearm)
 
 * Differences between waves
-  * Consolidate terminology for level/wave/difficulty
+  * Consolidate terminology for wave/difficulty
   * Go re-read that analysis of the Arcade.
     https://www.retrogamedeconstructionzone.com/2019/11/missilie-command-deep-dive.html
   * Bombs more numerous
@@ -48,7 +48,7 @@
   * Bomber number of bombs dropped increases
   * Bomber altitude decreases
   * Bomber smart bombs increase
-  * Aim at bases at start of level, at cities at end
+  * Aim at bases at start of wave, at cities at end
 
 * BUG: fullscreen & mouse capture don't work in web. Both these need to be in
   response to a user event. So:
@@ -79,14 +79,14 @@
   queue_free is called. Does the free fail because something else in-tree has a
   reference to it?
 
-* End of level show
+* End of wave show
   * Bonus popup from each base, INSTEAD of current HUD text?
     Ah, this relies upon bonus value being per-base, not (as currently)
     growing with the total amount of remaining ammo. Hmmm... That would encourage
     players to concentrate on using ammo from one base while hoarding it at others.
     That might not be terrible, since it acts in opposition to what's best for the
-    player. It means these bonuses will be very low at higher levels where the number
-    of incoming bombs is presumably high. Hmm. Maybe higher levels should not consistently
+    player. It means these bonuses will be very low at higher waves where the number
+    of incoming bombs is presumably high. Hmm. Maybe higher waves should not consistently
     have such a high number of bombs? Certainly we should not have number of bombs exceed
     the number of player missiles, except to the extent we can expect (or force) multiple
     bombs to be destroyable with one shot. Ah, but actually, we could have a high number
@@ -151,7 +151,7 @@
 * Rules, in game.
   * Behind an "Advanced play" button
   * Scoring
-  * Rebuilt base at the end of each level
+  * Rebuilt base at the end of each wave
   * Rebuilt city every X points
   * Time accelleration
 

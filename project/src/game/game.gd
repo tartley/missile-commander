@@ -1,7 +1,7 @@
 extends Node
 
 var cursor:Cursor
-var level:Level
+var wave:Wave
 
 func _ready():
     Main.score.reset()
@@ -12,15 +12,15 @@ func _ready():
     # repair & re-arm all bases
     for base:Base in Base.all:
         base.reset()
-    create_levels()
+    create_waves()
 
-func create_levels():
-    var level_number:int = 1
+func create_waves():
+    var wave_number:int = 1
     while true:
-        self.level = Level.create(level_number)
-        self.add_child.call_deferred(self.level)
-        await self.level.tree_exiting
-        level_number += 1
+        self.wave = Wave.create(wave_number)
+        self.add_child.call_deferred(self.wave)
+        await self.wave.tree_exiting
+        wave_number += 1
 
 func _unhandled_input(event:InputEvent):
     if event is InputEventKey and event.pressed and not event.echo:
@@ -38,7 +38,7 @@ func _unhandled_input(event:InputEvent):
             KEY_F2:
                 debug_destroy_base()
             KEY_F3:
-                self.level.end_bombs()
+                self.wave.end_bombs()
 
     if event is InputEventMouseButton and event.pressed:
         match event.button_index:
