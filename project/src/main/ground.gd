@@ -59,7 +59,7 @@ const annotated_polar_array := [
 ]
 
 var verts:PackedVector2Array
-var gaps:Array[Vector2] = []
+var gaps:Array[Node2D] = []
 
 
 # Manage an array of vertices, each one of which has an array of associated string annotations.
@@ -111,12 +111,15 @@ func set_up_collisions(av:AnnotatedVerts):
         polygon.points = av.get_vertices(hill_name)
         add_collision_shape(polygon, hill_name)
 
-func create_features(annotated_verts, feature_name:String, type:PackedScene) -> Array[Node2D]:
+func create_features(annotated_verts, feature_name:String, type:PackedScene, cls:Object=null) -> Array[Node2D]:
     var positions:Array[Vector2] = annotated_verts.get_vertices(feature_name)
     var retval:Array[Node2D] = []
     var feature:Node2D
     for pos in positions:
-        feature = type.instantiate()
+        if type:
+            feature = type.instantiate()
+        else:
+            feature = cls.new()
         feature.position = pos
         feature.rotation = pos.angle() - PI / 2
         feature.show_behind_parent = true
@@ -130,7 +133,7 @@ func _ready() -> void:
     create_features(annotated_verts, "city", CityScene)
     create_features(annotated_verts, "base", BaseScene)
     assert(Base.all.size() == 3)
-    self.gaps = annotated_verts.get_vertices("gap")
+    self.gaps = create_features(annotated_verts, "gap", null, Node2D)
     set_up_collisions(annotated_verts)
 
 func _draw() -> void:

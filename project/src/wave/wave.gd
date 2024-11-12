@@ -53,10 +53,8 @@ func lifecycle():
 
 func choose_target() -> Array: # Array of [City|Base|null, Vector2]
     var targets:Array = []
-    for target in City.all + Base.all:
+    for target in City.all + Base.all + Main.world.get_node("Ground").gaps:
         targets.append([target, target.position])
-    for pos in Main.world.get_node("Ground").gaps:
-        targets.append([null, pos])
     return targets.pick_random()
 
 func create_bomb():
