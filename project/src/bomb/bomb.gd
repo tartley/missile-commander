@@ -17,11 +17,11 @@ var velocity: Vector2
 var trail:Trail
 var target:Node2D
 
-static func create(pos:Vector2, target_:Node2D, dest:Vector2, speed:float) -> Bomb:
+static func create(pos:Vector2, target_:Node2D, speed:float) -> Bomb:
     var bomb := BombScene.instantiate() as Bomb
     bomb.position = pos
     bomb.target = target_
-    bomb.rotation = (dest - pos).angle()
+    bomb.rotation = (target_.position - pos).angle()
     bomb.velocity = Vector2.from_angle(bomb.rotation) * speed
     Main.world.add_child(bomb)
     return bomb

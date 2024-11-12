@@ -51,19 +51,17 @@ func lifecycle():
     $Labeller.remove_all_labels()
     self.queue_free()
 
-func choose_target() -> Array: # Array of [City|Base|null, Vector2]
+func choose_target() -> Node2D:
     var targets:Array = []
     for target in City.all + Base.all + Main.world.get_node("Ground").gaps:
-        targets.append([target, target.position])
+        targets.append(target)
     return targets.pick_random()
 
 func create_bomb():
     var start := Vector2(randf_range(-2000, +2000), -14300)
-    var td = choose_target()
-    var target = td[0]
-    var dest = td[1]
+    var target := choose_target()
     var speed := randf_range(40, 300)
-    var bomb := Bomb.create(start, target, dest, speed)
+    var bomb := Bomb.create(start, target, speed)
     bomb.tree_exiting.connect(bomb_exiting)
 
 func create_bombs() -> void:
